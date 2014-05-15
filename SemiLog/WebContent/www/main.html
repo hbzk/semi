@@ -11,6 +11,50 @@
 <script src="js/common.js"></script>
 <script src="js/jquery.ui.touch.js"></script>
 <title>Main</title>
+<style type="text/css">
+
+
+/* entire container, keeps perspective */
+.flip-container {
+	-webkit-perspective: 1000;
+}
+	/* flip the pane when hovered */
+	/* .flip-container:hover .flipper, .flip-container.hover .flipper { */
+	.qwert .flipper, .flip-container.hover .flipper {
+		-webkit-transform: rotateY(1080deg);
+	}
+
+.flip-container, .front, .back {
+	width: 65px;
+	height: 65px;
+}
+
+/* flip speed goes here */
+.flipper {
+-webkit-transition: 2s;
+-webkit-transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	-webkit-backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+}
+
+/* back, initially hidden pane */
+.back {
+	-webkit-transform: rotateY(180deg);
+}
+</style>
 </head>
 <body>
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" /> -->
@@ -22,8 +66,9 @@
 <section id="content">
 
   <div id="iconMainDiv">
-    <div id="droppableMain" class="iconMain start droppableMain ui-widget-content circular"><img src="css/img/water.png"></div>
-    
+    <div class="iconMain start flip-container" id="flip-toggle"><div id="droppableMain" 
+    class=" droppableMain ui-widget-content circular flipper "><div class="front"><img src="css/img/water.png"></div><div class="back"></div></div>
+    </div>
     <div id = "1" class="iconMain center top draggingItem ui-widget-content circular"><img src="css/img/news.png"></div>
     <div id = "2" class="iconMain left top draggingItem ui-widget-content circular"><img src="css/img/bikerC.png"></div>
     <div id = "3" class="iconMain right top draggingItem ui-widget-content circular"><img src="css/img/radio.png"></div>
@@ -32,6 +77,9 @@
     <div id = "6" class="iconMain center bottom draggingItem ui-widget-content circular"><img src="css/img/gamecontroller.png"></div>
   </div>
 </section>
+
+
+
 
 <div id="slide">
 
@@ -60,6 +108,17 @@
 </div>
 </div>
 </section>
-
+<script type="text/javascript">
+$(window).load(function(){
+	$('.iconMain').click(function(event){
+		console.log(this);
+		if ($(this).hasClass('qwert')) {
+			$(this).removeClass('qwert');
+		} else {
+			$(this).addClass('qwert');
+		}
+	})
+});
+</script>
 </body>
 </html>
