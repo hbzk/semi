@@ -106,7 +106,10 @@ $(function(){
 	$("#slide").css("display", "none");
 
 	$("#menuLeft").click(function() {
-		$("#slide").toggle("slide");
+		$(".img").css("display","");
+		$("#icons").appendTo("#slide");
+		$("#input").val("");
+		$("#slide").toggle("fade");
 	});
 		
 	$("#input").click(function(){
