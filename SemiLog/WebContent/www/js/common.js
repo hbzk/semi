@@ -32,7 +32,7 @@ $(function(){
     });
 
     
-    
+    /*
     $("#aaa").mousemove(function(e) {
       if (msDown) {
         var mouseX = e.pageX;
@@ -50,7 +50,7 @@ $(function(){
         $("#wrap").css("display","none");
       }
     });
-    
+    */
    
     $('#bbb').mousemove(function(e) {
         if (lbDown) {
