@@ -104,7 +104,7 @@ height: 60px; text-align: center; line-height: 100px; position: relative; }
 /* Result List = rt* ======================= */
 
 #resultList { height: 319px; width: 340px; overflow: auto; }    
-#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 30px; margin-top: 40px; } 
+#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 30px; margin-top: 50px; } 
 #rtTable { height: 70px;}
 #rtImage{ /* position: absolute; */ text-align: center; margin-top: -6px; margin-left: -280px; padding-top: 10px; }
 #rtName{ text-align: center; height: 20px; margin-left: 52px; margin-top: -10px; width: 105px; display: block; }
