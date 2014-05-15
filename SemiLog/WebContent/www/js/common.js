@@ -10,7 +10,8 @@ $(function(){
 	});
 	
 	
-
+	
+	
 
 
 	var availableTags = [
@@ -33,6 +34,7 @@ $(function(){
 	$('#input').autocomplete({
 		source: availableTags,
 		select: function (event, ui) {
+			
 			
 				if(ui.item.value) {
 					$(".img").css("display", "none");
