@@ -22,26 +22,76 @@
 
 .iconMain { background: url() 0px 0px no-repeat;}
 
-#one { background-image: url(css/img/news.png);}
-#two { background-image: url(css/img/bikerC.png);}
-#three { background-image: url(css/img/radio.png);}
-#four { background-image: url(css/img/tv.png);}
-#five { background-image: url(css/img/creditcard.png);}
-#six { background-image: url(css/img/gamecontroller.png);}
+#one { background: url(css/img/news.png) 0px 0px no-repeat;}
+#two { background: url(css/img/bikerC.png) 0px 0px no-repeat;}
+#three { background: url(css/img/radio.png) 0px 0px no-repeat;}
+#four { background: url(css/img/tv.png) 0px 0px no-repeat;}
+#five { background: url(css/img/creditcard.png) 0px 0px no-repeat;}
+#six { background: url(css/img/gamecontroller.png) 0px 0px no-repeat;}
+
+
+/* entire container, keeps perspective */
+.flip-container {
+	-webkit-perspective: 1000;
+}
+	/* flip the pane when hovered */
+	/* .flip-container:hover .flipper, .flip-container.hover .flipper { */
+	.qwert .flipper, .flip-container.hover .flipper {
+		-webkit-transform: rotateY(1080deg);
+	}
+
+.flip-container, .front, .back {
+	width: 64px;
+	height: 64px;
+}
+
+/* flip speed goes here */
+.flipper {
+-webkit-transition: 2s;
+-webkit-transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+/* .front, .back {
+	-webkit-backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+ */
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+}
+
+/* back, initially hidden pane */
+.back {
+	-webkit-transform: rotateY(180deg);
+}
+
 </style>
 </head>
 <body>
 
 <section id="layout">
 
-<a id="menuLeft" href="Copy of _layout.html">=</a>
+<!-- <div id="menuLeft">=</div> -->
 
 <section id="content">
 
   <div id="iconMainDiv">
     <div id="start" class="iconStart circular"></div>
-    
-    <div id="one" class="iconMain center top circular"></div>
+
+		<div class="iconMain center top flip-container" id="flip-toggle">
+			<div class="flipper">
+		    <div id="one" class="front"></div>
+				<div class="back"></div>
+			</div>
+		</div>
+
+    <!-- <div id="one" class="iconMain center top circular"></div> -->
     <div id="two" class="iconMain left top circular"></div>
     <div id="three" class="iconMain right top circular"></div>
     <div id="four" class="iconMain left bottom circular"></div>
@@ -52,8 +102,6 @@
   </div>
 </section>
 
-<div class="a1"><a href="result_pie1.html"><img src="css/img/piechart.png"></a></div>
-<div class="a2"><a href="result_text1.html"><img src="css/img/result_list.png"></a></div>
 
 <!-- <div id="slide">
 
@@ -78,9 +126,18 @@
 </div>
 </div> -->
 </section>
+
+
 <script type="text/javascript">
-$('#menuLeft').click(function(){
-	
+$(window).load(function(){
+	$('.iconMain').click(function(event){
+		//console.log(this);
+		if ($(this).hasClass('qwert')) {
+			$(this).removeClass('qwert');
+		} else {
+			$(this).addClass('qwert');
+		}
+	})
 });
 </script>
 </body>

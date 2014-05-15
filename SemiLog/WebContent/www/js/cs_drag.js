@@ -27,7 +27,6 @@ function dragdrop_drop() {
 	$('.iconStart').droppable({drop: function(event, ui){
 		lastdrager = $(event.toElement).removeAttr('style');
 		lastdragerClass = lastdrager.context.className;
-		console.log(lastdragerClass);
 		lastdragerImg = $(event.toElement).css('background-image');
 		$(this).css('background-image', $(lastdrager).css('background-image'));
 		$(event.toElement).css('background-image', 'none');
@@ -62,21 +61,17 @@ function dragdrop_startClick() {
 		$('.iconStart').droppable({ disabled: false });
 		
 		//타이머 초기화 후 사라짐
-		reset();
-		$('#result').html('').removeClass();
+		
+		if (typeof $id === 'undefined') {
+			console.log('undefined');
+		} else {
+			reset();
+			$('#result').html('').removeClass();
+		}
 		
 	});
 }
 
-function dragdrop_iconCount() {
-	var ic = $('.iconMain').length;
-	console.log(ic);
-	if (ic < 6) {
-		console.log('작다');
-	} else {
-		console.log('크다');
-	}
-}
 
 
 

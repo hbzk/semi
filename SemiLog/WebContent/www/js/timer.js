@@ -66,7 +66,7 @@ function reset() {
 function doing(id) {
 	$id = document.getElementById(id);
 	$id.innerHTML = formatTime(x.time());
-	clocktimer = setInterval("update("+ id+ ")", 1);
+	clocktimer = setInterval("update("+ id + ")", 1);
 	x.start();
 }
 
