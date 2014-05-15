@@ -69,3 +69,9 @@ function doing(id) {
 	x.start();
 }
 
+
+function result() {
+	$('#result').append(formatTime(x.time()));
+	x.reset();
+	//update();
+}
