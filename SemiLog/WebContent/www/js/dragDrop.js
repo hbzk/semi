@@ -1,14 +1,14 @@
-function dragDrop(){
 	  var dragSrc, dragImg, dropSrc, draggingEleId,droppedEleClass, wholeTag, mainSrc;
 	  
-	  var mainTag = $(".droppableMain")[0].outerHTML;
 	  
-	  console.log("mainTag=="+ mainTag);
-	  
+	  function drag(){
 	  
 		  $( ".draggingItem" ).draggable({
 			  
 	          start: function(event, ui) {
+	        	  var mainTag = $(".droppableMain")[0].outerHTML;
+	        	  
+	        	  console.log("mainTag=="+ mainTag);
 	        	  
 	              var Startpos = $(this).offset();
 	             
@@ -37,42 +37,49 @@ function dragDrop(){
 	              countC();
 	          }
 	  });
+	  }
 	
+	  
+	  function drop(){
 
-  $( ".droppableMain" ).droppable({
-	  	 accept: ".draggingItem",
-         drop: function( event, ui ) {
-        	 if($(".draggingItem").length==6){
-        	 mainSrc=$(this).find('img').attr('src');
-             dropSrc = $(this).find('img').attr('src',dragSrc);
-             console.log("droppable=>"+ dropSrc);
-             dragImg.removeAttr('src');
-             document.getElementById(draggingEleId).remove(); //drag된 아이템 객체 지우기
-         	countC();
-         	console.log("wholeTag====="+wholeTag);
-            $("#droppableMain").on('click',function(){
-           	  if($(".draggingItem").length==5){
-		       	  $(this).find('img').attr('src',mainSrc);
-		       	  $(wholeTag).appendTo("#iconMainDiv");
-           	  }
-           	dragDrop();
-             });
-      
-        	 }
-         }
-  
-  });
-  
- function countC(){ 
-	 var length = $(".draggingItem").length;
-  
-	 console.log("lengthClass====="+length);
- }
-  
- function tagInit(){
-	 wholeTag;
- }
-  
-}
+		  $( ".droppableMain" ).droppable({
+			  	 accept: ".draggingItem",
+		         drop: function( event, ui ) {
+		        	 if($(".draggingItem").length==6){
+		        	 mainSrc=$(this).find('img').attr('src');
+		             dropSrc = $(this).find('img').attr('src',dragSrc);
+		             console.log("droppable=>"+ dropSrc);
+		             dragImg.removeAttr('src');
+		             document.getElementById(draggingEleId).remove(); //drag된 아이템 객체 지우기
+		         	countC();
+		         	console.log("wholeTag====="+wholeTag);
+		            $("#droppableMain").on('click',function(){
+		           	  if($(".draggingItem").length==5){
+				       	  $(this).find('img').attr('src',mainSrc);
+				       	  $(wholeTag).appendTo("#iconMainDiv");
+		           	  }
+		           	  drag();
+		             });
+		      
+		        	 }
+		         }
+		  
+		  });
+	  }
+	  
+	  
+	  function countC(){ 
+		  var length = $(".draggingItem").length;
+		  
+		  console.log("lengthClass====="+length);
+	  }
+	  
+	  function tagInit(){
+		  wholeTag;
+	  }
 
+	  function dragDrop(){
+		  drag();
+		  drop();
+	  }
 window.onload=dragDrop;
