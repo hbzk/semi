@@ -20,7 +20,8 @@
 	-webkit-perspective: 1000;
 }
 	/* flip the pane when hovered */
-	.flip-container:hover .flipper, .flip-container.hover .flipper {
+	/* .flip-container:hover .flipper, .flip-container.hover .flipper { */
+	.qwert .flipper, .flip-container.hover .flipper {
 		-webkit-transform: rotateY(1080deg);
 	}
 
@@ -70,6 +71,7 @@
 				<div class="back"></div>
 			</div>
 		</div>
+		
 		<div class="iconMain center top flip-container" id="flip-toggle">
 			<div class="flipper">
 				<div class="front" style="background: url(css/img/news.png) 0 0 no-repeat;"></div>
@@ -100,7 +102,7 @@
 				<div class="back"></div>
 			</div>
 		</div>
-		<div class="iconMain center bottom flip-container" id="flip-toggle">
+		<div class="iconMain center bottom flip-container qwert" id="flip-toggle">
 			<div class="flipper">
 				<div class="front" style="background: url(css/img/gamecontroller.png) 0 0 no-repeat;"></div>
 				<div class="back"></div>
@@ -119,7 +121,18 @@
 </section>
 </section>
 
-
+<script type="text/javascript">
+$(window).load(function(){
+	$('.iconMain').click(function(event){
+		console.log(this);
+		if ($(this).hasClass('qwert')) {
+			$(this).removeClass('qwert');
+		} else {
+			$(this).addClass('qwert');
+		}
+	})
+});
+</script>
 </body>
 </html>
 
