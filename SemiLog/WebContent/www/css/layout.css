@@ -65,6 +65,10 @@ margin: 50px auto; width: 320px; height: 533px; position: relative; }
 #menuLeft { border: 1px solid #999; 
 display: block; width: 30px; height: 30px; }
 
+#menuRight { border: 1px solid #999; position: absolute;
+display: block; width: 30px; height: 30px; 
+margin-left: 200px; margin-top: -32px;}
+
 #content {
   margin-top: 51px;
 }
