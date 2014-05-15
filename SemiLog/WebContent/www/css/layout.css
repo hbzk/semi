@@ -5,8 +5,12 @@
   margin: 0px;
 }
 /* #content{
-	position: absolute;
+  position: absolute;
 } */
+
+#menuLeft {
+  margin-left: 90px;
+}
 
 
 #slide {
@@ -18,9 +22,9 @@
 }
 
 #input {
-	border: 0px;
-	width: 104px;
-	margin-top: 13px;
+  border: 0px;
+  width: 104px;
+  margin-top: 13px;
 }
 
 #icons {
@@ -36,9 +40,9 @@ hr {
 }
 
 .font {
-	text-align: center;
-	width: 65px;
-	color: white;
+  text-align: center;
+  width: 65px;
+  color: white;
 }
 
 
@@ -94,15 +98,3 @@ height: 100px; text-align: center; line-height: 100px; position: relative; }
 #resultFooter { position: absolute; bottom: 20px; right: 20px;}
 #resultFooter a { display: inline-block; margin-left: 5px; }
 #resultFooter img { width: 50px; height: 50px; }
-
-
-
-/* Result List = rt* ======================= */
-
-#resultList { height: 400px; width: 340px; overflow: auto; }    
-#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 36px; margin-top: 15px; } 
-#rtTable { height: 70px;}
-#rtImage{ /* position: absolute; */ text-align: center; margin-top: -6px; margin-left: -280px; padding-top: 10px; }
-#rtName{ text-align: center; height: 20px; margin-left: 52px; margin-top: -10px; width: 130px; display: block; }
-#rtTime{ text-align: center; float:right; margin-right: 40px; margin-top: -10px; }
-#resultList img { width: 40px; height: 40px; margin-bottom: -4%; }
