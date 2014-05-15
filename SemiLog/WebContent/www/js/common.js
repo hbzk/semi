@@ -106,7 +106,8 @@ $(function(){
 	$("#slide").css("display", "none");
 
 	$("#menuLeft").click(function() {
-		$(".img").css("display","");
+		$(".img").css("display", "");
+		$("hr").css("display", "");
 		$("#icons").appendTo("#slide");
 		$("#input").val("");
 		$("#slide").toggle("fade");
@@ -147,6 +148,7 @@ $(function(){
 					$(".img").css("display", "none");
 					$("hr").css("display", "none");
 					$("." + ui.item.value).css("display", "");
+					$("hr").css("display", "");
 				} 
 		},
 		selectFirst: true,
