@@ -14,7 +14,7 @@
 
 
 #slide {
-  height:620px; width:104px; overflow:hidden; 
+  height:533px;  px; width:104px; overflow:hidden; 
   background: #ccc;
   position: absolute;
   left: 0;
@@ -28,7 +28,7 @@
 }
 
 #icons {
-  height:582px; width:129px; overflow:auto;
+  height:490px; width:129px; overflow:auto;
   margin-left: 19px;
   margin-top: 13px;
 }
