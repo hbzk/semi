@@ -73,11 +73,11 @@ $(function(){
 			} else if($("#input").val() == "motorcy" || $("#input").val() == "오토바이"){
 				$(".img").css("display", "none");
 				$("hr").css("display", "none");
-				$(".i1").css("display", "");
+				$(".i11").css("display", "");
 			} else if($("#input").val() == "running" || $("#input").val() == "달리기"){
 				$(".img").css("display", "none");
 				$("hr").css("display", "none");
-				$(".i2").css("display", "");
+				$(".i12").css("display", "");
 			} else if($("#input").val() == "scooter" || $("#input").val() == "스쿠터"){
 				$(".img").css("display", "none");
 				$("hr").css("display", "none");
