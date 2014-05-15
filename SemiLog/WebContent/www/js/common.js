@@ -2,9 +2,9 @@ $(function(){
 	$("#slide").css("display", "none");
 
 	$("#menuLeft").click(function() {
-		$("#slide").toggle("fade");
+		$("#slide").toggle("slide");
 	});
-	
+		
 	$("#input").click(function(){
 		$("#input").val("");
 	});
@@ -40,8 +40,7 @@ $(function(){
 					$(".img").css("display", "none");
 					$("hr").css("display", "none");
 					$("." + ui.item.value).css("display", "");
-				}
-			
+				} 
 		},
 		selectFirst: true,
 		minLength: 1,
