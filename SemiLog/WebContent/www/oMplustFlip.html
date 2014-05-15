@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/testDraggable.css">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="js/dragDrop.js"></script>
+<link rel="stylesheet" href="css/layout.css">
+<script src="js/common.js"></script>
+<script src="js/jquery.ui.touch.js"></script>
+<title>Main</title>
+<style type="text/css">
+
+
+/* entire container, keeps perspective */
+.flip-container {
+	-webkit-perspective: 1000;
+}
+	/* flip the pane when hovered */
+	/* .flip-container:hover .flipper, .flip-container.hover .flipper { */
+	.qwert .flipper, .flip-container.hover .flipper {
+		-webkit-transform: rotateY(1080deg);
+	}
+
+.flip-container, .front, .back {
+	width: 65px;
+	height: 65px;
+}
+
+/* flip speed goes here */
+.flipper {
+-webkit-transition: 2s;
+-webkit-transform-style: preserve-3d;
+	position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+	-webkit-backface-visibility: hidden;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	z-index: 2;
+}
+
+/* back, initially hidden pane */
+.back {
+	-webkit-transform: rotateY(180deg);
+}
+</style>
+</head>
+<body>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" /> -->
+
+<section id="layout">
+
+<div id="menuLeft">=</div>
+
+<section id="content">
+
+  <div id="iconMainDiv">
+    <div class="iconMain start flip-container" id="flip-toggle"><div id="droppableMain" 
+    class=" droppableMain ui-widget-content circular flipper "><div class="front"><img src="css/img/water.png"></div><div class="back"></div></div>
+    </div>
+    <div id = "1" class="iconMain center top draggingItem ui-widget-content circular"><img src="css/img/news.png"></div>
+    <div id = "2" class="iconMain left top draggingItem ui-widget-content circular"><img src="css/img/bikerC.png"></div>
+    <div id = "3" class="iconMain right top draggingItem ui-widget-content circular"><img src="css/img/radio.png"></div>
+    <div id = "4" class="iconMain left bottom draggingItem ui-widget-content circular"><img src="css/img/tv.png"></div>
+    <div id = "5" class="iconMain right bottom draggingItem ui-widget-content circular"><img src="css/img/creditcard.png"></div>
+    <div id = "6" class="iconMain center bottom draggingItem ui-widget-content circular"><img src="css/img/gamecontroller.png"></div>
+  </div>
+</section>
+
+
+
+
+<div id="slide">
+
+
+
+  <input id="input" type="text" placeholder="Quick Search"/>
+
+
+
+<div id="icons">
+  <div class="img art 미술"><img src="css/img2/art.png"><br><div class="font">art</div></div><hr>
+  <div class="img bike 바이크"><img src="css/img2/bike.png"><br><div class="font">bike</div></div><hr>
+  <div class="img bikerC 자전거"><img src="css/img2/bikerC.png"><br><div class="font">bikerC</div></div><hr>
+  <div class="img booklet 책"><img src="css/img2/booklet.png"><br><div class="font">booklet</div></div><hr>
+  <div class="img briefcase 근무"><img src="css/img2/briefcase.png"><br><div class="font">briefcase</div></div><hr>
+  <div class="img brush 공부"><img src="css/img2/brush-pencil.png"><br><div class="font">brush</div></div><hr>
+  <div class="img car 운전"><img src="css/img2/car.png"><br><div class="font">car</div></div><hr>
+  <div class="img computer 컴퓨터"><img src="css/img2/computer.png"><br><div class="font">computer</div></div><hr>
+  <div class="img game 게임"><img src="css/img2/gamecontroller.png"><br><div class="font">game</div></div><hr>
+  <div class="img micro 노래방"><img src="css/img2/microphone.png"><br><div class="font">micro</div></div><hr>
+  <div class="img motorcy 오토바이"><img src="css/img2/motorcycle.png"><br><div class="font">motorcy</div></div><hr>
+  <div class="img running 달리기"><img src="css/img2/running.png"><br><div class="font">running</div></div><hr>
+  <div class="img scooter 스쿠터"><img src="css/img2/scooter.png"><br><div class="font">scooter</div></div><hr>
+  <div class="img train 전철"><img src="css/img2/train.png"><br><div class="font">train</div></div><hr>
+
+</div>
+</div>
+</section>
+<script type="text/javascript">
+$(window).load(function(){
+	$('.iconMain').click(function(event){
+		console.log(this);
+		if ($(this).hasClass('qwert')) {
+			$(this).removeClass('qwert');
+		} else {
+			$(this).addClass('qwert');
+		}
+	})
+});
+</script>
+</body>
+</html>
