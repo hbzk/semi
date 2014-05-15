@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+#main button, #disp {
+    width: 8em;
+    vertical-align: middle;
+    
+}
+#main button {
+
+    padding: 0.4em;
+    font-size: 1.1em;
+}
+#disp {
+	height : 64px;
+	width: 64px;
+    background-color: white;
+    font-size: 1em;
+    /* width: 4.0em; */
+    font-family: "Courier New";
+}
+
+#main {
+    text-align: center;
+    white-space: nowrap;
+}
+
+#lap {
+    margin-top: 0.5em;
+}

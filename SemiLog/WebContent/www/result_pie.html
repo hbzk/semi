@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/layout.css">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.pieChart.js"></script>
+<title>Result_Pie</title>
+</head>
+<body>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" /> -->
+
+<div id="backImg">
+
+<div id="blank"></div>
+<section id="layout">
+
+<header id="date">
+	<span class="left">&lt;</span>
+	<span class="right">&gt;</span>
+	<h1>05/12</h1>
+</header>
+
+<section id="content">
+
+<div id="pieChart"></div>
+
+
+</section>	<!-- content -->
+
+
+<footer id="resultFooter">
+		<a class=""><img src="css/img/result_piechart.png"></a>
+		<a class=""><img src="css/img/result_list.png"></a>
+</footer>
+</section>	<!-- layout -->
+</div>	<!-- backImg -->
+
+<script type="text/javascript">
+data = [
+	['Exercise',10],
+	['Play',4],
+	['TV',3],
+	['ETC',7],
+];
+console.log(data);
+$('#pieChart').pieChart(data,300,"pie");
+</script>
+</body>
+</html>
