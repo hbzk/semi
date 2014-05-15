@@ -1,4 +1,108 @@
 $(function(){
+	
+	var lbDown = false;
+    var msDown = false;
+    var box = $('body');
+    var offsetPx = 100;
+    var boxOffset = box.offset().left;
+    var boxWidth = box.width();
+    $("#wrap").load('OneChat.html');
+    $("#pane").css('display', 'none');
+
+    $('#pane').mousedown(function(e) {
+      if (e.which === 1) {
+        lbDown = true;
+      }
+    });
+    $('#pane').mouseup(function(e) {
+      if (e.which === 1) {
+        lbDown = false;
+      }
+    });
+    
+   $('#wrap').mousedown(function(e) {
+      if (e.which === 1) {
+        msDown = true;
+      }
+    });
+    $('#wrap').mouseup(function(e) {
+      if (e.which === 1) {
+        msDown = false;
+      }
+    });
+
+    
+    
+    $("#aaa").mousemove(function(e) {
+      if (msDown) {
+        var mouseX = e.pageX;
+        var boxMouseX = mouseX - boxOffset;
+        if ((boxMouseX > offsetPx) && (boxMouseX < (boxWidth - offsetPx))) {
+          $("#pane").hide("fade", {
+            direction : "right"
+          }, 500);
+          $("#pane").show("fade", {
+            direction : "right"
+          }, 500);
+          lbDown = false;
+          msDown = false;
+        }
+        $("#wrap").css("display","none");
+      }
+    });
+    
+   
+    $('#bbb').mousemove(function(e) {
+        if (lbDown) {
+          var mouseX = e.pageX;
+          var boxMouseX = mouseX - boxOffset;
+          if ((boxMouseX > offsetPx) && (boxMouseX < (boxWidth - offsetPx))) {
+
+            $("#pane").hide("fade", {
+              direction : "right"
+            }, 500);
+            $("#wrap").show("fade", {
+              direction : "left"
+            }, 500);
+            msDown = false;
+            lbDown = false;
+          }
+          $("#pane").css("display","none");
+        }
+      });
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/* ---------------------------------------------------------------------- */	
+	
+	
+	
+	
+	
 	$("#slide").css("display", "none");
 
 	$("#menuLeft").click(function() {
