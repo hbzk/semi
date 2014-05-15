@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="js/jquery.ui.touch.js"></script>
+<script type="text/javascript" src="js/jquery.pieChart.js"></script>
+<script type="text/javascript" src="js/dragDrop.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
+
+<link rel="stylesheet" href="css/layout.css">
+<title>Result_Pie</title>
+</head>
+<body>
+<section id="layout">
+<!-- 레이아웃 시작 -->
+
+<header id="date">
+	<span class="left">&lt;</span>
+	<span class="right">&gt;</span>
+	<h1>05/12</h1>
+</header>
+
+<section id="content">
+
+<div id="pieChart"></div>
+
+
+</section>	<!-- content -->
+
+
+<footer id="resultFooter">
+		<a class=""><img src="css/img/result_piechart.png"></a>
+		<a class=""><img src="css/img/result_list.png"></a>
+</footer>
+
+<!-- 레이아웃 끝 -->
+</section>
+
+<script type="text/javascript">
+data = [
+	['Exercise',10],
+	['Play',4],
+	['TV',3],
+	['ETC',7],
+];
+console.log(data);
+$('#pieChart').pieChart(data,300,"pie");
+</script>
+</body>
+</html>
