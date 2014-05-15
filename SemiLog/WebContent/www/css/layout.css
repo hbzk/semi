@@ -69,10 +69,10 @@ display: block; width: 30px; height: 30px; }
 /* 메인아이콘 */
 #iconMainDiv { width: 300px; height: 340px; margin: 0px auto; position: relative; }
 
-
 .iconStart { position: absolute; top: 142px; left: 118px; }
 
 .iconMain { position: absolute;}
+.iconMain.middle { top: 142px; left: 118px; }
 .iconMain.center { left: 118px; }
 .iconMain.left { left: 10px; }
 .iconMain.right { right: 10px; }
@@ -80,6 +80,11 @@ display: block; width: 30px; height: 30px; }
 .iconMain.left.top, .right.top { top: 80px; }
 .iconMain.left.bottom, .right.bottom { top: 205px; } 
 .iconMain.center.bottom { top: 275px; } 
+
+/* 타이머 */
+#result { width: 64px; height: 64px; 
+line-height: 64px; text-align: center; font-weight: bolder; font-size: 145%; }
+
 
 
 
@@ -104,7 +109,7 @@ height: 60px; text-align: center; line-height: 100px; position: relative; }
 /* Result List = rt* ======================= */
 
 #resultList { height: 319px; width: 340px; overflow: auto; }    
-#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 30px; margin-top: 50px; } 
+#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 30px; margin-top: 40px; } 
 #rtTable { height: 70px;}
 #rtImage{ /* position: absolute; */ text-align: center; margin-top: -6px; margin-left: -280px; padding-top: 10px; }
 #rtName{ text-align: center; height: 20px; margin-left: 52px; margin-top: -10px; width: 105px; display: block; }
