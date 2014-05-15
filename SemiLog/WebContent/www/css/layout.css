@@ -100,6 +100,7 @@ height: 60px; text-align: center; line-height: 100px; position: relative; }
 /* 파이차트 */
 #pieChart { margin-left: 35px; margin-top:20px;}
 .pieChart_legend {margin-top: 23px;}
+
 /* 결과창 하단 메뉴 */
 #resultFooter { position: absolute; bottom: 20px; right: 20px; }
 #resultFooter a { display: inline-block; margin-left: 5px; }
