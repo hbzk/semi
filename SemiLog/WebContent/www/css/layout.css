@@ -69,9 +69,10 @@ display: block; width: 30px; height: 30px; }
 /* 메인아이콘 */
 #iconMainDiv { width: 300px; height: 340px; margin: 0px auto; position: relative; }
 
-.iconMain { position: absolute;}
-.iconMain.start { top: 142px; left: 118px; }
 
+.iconStart { position: absolute; top: 142px; left: 118px; }
+
+.iconMain { position: absolute;}
 .iconMain.center { left: 118px; }
 .iconMain.left { left: 10px; }
 .iconMain.right { right: 10px; }
