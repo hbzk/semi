@@ -28,7 +28,7 @@
 }
 
 #icons {
-  height:478px; width:129px; overflow:auto;
+  height:490px; width:129px; overflow:auto;
   margin-left: 19px;
   margin-top: 13px;
 }
@@ -65,22 +65,14 @@ margin: 50px auto; width: 320px; height: 533px; position: relative; }
 #menuLeft { border: 1px solid #999; 
 display: block; width: 30px; height: 30px; }
 
-#menuRight { border: 1px solid #999; position: absolute;
-display: block; width: 30px; height: 30px; 
-margin-left: 200px; margin-top: -32px;}
-
-#content {
-  margin-top: 51px;
-}
 
 /* 메인아이콘 */
 #iconMainDiv { width: 300px; height: 340px; margin: 0px auto; position: relative; }
 
-.iconMain { position: absolute;}
-.iconMain.middle { top: 142px; left: 118px; }
-.iconMain.center { left: 118px; }
-.iconMain.start { top: 142px; left: 118px; }
 
+.iconStart { position: absolute; top: 142px; left: 118px; }
+
+.iconMain { position: absolute;}
 .iconMain.center { left: 118px; }
 .iconMain.left { left: 10px; }
 .iconMain.right { right: 10px; }
@@ -94,27 +86,27 @@ margin-left: 200px; margin-top: -32px;}
 /* Result Pie ======================== */
 
 #date {
-height: 100px; text-align: center; line-height: 100px; position: relative; }
-#date h1 { font-size: 400%; font-weight: bold; margin: 0;}
+height: 60px; text-align: center; line-height: 100px; position: relative; }
+#date h1 { font-size: 400%; font-weight: bold; margin: 0; }
 #date span { position: absolute; }
 #date span.left { left: 40px; }
 #date span.right { right: 40px; }
 
 /* 파이차트 */
-#pieChart { margin-left: 30px; }
-
+#pieChart { margin-left: 35px; margin-top:20px;}
+.pieChart_legend {margin-top: 23px;}
 /* 결과창 하단 메뉴 */
-#resultFooter { position: absolute; bottom: 20px; right: 20px;}
+#resultFooter { position: absolute; bottom: 20px; right: 20px; }
 #resultFooter a { display: inline-block; margin-left: 5px; }
 #resultFooter img { width: 50px; height: 50px; }
 
 
 /* Result List = rt* ======================= */
 
-#resultList { height: 400px; width: 340px; overflow: auto; }    
-#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 36px; margin-top: 15px; } 
+#resultList { height: 319px; width: 340px; overflow: auto; }    
+#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 30px; margin-top: 40px; } 
 #rtTable { height: 70px;}
 #rtImage{ /* position: absolute; */ text-align: center; margin-top: -6px; margin-left: -280px; padding-top: 10px; }
-#rtName{ text-align: center; height: 20px; margin-left: 52px; margin-top: -10px; width: 130px; display: block; }
-#rtTime{ text-align: center; float:right; margin-right: 40px; margin-top: -10px; }
+#rtName{ text-align: center; height: 20px; margin-left: 52px; margin-top: -10px; width: 105px; display: block; }
+#rtTime{ text-align: center; float:right; margin-right: 66px; margin-top: -10px; }
 #resultList img { width: 40px; height: 40px; margin-bottom: -4%; }
