@@ -77,6 +77,8 @@ margin-left: 200px; margin-top: -32px;}
 #iconMainDiv { width: 300px; height: 340px; margin: 0px auto; position: relative; }
 
 .iconMain { position: absolute;}
+.iconMain.middle { top: 142px; left: 118px; }
+.iconMain.center { left: 118px; }
 .iconMain.start { top: 142px; left: 118px; }
 
 .iconMain.center { left: 118px; }

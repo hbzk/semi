@@ -15,7 +15,7 @@ $(window).load(function(){
 
 // 드래그
 function dragdrop_doing() {
-	$('.iconMain').draggable({distance: 20}, {revert: true}, {zIndex: 9},
+	$('.iconMain').draggable({distance: 20}, {revert: "invalid"}, {zIndex: 9},
 		{start: function(event,ui) {
 		
 	}});
@@ -35,7 +35,11 @@ function dragdrop_drop() {
 		
 		$('.iconStart').draggable({distance: 20}, {revert: "invalid"}, {zIndex: 9},
 			{
-			start: function(event,ui) {}, stop: function(event, ui) {}
+			start: function(event,ui) {
+				console.log(456);
+			}, stop: function(event, ui) {
+				console.log(123);
+			}
 		});
 	}});
 }
