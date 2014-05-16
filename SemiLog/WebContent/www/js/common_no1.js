@@ -147,7 +147,7 @@ $(function(){
 	
 	$("#slide").css("display", "none");
 
-	$(".iconMain").click(function() {
+	$().click(function() {
 		$(".img").css("display", "");
 		$("hr").css("display", "");
 		$("#icons").appendTo("#slide");
