@@ -40,6 +40,7 @@ function dragdrop_drop() {
 		doing('result');
 		$('#layout').find('#result').addClass(lastdragerClass)
 			.removeClass('ui-draggable ui-draggable-dragging');
+		
 
 		
 	}});
