@@ -66,25 +66,7 @@ margin: 50px auto; width: 320px; height: 533px; position: relative; margin-top: 
 display: block; width: 30px; height: 30px; }
 
 
-.a1{
-  margin-top: 58px;
-  margin-left: 190px;
-}
-.a1 img {
-  bottom: 20px; right: 20px;
-  width: 50px; height: 50px;
-}
 
-
-
-.a2{
-	margin-top: 35px;
-	margin-left: 230px;
-}
-.a2 img {
-	position: absolute; bottom: 20px; right: 20px;
-	width: 50px; height: 50px;
-}
 
 #content {
   margin-top: 34px;
