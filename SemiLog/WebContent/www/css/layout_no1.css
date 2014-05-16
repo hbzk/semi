@@ -23,27 +23,26 @@
 
 #slideRight {
 	position: absolute;
-	border: 1px solid red;
 	width: 320px;
-	height: 532px;
+	height: 345px;
 	margin-left: -10px;
-	margin-top: -67px;
+	margin-top: 10px;
 }
 
 #slideLeft {
+	border: 1px solid red;
 	position: absolute;
-  border: 1px solid red;
   width: 320px;
-  height: 532px;
-  margin-top: -95px;
+  height: 335px;
+  margin-top: 10px;
 }
 
 .slideLeft2 {
+	border: 1px solid red;
   position: absolute;
-  border: 1px solid red;
   width: 320px;
-  height: 532px;
-  margin-top: -61px;
+  height: 345px;
+  margin-top: 10px;
 }
 
 #input {
@@ -84,12 +83,9 @@ hr {
 
 /* 갤럭시 디스플레이 레이아웃 */
 
-#layout { border: 1px solid #000;
+#layout { border: 1px solid #000; 
 margin: 50px auto; width: 320px; height: 533px; position: relative;}
 
-/* 좌측 메뉴 */
-#menuLeft { border: 1px solid #999; 
-display: block; width: 30px; height: 30px; }
 
 
 
@@ -102,7 +98,7 @@ display: block; width: 30px; height: 30px; }
 
 
 /* 메인아이콘 */
-#iconMainDiv { width: 300px; height: 340px; margin: 0px auto; position: relative; }
+#iconMainDiv { width: 300px; height: 340px; margin: 0px auto; position: relative; margin-top: 85px;}
 
 .iconMain { position: absolute;}
 .iconStart { position: absolute; top: 142px; left: 118px; }
