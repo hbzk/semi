@@ -85,7 +85,7 @@ $(function(){
         }
       });
 	
-    $("#slideLeft2").mousemove(function(e) {
+    $(".slideLeft2").mousemove(function(e) {
         if (lbDown) {
           var mouseX = e.pageX;
           var boxMouseX = mouseX - boxOffset;

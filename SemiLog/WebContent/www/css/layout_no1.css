@@ -38,7 +38,7 @@
   margin-top: -95px;
 }
 
-#slideLeft2 {
+.slideLeft2 {
   position: absolute;
   border: 1px solid red;
   width: 320px;
