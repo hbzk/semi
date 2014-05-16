@@ -49,24 +49,24 @@ function formatTime(time) {
 }
 
 
-function update(id) {
+function timer_update(id) {
 	$id.innerHTML = formatTime(x.time());
 }
-function stop() {
+function timer_stop() {
 	x.stop();
 	clearInterval(clocktimer);
 }
-function reset() {
-	stop();
+function timer_reset() {
+	timer_stop();
 	x.reset();
-	update();
+	timer_update();
 }
 
 //타이머 출력 함수
-function doing(id) {
+function timer_doing(id) {
 	$id = document.getElementById(id);
 	$id.innerHTML = formatTime(x.time());
-	clocktimer = setInterval("update("+ id + ")", 1);
+	clocktimer = setInterval("timer_update("+ id + ")", 1);
 	x.start();
 }
 

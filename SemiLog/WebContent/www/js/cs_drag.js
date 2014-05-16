@@ -31,13 +31,14 @@ function dragdrop_drop() {
 		$(event.toElement).css('background-image', 'none');
 	
 		// 중앙아이콘 - 드롭 비활성. 드래그 활성 
-		$('.iconStart').droppable({ disabled: true }).draggable({distance: 20},{revert: "invalid"}, {zIndex: 9},
+		$('.iconStart').droppable({ disabled: true })
+			.draggable({ disabled: false },{distance: 20},{revert: "invalid"}, {zIndex: 9},
 			{start: function(event,ui) {}, stop: function(event, ui) {}});
 		// 드래그 항목 갱신
 		dragdrop_doing();
 		
 		// 타이머 출력
-		doing('result');
+		timer_doing('result');
 		$('#layout').find('#result').addClass(lastdragerClass)
 			.removeClass('ui-draggable ui-draggable-dragging');
 		
@@ -62,7 +63,7 @@ function dragdrop_startClick() {
 		if (typeof $id === 'undefined') {
 			console.log('undefined');
 		} else {
-			reset();
+			timer_reset();
 			$('#result').html('').removeClass();
 		}
 		
