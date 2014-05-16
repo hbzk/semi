@@ -68,32 +68,6 @@ display: block; width: 30px; height: 30px; }
 
 
 
-.a1{
-  margin-top: 53px;
-  margin-left: 125px;
-}
-.a1 img {
-  bottom: 20px; right: 20px;
-  width: 50px; height: 50px;
-}
-
-.a2{
-	position: absolute;
-	margin-left: 181px;
-	margin-top: -61px;
-}
-
-.a3{
-  margin-top: 53px;
-  margin-left: 230px;
-}
-.a3 img {
-  position: absolute;
-  margin-top: -107px;
-  width: 50px; height: 50px;
-  margin-left: 20px;
-
-}
 
 #content {
   margin-top: 34px;
