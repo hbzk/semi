@@ -58,7 +58,7 @@ hr {
 
 /* 갤럭시 디스플레이 레이아웃 */
 
-#layout { border: 1px solid #000;
+#layout { /* border: 1px solid #ccc; */
 margin: 50px auto; width: 320px; height: 533px; position: relative;}
 
 /* 좌측 메뉴 */
