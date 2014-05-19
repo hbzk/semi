@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript" src="js/jquery.ui.touch.js"></script>
@@ -18,39 +21,61 @@
 
 <style>
 #LoginHeader {
+  font-weight: bold;
   background-color: #A9F5BC;
   height: 60px;
   color: white;
   text-align: center;
   font-size: 20px;
-  line-height: 32px;
+  line-height: 33px;
 }
 #LoginHeader1 {
   background-color: #CEF6D8;
   height: 25px;
 }
 #LoginMiddle {
-  height: 70px;
+  height: 40px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 18px;
+  text-align: center;
+  padding: 17px;
 }
 #LoginContent {
   border: 1px solid white;
   background-color: #F5F6CE;
-  height: 401px;
+  height: 397px;
 }
 #LoginId {
   background-color: white;
   margin-top: 3px;
-  height: 70px;
 }
 #email {
   border: 0px;
-  height: 68px;
-  width: 318px;
+  height: 30px;
+  width: 278px;
+  font-size: 20px;
+  padding: 20px;
 }
 #LoginPassword {
+  position: absolute;
   margin-top: 3px;
   background-color: #A9F5BC;
   height: 60px;
+}
+#LoginBottom {
+  display: inline-block;
+  background-color: #CEF6D8;
+  height: 25px;
+  width: 318px;
+  margin-top: 35px;
+}
+#Password {
+	border: 0px;
+	position: absolute;
+	margin-top: -61px;
+	width: 318px;
+	height: 53px;
 }
 </style>
 
@@ -66,22 +91,35 @@
 <div id="LoginHeader1"></div>
 Username
 </div>
-<div id="LoginMiddle"></div>
+<div id="LoginMiddle">
+Please select a unique username.<br>
+Your username identifies you on Sem1colon
+</div>
 <div id="LoginContent">
 <div id="LoginId">
 <form>
-    <input id="email" type="email" data-clear-btn="true" name="email-2" value="">
+    <input id="email" type="email" data-clear-btn="true" name="email-2" value="" placeholder="email@">
 </form>
 </div>
 <div id="LoginPassword">
-<div id="Login"></div>
+<div id="LoginBottom"></div>
+<input id="Password" type="text" name="text" style="background-color:transparent;">
 </div>
 </div>
-
 </section>
 
 
 
 
+
+
+<script>
+$("#LoginPassword").css("display", "");
+$("#Password").css("display", "");
+</script>
 </body>
 </html>
+
+
+
+
