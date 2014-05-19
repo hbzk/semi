@@ -10,16 +10,15 @@
 <script type="text/javascript" src="js/cs_drag.js"></script>
 <script type="text/javascript" src="js/timer.js"></script>
 
-<link rel="stylesheet" href="css/jquery-ui.css">
 <link rel="stylesheet" href="css/layout_no.css">
 <title>Main</title>
 <style type="text/css">
-
+map {background: #ccc; border: 1px solid red; width: 100px; height: 100px;}
+/* area { background: #999; border: 1px solid blue; width: 100px; height: 100px;} */
 </style>
 </head>
 <body>
 
-<div id='wrap'>
 
 <section id="layout">
 
@@ -28,7 +27,11 @@
 
 <div id="iconMainDiv">
 	<div id="startArea"><div id="start" class="iconStart circular"></div></div>
-  
+	<MAP name="sample">
+    <AREA shape=rect coords="51,73,110,120" href="/help/sample1.asp">
+    <AREA shape=rect coords="13,91,50,120" href="/help/sample2.asp">
+    <AREA shape=rect coords="150,70,180,90" href="/help/sample3.asp">
+  </MAP>
   <div id="one" class="iconMain center top circular"></div>
   <div id="two" class="iconMain left top circular"></div>
   <div id="three" class="iconMain right top circular"></div>
@@ -61,54 +64,9 @@
   <div class="img train 전철"><img src="css/img2/train.png"><br><div class="font">train</div></div><hr>
 </div>
 </div>
-</section>
-</div>
-
-
-
-
-
-
-
-
-
-<div id='pane'>
-
-
-
-<section id="layout">
-
-<header id="date">
-  <span class="left">&lt;</span>
-  <span class="right">&gt;</span>
-  <h1>05/12</h1>
-</header>
-
-
-
-<div id="pieChart"></div>
-<div class="pieChart_legend"></div>
-
-
 
 
 </section>
-</div>
-
-<script type="text/javascript">
-data = [
-  ['Exercise',10],
-  ['Play',4],
-  ['TV',3],
-  ['ETC',7],
-];
-console.log(data);
-$('#pieChart').pieChart(data,250,"pie");
-</script>
-</body>
-
-
-
 
 
 
