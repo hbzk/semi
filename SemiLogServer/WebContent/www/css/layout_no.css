@@ -55,11 +55,13 @@ margin: 50px auto; width: 320px; height: 533px; position: relative;}
 /* 메인아이콘 */
 #iconMainDiv { width: 300px; height: 340px; margin: 34px auto 0px; position: relative; }
 
-.iconStart { background: url(img/play.png) 0px 0px no-repeat; opacity: 1;
-position: absolute; top: 142px; left: 118px; }
+#startArea { width: 128px; height: 128px; position: absolute; top: 110px; left: 86px; }
+.circular{ width: 64px; height: 64px; border-radius: 32px; border: 0px;
+-webkit-border-radius: 32px; -moz-border-radius: 32px; }
 
-.iconMain { background: url() 0px 0px no-repeat;
-position: absolute; }
+.iconStart { position: absolute; top: 32px; left: 32px;
+background: url(img/play.png) 0px 0px no-repeat; opacity: 1; }
+.iconMain { background: url() 0px 0px no-repeat; position: absolute; }
 #one { background-image: url(img/news.png);}
 #two { background-image: url(img/bikerC.png);}
 #three { background-image: url(img/radio.png);}
