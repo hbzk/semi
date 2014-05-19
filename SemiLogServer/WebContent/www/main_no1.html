@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="js/jquery.pieChart.js"></script>
+<script type="text/javascript" src="js/jquery.ui.touch.js"></script>
+
+<script type="text/javascript" src="js/common_no1.js"></script>
+<!-- <script type="text/javascript" src="js/dragDrop.js"></script> -->
+<script type="text/javascript" src="js/cs_drag.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
+
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/testDraggable.css">
+<link rel="stylesheet" href="css/layout_no1.css">
+<title>Main</title>
+<style type="text/css">
+.iconStart { background: url(css/img/play.png) 0px 0px no-repeat; opacity: 1;}
+
+.iconMain { background: url() 0px 0px no-repeat;}
+
+#one { background-image: url(css/img/news.png);}
+#two { background-image: url(css/img/bikerC.png);}
+#three { background-image: url(css/img/radio.png);}
+#four { background-image: url(css/img/tv.png);}
+#five { background-image: url(css/img/creditcard.png);}
+#six { background-image: url(css/img/gamecontroller.png);}
+</style>
+</head>
+<body>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" /> -->
+
+<div id='wrap'>
+<section id="layout">
+
+
+
+
+
+<section id="content">
+  <div id="iconMainDiv">
+<div id="slideRight"></div>
+    <div id="start" class="iconStart circular"></div>
+    
+    <div id="one" class="iconMain center top circular"></div>
+    <div id="two" class="iconMain left top circular"></div>
+    <div id="three" class="iconMain right top circular"></div>
+    <div id="four" class="iconMain left bottom circular"></div>
+    <div id="five" class="iconMain right bottom circular"></div>
+    <div id="six" class="iconMain center bottom circular"></div>
+    
+    <p id="result"></p>
+  </div>
+</section>
+
+<div id="slide">
+<form onsubmit='return false'>
+  <input id="input" type="text" placeholder="Quick Search" />
+</form>
+
+<div id="icons">
+  <div class="img art 미술"><img src="css/img2/art.png"><br><div class="font">art</div></div><hr>
+  <div class="img bike 바이크"><img src="css/img2/bike.png"><br><div class="font">bike</div></div><hr>
+  <div class="img bikerC 자전거"><img src="css/img2/bikerC.png"><br><div class="font">bikerC</div></div><hr>
+  <div class="img booklet 책"><img src="css/img2/booklet.png"><br><div class="font">booklet</div></div><hr>
+  <div class="img briefcase 근무"><img src="css/img2/briefcase.png"><br><div class="font">briefcase</div></div><hr>
+  <div class="img brush 공부"><img src="css/img2/brush-pencil.png"><br><div class="font">brush</div></div><hr>
+  <div class="img car 운전"><img src="css/img2/car.png"><br><div class="font">car</div></div><hr>
+  <div class="img computer 컴퓨터"><img src="css/img2/computer.png"><br><div class="font">computer</div></div><hr>
+  <div class="img game 게임"><img src="css/img2/gamecontroller.png"><br><div class="font">game</div></div><hr>
+  <div class="img micro 노래방"><img src="css/img2/microphone.png"><br><div class="font">micro</div></div><hr>
+  <div class="img motorcy 오토바이"><img src="css/img2/motorcycle.png"><br><div class="font">motorcy</div></div><hr>
+  <div class="img running 달리기"><img src="css/img2/running.png"><br><div class="font">running</div></div><hr>
+  <div class="img scooter 스쿠터"><img src="css/img2/scooter.png"><br><div class="font">scooter</div></div><hr>
+  <div class="img train 전철"><img src="css/img2/train.png"><br><div class="font">train</div></div><hr>
+</div>
+</div>
+</section>
+</div>
+
+
+
+
+
+
+
+
+
+<div id='pane'>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" /> -->
+
+
+<section id="layout">
+
+<header id="date">
+  <span class="left">&lt;</span>
+  <span class="right">&gt;</span>
+  <h1>05/12</h1>
+</header>
+
+
+<section id="content">
+
+<div id="pieChart"></div>
+<div class="pieChart_legend"></div>
+</section>  <!-- content -->
+
+
+<div id="slideLeft"></div>
+<footer id="resultFooter">
+    <a id="goList"><img src="css/img/result_list.png"></a>
+</footer>
+</section>  <!-- layout -->
+</div>  <!-- backImg -->
+
+<script type="text/javascript">
+data = [
+  ['Exercise',10],
+  ['Play',4],
+  ['TV',3],
+  ['ETC',7],
+];
+console.log(data);
+$('#pieChart').pieChart(data,250,"pie");
+</script>
+
+
+
+
+
+
+
+
+
+<div id='pane2'>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" /> -->
+
+
+<section id="layout">
+
+<header id="date">
+  <span class="left" >&lt;</span>
+  <span class="right">&gt;</span>
+  <h1>05/12</h1>
+</header>
+<div class="slideLeft2"></div>
+
+<div id="rtScroll" class="slideLeft2">
+<div id="resultList">
+
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/gamecontroller.png"></div>
+    <div id="rtTime">09:10~10:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">Angdroid</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/creditcard.png"></div>
+    <div id="rtTime">10:59~11:35</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">일이삼사오육칠팔구십</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/radio.png"></div>
+    <div id="rtTime">11:43~11:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">비정한 문자제한</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/tv.png"></div>
+    <div id="rtTime">11:58~12:43</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">'...'이</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/news.png"></div>
+    <div id="rtTime">12:55~13:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">훼이크로</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/water.png"></div>
+    <div id="rtTime">13:54~13:58</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">보입니까?</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/result_list.png"></div>
+    <div id="rtTime">14:20~17:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">드</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/gamecontroller.png"></div>
+    <div id="rtTime">18:10~19:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">라</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/bikerC.png"></div>
+    <div id="rtTime">19:55~20:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">군</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/news.png"></div>
+    <div id="rtTime">21:10~22:57</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">출</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/result_piechart.png"></div>
+    <div id="rtTime">23:10~24:04</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">동</span>
+    </div>
+
+
+</div>  <!-- content -->
+</div>
+
+
+
+<footer id="resultFooter">
+    <a id="goPie"><img src="css/img/result_piechart.png"></a>
+</footer>
+</section>  <!-- layout -->
+</div>  <!-- backImg -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

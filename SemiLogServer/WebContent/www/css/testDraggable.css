@@ -1,0 +1,22 @@
+.circular{
+	width: 64px;
+	height: 64px;
+	border-radius: 32px;
+  border: 0px ;
+	-webkit-border-radius: 32px;
+	-moz-border-radius: 32px;
+}
+#draggable{
+		left: 100px;
+	 top: 100px;
+	 position: absolute;
+	  
+		}
+
+
+#droppable{
+	 position: absolute;
+	 left: 300px;
+	 top: 300px;
+	 
+}
