@@ -30,7 +30,7 @@ function dragdrop_drop() {
 		$(this).css('background-image', $(lastdrager).css('background-image'));
 		$(event.toElement).css('background-image', 'none');
 	
-		// 중앙아이콘 - 드롭 비활성. 드래그 활성 
+		// 중앙아이콘 - 드롭 비활성. 드래그 활성
 		$('.iconStart').droppable({ disabled: true })
 			.draggable({ disabled: false },{distance: 20},{revert: "invalid"}, {zIndex: 9},
 			{start: function(event,ui) {}, stop: function(event, ui) {}});
