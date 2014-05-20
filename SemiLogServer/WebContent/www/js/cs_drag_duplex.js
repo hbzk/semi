@@ -24,26 +24,22 @@ function dragdrop_doing() {
 // 드롭
 function dragdrop_drop() {
 	$('.iconStart').droppable({tolerance: "touch"}, {drop: function(event, ui){
+		
 		// 만약 타이머가 동작중이면
 		if ($('#result').hasClass('iconMain')) {
 			// 타이머 저장 후 초기화
-			$('#check').append(formatTime(x.time()) + '<br>');
+			$('#check').append(formatTime(x.time()) + ' ');
 			$('#result').html('').removeClass();
 			timer_reset();
 			// 이전 드래거를 원위치 
 			$(lastdrager).css('background-image', lastdragerImg);
-		} else {
-			console.log(000);
-		}
-		
-		console.log($(event.toElement));
+		} 
 		
 		lastdrager = $(event.toElement).removeAttr('style');
 		lastdragerImg = lastdrager.css('background-image');
 		lastdragerClass = lastdrager.context.className;
 		$(this).css('background-image', $(lastdrager).css('background-image'));
 		lastdrager.css('background-image', 'none');
-		
 		
 		
 		// 중앙아이콘 - 드래그 활성
@@ -75,7 +71,7 @@ function dragdrop_startClick() {
 		
 		// 타이머 저장 및 초기화 후 사라짐
 		if ($('#result').hasClass('iconMain')) {
-			$('#check').append(formatTime(x.time()) + '<br>');
+			$('#check').append(formatTime(x.time()) + ' ');
 			timer_reset();
 			$('#result').html('').removeClass();
 		}

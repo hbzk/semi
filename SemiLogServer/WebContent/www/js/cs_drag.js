@@ -13,7 +13,6 @@ $(window).load(function(){
 });
 
 
-
 // 드래그
 function dragdrop_doing() {
 	$('.iconMain').draggable({distance: 20}, {revert: true}, {zIndex: 9},
@@ -23,27 +22,35 @@ function dragdrop_doing() {
 
 // 드롭
 function dragdrop_drop() {
-	$('.iconStart').droppable({tolerance: "touch"},
-		{drop: function(event, ui){
-			lastdrager = $(event.toElement).removeAttr('style');
-			lastdragerImg = lastdrager.css('background-image');
-			lastdragerClass = lastdrager.context.className;
-			$(this).css('background-image', $(lastdrager).css('background-image'));
-			lastdrager.css('background-image', 'none');
-	
-		// 중앙아이콘 - 드롭 비활성. 드래그 활성
-		$('.iconStart').droppable({ disabled: true })
-			.draggable({ disabled: false },{distance: 20},{revert: "invalid"}, {zIndex: 9},
+	$('.iconStart').droppable({tolerance: "touch"}, {drop: function(event, ui){
+		
+		// 만약 타이머가 동작중이면
+		if ($('#result').hasClass('iconMain')) {
+			// 타이머 저장 후 초기화
+			$('#check').append(formatTime(x.time()) + ' ');
+			$('#result').html('').removeClass();
+			timer_reset();
+			// 이전 드래거를 원위치 
+			$(lastdrager).css('background-image', lastdragerImg);
+		} 
+		
+		lastdrager = $(event.toElement).removeAttr('style');
+		lastdragerImg = lastdrager.css('background-image');
+		lastdragerClass = lastdrager.context.className;
+		$(this).css('background-image', $(lastdrager).css('background-image'));
+		lastdrager.css('background-image', 'none');
+		
+		
+		// 중앙아이콘 - 드래그 활성
+		$('.iconStart').draggable({ disabled: false },{distance: 20},{revert: "invalid"}, {zIndex: 9},
 			{start: function(event,ui) {}, stop: function(event, ui) {}});
 		// 드래그 항목 갱신
 		dragdrop_doing();
 		
 		// 타이머 출력
 		timer_doing('result');
-		$('#layout').find('#result').addClass(lastdragerClass)
+		$('#result').addClass(lastdragerClass)
 			.removeClass('ui-draggable ui-draggable-dragging');
-		
-
 		
 	}});
 }
@@ -60,10 +67,9 @@ function dragdrop_startClick() {
 			$(lastdrager).css('background-image', lastdragerImg);
 		}
 		
-		// 타이머 초기화 후 사라짐
-		if (typeof $id === 'undefined') {
-			console.log('undefined');
-		} else {
+		// 타이머 저장 및 초기화 후 사라짐
+		if ($('#result').hasClass('iconMain')) {
+			$('#check').append(formatTime(x.time()) + ' ');
 			timer_reset();
 			$('#result').html('').removeClass();
 		}
@@ -71,7 +77,6 @@ function dragdrop_startClick() {
 		// 중앙아이콘 - 드래그 비활성, 드롭 활성 
 		dragdrop_doing();
 		$('.iconStart').draggable({ disabled: true }).droppable({ disabled: false });
-		
 		
 	});
 }
