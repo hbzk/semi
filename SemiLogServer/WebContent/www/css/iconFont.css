@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+
+
+.fa, .li{
+		font-size: 2.5em;
+		color: white;
+		line-height: 70px;
+		text-align: center;
+		text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
+		width: 70px;
+		height: 70px;
+		border-radius: 35px;
+	  border: 0px ;
+		-webkit-border-radius: 35px;
+		-moz-border-radius: 35px;
+		display: block;
+}
+
+.li{
+		text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+.iconMain{
+		margin: 34px auto 0px; position: absolute; 
+		width: 300px;
+		height: auto;
+}
+
+
+/* Activity List */
+ .fa-paper-plane{
+		background: #FF534E;
+}
+
+.li_tv{
+		
+			background: #58C763;
+}
