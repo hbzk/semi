@@ -16,7 +16,6 @@ $(window).load(function(){
 });
 
 
-
 // 드래그 대상 설정
 function dragdrop_doing() {
 	$('.iconMain').draggable({distance: 20}, {revert: true}, {revertDuration: 500}, {zIndex: 9});
