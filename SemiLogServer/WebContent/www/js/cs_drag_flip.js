@@ -32,6 +32,9 @@ function dragdrop_drop() {
 			timer_reset();
 			// 이전 드래거를 원위치 
 			$(lastdrager).css('background-image', lastdragerImg);
+			
+			// 빙글빙글
+			dragdrop_flip();
 		} 
 		
 		lastdrager = $(event.toElement).removeAttr('style');
@@ -65,7 +68,10 @@ function dragdrop_startClick() {
 		}
 		
 		if ($(lastdrager).css('background-image') != lastdragerImg) {
-			$(lastdrager).css('background-image', lastdragerImg);
+			lastdrager.css('background-image', lastdragerImg);
+			
+			// 빙글빙글
+			dragdrop_flip();
 		}
 		
 		// 타이머 저장 및 초기화 후 사라짐
@@ -79,10 +85,19 @@ function dragdrop_startClick() {
 		dragdrop_doing();
 		$('.iconStart').draggable({ disabled: true }).droppable({ disabled: false });
 		
-		
 	});
 }
 
-
-
+function dragdrop_flip() {
+	lastdrager.css('background-image', lastdragerImg);
+	lastdrager.addClass('flipping');
+	
+	$('.iconMain').draggable({ disabled: true }); // 드래그 비활성화
+	
+	// 시간 지연 후 동작 가능 상태로 전환
+	setTimeout(function(){
+		$('.flipping').removeClass('flipping');
+		$('.iconMain').draggable({ disabled: false }); // 드래그 활성화
+	}, 1000);
+}
 
