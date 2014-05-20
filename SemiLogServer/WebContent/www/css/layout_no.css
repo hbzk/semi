@@ -83,8 +83,7 @@ line-height: 64px; text-align: center; font-weight: bolder; font-size: 145%; }
 
 /* Result Pie ======================== */
 
-#date {
-height: 60px; text-align: center; line-height: 100px; position: relative; }
+#date { height: 60px; text-align: center; line-height: 100px; position: relative; }
 #date h1 { font-size: 400%; font-weight: bold; margin: 0; }
 #date span { position: absolute; }
 #date span.left { left: 40px; }
