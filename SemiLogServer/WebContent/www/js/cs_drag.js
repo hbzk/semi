@@ -1,5 +1,5 @@
-var lastdrager;
 var startImg;
+var lastdrager;
 var lastdragerImg;
 var lastdragerClass;
 
@@ -8,97 +8,68 @@ $(window).load(function(){
 	
 	dragdrop_doing();
 	dragdrop_drop();
-	dragdrop_startClick();
-	
+
+	$('.iconStart').click(function(){ // 시작 버튼 클릭시 초기화
+		dragdrop_timerCheck();
+	});
+
 });
 
 
-// 드래그
+
+// 드래그 대상 설정
 function dragdrop_doing() {
-	$('.iconMain').draggable({distance: 20}, {revert: true}, {zIndex: 9},
-		// 드래그 시작시 동작 함수
-		{start: function(event,ui) {}});
+	$('.iconMain').draggable({distance: 20}, {revert: true}, {revertDuration: 500}, {zIndex: 9});
 }
 
 // 드롭
 function dragdrop_drop() {
 	$('.iconStart').droppable({tolerance: "touch"}, {drop: function(event, ui){
 		
-		// 만약 타이머가 동작중이면
-		if ($('#result').hasClass('iconMain')) {
-			// 타이머 저장 후 초기화
-			$('#check').append(formatTime(x.time()) + ' ');
-			$('#result').html('').removeClass();
-			timer_reset();
-			// 이전 드래거를 원위치 
-			$(lastdrager).css('background-image', lastdragerImg);
-			
-			// 빙글빙글
-			dragdrop_flip();
-		} 
+		dragdrop_timerCheck(); // 이미 실행중인지 확인 후 초기화
 		
+		// 드래그 대상 관련 조작
 		lastdrager = $(event.toElement).removeAttr('style');
 		lastdragerImg = lastdrager.css('background-image');
-		lastdragerClass = lastdrager.context.className;
-		$(this).css('background-image', $(lastdrager).css('background-image'));
 		lastdrager.css('background-image', 'none');
+		lastdragerClass = lastdrager.context.className;
+		lastdrager.draggable({revertDuration:0});
 		
-		
-		// 중앙아이콘 - 드래그 활성
-		$('.iconStart').draggable({ disabled: false },{distance: 20},{revert: "invalid"}, {zIndex: 9},
-			{start: function(event,ui) {}, stop: function(event, ui) {}});
-		// 드래그 항목 갱신
-		dragdrop_doing();
+		// 시작아이콘 드래그 활성
+		$('.iconStart').css('background-image', lastdragerImg)
+			.draggable({disabled: false},{distance: 20},{revert: "invalid"},{zIndex: 9});
 		
 		// 타이머 출력
-		timer_doing('result');
-		$('#result').addClass(lastdragerClass)
+		timer_doing('timer');
+		$('#timer').addClass(lastdragerClass)
 			.removeClass('ui-draggable ui-draggable-dragging');
-		
-
 	}});
 }
 
-// 중앙 클릭시
-function dragdrop_startClick() {
-	$('.iconStart').click(function(){
-		// 이미지가 있는지 확인 후, 없을때만 채우기 (깜빡임 방지)
-		if ($('.iconStart').css('background-image') != startImg) {
-			$('.iconStart').css('background-image', startImg);
-		}
-		
-		if ($(lastdrager).css('background-image') != lastdragerImg) {
-			lastdrager.css('background-image', lastdragerImg);
-			
-			// 빙글빙글
-			dragdrop_flip();
-		}
-		
-		// 타이머 저장 및 초기화 후 사라짐
-		if ($('#result').hasClass('iconMain')) {
-			$('#check').append(formatTime(x.time()) + ' ');
-			timer_reset();
-			$('#result').html('').removeClass();
-		}
-		
-		// 중앙아이콘 - 드래그 비활성, 드롭 활성 
-		dragdrop_doing();
-		$('.iconStart').draggable({ disabled: true }).droppable({ disabled: false });
-		
-	});
-}
-
-
+// 빙글빙글
 function dragdrop_flip() {
-	lastdrager.css('background-image', lastdragerImg);
 	lastdrager.addClass('flipping');
+	$('.iconMain').draggable({disabled:true }); // 전체 드래그 비활성화
 	
-	$('.iconMain').draggable({ disabled: true }); // 드래그 비활성화
-	
-	// 시간 지연 후 동작 가능 상태로 전환
+	// 일정 시간 후 다시 드래그 활성화
 	setTimeout(function(){
 		$('.flipping').removeClass('flipping');
-		$('.iconMain').draggable({ disabled: false }); // 드래그 활성화
+		$('.iconMain').draggable({ disabled: false });
 	}, 1000);
 }
 
+// 타이머 구동 확인 + 저장 + 초기화
+function dragdrop_timerCheck() {
+	if ($('#timer').hasClass('iconMain')) { // 실행 중인지 확인
+		$('#result').append(formatTime(x.time()) + ' '); // DB 구현 전까지 타이머 저장 대용
+		timer_reset(); // 타이머 초기화
+		$('#timer').html('').removeClass(); // 타이머 출력 제거
+		
+		$('.iconStart').draggable({disabled: true}).droppable({disabled: false}) // 시작아이콘 드래그 방지
+			.css('background-image', startImg); // 시작 아이콘 초기화
+		lastdrager.css('background-image', lastdragerImg); // 드래그했던 아이콘 초기화
+		
+		dragdrop_doing(); // 드래그 항목 갱신 (타이머 드래그 방지)
+		dragdrop_flip(); // 빙글빙글
+	}
+}

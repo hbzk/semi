@@ -76,9 +76,10 @@ background: url(img/play.png) 12px 32px no-repeat; opacity: 1; }
 .iconMain.center.bottom { top: 275px; } 
 
 /* 타이머 */
-#result { width: 64px; height: 64px; 
+#timer { width: 64px; height: 64px; 
 line-height: 64px; text-align: center; font-weight: bolder; font-size: 145%; }
 
+#result { margin-top: 10px; }
 
 /* Result Pie ======================== */
 
