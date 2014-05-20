@@ -7,12 +7,14 @@
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript" src="js/jquery.ui.touch.js"></script>
 <script type="text/javascript" src="js/common_no.js"></script>
-<script type="text/javascript" src="js/cs_drag_duplex.js"></script>
+<script type="text/javascript" src="js/cs_drag_flip.js"></script>
 <script type="text/javascript" src="js/timer.js"></script>
 
 <link rel="stylesheet" href="css/layout_no.css">
 <title>Main</title>
 <style type="text/css">
+/* .flip-container { -webkit-perspective: 1000;} */
+.iconMain { /* -webkit-transform: rotateY(1080deg); */ -webkit-transition: 2s;} */
 
 </style>
 </head>
@@ -27,7 +29,7 @@
 
 <div id="iconMainDiv">
 	<div id="start" class="iconStart"></div>
-  <div id="one" class="iconMain center top circular"></div>
+  <div class="flip-container"><div id="one" class="iconMain center top circular"></div></div>
   <div id="two" class="iconMain left top circular"></div>
   <div id="three" class="iconMain right top circular"></div>
   <div id="four" class="iconMain left bottom circular"></div>
@@ -64,6 +66,12 @@
 </section>
 
 <p id="check"></p>
-
+<script type="text/javascript">
+$(window).load(function(){
+	$('.iconMain').click(function(event){
+		$(this).css('-webkit-transform', 'rotateY(1080deg)');
+	});
+});
+</script>
 </body>
 </html>

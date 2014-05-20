@@ -13,7 +13,6 @@ $(window).load(function(){
 });
 
 
-
 // 드래그
 function dragdrop_doing() {
 	$('.iconMain').draggable({distance: 20}, {revert: true}, {zIndex: 9},

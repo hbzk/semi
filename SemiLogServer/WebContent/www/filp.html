@@ -21,9 +21,9 @@
 }
 	/* flip the pane when hovered */
 	/* .flip-container:hover .flipper, .flip-container.hover .flipper { */
-	.qwert .flipper, .flip-container.hover .flipper {
-		-webkit-transform: rotateY(1080deg);
-	}
+.qwert .flipper, .flip-container.hover .flipper {
+	-webkit-transform: rotateY(1080deg);
+}
 
 .flip-container, .front, .back {
 	width: 65px;
@@ -124,12 +124,7 @@
 <script type="text/javascript">
 $(window).load(function(){
 	$('.iconMain').click(function(event){
-		console.log(this);
-		if ($(this).hasClass('qwert')) {
-			$(this).removeClass('qwert');
-		} else {
-			$(this).addClass('qwert');
-		}
+		$(this).toggleClass('qwert');
 	})
 });
 </script>
