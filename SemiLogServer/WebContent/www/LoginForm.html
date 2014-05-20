@@ -48,10 +48,6 @@
   background-color: #F5F6CE;
   height: 397px;
 }
-#LoginId {
-  background-color: white;
-  margin-top: 3px;
-}
 #email {
   position: absolute;
   background-color: white;
@@ -60,23 +56,11 @@
   width: 278px;
   font-size: 20px;
   padding: 20px;
-  margin-top: -1px;
-}
-#Enter {
-	border: 0px;
-	position: absolute;
-	margin-top: -63px;
-	width: 278px;
-	height: 25px;
-	font-size: 20px;
-	padding: 20px;
-	background-color: #A9F5BC;
+  margin-top: 2px;
 }
 #Password {
-  position: absolute;
   border: 0px;
-  position: absolute;
-  margin-top: 71px;
+  margin-top: 74px;
   width: 278px;
   height: 25px;
   font-size: 20px;
@@ -84,21 +68,14 @@
   background-color: white;
 }
 #Enter {
-  margin-top: 71px;
+  border: 0px;
+  margin-top: 2px;
+  background-color: #A9F5BC;
   width: 318px;
-  height: 65px;
-  color: white;
+  height: 62px;
   font-weight: bold;
-}
-.error {
-  border: 1px solid red;
-  position: absolute;
-  margin-top: px;
-  font-size: 21px;
-  padding-left: 17px;
-  width: 299px;
-  height: 67px;
-  background-color: #FE2E2E;
+  color: white;
+  font-size: 20px;
 }
 </style>
 
@@ -119,13 +96,13 @@ Please select a unique username.<br>
 Your username identifies you on Sem1colon
 </div>
 <div id="LoginContent">
-<div id="LoginId">
+
 <form id="form" name="form">
-    <input oninput="OnInput (event)" onpropertychange="OnPropChanged (event)"  id="email" name="email" type="text" data-clear-btn="true" placeholder="email@" required>
-    <input id="Password" name="Password" type="password" placeholder="password" required>
+    <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
+    <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
     <button id="Enter" name="Enter" type="submit">Enter</button>
 </form>
-</div>
+
 </div>
 </section>
 </div>
@@ -143,13 +120,11 @@ Please select a unique username.<br>
 Your username identifies you on Sem1colon
 </div>
 <div id="LoginContent">
-<div id="LoginId">
 <form id="form" name="form">
     <input id="email" name="email" type="text" data-clear-btn="true" placeholder="email@">
     <input id="Password" name="Password" type="password" placeholder="password">
     <button id="Enter" name="Enter" type="submit">Enter</button>
 </form>
-</div>
 </div>
 </section>
 </div>
@@ -157,29 +132,9 @@ Your username identifies you on Sem1colon
 
 <script>
 
-function OnInput (event) {
-    alert ("The new content: " + event.target.value);
-}
-
-
-(function($){
-
-    $(document).ready(function() {
-
-    	
-    	
-    	
-    	
-    	 
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
+		
+	
+	
     $('#form').validate({
             rules: {
                 email: { required: true, email: true },
@@ -192,35 +147,79 @@ function OnInput (event) {
             submitHandler: function (frm) {
                 frm.submit();
             },
-            success: function (e) { 
-            }
+            errorPlacement: function(error, element) {
+                $(element).css("background","#FA5858");
+            },
+            success: function (success, element) {
+            	  $(element).css("background", "#A9F5BC");
+            },
+            
         });
   
   
+    
+    
+    $("#Password").css("display", "none");
+	$("#Enter").css("display", "none");
+	
+    function OnInput (event) {
+        if((event.target.value).match("@") && (event.target.value).match("com") || (event.target.value).match("net")) {
+		$("#Password").css("display", "");
+  		
+        }else{
+        	
+       $("#Password").css("display", "none");
+       
+        }  
+    }
+    
+    function OnInput1 (event) {
+    	if($("#Password").val().length > 0) {
+    		$("#Enter").css("display", "");
+    	}
+    }
+    
+    
+   
   
+    	
+    
   
-  
-  
+   
+    
+    
+    
+    
+	
 
-    
-    
-    
-    
-    $("#Password").css("display", "");
-    
-  
-  $("#SignUp").css("display", "none");  
-  $("#LoginHeader").click(function(){
-	  $("#Login").css("display", "none");
-	  $("#SignUp").css("display", "")
-  });
-  
-  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    $("#SignUp").css("display", "none");
+	$("#LoginHeader").click(function() {
+	$("#Login").css("display", "none");
+	$("#SignUp").css("display", "")
+	
+	
+	
+	
+		
+		
+	});
 
-    });
-})(jQuery);
-  
-  
+
 </script>
 
 
