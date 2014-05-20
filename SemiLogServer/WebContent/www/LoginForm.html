@@ -97,8 +97,8 @@ Your username identifies you on Sem1colon
 </div>
 <div id="LoginContent">
 <div id="LoginId">
-<form>
-    <input id="email" type="email" data-clear-btn="true" name="email-2" value="" placeholder="email@">
+<form id="form" name="form" method="post">
+    <input id="email" name="email" type="email" data-clear-btn="true" placeholder="email@">
 </form>
 </div>
 <div id="LoginPassword">
@@ -114,8 +114,12 @@ Your username identifies you on Sem1colon
 
 
 <script>
-$("#LoginPassword").css("display", "");
-$("#Password").css("display", "");
+$("#Password").css("display", "none");
+
+var email = $("#email").text();
+
+
+
 </script>
 </body>
 </html>
