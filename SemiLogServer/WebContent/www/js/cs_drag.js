@@ -42,18 +42,20 @@ function dragdrop_drop() {
 		timer_doing('timer');
 		$('#timer').addClass(lastdragerClass)
 			.removeClass('ui-draggable ui-draggable-dragging');
+		
 	}});
 }
 
 // 빙글빙글
 function dragdrop_flip() {
 	lastdrager.addClass('flipping');
-	$('.iconMain').draggable({disabled:true }); // 전체 드래그 비활성화
+	$('.iconMain').draggable({disabled:true}); // 전체 드래그 비활성화
 	
 	// 일정 시간 후 다시 드래그 활성화
 	setTimeout(function(){
 		$('.flipping').removeClass('flipping');
-		$('.iconMain').draggable({ disabled: false });
+		$('.iconMain').draggable({disabled: false});
+		$('#timer').draggable({disabled: true});
 	}, 1000);
 }
 
@@ -64,11 +66,13 @@ function dragdrop_timerCheck() {
 		timer_reset(); // 타이머 초기화
 		$('#timer').html('').removeClass(); // 타이머 출력 제거
 		
+		dragdrop_doing(); // 드래그 항목 갱신 (타이머 드래그 방지)
+		
 		$('.iconStart').draggable({disabled: true}).droppable({disabled: false}) // 시작아이콘 드래그 방지
 			.css('background-image', startImg); // 시작 아이콘 초기화
 		lastdrager.css('background-image', lastdragerImg); // 드래그했던 아이콘 초기화
 		
-		dragdrop_doing(); // 드래그 항목 갱신 (타이머 드래그 방지)
+		
 		dragdrop_flip(); // 빙글빙글
 	}
 }
