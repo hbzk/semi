@@ -23,12 +23,13 @@ function dragdrop_doing() {
 
 // 드롭
 function dragdrop_drop() {
-	$('.iconStart').droppable({drop: function(event, ui){
-		lastdrager = $(event.toElement).removeAttr('style');
-		lastdragerClass = lastdrager.context.className;
-		lastdragerImg = $(event.toElement).css('background-image');
-		$(this).css('background-image', $(lastdrager).css('background-image'));
-		$(event.toElement).css('background-image', 'none');
+	$('.iconStart').droppable({tolerance: "touch"},
+		{drop: function(event, ui){
+			lastdrager = $(event.toElement).removeAttr('style');
+			lastdragerImg = lastdrager.css('background-image');
+			lastdragerClass = lastdrager.context.className;
+			$(this).css('background-image', $(lastdrager).css('background-image'));
+			lastdrager.css('background-image', 'none');
 	
 		// 중앙아이콘 - 드롭 비활성. 드래그 활성
 		$('.iconStart').droppable({ disabled: true })
