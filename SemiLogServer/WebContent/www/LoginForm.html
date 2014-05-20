@@ -53,6 +53,7 @@
   margin-top: 3px;
 }
 #email {
+  position: absolute;
   background-color: white;
   border: 0px;
   height: 30px;
@@ -75,7 +76,7 @@
   position: absolute;
   border: 0px;
   position: absolute;
-  margin-top: 2px;
+  margin-top: 71px;
   width: 278px;
   height: 25px;
   font-size: 20px;
@@ -83,19 +84,21 @@
   background-color: white;
 }
 #Enter {
-  margin-top: 68px;
+  margin-top: 71px;
   width: 318px;
   height: 65px;
   color: white;
   font-weight: bold;
 }
 .error {
+  border: 1px solid red;
   position: absolute;
-  width: 270px;
-  height: 120px;
-  line-height: 20px;
-  padding: 23px;
-  text-align: center;
+  margin-top: px;
+  font-size: 21px;
+  padding-left: 17px;
+  width: 299px;
+  height: 67px;
+  background-color: #FE2E2E;
 }
 </style>
 
@@ -118,7 +121,7 @@ Your username identifies you on Sem1colon
 <div id="LoginContent">
 <div id="LoginId">
 <form id="form" name="form">
-    <input id="email" name="email" type="text" data-clear-btn="true" placeholder="email@" required>
+    <input oninput="OnInput (event)" onpropertychange="OnPropChanged (event)"  id="email" name="email" type="text" data-clear-btn="true" placeholder="email@" required>
     <input id="Password" name="Password" type="password" placeholder="password" required>
     <button id="Enter" name="Enter" type="submit">Enter</button>
 </form>
@@ -142,8 +145,8 @@ Your username identifies you on Sem1colon
 <div id="LoginContent">
 <div id="LoginId">
 <form id="form" name="form">
-    <input id="email" name="email" type="text" data-clear-btn="true" placeholder="email@" required>
-    <input id="Password" name="Password" type="password" placeholder="password" required>
+    <input id="email" name="email" type="text" data-clear-btn="true" placeholder="email@">
+    <input id="Password" name="Password" type="password" placeholder="password">
     <button id="Enter" name="Enter" type="submit">Enter</button>
 </form>
 </div>
@@ -153,6 +156,59 @@ Your username identifies you on Sem1colon
 
 
 <script>
+
+function OnInput (event) {
+    alert ("The new content: " + event.target.value);
+}
+
+
+(function($){
+
+    $(document).ready(function() {
+
+    	
+    	
+    	
+    	
+    	 
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    $('#form').validate({
+            rules: {
+                email: { required: true, email: true },
+                Password: { required: true },
+               },
+            messages: { Password: { required: "암호를 입력하시오." },
+                        email: { required: "이메일 형식으로 입력하시오.",
+                        	         email: "이메일 형식으로 입력하시오." },
+            },
+            submitHandler: function (frm) {
+                frm.submit();
+            },
+            success: function (e) { 
+            }
+        });
+  
+  
+  
+  
+  
+  
+
+    
+    
+    
+    
+    $("#Password").css("display", "");
+    
+  
   $("#SignUp").css("display", "none");  
   $("#LoginHeader").click(function(){
 	  $("#Login").css("display", "none");
@@ -161,6 +217,10 @@ Your username identifies you on Sem1colon
   
   
 
+    });
+})(jQuery);
+  
+  
 </script>
 
 
