@@ -51,6 +51,7 @@
   margin-top: 3px;
 }
 #email {
+  background-color: white;
   border: 0px;
   height: 30px;
   width: 278px;
@@ -74,8 +75,11 @@
 	border: 0px;
 	position: absolute;
 	margin-top: -61px;
-	width: 318px;
-	height: 53px;
+	width: 278px;
+	height: 14px;
+	font-size: 20px;
+	padding: 20px;
+	background-color: #A9F5BC;
 }
 </style>
 
@@ -97,13 +101,13 @@ Your username identifies you on Sem1colon
 </div>
 <div id="LoginContent">
 <div id="LoginId">
-<form id="form" name="form" method="post">
-    <input id="email" name="email" type="email" data-clear-btn="true" placeholder="email@">
+<form id="form" name="form">
+    <input id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
 </form>
 </div>
 <div id="LoginPassword">
 <div id="LoginBottom"></div>
-<input id="Password" type="text" name="text" style="background-color:transparent;">
+<input id="Password" type="password" name="password" required>
 </div>
 </div>
 </section>
@@ -111,16 +115,11 @@ Your username identifies you on Sem1colon
 
 
 
-
-
 <script>
-$("#Password").css("display", "none");
-
-var email = $("#email").text();
-
-
-
+$("#form").validate();
 </script>
+
+
 </body>
 </html>
 
