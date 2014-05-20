@@ -12,9 +12,11 @@
 <script type="text/javascript" src="js/common_no.js"></script>
 <script type="text/javascript" src="js/cs_drag.js"></script>
 <script type="text/javascript" src="js/timer.js"></script>
+<script src="js/jquery.validate.js"></script>
 
 <link rel="stylesheet" href="css/jquery-ui.css">
 <link rel="stylesheet" href="css/layout_no.css">
+
 <title>Main</title>
 
 
@@ -57,29 +59,43 @@
   width: 278px;
   font-size: 20px;
   padding: 20px;
+  margin-top: -1px;
 }
-#LoginPassword {
-  position: absolute;
-  margin-top: 3px;
-  background-color: #A9F5BC;
-  height: 60px;
-}
-#LoginBottom {
-  display: inline-block;
-  background-color: #CEF6D8;
-  height: 25px;
-  width: 318px;
-  margin-top: 35px;
-}
-#Password {
+#Enter {
 	border: 0px;
 	position: absolute;
-	margin-top: -61px;
+	margin-top: -63px;
 	width: 278px;
-	height: 14px;
+	height: 25px;
 	font-size: 20px;
 	padding: 20px;
 	background-color: #A9F5BC;
+}
+#Password {
+  position: absolute;
+  border: 0px;
+  position: absolute;
+  margin-top: 2px;
+  width: 278px;
+  height: 25px;
+  font-size: 20px;
+  padding: 20px;
+  background-color: white;
+}
+#Enter {
+  margin-top: 68px;
+  width: 318px;
+  height: 65px;
+  color: white;
+  font-weight: bold;
+}
+.error {
+  position: absolute;
+  width: 270px;
+  height: 120px;
+  line-height: 20px;
+  padding: 23px;
+  text-align: center;
 }
 </style>
 
@@ -89,11 +105,11 @@
 <body>
 
 
-
+<div id="Login">
 <section id="layout">
 <div id="LoginHeader">
 <div id="LoginHeader1"></div>
-Username
+Login
 </div>
 <div id="LoginMiddle">
 Please select a unique username.<br>
@@ -102,21 +118,49 @@ Your username identifies you on Sem1colon
 <div id="LoginContent">
 <div id="LoginId">
 <form id="form" name="form">
-    <input id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
+    <input id="email" name="email" type="text" data-clear-btn="true" placeholder="email@" required>
+    <input id="Password" name="Password" type="password" placeholder="password" required>
+    <button id="Enter" name="Enter" type="submit">Enter</button>
 </form>
-</div>
-<div id="LoginPassword">
-<div id="LoginBottom"></div>
-<input id="Password" type="password" name="password" required>
 </div>
 </div>
 </section>
+</div>
 
 
+
+<div id="SignUp">
+<section id="layout">
+<div id="LoginHeader">
+<div id="LoginHeader1"></div>
+Sign Up
+</div>
+<div id="LoginMiddle">
+Please select a unique username.<br>
+Your username identifies you on Sem1colon
+</div>
+<div id="LoginContent">
+<div id="LoginId">
+<form id="form" name="form">
+    <input id="email" name="email" type="text" data-clear-btn="true" placeholder="email@" required>
+    <input id="Password" name="Password" type="password" placeholder="password" required>
+    <button id="Enter" name="Enter" type="submit">Enter</button>
+</form>
+</div>
+</div>
+</section>
+</div>
 
 
 <script>
-$("#form").validate();
+  $("#SignUp").css("display", "none");  
+  $("#LoginHeader").click(function(){
+	  $("#Login").css("display", "none");
+	  $("#SignUp").css("display", "")
+  });
+  
+  
+
 </script>
 
 
