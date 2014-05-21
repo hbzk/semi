@@ -1,8 +1,16 @@
 @CHARSET "UTF-8";
 
+@font-face {
+		font-family: venera;
+		src: url('../font/Venera-300.otf'') format("opentype");
+}
+body{
+		background: #ECF1F4;
+		
+}
+
 .iconContainer{
 		margin: 34px 34px; position: absolute; 
-		height: 800px;
 		width: 560px;
 		
 }
@@ -57,7 +65,7 @@ h1{
 /* Activity List */
 
 .routins{
-		background: #FFFFC4;
+		/* background: #FFFFC4; */
 }
 
 .li_tv{
