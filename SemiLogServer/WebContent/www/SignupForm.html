@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="js/jquery.ui.touch.js"></script>
+<script type="text/javascript" src="js/common_no.js"></script>
+<script type="text/javascript" src="js/cs_drag.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
+<script src="js/jquery.validate.js"></script>
+
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/layout_no.css">
+
+<title>Main</title>
+
+
+
+<style>
+#LoginHeader {
+  font-weight: bold;
+  background-color: #A9F5BC;
+  height: 60px;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  line-height: 33px;
+}
+#LoginHeader1 {
+  background-color: #CEF6D8;
+  height: 25px;
+}
+#LoginMiddle {
+  height: 40px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 18px;
+  text-align: center;
+  padding: 17px;
+}
+#LoginContent {
+  border: 1px solid white;
+  background-color: #F5F6CE;
+  height: 397px;
+}
+#email {
+  position: absolute;
+  background-color: white;
+  border: 0px;
+  height: 30px;
+  width: 278px;
+  font-size: 20px;
+  padding: 20px;
+  margin-top: 2px;
+}
+#Password {
+  border: 0px;
+  margin-top: 74px;
+  width: 278px;
+  height: 25px;
+  font-size: 20px;
+  padding: 20px;
+  background-color: white;
+}
+#Enter {
+  border: 0px;
+  margin-top: 2px;
+  background-color: #CEF6D8;
+  width: 318px;
+  height: 62px;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+}
+</style>
+
+
+
+</head>
+<body>
+
+
+
+<section id="layout">
+<div id="LoginHeader">
+<div id="LoginHeader1"></div>
+SIGN UP
+</div>
+<div id="LoginMiddle">
+Please select a unique username.<br>
+Your username identifies you on Sem1colon
+</div>
+<div id="LoginContent">
+
+<form id="form" name="form">
+    <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
+    <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
+    <button id="Enter" name="Enter" type="submit">Sign Up</button>
+</form>
+
+</div>
+</section>
+
+
+
+
+
+
+
+<script>
+    $('#form').validate({
+          rules: { email: { required: true, email: true },
+                Password: { required: true },
+            },
+          messages: { Password: { required: "암호를 입력하시오." },
+                         email: { required: "이메일 형식으로 입력하시오.",
+                        	            email: "이메일 형식으로 입력하시오." },
+            },
+          submitHandler: function (frm) { frm.submit(); },
+          
+          errorPlacement: function(error, element) {
+                //$(element).css("background","#FA5858");
+            },
+          success: function (success, element) {
+            	  //$(element).css("background", "#A9F5BC");
+            },       
+        });
+  
+  
+    $("#Password").css("display", "none");
+	  $("#Enter").css("display", "none");
+	
+    function OnInput (event) {
+        if((event.target.value).match("@") && (event.target.value).match("com") || (event.target.value).match("net")) {
+        	  $("#email").css("backgroundColor", "#A9F5BC");
+        	  $("#Password").css("display", "");
+        	  $("#Password").focus();  
+        }else{
+          $("#email").css("backgroundColor", "#FA5858");
+          $("#Password").css("display", "none");
+        }  
+    }
+    
+    function OnInput1 (event) {
+    	if(event.target.value.length > 0) {
+    		$("#Password").css("backgroundColor", "#A9F5BC");
+    		$("#Enter").css({ "display": "" 	});
+    	} else {
+    		$("#Password").css("backgroundColor", "#FA5858");
+    		$("#Enter").css("display", "none");
+    	}
+    }
+</script>
+
+
+</body>
+</html>
+
+
+
+
