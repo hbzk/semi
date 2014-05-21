@@ -36,17 +36,18 @@
   height: 25px;
 }
 #LoginMiddle {
-  height: 40px;
+  height: 51px;
   font-size: 12px;
   font-weight: bold;
   line-height: 18px;
   text-align: center;
-  padding: 17px;
+  padding: 16px;
+  padding-top: 13px;
 }
 #LoginContent {
   border: 1px solid white;
   background-color: #F5F6CE;
-  height: 397px;
+  height: 391px;
 }
 #email {
   position: absolute;
@@ -87,6 +88,14 @@
   color: white;
   font-size: 20px;
 }
+#EmailMessage {
+	margin-top: 1px;
+	color: #FA5858;
+}
+#PasswordMessage {
+	margin-top: 1px;
+	color: #FA5858;
+}
 </style>
 
 
@@ -104,6 +113,9 @@ LOG IN
 <div id="LoginMiddle">
 Please select a unique username.<br>
 Your username identifies you on Sem1colon
+<div id="welcome">Welcome to Sem1colon</div>
+<div id="EmailMessage">이메일 형식으로 작성해주세요</div>
+<div id="PasswordMessage">비밀번호를 입력해주세요</div>
 </div>
 <div id="LoginContent">
 
@@ -124,6 +136,9 @@ Your username identifies you on Sem1colon
 
 
 <script>
+
+	$("#EmailMessage").css("display", "none");
+	$("#PasswordMessage").css("display", "none");
 
     $('#form').validate({
           rules: { email: { required: true, email: true },
@@ -151,10 +166,16 @@ Your username identifies you on Sem1colon
         if((event.target.value).match("@") && (event.target.value).match("com") || (event.target.value).match("net")) {
         	  $("#email").css("backgroundColor", "#A9F5BC");
         	  $("#Password").css("display", "");
-        	  $("#Password").focus();  
+        	  $("#Password").focus();
+        	  $("#EmailMessage").css("display", "none");
+        	  
+        	  $("#welcome").css("display", "none");
         }else{
           $("#email").css("backgroundColor", "#FA5858");
+          $("#EmailMessage").css("display", "");
+          $("#welcome").css("display", "none");
           $("#Password").css("display", "none");
+          $("#PasswordMessage").css("display", "none");
         }  
     }
     
@@ -162,19 +183,25 @@ Your username identifies you on Sem1colon
     	if(event.target.value.length > 0) {
     		$("#Password").css("backgroundColor", "#A9F5BC");
     		$("#pw").css("display", "none");
-    		$("#Enter").css({ "display": "" 	});
+    		$("#Enter").css({ "display": ""});
+    		$("#EmailMessage").css("display", "none");	
+    		$("#PasswordMessage").css("display", "none");
     	} else {
     		$("#Password").css("backgroundColor", "#FA5858");
     		$("#Enter").css("display", "none");
     		$("#pw").css("display", "");
+    		$("#PasswordMessage").css("display", "");
     	}
     }
+   
     
     $("#Password").click(function(){
     	$("#Password").val("");
     	$("#Password").css("backgroundColor", "#FA5858");
         $("#Enter").css("display", "none");
         $("#pw").css("display", "");
+        $("#EmailMessage").css("display", "none");	
+        $("#PasswordMessage").css("display", "");
     });
 </script>
 
