@@ -67,12 +67,22 @@
   padding: 20px;
   background-color: white;
 }
+#pw {
+  border: 0px;
+  margin-top: 2px;
+  background-color: #CEF6D8;
+  width: 318px;
+  height: 38px;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+}
 #Enter {
   border: 0px;
   margin-top: 2px;
   background-color: #CEF6D8;
   width: 318px;
-  height: 62px;
+  height: 38px;
   font-weight: bold;
   color: white;
   font-size: 20px;
@@ -100,6 +110,7 @@ Your username identifies you on Sem1colon
 <form id="form" name="form">
     <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
     <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
+    <button id="pw">password 찾기</button>
     <button id="Enter" name="Enter" type="submit">Log In</button>
 </form>
 
@@ -113,6 +124,7 @@ Your username identifies you on Sem1colon
 
 
 <script>
+
     $('#form').validate({
           rules: { email: { required: true, email: true },
                 Password: { required: true },
@@ -149,12 +161,21 @@ Your username identifies you on Sem1colon
     function OnInput1 (event) {
     	if(event.target.value.length > 0) {
     		$("#Password").css("backgroundColor", "#A9F5BC");
+    		$("#pw").css("display", "none");
     		$("#Enter").css({ "display": "" 	});
     	} else {
     		$("#Password").css("backgroundColor", "#FA5858");
     		$("#Enter").css("display", "none");
+    		$("#pw").css("display", "");
     	}
     }
+    
+    $("#Password").click(function(){
+    	$("#Password").val("");
+    	$("#Password").css("backgroundColor", "#FA5858");
+        $("#Enter").css("display", "none");
+        $("#pw").css("display", "");
+    });
 </script>
 
 
