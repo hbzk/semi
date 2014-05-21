@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
     "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
@@ -12,48 +11,33 @@
 <script type="text/javascript" src="js/common_no.js"></script>
 <script type="text/javascript" src="js/cs_drag.js"></script>
 <script type="text/javascript" src="js/timer.js"></script>
-
 <link rel="stylesheet" href="css/layout_no.css">
-
+<!-- <link rel="stylesheet" href="css/layout_no.css"> -->
 
 <script>
-
 $(document).ready(function() {
-
     $('a.panel').click(function () {
-
         $('a.panel').removeClass('selected');
-        $(this).addClass('selected');
-        
-        current = $(this);
-                
-        $('#wrapper').scrollTo($(this).attr('href'), 800);      
-        
+        $(this).addClass('selected');        
+        current = $(this);                
+        $('#wrapper').scrollTo($(this).attr('href'), 800);              
         return false;
-    });
-    
+    });    
     $(window).resize(function () {
         resizePanel();
-    });
-    
+    });    
 });
-
 function resizePanel() {
-
     width = $(window).width();
     height = $(window).height();
-
-    mask_height = height * $('.item').length;
-        
-    //$('#debug').html(width  + ' ' + height + ' ' + mask_height);
-    
+    mask_height = height * $('.item').length;        
+    $('#debug').html(width  + ' ' + height + ' ' + mask_height);    
     $('#wrapper, .item').css({width: width, height: height});
     $('#mask').css({width: width, height: mask_height});
-    $('#wrapper').scrollTo($('a.selected').attr('href'), 0);
-        
+    $('#wrapper').scrollTo($('a.selected').attr('href'), 0);        
 }
-
 </script>
+
 
 <style>
 
@@ -87,90 +71,78 @@ body {
     
     .content1 {
         border: 1px solid #000;
-        margin-left: 450px; 
+        /* margin-left: 450px; */
         margin-top: 0px;
         width: 320px; 
         height: 533px; 
         position: relative;
         text-align: center;
+        
     }
     
     .content2 {
         border: 1px solid #000;
-        margin-left: 450px;
-        margin-top: 50px; 
+        /* margin-left: 450px; */
+        /* margin-top: 50px;  */
+        margin-top: 0px;
         width: 320px; 
         height: 533px; 
         position: relative;
         text-align: center;
+        
     }
     
-    #btt1 { margin-top: 46px; width: 70px; }
+    #btt1 { margin-top: 460px; width: 70px; }
     #btt2 { margin-top: 46px; width: 70px; }
     
+    
+    
+    
+    #Main_0 {
+    border: 1px solid red;
+    position: absolute;
+    width: 320px;
+    height: 532px;
+    
+    background-color: gray;
+    /* z-index:-1; */
+    z-index:1;
+    }
+    #Main_set {
+    border: 1px solid red;
+    position: absolute;
+    width: 320px;
+    height: 532px;
+    
+    background-color: green;
+    z-index:2;
+}
    
+  
 
 </style>
 </head>
-<body>
-
 
 <div id="wrapper">
-
     <div id="mask">
-
-        <div id="item1" class="item">
-            <div class="content1"><a id="menuLeft">=</a>
-
-<div id="iconMainDiv">
-    <div id="start" class="iconStart"></div>
-  <div id="one" class="iconMain center top circular"></div>
-  <div id="two" class="iconMain left top circular"></div>
-  <div id="three" class="iconMain right top circular"></div>
-  <div id="four" class="iconMain left bottom circular"></div>
-  <div id="five" class="iconMain right bottom circular"></div>
-  <div id="six" class="iconMain center bottom circular"></div>
-  
-  <p id="timer"></p>
-</div>
-
-<div id="slide">
-<form onsubmit='return false'>
-  <input id="input" type="text" placeholder="Quick Search" />
-</form>
-
-<div id="icons">
-  <div class="img art 미술"><img src="css/img2/art.png"><br><div class="font">art</div></div><hr>
-  <div class="img bike 바이크"><img src="css/img2/bike.png"><br><div class="font">bike</div></div><hr>
-  <div class="img bikerC 자전거"><img src="css/img2/bikerC.png"><br><div class="font">bikerC</div></div><hr>
-  <div class="img booklet 책"><img src="css/img2/booklet.png"><br><div class="font">booklet</div></div><hr>
-  <div class="img briefcase 근무"><img src="css/img2/briefcase.png"><br><div class="font">briefcase</div></div><hr>
-  <div class="img brush 공부"><img src="css/img2/brush-pencil.png"><br><div class="font">brush</div></div><hr>
-  <div class="img car 운전"><img src="css/img2/car.png"><br><div class="font">car</div></div><hr>
-  <div class="img computer 컴퓨터"><img src="css/img2/computer.png"><br><div class="font">computer</div></div><hr>
-  <div class="img game 게임"><img src="css/img2/gamecontroller.png"><br><div class="font">game</div></div><hr>
-  <div class="img micro 노래방"><img src="css/img2/microphone.png"><br><div class="font">micro</div></div><hr>
-  <div class="img motorcy 오토바이"><img src="css/img2/motorcycle.png"><br><div class="font">motorcy</div></div><hr>
-  <div class="img running 달리기"><img src="css/img2/running.png"><br><div class="font">running</div></div><hr>
-  <div class="img scooter 스쿠터"><img src="css/img2/scooter.png"><br><div class="font">scooter</div></div><hr>
-  <div class="img train 전철"><img src="css/img2/train.png"><br><div class="font">train</div></div><hr>
-</div>
-</div>
-            
-                <a href="#item2" class="panel"><button id="btt1">▼</button></a>
-            </div>
+         <div id="item1" class="item">
+            <!-- <div class="content1"></div> -->
         </div>
         
         <div id="item2" class="item">
-            <div class="content2">
+            <!-- <div class="content2"> --><div id="Main_set">
                 <a href="#item1" class="panel"><button id="btt2">▲</button></a>
-            </div>
+            </div><!-- </div> -->
         </div>
-        
-        
-    </div>
 
+    </div>
 </div>
+
+<div id="Main_0">
+<a href="#item2" class="panel"><button id="btt1">▼</button></a>
+</div> 
+
+
 
 </body>
 </html>
