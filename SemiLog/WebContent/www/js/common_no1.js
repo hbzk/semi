@@ -24,11 +24,11 @@ $(function(){
      
     
      $('#wrap').mousemove(function(e) {
-    	 console.log(e.pageX);
-    	 console.log(x);
         if (e.pageX < x) {
           msDown = true;
-        }   
+        } else {
+        	return;
+        }
       });
   
      $("#slideRight").mousemove(function(e) {
