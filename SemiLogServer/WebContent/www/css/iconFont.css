@@ -1,20 +1,38 @@
 @CHARSET "UTF-8";
 
+.iconContainer{
+		margin: 34px 34px; position: absolute; 
+		height: 800px;
+		width: 500px;
+		border: 1px solid #999;
+		
+}
 
 
+.activityIcon{
+		padding: 10px;
+		width: 70px;
+		height: 70px;
+		float: left;
+		
+}
 .fa, .li{
-		font-size: 2.5em;
+		font-size: 2.8em;
 		color: white;
 		line-height: 70px;
 		text-align: center;
 		text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
-		width: 70px;
-		height: 70px;
+		
 		border-radius: 35px;
 	  border: 0px ;
 		-webkit-border-radius: 35px;
 		-moz-border-radius: 35px;
 		display: block;
+}
+
+.fa{
+		
+		
 }
 
 .li{
@@ -24,19 +42,177 @@
 
 
 
-.iconMain{
-		margin: 34px auto 0px; position: absolute; 
-		width: 300px;
-		height: auto;
-}
 
 
 /* Activity List */
- .fa-paper-plane{
-		background: #FF534E;
-}
+
+
 
 .li_tv{
 		
 			background: #58C763;
+}
+.fa-headphones{
+		background: #207178;
+}
+
+.fa-automobile{
+		background: #0F4154;
+}
+.fa-gamepad{
+		background: #EBE9D8;
+}
+
+/*컴퓨터*/
+.fa-desktop{
+		background: #B7C11E;
+}
+
+.fa-mobile{
+		background: #8A1D30;
+		font-size: 4em;
+}
+.fa-phone{
+		background: #F4BCAC;
+}
+.li_banknote{
+		background: #477306;
+}
+
+.fa-cutlery{
+		background: #5C5C2B;
+}
+
+/*농구or운동*/
+
+.fa-dribbble{
+			background: #5C5C2B;
+}
+
+/*휴식*/
+.fa-coffee{
+		background: #BF6415;
+}
+
+/* 대화 */
+.fa-comment{
+		background: #D39FE8;
+}
+
+/* 유아 */
+.fa-child{
+		background: #FFDB68;
+		font-size: 3.0em;
+}
+
+/* 빨래 */
+.li_t-shirt{
+		background: #83DBE8;
+}
+
+/* 바차트 */
+.fa-bar-chart-o{
+		background: #2E313D;
+}
+
+/*리스트*/
+.fa-list-alt{
+		background: #8A1D30;
+}
+
+/*실험*/
+.fa-flask{
+		background: #8A1D30;
+} 
+
+/*공부*/
+.li_pen{
+		background: #8A1D30;
+		font-size: 2.5em;
+}
+
+/*전구, 물리(전기)*/
+.li_bulb{
+		background: #8A1D30;
+}
+
+/*여행*/
+.fa-plane{
+		background: #8A1D30;
+}
+
+/*추가버튼*/
+.fa-plus{
+		background: #8A1D30;
+}
+
+/*가위, 공작*/
+.fa-scissors{
+		background: #8A1D30;
+}
+
+/*개발자, 코딩*/
+.fa-code{
+		background: #8A1D30;
+}
+
+/*개발자, 코딩*/
+.fa-keyboard-o{
+		background: #FF9D84;
+}
+
+/*병원*/
+.fa-hospital-o{
+		background: #8A1D30;
+}
+/*유아 진료 */
+.fa-stethoscope{
+		background: #8A1D30;
+}
+
+/*책*/
+.fa-book{
+		background: #8A1D30;
+}
+
+/*책, 북마크 */
+.fa-bookmark{
+		background: #8A1D30;
+}
+
+/*집, 집안일*/
+.fa-home{
+		background: #8A1D30;
+}
+
+/*집안일, 쓰레기비우기 청소*/
+.li_trash{
+		background: #8A1D30;
+}
+
+
+/*맥주*/
+.fa-beer{
+		background: #8A1D30;
+}
+
+/*와인*/
+.fa-glass{
+		background: #8A1D30;
+		font-size: 2.5em;
+}
+
+/*영화보기*/
+.li_video{
+		background: rgb(232,112,79);
+}
+
+/*이유식*/
+.fa-spoon{
+		background: #8A1D30;
+}
+
+/*잠*/
+.fa-moon-o{
+		background: #8A1D30;
 }
