@@ -22,6 +22,7 @@
 }
 
 #slideRight {
+	border:1px solid red;
 	position: absolute;
 	width: 320px;
 	height: 345px;
