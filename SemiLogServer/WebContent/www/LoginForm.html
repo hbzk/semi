@@ -70,7 +70,7 @@
 #Enter {
   border: 0px;
   margin-top: 2px;
-  background-color: #A9F5BC;
+  background-color: #CEF6D8;
   width: 318px;
   height: 62px;
   font-weight: bold;
@@ -89,7 +89,7 @@
 <section id="layout">
 <div id="LoginHeader">
 <div id="LoginHeader1"></div>
-Login
+LOG IN
 </div>
 <div id="LoginMiddle">
 Please select a unique username.<br>
@@ -100,7 +100,7 @@ Your username identifies you on Sem1colon
 <form id="form" name="form">
     <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
     <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
-    <button id="Enter" name="Enter" type="submit">Enter</button>
+    <button id="Enter" name="Enter" type="submit">Log In</button>
 </form>
 
 </div>
@@ -113,7 +113,7 @@ Your username identifies you on Sem1colon
 <section id="layout">
 <div id="LoginHeader">
 <div id="LoginHeader1"></div>
-Sign Up
+SIGN UP
 </div>
 <div id="LoginMiddle">
 Please select a unique username.<br>
@@ -121,9 +121,9 @@ Your username identifies you on Sem1colon
 </div>
 <div id="LoginContent">
 <form id="form" name="form">
-    <input id="email" name="email" type="text" data-clear-btn="true" placeholder="email@">
-    <input id="Password" name="Password" type="password" placeholder="password">
-    <button id="Enter" name="Enter" type="submit">Enter</button>
+    <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
+    <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
+    <button id="Enter" name="Enter" type="submit">Sign Up</button>
 </form>
 </div>
 </section>
@@ -136,88 +136,54 @@ Your username identifies you on Sem1colon
 	
 	
     $('#form').validate({
-            rules: {
-                email: { required: true, email: true },
+          rules: { email: { required: true, email: true },
                 Password: { required: true },
-               },
-            messages: { Password: { required: "암호를 입력하시오." },
-                        email: { required: "이메일 형식으로 입력하시오.",
-                        	         email: "이메일 형식으로 입력하시오." },
             },
-            submitHandler: function (frm) {
-                frm.submit();
+          messages: { Password: { required: "암호를 입력하시오." },
+                         email: { required: "이메일 형식으로 입력하시오.",
+                        	            email: "이메일 형식으로 입력하시오." },
             },
-            errorPlacement: function(error, element) {
-                $(element).css("background","#FA5858");
+          submitHandler: function (frm) { frm.submit(); },
+          
+          errorPlacement: function(error, element) {
+                //$(element).css("background","#FA5858");
             },
-            success: function (success, element) {
-            	  $(element).css("background", "#A9F5BC");
-            },
-            
+          success: function (success, element) {
+            	  //$(element).css("background", "#A9F5BC");
+            },       
         });
   
   
-    
-    
     $("#Password").css("display", "none");
-	$("#Enter").css("display", "none");
+	  $("#Enter").css("display", "none");
 	
     function OnInput (event) {
         if((event.target.value).match("@") && (event.target.value).match("com") || (event.target.value).match("net")) {
-		$("#Password").css("display", "");
-  		
+        	  $("#email").css("backgroundColor", "#A9F5BC");
+        	  $("#Password").css("display", "");
+        	  $("#Password").focus();  
         }else{
-        	
-       $("#Password").css("display", "none");
-       
+          $("#email").css("backgroundColor", "#FA5858");
+          $("#Password").css("display", "none");
         }  
     }
     
     function OnInput1 (event) {
-    	if($("#Password").val().length > 0) {
-    		$("#Enter").css("display", "");
+    	if(event.target.value.length > 0) {
+    		$("#Password").css("backgroundColor", "#A9F5BC");
+    		$("#Enter").css({ "display": "" 	});
+    	} else {
+    		$("#Password").css("backgroundColor", "#FA5858");
+    		$("#Enter").css("display", "none");
     	}
     }
     
-    
-   
-  
-    	
-    
-  
-   
-    
-    
-    
-    
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-    $("#SignUp").css("display", "none");
+  $("#SignUp").css("display", "none");
 	$("#LoginHeader").click(function() {
 	$("#Login").css("display", "none");
 	$("#SignUp").css("display", "")
 	
-	
-	
-	
-		
-		
-	});
+});
 
 
 </script>
