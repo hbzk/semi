@@ -85,7 +85,7 @@
 <body>
 
 
-<div id="Login">
+
 <section id="layout">
 <div id="LoginHeader">
 <div id="LoginHeader1"></div>
@@ -105,36 +105,14 @@ Your username identifies you on Sem1colon
 
 </div>
 </section>
-</div>
 
 
 
-<div id="SignUp">
-<section id="layout">
-<div id="LoginHeader">
-<div id="LoginHeader1"></div>
-SIGN UP
-</div>
-<div id="LoginMiddle">
-Please select a unique username.<br>
-Your username identifies you on Sem1colon
-</div>
-<div id="LoginContent">
-<form id="form" name="form">
-    <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
-    <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
-    <button id="Enter" name="Enter" type="submit">Sign Up</button>
-</form>
-</div>
-</section>
-</div>
+
+
 
 
 <script>
-
-		
-	
-	
     $('#form').validate({
           rules: { email: { required: true, email: true },
                 Password: { required: true },
@@ -177,15 +155,6 @@ Your username identifies you on Sem1colon
     		$("#Enter").css("display", "none");
     	}
     }
-    
-  $("#SignUp").css("display", "none");
-	$("#LoginHeader").click(function() {
-	$("#Login").css("display", "none");
-	$("#SignUp").css("display", "")
-	
-});
-
-
 </script>
 
 
