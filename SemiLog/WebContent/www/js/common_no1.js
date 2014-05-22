@@ -26,8 +26,10 @@ $(function(){
      $('#wrap').click(function(e) {
     	
         if (e.pageX) {
+        	
           msDown = true;
         } else {
+        	
         	return false;
         }
       });
@@ -46,8 +48,8 @@ $(function(){
     			 }, 600);
     			 lbDown = false;
     			 msDown = false;
-    		 }
-    		 $("#wrap").css("display","none");
+    			 $("#wrap").css("display","none");
+    		 } 
     	 }
      });
      
@@ -69,11 +71,11 @@ $(function(){
     	  return false;
       }
      });
-    $("#slideLeft").mousedown(function(e) {
+    $("#slideLeft").mousemove(function(e) {
         if (lbDown) {
           var mouseX = e.pageX;
           var boxMouseX = mouseX - boxOffset;
-          if (e.pageX < x) {
+          if (e.pageX > x) {
 
             $("#pane").hide("slide", {
               direction : "right"
@@ -83,8 +85,8 @@ $(function(){
             }, 600);
             msDown = false;
             lbDown = false;
+            $("#pane").css("display","none");
           }
-          $("#pane").css("display","none");
         }
       });
     
