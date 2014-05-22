@@ -96,6 +96,10 @@
 	margin-top: 1px;
 	color: #FA5858;
 }
+#fail {
+  margin-top: 1px;
+  color: #FA5858;
+}
 </style>
 
 
@@ -116,6 +120,7 @@ Your username identifies you on Sem1colon
 <div id="welcome">Welcome to Sem1colon</div>
 <div id="EmailMessage">이메일 형식으로 작성해주세요</div>
 <div id="PasswordMessage">비밀번호를 입력해주세요</div>
+<div id="fail">아이디와 암호가 일치하지 않습니다</div>
 </div>
 <div id="LoginContent">
 
@@ -139,6 +144,7 @@ Your username identifies you on Sem1colon
 
 	$("#EmailMessage").css("display", "none");
 	$("#PasswordMessage").css("display", "none");
+	$("#fail").css("display", "none");
 
     $('#form').validate ({
           rules: { email: { required: true, email: true },
@@ -151,7 +157,7 @@ Your username identifies you on Sem1colon
           submitHandler: function (frm) { frm.submit(); },
           
           errorPlacement: function(error, element) {
-                //$(element).css("background","#FA5858");
+               //$("#fail").css("display","");
             },
           success: function (success, element) {
             	  //$(element).css("background", "#A9F5BC");
@@ -167,7 +173,8 @@ Your username identifies you on Sem1colon
         		(event.target.value).indexOf("@") < (event.target.value).indexOf(".") &&
         		((event.target.value).match("com") || 
           (event.target.value).match("net") ||
-          (event.target.value).match("co.kr")) 
+          (event.target.value).match("kr")  ||
+          (event.target.value).match("ac"))
              ) {
         	  $("#email").css("backgroundColor", "#FAFFBD");
         	  $("#Password").css("display", "");
@@ -205,7 +212,6 @@ Your username identifies you on Sem1colon
     	}
     }
    
-    
     $("#Password").click(function(){
     	$("#Password").val("");
     	$("#Password").css("backgroundColor", "#FA5858");
@@ -213,7 +219,14 @@ Your username identifies you on Sem1colon
         $("#pw").css("display", "");
         $("#EmailMessage").css("display", "none");	
         $("#PasswordMessage").css("display", "");
+        $("#EmailMessage").css("display", "none");
+        $("#fail").css("display", "none");
     });
+    $("#email").click(function(){
+    	$("#PasswordMessage").css("display", "none");
+    });
+    
+    
 </script>
 
 
