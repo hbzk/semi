@@ -22,7 +22,7 @@
 <style>
 #LoginHeader {
   font-weight: bold;
-  background-color: #A9F5BC;
+  background-color: #42BCB2;
   height: 60px;
   color: white;
   text-align: center;
@@ -30,7 +30,7 @@
   line-height: 33px;
 }
 #LoginHeader1 {
-  background-color: #CEF6D8;
+  background-color: #42BCB2;
   height: 25px;
 }
 #LoginMiddle {
@@ -39,12 +39,12 @@
   font-weight: bold;
   line-height: 18px;
   text-align: center;
-  padding: 16px;
+  padding: 16px;F35D5D
   padding-top: 13px;
 }
 #LoginContent {
   border: 1px solid white;
-  background-color: #C1BDFF;
+  background-color: #42BCB2;
   height: 700px;
 }
 #email {
@@ -77,9 +77,9 @@
 #pw {
   border: 0px;
   margin-top: 2px;
-  background-color: #CEF6D8;
+  background-color: #F35D5D;
   width: 100%;
-  height: 38px;
+  height: 50px;
   font-weight: bold;
   color: white;
   font-size: 20px;
@@ -87,9 +87,9 @@
 #Enter {
   border: 0px;
   margin-top: 2px;
-  background-color: #CEF6D8;
+  background-color: #F05630;
   width: 100%;
-  height: 38px;
+  height: 50px;
   font-weight: bold;
   color: white;
   font-size: 20px;
@@ -134,7 +134,7 @@ Your username identifies you on Sem1colon
     <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
     <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
     <button id="pw">password 찾기</button>
-    <button id="Enter" name="Enter" type="submit">Log In</button>
+    <button id="Enter" name="Enter" type="submit">Enter</button>
 </form>
 
 </div>
@@ -182,7 +182,7 @@ Your username identifies you on Sem1colon
           (event.target.value).match("kr")  ||
           (event.target.value).match("ac"))
              ) {
-        	  $("#email").css("backgroundColor", "#FAFFBD");
+        	  $("#email").css("backgroundColor", "white");
         	  $("#Password").css("display", "");
         	  $("#Password").focus();
         	  $("#EmailMessage").css("display", "none");	  
@@ -191,7 +191,7 @@ Your username identifies you on Sem1colon
         		(event.target.value).match("@") &&
         		((event.target.value).indexOf("@") < (event.target.value).indexOf("."))
         		) {
-         	$("#email").css("backgroundColor", "#FAFFBD");
+         	$("#email").css("backgroundColor", "white");
           $("#Password").css("display", "");
           $("#EmailMessage").css("display", "");
         } else {
@@ -205,7 +205,7 @@ Your username identifies you on Sem1colon
     
     function OnInput1 (event) {
     	if(event.target.value.length > 0) {
-    		$("#Password").css("backgroundColor", "#FAFFBD");
+    		$("#Password").css("backgroundColor", "white");
     		$("#pw").css("display", "none");
     		$("#Enter").css({ "display": ""});
     		$("#EmailMessage").css("display", "none");	
