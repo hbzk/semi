@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="js/jquery.ui.touch.js"></script>
+<script type="text/javascript" src="js/common_no.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
+<script type="text/javascript" src="js/cs_drag_font.js"></script>
+<script type="text/javascript" src="js/jquery.scrollTo.js"></script>
+
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/lineconStyle.css">
+<link rel="stylesheet" href="css/layout_font.css">
+<link rel="stylesheet" href="css/common_font.css">
+<title>Main</title>
+<style type="text/css">
+
+#wrapper {
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;left:0;
+    overflow:hidden;
+}
+
+    #mask {
+        width:100%;
+        height:500%;
+        overflow:hidden;
+    }
+
+     .item {
+        width:100%;
+        height:20%;
+        display:block;
+    }     
+    
+    .content1 {
+        border: 1px solid #000;
+        margin-top: 0px;
+        width: 320px; 
+        height: 533px; 
+        position: relative;
+        text-align: center;
+        
+    }
+    
+    .content2 {
+        border: 1px solid #000;
+        margin-top: 0px;
+        width: 320px; 
+        height: 533px; 
+        position: relative;
+        text-align: center;
+        
+    }
+    
+    #btt1 { margin-top: 100px; margin-left:125px; width: 70px; }
+    #btt2 { margin-top: 46px; margin-left:125px; width: 70px; }
+    
+    #Main_0 {
+    border: 1px solid red;
+    position: absolute;
+    width: 320px;
+    height: 532px;
+    z-index:0;
+    }
+    
+    #Main_set {
+    border: 1px solid red;
+    position: absolute;
+    width: 320px;
+    height: 328px;
+    margin-top: 204px;
+    background-color: #ECF1F4;
+    z-index:1;
+}
+
+
+
+#bottomBar {
+  position:absolute;
+  background-color:#abc;
+  left:105px;
+  width:90px;
+  height:10px;
+  top: 95%;
+}
+
+
+
+
+</style>
+</head>
+<body>
+
+<section id="layout">
+
+<div id="wrapper">
+    <div id="mask">
+        <div id="item1" class="item"></div>
+        <div id="item2" class="item">
+            <div id="Main_set">
+                <a href="#item1" class="panel"><button id="btt2">▼</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="Main_0">
+    <section id="iconMainDiv">
+        <div id="start"><i class="fa fa-play"></i></div>
+        
+        <div id="middle"><!-- <i class="li li_tv"></i> 아이콘이 여기로 --></div>
+        
+      <div id="one" class="drag iconMain center top"><i class="li li_tv"></i></div>
+      <div id="two" class="drag iconMain left top"><i class="fa fa-cutlery"></i></div>
+      <div id="three" class="drag iconMain right top"><i class="fa fa-desktop"></i></div>
+      <div id="four" class="drag iconMain left bottom"><i class="fa fa-moon-o"></i></div>
+      <div id="five" class="drag iconMain right bottom"><i class="fa fa-mobile"></i></div>
+      <div id="six" class="drag iconMain center bottom"><i class="fa fa-coffee"></i></div>
+      
+      <p id="timer"></p>
+    </section>
+    
+<a href="#item2" class="panel"><div id="bottomBar" class="bottomBar">
+</div>
+</a></div>
+</section>
+
+<p id="result"></p>
+<script>
+var menu_flag = true;
+
+$(".bottomBar").click(function(){
+    
+  if (menu_flag) {
+      
+      
+    $(".center.top").animate({"top": "-=5px"/* ,"left": "-=100px" */}, "600"); 
+    $(".left.top").animate({"top": "-=75px"},"400");
+    $(".right.top").animate({"top": "-=75px"}, "400");
+        $(".left.bottom").animate({"top": "-=120px"}, "300");
+        $(".right.bottom").animate({"top": "-=120px"}, "300"); 
+        $(".center.bottom").animate({"top": "-=190px"}, "200");
+        $("#start").fadeOut(400);
+        menu_flag = false;
+        
+  } else {
+      $(".center.top").animate({"top": "+=5px"}, "600"); 
+         $(".left.top").animate({"top": "+=75px"},"400");
+        $(".right.top").animate({"top": "+=75px"}, "400");
+            $(".left.bottom").animate({"top": "+=120px"}, "300");
+            $(".right.bottom").animate({"top": "+=120px"}, "300"); 
+            $(".center.bottom").animate({"top": "+=190px"}, "200"); 
+            $("#start").fadeIn(400);
+        menu_flag = true;
+        
+  }
+});
+</script>
+<script>
+$(document).ready(function() {
+    $('a.panel').click(function () {
+        $('a.panel').removeClass('selected');
+        $(this).addClass('selected');        
+        current = $(this);                
+        $('#wrapper').scrollTo($(this).attr('href'), 400);              
+        return false;
+    });    
+    $(window).resize(function () {
+        resizePanel();
+    });    
+});
+function resizePanel() {
+    width = $(window).width();
+    height = $(window).height();
+    mask_height = height * $('.item').length;
+    $('#wrapper, .item').css({width: width, height: height});
+    $('#mask').css({width: width, height: mask_height});
+    $('#wrapper').scrollTo($('a.selected').attr('href'), 0);        
+}
+</script>
+</body>
+</html>
