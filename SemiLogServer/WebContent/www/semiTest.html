@@ -1,0 +1,73 @@
+
+ <html>
+<head>
+<style>
+#container {
+  position:absolute;
+  background-color:#abc;
+  left:50px;
+  width:90px;
+  height:90px;
+  margin:5px;
+}
+
+
+#menu {
+  position:absolute;
+  background-color:#000000;
+  width:10px;
+  height:90px;  
+}
+
+#container2 {
+  position:absolute;
+  background-color:#abc;
+  top: 100px;
+  left: 50px;
+  width:90px;
+  height:90px;
+  margin:5px;
+}
+
+
+#menu2 {
+  position:absolute;
+  background-color:#000000;
+  width:10px;
+  height:90px;  
+}
+</style>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+
+<body>
+
+<div id="container" class="container">
+	<div id="menu" class="menu"></div>
+	
+</div>
+<div id="container2" class="container">
+	<div id="menu2" class="menu"></div>
+	
+</div>
+<script>
+
+var menu_flag = true;
+
+$(".container").click(function(){
+  if (menu_flag) {
+  	$(this).animate({"left": "+=300px"}, "slow");
+		menu_flag = false;
+		
+  } else {
+	$(this).animate({"left": "-=300px"}, "slow");
+    menu_flag = true;
+  }
+});
+
+
+
+</script>
+</body>
+</html>
