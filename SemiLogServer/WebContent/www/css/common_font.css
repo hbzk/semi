@@ -1,0 +1,86 @@
+.fa-play { background: #BFBFBF; margin: 29px 0 0 9px;}
+/* Activity List */
+
+.routins { }
+
+.li_tv { background: #66D9B8; text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);}
+.fa-cutlery { background: #87C038;}
+/*컴퓨터*/
+.fa-desktop{ background: #F2C12E;}
+/*잠*/
+.fa-moon-o { background: #F27127;}
+.fa-mobile { background: #F24E29; font-size: 4em;}
+/*휴식*/
+.fa-coffee {background: #267FB8;}
+
+/*-------------------------------- */
+.fa-headphones { background: #DB435C;}
+.fa-music { background: #74DBC5;}
+.fa-automobile {	background: #61A74D;}
+.fa-phone { background: #F4BCAC;}
+.li_banknote {	background: #477306;}
+/* 대화 */
+.fa-comment { background: #D39FE8;}
+/*농구or운동*/
+.fa-dribbble { background: #F59D32;}
+/*여행*/
+.fa-plane { background: #8A1D30;}
+.fa-gamepad { background: #35203B;}
+.fa-puzzle-piece { background: #9BB144;}
+/*맥주*/
+.fa-beer { background: #FE5850;}
+/*와인*/
+.fa-glass { background: #164065; font-size: 2.5em;}
+/*영화보기*/
+.li_video {	background: #37A1FE;}
+/*병원*/
+.fa-hospital-o { background: #5C89B2;}
+
+/* -------------------------------*/
+/* 빨래 */
+.li_t-shirt { background: #FBDC01;}
+/*집, 집안일*/
+.fa-home { background: #FFA14A;}
+
+/*집안일, 쓰레기비우기 청소*/
+.li_trash { background: #E85649;}
+/*가위, 공작*/
+.fa-scissors { background: #83DBE8;}
+
+/*---------------------------------*/
+/*실험*/
+.fa-flask { background: #B7C11E;} 
+.fa-leaf { background: #88A825;}
+/*공부*/
+.li_pen { background: #911146; font-size: 2.5em;}
+/*전구, 물리(전기)*/
+.li_bulb { background: #CF4A30;}
+/*책*/
+.fa-book { background: #218D80;}
+/*책, 북마크 */
+.fa-bookmark { background: #ED8C2B;}
+
+/*--------------------------------------*/
+/* 유아 */
+.fa-child { background: #813DAC; font-size: 3.0em;}
+/*유아 진료 */
+.fa-stethoscope { background: #FF5760;}
+/*이유식*/
+.fa-spoon { background: #F0947C;}
+
+/*------------------------------------*/
+/*개발자, 코딩*/
+.fa-code { background: #064B75;}
+/*개발자, 코딩*/
+.fa-keyboard-o { background: #008899;}
+
+/* 바차트 */
+.fa-bar-chart-o {	background: #8A1D30;}
+/*리스트*/
+.fa-list-alt { background: #8A1D30;}
+
+/*추가버튼*/
+.fa-plus { background: #8A1D30;}
+.fa-info { background: #8A1D30;}
+.fa-file-excel-o { background: #8A1D30;}
+.fa-file-image-o { background: #8A1D30;}

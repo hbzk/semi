@@ -1,4 +1,74 @@
 @CHARSET "UTF-8";
+/* 레이아웃 */
+#layout { border: 1px solid #000;
+margin: 50px auto 0px; width: 320px; height: 533px; position: relative;}
+
+/* 메인아이콘 */
+#iconMainDiv { width: 300px; height: 340px; margin: 34px auto 0px; position: relative; }
+
+
+/* 폰트 아이콘 */
+.fa, .li{  
+	display: block; width: 70px; height: 70px; line-height: 70px; font-size: 2.8em;
+	border-radius: 35px; -webkit-border-radius: 35px;	-moz-border-radius: 35px;
+	text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15); border: 0px; 
+	color: white; text-align: center;	
+}
+
+#start { position: absolute; top: 110px; left: 106px; width: 88px; height: 128px; opacity: 1; }
+.iconMain { position: absolute; }
+
+.iconMain.center { left: 115px; }
+.iconMain.left { left: 10px; }
+.iconMain.right { right: 10px; }
+.iconMain.center.top { top: 10px; }
+.iconMain.left.top, .right.top { top: 80px; }
+.iconMain.left.bottom, .right.bottom { top: 205px; } 
+.iconMain.center.bottom { top: 275px; } 
+
+/* 빙글빙글 */
+.flipping { -webkit-transform: rotateY(720deg); -webkit-transition: 1.0s;}
+
+
+/* ====================================== */
+
+
+/* 타이머 */
+#timer { width: 64px; height: 64px; 
+line-height: 64px; text-align: center; font-weight: bolder; font-size: 145%; }
+
+#result { margin-top: 10px; }
+
+
+
+/* Result Pie ======================== */
+
+#date { height: 60px; text-align: center; line-height: 100px; position: relative; }
+#date h1 { font-size: 400%; font-weight: bold; margin: 0; }
+#date span { position: absolute; }
+#date span.left { left: 40px; }
+#date span.right { right: 40px; }
+
+/* 파이차트 */
+#pieChart { margin-left: 35px; margin-top:20px;}
+.pieChart_legend {margin-top: 23px;}
+
+/* 결과창 하단 메뉴 */
+#resultFooter { position: absolute; bottom: 20px; right: 20px;}
+#resultFooter a { display: inline-block; margin-left: 5px; }
+#resultFooter img { width: 50px; height: 50px; }
+
+
+/* Result List = rt* ======================= */
+
+#resultList { height: 319px; width: 340px; overflow: auto; margin-top: 20px;}    
+#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 30px; margin-top: 40px; } 
+#rtTable { height: 70px;}
+#rtImage{ /* position: absolute; */ text-align: center; margin-top: -6px; margin-left: -280px; padding-top: 10px; }
+#rtName{ text-align: center; height: 20px; margin-left: 52px; margin-top: -10px; width: 105px; display: block; }
+#rtTime{ text-align: center; float:right; margin-right: 66px; margin-top: -10px; }
+#resultList img { width: 40px; height: 40px; margin-bottom: -4%; }
+
 
 /* 슬라이드 */
 * { margin: 0px; padding: 0px;}
@@ -39,80 +109,3 @@ hr {
   width: 65px;
   color: white;
 }
-
-
-/* 끝 */ 
-
-
-
-/* 레이아웃 */
-
-#layout { border: 1px solid #000;
-margin: 50px auto; width: 320px; height: 533px; position: relative;}
-
-
-
-/* 메인아이콘 */
-#iconMainDiv { width: 300px; height: 340px; margin: 34px auto 0px; position: relative; }
-
-.iconStart {  background: url(img/play.png) 0px 0px no-repeat; opacity: 1; 
-position: absolute; top: 142px; left: 118px; }
-
-.fa{
-		padding: 12px;
-		font-size: 2.5em;
-		
-}
-
-.iconMain { background: url() 0px 0px no-repeat;
-position: absolute; }
-#one { /* background-image: url(img/news.png); */background: #FF4444;
-text-shadow: /* 1px 3px 0px #FF4444, */ 3px 4px 0px rgba(0, 0, 0, 0.15);
-text-align: center;}
-#two { background-image: url(img/bikerC.png);}
-#three { background-image: url(img/radio.png);}
-#four { background-image: url(img/tv.png);}
-#five { background-image: url(img/creditcard.png);}
-#six { background-image: url(img/gamecontroller.png);}
-
-.iconMain.center { left: 118px; }
-.iconMain.left { left: 10px; }
-.iconMain.right { right: 10px; }
-.iconMain.center.top { top: 10px; }
-.iconMain.left.top, .right.top { top: 80px; }
-.iconMain.left.bottom, .right.bottom { top: 205px; } 
-.iconMain.center.bottom { top: 275px; } 
-
-/* 타이머 */
-#result { width: 64px; height: 64px; 
-line-height: 64px; text-align: center; font-weight: bolder; font-size: 145%; }
-
-
-/* Result Pie ======================== */
-
-#date {
-height: 60px; text-align: center; line-height: 100px; position: relative; }
-#date h1 { font-size: 400%; font-weight: bold; margin: 0; }
-#date span { position: absolute; }
-#date span.left { left: 40px; }
-#date span.right { right: 40px; }
-
-/* 파이차트 */
-#pieChart { margin-left: 35px; margin-top:20px;}
-.pieChart_legend {margin-top: 23px;}
-
-/* 결과창 하단 메뉴 */
-#resultFooter { position: absolute; bottom: 20px; right: 20px;}
-#resultFooter a { display: inline-block; margin-left: 5px; }
-#resultFooter img { width: 50px; height: 50px; }
-
-
-/* Result List = rt* ======================= */
-
-#resultList { height: 319px; width: 340px; overflow: auto; margin-top: 20px;}    
-#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 30px; margin-top: 40px; } 
-#rtTable { height: 70px;}
-#rtImage{ /* position: absolute; */ text-align: center; margin-top: -6px; margin-left: -280px; padding-top: 10px; }
-#rtName{ text-align: center; height: 20px; margin-left: 52px; margin-top: -10px; width: 105px; display: block; }
-#rtTime{ text-align: center; float:right; margin-right: 66px; margin-top: -10px; }
-#resultList img { width: 40px; height: 40px; margin-bottom: -4%; }
