@@ -164,17 +164,24 @@ Your username identifies you on Sem1colon
 	
     function OnInput (event) {
         if(
-        		(event.target.value).match("@") && 
+        		(event.target.value).indexOf("@") < (event.target.value).indexOf(".") &&
         		((event.target.value).match("com") || 
-        		(event.target.value).match("net") ||
-        		(event.target.value).match("co.kr"))) {
+          (event.target.value).match("net") ||
+          (event.target.value).match("co.kr")) 
+             ) {
         	  $("#email").css("backgroundColor", "#FAFFBD");
         	  $("#Password").css("display", "");
         	  $("#Password").focus();
-        	  $("#EmailMessage").css("display", "none");
-        	  
+        	  $("#EmailMessage").css("display", "none");	  
         	  $("#welcome").css("display", "none");
-        }else{
+        } else if( 
+        		(event.target.value).match("@") &&
+        		((event.target.value).indexOf("@") < (event.target.value).indexOf("."))
+        		) {
+         	$("#email").css("backgroundColor", "#FAFFBD");
+          $("#Password").css("display", "");
+          $("#EmailMessage").css("display", "");
+        } else {
           $("#email").css("backgroundColor", "#FA5858");
           $("#EmailMessage").css("display", "");
           $("#welcome").css("display", "none");
