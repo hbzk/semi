@@ -1,12 +1,18 @@
 @CHARSET "UTF-8";
 
 @font-face {
-		font-family: venera;
-		src: url('../font/Venera-300.otf'') format("opentype");
+    font-family: 'Junction';
+    src: url('/font/junction/junction-regular.eot');
+    src: url('/font/junction/junction-regular.eot?#iefix') format('embedded-opentype'),
+         url('/font/junction/junction-regular.woff') format('woff'),
+         url('/font/junction/junction-regular.ttf') format('truetype'),
+         url('/font/junction/junction-regular.svg#junctionregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 body{
 		background: #ECF1F4;
-		
 }
 
 .iconContainer{
@@ -21,6 +27,7 @@ body{
 
 h1{
 		margin-left: 20px;
+		font-family: Junction;
 }
 .title{
 		border: 1px solid #999;
@@ -248,6 +255,10 @@ h1{
 }
 .fa-file-image-o{
 		background: #8A1D30;
+}
+.fa-play{
+		font-size: 2.5em;
+		background: #BFBFBF;
 }
 
 
