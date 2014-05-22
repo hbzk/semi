@@ -39,7 +39,8 @@ function dragdrop_drop() {
 			lastIcon = lastDragger.children('i');
 		}
 
-		lastDragger.draggable({revertDuration:0});
+		//lastDragger.draggable({revertDuration:0});
+		lastDragger.attr('style', '');
 		lastDraggerClass = lastDragger[0].className;
 		
 		// 아이콘 중앙 배치
@@ -82,5 +83,9 @@ function dragdrop_flip() {
 	setTimeout(function(){
 		$('.flipping').removeClass('flipping');
 		$('.drag').draggable({disabled: false});
+		
+		// 안드로이드에서 3,5번 flip 궤도 이상 - 보정 
+		lastDragger.attr('style','');
+		
 	}, 1000);
 }

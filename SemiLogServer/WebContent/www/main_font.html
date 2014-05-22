@@ -52,9 +52,12 @@
 var menu_flag = true;
 
 $(".bottomBar").click(function(){
+	
   if (menu_flag) {
-  	 $(".center.top").animate({"top": "-=5px"/* ,"left": "-=100px" */}, "600"); 
-  	 $(".left.top").animate({"top": "-=75px"},"400");
+	  
+	  
+  	$(".center.top").animate({"top": "-=5px"/* ,"left": "-=100px" */}, "600"); 
+  	$(".left.top").animate({"top": "-=75px"},"400");
   	$(".right.top").animate({"top": "-=75px"}, "400");
 		$(".left.bottom").animate({"top": "-=120px"}, "300");
 		$(".right.bottom").animate({"top": "-=120px"}, "300"); 
@@ -71,6 +74,7 @@ $(".bottomBar").click(function(){
 			$(".center.bottom").animate({"top": "+=190px"}, "200"); 
 			$("#start").fadeIn(400);
 	    menu_flag = true;
+	    
   }
 });
 </script>
