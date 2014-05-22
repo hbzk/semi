@@ -140,7 +140,7 @@ Your username identifies you on Sem1colon
 	$("#EmailMessage").css("display", "none");
 	$("#PasswordMessage").css("display", "none");
 
-    $('#form').validate({
+    $('#form')..      ({
           rules: { email: { required: true, email: true },
                 Password: { required: true },
             },
@@ -163,7 +163,11 @@ Your username identifies you on Sem1colon
 	  $("#Enter").css("display", "none");
 	
     function OnInput (event) {
-        if((event.target.value).match("@") && (event.target.value).match("com") || (event.target.value).match("net")) {
+        if(
+        		(event.target.value).match("@") && 
+        		((event.target.value).match(".com") || 
+        		(event.target.value).match(".net") ||
+        		(event.target.value).match(".co.kr"))) {
         	  $("#email").css("backgroundColor", "#A9F5BC");
         	  $("#Password").css("display", "");
         	  $("#Password").focus();
