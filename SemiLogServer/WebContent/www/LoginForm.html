@@ -177,19 +177,21 @@ Your Email identifies you on Sem1colon
     function OnInput (event) {
         if(
         		(event.target.value).indexOf("@") < (event.target.value).indexOf(".") &&
+        		(event.target.value).length > ((event.target.value).indexOf(".") + 1) &&
         		((event.target.value).match("com") || 
           (event.target.value).match("net") ||
-          (event.target.value).match("kr")  ||
-          (event.target.value).match("ac"))
+          (event.target.value).match("kr"))
              ) {
         	  $("#email").css("backgroundColor", "white");
         	  $("#Password").css("display", "");
         	  $("#Password").focus();
         	  $("#EmailMessage").css("display", "none");	  
         	  $("#welcome").css("display", "none");
-        } else if( 
+        } else if ( 
         		(event.target.value).match("@") &&
+        		(event.target.value).length > ((event.target.value).indexOf(".") + 1) &&
         		((event.target.value).indexOf("@") < (event.target.value).indexOf("."))
+        		
         		) {
          	$("#email").css("backgroundColor", "white");
           $("#Password").css("display", "");
