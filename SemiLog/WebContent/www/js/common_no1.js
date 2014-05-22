@@ -23,11 +23,12 @@ $(function(){
 
      
     
-     $('#wrap').mousemove(function(e) {
-        if (e.pageX < x) {
+     $('#wrap').click(function(e) {
+    	
+        if (e.pageX) {
           msDown = true;
         } else {
-        	return;
+        	return false;
         }
       });
   
@@ -61,16 +62,18 @@ $(function(){
      
      
      
-    $('#pane').mousemove(function(e) {
-      if (e.which === 1) {
+    $('#pane').click(function(e) {
+      if (e.which) {
         lbDown = true;
+      } else {
+    	  return false;
       }
      });
     $("#slideLeft").mousedown(function(e) {
         if (lbDown) {
           var mouseX = e.pageX;
           var boxMouseX = mouseX - boxOffset;
-          if ((boxMouseX > offsetPx) && (boxMouseX < (boxWidth - offsetPx))) {
+          if (e.pageX < x) {
 
             $("#pane").hide("slide", {
               direction : "right"
