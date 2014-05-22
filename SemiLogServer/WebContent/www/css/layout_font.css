@@ -18,6 +18,7 @@ margin: 50px auto 0px; width: 320px; height: 533px; position: relative;}
 #start { position: absolute; top: 110px; left: 106px; width: 88px; height: 128px; opacity: 1; }
 .iconMain { position: absolute; }
 
+.iconMain.middle { background: #ccc; left: 115px; }
 .iconMain.center { left: 115px; }
 .iconMain.left { left: 10px; }
 .iconMain.right { right: 10px; }

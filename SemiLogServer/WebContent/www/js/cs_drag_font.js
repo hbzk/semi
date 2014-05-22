@@ -1,15 +1,14 @@
-var startImg;
-var lastdrager;
-var lastdragerImg;
-var lastdragerClass;
+var startIconClass;
+var lastIcon;
+var lastDragger;
 
 $(window).load(function(){
-	startImg = $('.iconStart').css('background-image');
+	startIconClass = ($('#start').children('i')[0].className);
 	
 	dragdrop_doing();
 	dragdrop_drop();
 
-	$('.iconStart').click(function(){ // 시작 버튼 클릭시 초기화
+	$('#start').click(function(){ // 시작 버튼 클릭시 초기화
 		dragdrop_timerCheck();
 	});
 
@@ -25,23 +24,26 @@ function dragdrop_doing() {
 function dragdrop_drop() {
 	$('#start').droppable({tolerance: "touch"}, {drop: function(event, ui){
 		
-		dragdrop_timerCheck(); // 이미 실행중인지 확인 후 초기화
+		/*dragdrop_timerCheck(); */// 이미 실행중인지 확인 후 초기화
 		
 		// 드래그 대상 관련 조작
-		lastdrager = $(event.toElement).removeAttr('style');
-		lastdragerImg = lastdrager.css('background-image');
+		lastIcon = $(event.toElement);
+		console.log(lastIcon);
+		lastDragger = lastIcon.parent();
+		console.log(lastDragger);
+/*		lastdragerIcon = lastdrager.css('background-image');
 		lastdrager.css('background-image', 'none');
-		lastdragerClass = lastdrager.context.className;
+		lastdragerIconClass = lastdrager.context.className;
 		lastdrager.draggable({revertDuration:0});
 		
 		// 시작아이콘 드래그 활성
-		$('#start').css('background-image', lastdragerImg)
+		$('#start').css('background-image', lastdragerIcon)
 			.draggable({disabled: false},{distance: 20},{revert: "invalid"},{zIndex: 9});
 		
 		// 타이머 출력
 		timer_doing('timer');
-		$('#timer').addClass(lastdragerClass)
-			.removeClass('ui-draggable ui-draggable-dragging');
+		$('#timer').addClass(lastdragerIconClass)
+			.removeClass('ui-draggable ui-draggable-dragging');*/
 		
 	}});
 }
@@ -70,7 +72,7 @@ function dragdrop_timerCheck() {
 		
 		$('#start').draggable({disabled: true}).droppable({disabled: false}) // 시작아이콘 드래그 방지
 			.css('background-image', startImg); // 시작 아이콘 초기화
-		lastdrager.css('background-image', lastdragerImg); // 드래그했던 아이콘 초기화
+		lastdrager.css('background-image', lastdragerIconClass); // 드래그했던 아이콘 초기화
 		
 		
 		dragdrop_flip(); // 빙글빙글
