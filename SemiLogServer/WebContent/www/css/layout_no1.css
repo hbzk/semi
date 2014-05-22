@@ -26,7 +26,7 @@
 	position: absolute;
 	width: 320px;
 	height: 345px;
-	margin-left: -10px;
+	margin-left: -11px;
 	margin-top: 10px;
 }
 
@@ -35,10 +35,12 @@
 	position: absolute;
   width: 320px;
   height: 335px;
+  margin-left: -1px;
   margin-top: 11px;
 }
 
 .slideLeft2 {
+  border:1px solid red;
   position: absolute;
   width: 320px;
   height: 340px;

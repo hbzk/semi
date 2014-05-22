@@ -99,16 +99,18 @@ $(function(){
     
     
     
-    $('#pane2').mousedown(function(e) {
-        if (e.which === 1) {
+    $('#pane2').click(function(e) {
+        if (e.which) {
           lbDown = true;
+        } else {
+        	return false;
         }
       });
     $(".slideLeft2").mousemove(function(e) {
         if (lbDown) {
           var mouseX = e.pageX;
           var boxMouseX = mouseX - boxOffset;
-          if ((boxMouseX > offsetPx) && (boxMouseX < (boxWidth - offsetPx))) {
+          if (e.pageX > x) {
 
             $("#pane").hide("slide", {
               direction : "right"
@@ -118,9 +120,9 @@ $(function(){
             }, 600);
             msDown = false;
             lbDown = false;
+            $("#pane").css("display","none");
+            $("#pane2").css("display", "none");
           }
-          $("#pane").css("display","none");
-          $("#pane2").css("display", "none");
         }
       });
 	
