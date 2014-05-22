@@ -1,9 +1,9 @@
-var startIconClass;
+var startIcon;
 var lastIcon;
 var lastDragger;
 
 $(window).load(function(){
-	startIconClass = ($('#start').children('i')[0].className);
+	startIcon = ($('#start').children('i'));
 	
 	dragdrop_doing();
 	dragdrop_drop();
@@ -26,22 +26,30 @@ function dragdrop_drop() {
 		
 		/*dragdrop_timerCheck(); */// 이미 실행중인지 확인 후 초기화
 		
-		// 드래그 대상 관련 조작
+		// 드래그 대상 관련
 		lastIcon = $(event.toElement);
-		console.log(lastIcon);
 		lastDragger = lastIcon.parent();
-		console.log(lastDragger);
+		
+		$('#middle').html(lastIcon)
+		.draggable({distance: 20}, {revert: true}, {revertDuration: 500}, {zIndex: 9}); // 해당 아이콘 중앙 배치
+		
+		
 /*		lastdragerIcon = lastdrager.css('background-image');
 		lastdrager.css('background-image', 'none');
 		lastdragerIconClass = lastdrager.context.className;
-		lastdrager.draggable({revertDuration:0});
+		lastdrager.draggable({revertDuration:0}); */
 		
-		// 시작아이콘 드래그 활성
-		$('#start').css('background-image', lastdragerIcon)
-			.draggable({disabled: false},{distance: 20},{revert: "invalid"},{zIndex: 9});
+		
+		
+		
+		// 시작 아이콘 관련
+		$('#start').html();
+		
+		/*$('#start').css('background-image', lastdragerIcon)
+			.draggable({disabled: false},{distance: 20},{revert: "invalid"},{zIndex: 9});*/
 		
 		// 타이머 출력
-		timer_doing('timer');
+		/*timer_doing('timer');
 		$('#timer').addClass(lastdragerIconClass)
 			.removeClass('ui-draggable ui-draggable-dragging');*/
 		
