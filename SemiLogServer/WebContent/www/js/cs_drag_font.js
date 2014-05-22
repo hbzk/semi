@@ -27,18 +27,18 @@ function dragdrop_drop() {
 		
 		dragdrop_timerCheck(); // 이미 실행중인지 확인 후 초기화
 		
+		
 		// 드래그 대상 관련
-		lastIcon = $(event.toElement);
-		
-		console.log(lastIcon.parent('div'));
-		
-		// 의도치 않게 드래거 인식 실패하는 경우 대비
-		if (lastIcon.parent('div').length > 0) {
+		// 가끔 드래그 대상이 div로 인식되는 버그 대응 
+		if (event.toElement.tagName == "I") {
+			lastIcon = $(event.toElement);
 			lastDragger = lastIcon.parent('div');
 		} else {
-			lastDragger = lastIcon.parent('div').context;
+			console.log('event.toElement == div');
+			lastDragger = $(event.toElement);
+			lastIcon = lastDragger.children('i');
 		}
-		
+
 		lastDragger.draggable({revertDuration:0});
 		lastDraggerClass = lastDragger[0].className;
 		
@@ -50,7 +50,6 @@ function dragdrop_drop() {
 		
 		// 타이머 출력
 		timer_doing('timer');
-		console.log(lastDraggerClass);
 		$('#timer').addClass(lastDraggerClass)
 			.removeClass('drag ui-draggable ui-draggable-dragging');
 	}});
