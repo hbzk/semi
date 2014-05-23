@@ -76,7 +76,7 @@
     position: absolute;
     width: 320px;
     height: 328px;
-    margin-top: 250px;
+    margin-top: 290px;
     background-color: #ECF1F4;
     z-index:1;
 }
@@ -339,7 +339,14 @@ $('#pieChart').pieChart(data,250,"pie");
 
 <script>
 
+var y;
 
+function myFunction(e)  {     
+	  $("#bottomBar").mouseup(function(){
+	    y = e.clienty;   
+	    console.log(e.clienty);
+	  });
+	}
 
 
 
@@ -348,9 +355,7 @@ $('#pieChart').pieChart(data,250,"pie");
 
 var menu_flag = true;
 
-$(".bottomBar").mousedown(function(e){
-	
-	  console.log(e.pageX);
+$(".bottomBar").click(function(){
     
   if (menu_flag) {
       
@@ -383,7 +388,7 @@ $(document).ready(function() {
         $('a.panel').removeClass('selected');
         $(this).addClass('selected');        
         current = $(this);                
-        $('#wrapper').scrollTo($(this).attr('href'), 400);              
+        $('#wrapper').scrollTo($(this).attr('href'), 300);              
         return false;
     });    
     $(window).resize(function () {
