@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Flick Navigation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/lineconStyle.css">
+<link rel="stylesheet" href="css/layout_font.css">
+<link rel="stylesheet" href="css/common_font.css">
+<style type="text/css">
+
+#touchSlider2 { width:100%; height:500px; margin:0 auto; background:#ccc; 
+position:relative; overflow:hidden; }
+#touchSlider2 article { width:100%; height:500px; 
+position:absolute; top:0; left:0; overflow:hidden; }
+#touchSlider2 article>section { float:left; width:100%; height:500px; 
+background:#9C9; font-size:14px; color:#fff; margin: 0 auto;}
+
+.content { background: #ddd; width: 350px; height: 800px; margin: 0 auto;
+font-size: 300%; line-height: 500px;}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.event.drag-1.5.min.js"></script>
+<script type="text/javascript" src="js/jquery.touchSlider.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	
+	$("#touchSlider2").touchSlider({
+		roll : false,
+		page : 1,
+		speed : 300,
+		btn_prev : $("#touchSlider2").next().find(".btn_prev"),
+		btn_next : $("#touchSlider2").next().find(".btn_next")
+	});
+	
+	
+});
+</script>
+</head>
+
+
+<body>
+
+
+<div id="touchSlider2">
+	<article>
+		<section style="background: #333;">
+			
+<section id="iconMainDiv">
+	<div id="start"><i class="fa fa-play"></i></div>
+	
+	<div id="middle"><!-- <i class="li li_tv"></i> 아이콘이 여기로 --></div>
+	
+  <div id="one" class="drag iconMain center top"><i class="li li_tv"></i></div>
+  <div id="two" class="drag iconMain left top"><i class="fa fa-cutlery"></i></div>
+  <div id="three" class="drag iconMain right top"><i class="fa fa-desktop"></i></div>
+  <div id="four" class="drag iconMain left bottom"><i class="fa fa-moon-o"></i></div>
+  <div id="five" class="drag iconMain right bottom"><i class="fa fa-mobile"></i></div>
+  <div id="six" class="drag iconMain center bottom"><i class="fa fa-coffee"></i></div>
+  
+  <p id="timer"></p>
+</section>
+
+
+		</section>
+		<section style="background: #777;">
+			<div class="content">2페이지2페이지2페이지2페이지2페이지</div>
+		</section>
+		<section style="background: #555;">
+			<div class="content">3페이지3페이지3페이지3페이지3페이지</div>
+		</section>
+		<section style="background: #999;">
+			<div class="content">4페이지4페이지4페이지4페이지4페이지</div>
+		</section>
+	</article>
+</div>
+
+
+
+
+</body>
+
+</html>
