@@ -120,7 +120,7 @@ $(function(){
           var boxMouseX = mouseX - boxOffset;
           console.log(downX2);
           console.log(e.pageX);
-          if (e.pageX > downX2) {
+          if (e.pageX < downX2) {
 
             $("#pane").hide("slide", {
               direction : "right"
