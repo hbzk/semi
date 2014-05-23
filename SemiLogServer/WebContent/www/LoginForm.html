@@ -150,7 +150,7 @@ Your Email identifies you on Sem1colon
     <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
     <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
     <button id="pw">password 찾기</button>
-    <button id="Enter" name="Enter" type="submit" >Enter</button>
+    <button id="Enter" name="Enter" type="submit">Enter</button>
     <button id="SignUp">SIGN UP</button>
 </form>
 
@@ -159,11 +159,15 @@ Your Email identifies you on Sem1colon
 
 
 
-<div id="go">건너뛰기</div>
+<div id="go"><a href="main_font_2.html">건너뛰기</a></div>
 
 
 
 <script>
+
+  $("#SignUp").click(function(){
+	  location.href="SignupForm.html";
+  });
 
 	$("#EmailMessage").css("display", "none");
 	$("#PasswordMessage").css("display", "none");
