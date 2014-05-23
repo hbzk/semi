@@ -80,6 +80,8 @@ $(function(){
         if (lbDown) {
           var mouseX = e.pageX;
           var boxMouseX = mouseX - boxOffset;
+          console.log(downX1);
+          console.log(e.pageX);
           if (e.pageX > downX1) {
 
             $("#pane").hide("slide", {
@@ -116,6 +118,8 @@ $(function(){
         if (lbDown) {
           var mouseX = e.pageX;
           var boxMouseX = mouseX - boxOffset;
+          console.log(downX2);
+          console.log(e.pageX);
           if (e.pageX > downX2) {
 
             $("#pane").hide("slide", {
