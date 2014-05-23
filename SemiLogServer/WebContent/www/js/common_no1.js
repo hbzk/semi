@@ -11,6 +11,8 @@ $(function(){
 /* -------------------------슬라이드--------------------------- */
 	
 
+	
+	
 	 var lbDown = false;
     var msDown = false;
     var box = $('body');
@@ -22,8 +24,9 @@ $(function(){
      $("#pane2").css('display', 'none');
 
      
-    
-     $('#wrap').click(function(e) {
+    var downX;
+     $('#wrap').mousedown(function(e) {
+    	downX = e.pageX;
     	
         if (e.pageX) {
         	
@@ -34,12 +37,13 @@ $(function(){
         }
       });
   
-     $("#slideRight").mousemove(function(e) {
+     $("#slideRight").mouseup(function(e) {
     	 if (msDown) {
     		 var mouseX = e.pageX;
     		 var boxMouseX = mouseX - boxOffset;
-    		 console.log(boxMouseX);
-    		 if (e.pageX < x) {
+    		 console.log(downX);
+    		 console.log(e.pageX);
+    		 if (e.pageX < downX) {
     			 $("#pane").hide("slide", {
     				 direction : "right"
     			 }, 600);
@@ -63,19 +67,20 @@ $(function(){
      
      
      
-     
-    $('#pane').click(function(e) {
+     var downX1;
+    $('#pane').mousedown(function(e) {
+    	downX1 = e.pageX;
       if (e.which) {
         lbDown = true;
       } else {
     	  return false;
       }
      });
-    $("#slideLeft").mousemove(function(e) {
+    $("#slideLeft").mouseup(function(e) {
         if (lbDown) {
           var mouseX = e.pageX;
           var boxMouseX = mouseX - boxOffset;
-          if (e.pageX > x) {
+          if (e.pageX > downX1) {
 
             $("#pane").hide("slide", {
               direction : "right"
@@ -98,19 +103,20 @@ $(function(){
     
     
     
-    
-    $('#pane2').click(function(e) {
+    var downX2;
+    $('#pane2').mousedown(function(e) {
+    	var downX2 = e.pageX;
         if (e.which) {
           lbDown = true;
         } else {
         	return false;
         }
       });
-    $(".slideLeft2").mousemove(function(e) {
+    $(".slideLeft2").mouseup(function(e) {
         if (lbDown) {
           var mouseX = e.pageX;
           var boxMouseX = mouseX - boxOffset;
-          if (e.pageX > x) {
+          if (e.pageX > downX2) {
 
             $("#pane").hide("slide", {
               direction : "right"
