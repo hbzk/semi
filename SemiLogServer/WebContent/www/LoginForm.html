@@ -96,6 +96,16 @@
   color: white;
   font-size: 20px;
 }
+#SignUp {
+  border: 0px;
+  margin-top: 22px;
+  background-color: #F05630;
+  width: 100%;
+  height: 50px;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+}
 #EmailMessage {
 	margin-top: 1px;
 	color: #FA5858;
@@ -107,6 +117,10 @@
 #fail {
   margin-top: 1px;
   color: #FA5858;
+}
+#go {
+  margin-top: -320px;
+  margin-left: 585px;
 }
 </style>
 
@@ -137,6 +151,7 @@ Your Email identifies you on Sem1colon
     <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
     <button id="pw">password 찾기</button>
     <button id="Enter" name="Enter" type="submit" >Enter</button>
+    <button id="SignUp">SIGN UP</button>
 </form>
 
 </div>
@@ -144,7 +159,7 @@ Your Email identifies you on Sem1colon
 
 
 
-
+<div id="go">건너뛰기</div>
 
 
 
@@ -193,17 +208,18 @@ Your Email identifies you on Sem1colon
         		(event.target.value).match("@") &&
         		(event.target.value).length > ((event.target.value).indexOf(".") + 1) &&
         		((event.target.value).indexOf("@") < (event.target.value).indexOf("."))
-        		
         		) {
          	$("#email").css("backgroundColor", "white");
           $("#Password").css("display", "");
           $("#EmailMessage").css("display", "");
+          $("#SignUp").css("display", "none");
         } else {
           $("#email").css("backgroundColor", "#FA5858");
           $("#EmailMessage").css("display", "");
           $("#welcome").css("display", "none");
           $("#Password").css("display", "none");
           $("#PasswordMessage").css("display", "none");
+          $("#SignUp").css("display", "");
         }  
     }
     
@@ -219,6 +235,7 @@ Your Email identifies you on Sem1colon
     		$("#Enter").css("display", "none");
     		$("#pw").css("display", "");
     		$("#PasswordMessage").css("display", "");
+    		$("#SignUp").css("display", "none");
     	}
     }
    
