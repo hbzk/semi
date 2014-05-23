@@ -107,7 +107,7 @@ $(function(){
     
     var downX2;
     $('#pane2').mousedown(function(e) {
-    	var downX2 = e.pageX;
+    	downX2 = e.pageX;
         if (e.which) {
           lbDown = true;
         } else {
@@ -120,7 +120,7 @@ $(function(){
           var boxMouseX = mouseX - boxOffset;
           console.log(downX2);
           console.log(e.pageX);
-          if (e.pageX < downX2) {
+          if (e.pageX > downX2) {
 
             $("#pane").hide("slide", {
               direction : "right"
