@@ -14,6 +14,7 @@
 
 <link rel="stylesheet" href="css/jquery-ui.css">
 <link rel="stylesheet" href="css/layout_no.css">
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
 
 <title>Main</title>
 
@@ -122,6 +123,24 @@
   margin-top: -320px;
   margin-left: 585px;
 }
+
+/* x button */
+.clearable{
+  background: url(src/circle_delete1.png) no-repeat right -30px center ;
+  background-size: 20px;
+  border:1px solid #999;
+  padding:3px 18px 3px 4px;  
+  border-radius:0px;
+  transition: background 0.4s; 
+}
+
+.clearable.x{
+  background-position: right 20px center;
+}
+
+.clearable.onX{
+  cursor:pointer;
+}
 </style>
 
 
@@ -147,7 +166,8 @@ Your Email identifies you on Sem1colon
 <div id="LoginContent">
 
 <form id="form" name="form" action="main_font.html">
-    <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
+    <span><input oninput="OnInput (event)" id="email" name="email" type="email" class="clearable" data-clear-btn="true" placeholder="email@" required></span>
+    
     <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
     <button id="pw">password 찾기</button>
     <button id="Enter" name="Enter" type="submit">Enter</button>
@@ -258,6 +278,15 @@ Your Email identifies you on Sem1colon
     	$("#PasswordMessage").css("display", "none");
     });
     
+    function tog(v){return v?'addClass':'removeClass';} 
+
+    $(document).on('input', '.clearable', function(){
+        $(this)[tog(this.value)]('x');
+    }).on('mousemove', '.x', function( e ){
+        $(this)[tog(this.offsetWidth-50 < e.clientX-this.getBoundingClientRect().left)]('onX');   
+    }).on('click', '.onX', function(){
+        $(this).removeClass('x onX').val('');
+    });
     
 </script>
 
