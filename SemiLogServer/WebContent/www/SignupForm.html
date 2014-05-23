@@ -132,7 +132,7 @@ Your Email identifies you on Sem1colon
 </div>
 <div id="LoginContent">
 
-<form id="form" name="form">
+<form id="form" name="form" action="LoginForm.html">
     <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
     <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
     <button id="Enter" name="Enter" type="submit">Enter</button>
@@ -193,6 +193,7 @@ Your Email identifies you on Sem1colon
             $("#Password").focus();
             $("#EmailMessage").css("display", "none");    
             $("#welcome").css("display", "none");
+            $("#Enter").css("display", "none");
             $("#LogIn").css("display", "none");
         } else if ( 
             (event.target.value).match("@") &&
@@ -202,8 +203,8 @@ Your Email identifies you on Sem1colon
           $("#email").css("backgroundColor", "white");
           $("#Password").css("display", "");
           $("#EmailMessage").css("display", "");
+          $("#Enter").css("display", "none");
           $("#LogIn").css("display", "none");
-          $("#Enter").css("display", "");
         } else {
           $("#email").css("backgroundColor", "#FA5858");
           $("#EmailMessage").css("display", "");
