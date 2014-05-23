@@ -22,7 +22,7 @@
 }
 
 #slideRight {
-	border:1px solid red;
+	
 	position: absolute;
 	width: 320px;
 	height: 345px;
@@ -31,7 +31,7 @@
 }
 
 #slideLeft {
-	border:1px solid red;
+	
 	position: absolute;
   width: 320px;
   height: 335px;
@@ -40,7 +40,7 @@
 }
 
 .slideLeft2 {
-  border:1px solid red;
+  
   position: absolute;
   width: 320px;
   height: 340px;
@@ -100,7 +100,7 @@ margin: 50px auto; width: 320px; height: 533px; position: relative;}
 
 
 /* 메인아이콘 */
-#iconMainDiv { width: 300px; height: 340px; margin: 0px auto; position: relative; margin-top: 85px;}
+#iconMainDiv { width: 300px; height: 340px; margin: 0px auto; position: relative; margin-top: 75px;}
 
 .iconMain { position: absolute;}
 .iconStart { position: absolute; top: 142px; left: 118px; }
