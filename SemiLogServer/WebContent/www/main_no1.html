@@ -338,9 +338,19 @@ $('#pieChart').pieChart(data,250,"pie");
 
 
 <script>
+
+
+
+
+
+
+
+
 var menu_flag = true;
 
-$(".bottomBar").click(function(){
+$(".bottomBar").mousedown(function(e){
+	
+	  console.log(e.pageX);
     
   if (menu_flag) {
       
