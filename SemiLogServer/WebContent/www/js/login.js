@@ -14,7 +14,6 @@ var app = express();
 
 
 app.use(bodyParser());
-
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 var dbconn = mysql.createConnection({
@@ -51,6 +50,10 @@ app.get('/', function(req,res){
 		res.json(rows);
 	});
 });
+
+
+
+
 
 module.exports = function(passport) {
  
