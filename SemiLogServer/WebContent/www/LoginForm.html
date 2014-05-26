@@ -166,21 +166,17 @@ Your Email identifies you on Sem1colon
 <div id="LoginContent">
 
 <form id="form" name="form" action="main_font.html">
-    <span><input oninput="OnInput (event)" id="email" name="email" type="email" class="clearable" data-clear-btn="true" placeholder="email@" required></span>
+    <span><input oninput="OnInput(event)" id="email" name="email" type="email" class="clearable" data-clear-btn="true" placeholder="email@" required></span>
     
     <input oninput="OnInput1 (event)" id="Password" name="Password" type="password" placeholder="password" required>
     <button id="pw">password 찾기</button>
     <button id="Enter" name="Enter" type="submit">Enter</button>
     <button id="SignUp">SIGN UP</button>
 </form>
-
 </div>
 
 
-
-
 <div id="go"><a href="main_font_2.html">건너뛰기</a></div>
-
 
 
 <script>
@@ -212,7 +208,7 @@ Your Email identifies you on Sem1colon
         });
   
   
-    $("#Password").css("display", "none");
+    $("#Password").css("display", "");
 	  $("#Enter").css("display", "none");
 	
     function OnInput (event) {
@@ -288,8 +284,10 @@ Your Email identifies you on Sem1colon
         $(this).removeClass('x onX').val('');
     });
     
-</script>
 
+    
+</script>
+<script src="js/login.js"></script>
 
 </body>
 </html>

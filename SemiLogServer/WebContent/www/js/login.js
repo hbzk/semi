@@ -2,6 +2,25 @@ var http = require('http');
 var express = require('express');
 
 var app = express();
+app.use(express.bodyParser());
+
+var server = http.createServer(function(request, response) {
+    if (request.method == 'POST') {
+        var body = '';
+        request.on('data', function (data) {
+            body += data;
+        });
+        request.on('end', function () {
+            var req = qs.parse(body);
+            checkAuth (req, res, next);
+        });
+    } else {
+        var url_parts = url.parse(request.url, true);
+        var query = url_parts.query;
+        console.log(query);
+        checkAuth (query, res, next);
+    }
+});
 
 
 function checkAuth (req, res, next){
@@ -20,7 +39,7 @@ app.get('/afterLogin', checkAuth, function (req, res) {
 
 app.post('/login', function (req, res) {
 	  var post = req.body;
-	  if (post.user === 'john' && post.password === 'johnspassword') {
+	  if (post.user === 'id' && post.password === 'password') {
 	    req.session.user_id = johns_user_id_here;
 	    res.redirect('/afterLogin');
 	  } else {
