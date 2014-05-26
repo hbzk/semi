@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="js/jquery.ui.touch.js"></script>
+<script type="text/javascript" src="js/common_no.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
+<script type="text/javascript" src="js/cs_drag_setting.js"></script>
+
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/lineconStyle.css">
+<link rel="stylesheet" href="css/layout_font.css">
+<link rel="stylesheet" href="css/common_font.css">
+<title>Main</title>
+<style type="text/css">
+body { overflow: hidden;}
+
+#middle { width: 70px; height: 179px; margin-top: -174px; border: 1px solid red;}
+#bottom { border: 1px solid red; margin-top: -140px; height: 240px;}
+
+#setting { background: #ccc; width: 318px; height: 341px; border: 1px solid red; 
+position: absolute; top: 600px; margin-top: -580px; margin-left: 319px;}
+
+#setting_down { background: aliceblue; width: 100%; height: 20px; position:absolute; top: 550px; border: 1px solid red;}
+
+</style>
+</head>
+<body>
+
+<section id="layout">
+	<section id="iconMainDiv">
+		<div id="start"><i class="fa fa-play"></i></div>
+		
+		<div id="middle"><!-- 아이콘이 여기로 --></div>
+		
+	  <div id="one" class="drag iconMain center top"><i class="li li_tv"></i></div>
+	  <div id="two" class="drag iconMain left top"><i class="fa fa-cutlery"></i></div>
+	  <div id="three" class="drag iconMain right top"><i class="fa fa-desktop"></i></div>
+	  <div id="four" class="drag iconMain left bottom"><i class="fa fa-moon-o"></i></div>
+	  <div id="five" class="drag iconMain right bottom"><i class="fa fa-mobile"></i></div>
+	  <div id="six" class="drag iconMain center bottom"><i class="fa fa-coffee"></i></div>
+	  	
+
+	</section>
+	  	<div id="bottom"></div>
+<div id="bottomBar" class="bottomBar">
+</div>
+</section>
+
+
+
+	<div id="setting_down">
+		<article id="setting"></article>
+	</div>
+	
+
+<script>
+var position = 'bottom';
+
+$('#setting_down').draggable({axis: "y"}, { revert: 'invalid' });
+
+
+
+$('#middle').droppable({accept: "#setting_down"}, {tolerance: "touch"}, {
+	drop: function(event, ui) {
+		console.log(event);
+		console.log(ui);
+		
+		if (position == 'bottom') {
+			$('#setting_down').animate({top: 220}, {duration: 700
+				, step: function(now, fx) {
+					console.log(now);
+					position = 'top';
+					$('#middle').droppable({tolerance: "pointer"});
+				}
+			});
+		}  else {
+			$('#setting_down').animate({top: 550}, {duration: 700
+				, step: function(now, fx) {
+					console.log(now);
+					position = 'bottom';
+					$('#middle').droppable({tolerance: "touch"});
+				}
+			});
+		} 
+	}
+});
+
+$('#bottom').droppable({accept: "#setting_down"}, {tolerance: "touch"}, {
+	drop: function(event, ui) {
+		console.log(event);
+		console.log(ui);
+		
+		if (position == 'bottom') {
+			$('#setting_down').animate({top: 220}, {duration: 700
+				, step: function(now, fx) {
+					console.log(now);
+					position = 'top';
+					$('#middle').droppable({tolerance: "pointer"});
+				}
+			});
+		}  else {
+			$('#setting_down').animate({top: 550}, {duration: 700
+				, step: function(now, fx) {
+					console.log(now);
+					position = 'bottom';
+					$('#middle').droppable({tolerance: "touch"});
+				}
+			});
+		} 
+	}
+});
+
+
+
+</script>
+</body>
+</html>
