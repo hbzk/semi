@@ -20,44 +20,28 @@ var dbconn = mysql.createConnection({
 });
 
 
-app.post('/users',function(req,res){
+// /signup post 요청 오면 insert 수행
+app.post('/signup',function(req,res){
 	
-	//console.log(req);
-	console.log(req.param('email'));
-	console.log(req.body);
-	//console.log(req.query);
-	//console.log(req.query.originalUrl);
-	
-	//var urlObj = require('url').parse(req.url, true);
-	//console.log(urlObj);
-	
-	res.send(200,'success');
-	
-    /*var user = {'EMAIL': '12345',
-                'PASSWORD': '456'};
-    dbconn.query('insert into USER set ?',user,function(err,result){
+	var user = req.body;
+    dbconn.query('insert into USER set ?', user, function(err,result){
         if (err) {
             console.error(err);
             throw err;
         }
         res.send(200,'success');
-    });*/
+    });
 });
 
 
-
-app.get('/users', function(req,res){
-	console.log(req.param('email'));
-	console.log(req.body);
-	console.log(req.query);
+// (테스트 할 동안) pathname 없으면 user list 출력
+app.get('/', function(req,res){
 	
-	res.json(req.query);
 	dbconn.query('select * from USER', function(err, rows){
 		if (err) {
 			console.log('Query err');
 			console.log(err);
 		}
-		results = rows;
 		console.log(rows);
 		res.json(rows);
 	});
