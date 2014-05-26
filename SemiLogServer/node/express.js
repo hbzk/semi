@@ -1,10 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var http = require('http');
-var path = require('path');
 
+var http = require('http');
 var mysql = require('mysql');
-var sha1 = require('./sha1.js');
+var sha1 = require('./sha1.js'); // password sha1 암호화
 
 var app = express();
 
@@ -20,8 +19,12 @@ var dbconn = mysql.createConnection({
 });
 
 
-// /signup post 요청 오면 insert 수행
+// /signup으로 post 요청 오면 insert 수행
 app.post('/signup',function(req,res){
+	console.log(sha1.SHA1(req.body.password));
+	req.body.password = sha1.SHA1(req.body.password); 
+	console.log(req.body.password);
+	//res.send(200, req.body);
 	
 	var user = req.body;
     dbconn.query('insert into USER set ?', user, function(err,result){
@@ -29,8 +32,19 @@ app.post('/signup',function(req,res){
             console.error(err);
             throw err;
         }
-        res.send(200,'success');
+        res.send(200,'가입 되었다');
     });
+
+});
+
+// 이메일 중복 확인
+app.get('/emailCheck',function(req,res){
+	var email = req.query.email;
+	dbconn.query('select * from USER where EMAIL = ?', email, function(err, rows){
+		if (err) {console.log(err);}
+		if (rows.length > 0) { res.send('이미 있는 이메일');} 
+		else { res.send('가입 안된 이메일'); }
+	});
 });
 
 
