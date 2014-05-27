@@ -17,9 +17,10 @@
 <title>Main</title>
 <style type="text/css">
 body { overflow: hidden;}
-#middle { width: 70px; height: 70px;}
+#middle { width: 70px; height: 70px; border: 1px solid red;}
+#footer { border: 1px solid red; position: absolute; margin-top: 200px;}
 #setting { background: #ccc; width: 100%; height: 600px;  
-position: absolute; top: 600px; }
+position: absolute; top: 500px; }
 #setting_down { background: aliceblue; width: 100%; height: 100px; 
 position:absolute; top: 500px;}
 
@@ -32,6 +33,7 @@ position:absolute; top: 500px;}
 		<div id="start"><i class="fa fa-play"></i></div>
 		
 		<div id="middle"><!-- 아이콘이 여기로 --></div>
+		<div id="footer"></div>
 		
 	  <div id="one" class="drag iconMain center top"><i class="li li_tv"></i></div>
 	  <div id="two" class="drag iconMain left top"><i class="fa fa-cutlery"></i></div>
@@ -57,7 +59,7 @@ var position = 'bottom';
 
 $('#setting').draggable({axis: "y"}, { revert: 'invalid' });
 
-$('#setting_down').click(function(){
+$('#setting').click(function(){
 	if (position == 'bottom') {
  		$('#setting').animate({top: 60}, {duration: 700
 			, step: function(now, fx) {
@@ -88,7 +90,7 @@ $('#middle').droppable({accept: "#setting"}, {tolerance: "touch"}, {
 				}
 			});
 		}  else {
-			$('#setting').animate({top: 600}, {duration: 700
+			$('#setting').animate({top: 500}, {duration: 700
 				, step: function(now, fx) {
 					console.log(now);
 					position = 'bottom';
