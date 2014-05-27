@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="js/jquery.pieChart.js"></script>
+<script type="text/javascript" src="js/jquery.ui.touch.js"></script>
+<script type="text/javascript" src="js/common_no1.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
+<script type="text/javascript" src="js/cs_drag_font.js"></script>
+<script type="text/javascript" src="js/jquery.scrollTo.js"></script>
+
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/lineconStyle.css">
+<link rel="stylesheet" href="css/layout_font.css">
+<link rel="stylesheet" href="css/common_font.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/layout_no1.css">
+<title>Main</title>
+</head>
+<body>
+
+
+<div id='wrap' onmousemove="myFunction(event)">
+
+
+
+<section id="layout">
+
+
+  <div id="iconMainDiv">
+      <p id="timer"></p>
+      <div id="start"><i class="fa fa-play"></i></div>
+      
+      <div id="slideRight"></div>
+       
+        
+      <div id="middle"><!-- <i class="li li_tv"></i> 아이콘이 여기로 --></div>
+        
+      <div id="one" class="drag iconMain center top"><i class="li li_tv"></i></div>
+      <div id="two" class="drag iconMain left top"><i class="fa fa-cutlery"></i></div>
+      <div id="three" class="drag iconMain right top"><i class="fa fa-desktop"></i></div>
+      <div id="four" class="drag iconMain left bottom"><i class="fa fa-moon-o"></i></div>
+      <div id="five" class="drag iconMain right bottom"><i class="fa fa-mobile"></i></div>
+      <div id="six" class="drag iconMain center bottom"><i class="fa fa-coffee"></i></div>
+  </div>
+  
+  
+</section>
+
+
+
+<p id="result"></p>
+</div>
+
+
+
+
+
+
+
+
+
+<div id='pane'>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" /> -->
+
+
+<section id="layout">
+
+<header id="date">
+  <span class="left">&lt;</span>
+  <span class="right">&gt;</span>
+  <h1>05/12</h1>
+</header>
+
+
+<section id="content">
+
+<div id="pieChart"></div>
+<div class="pieChart_legend"></div>
+</section>  <!-- content -->
+
+
+<div id="slideLeft"></div>
+
+<footer id="resultFooter">
+    <a id="goList"><img src="css/img/result_list.png"></a>
+</footer>
+
+
+
+</section>  <!-- layout -->
+
+
+</div>  <!-- pane -->
+
+
+
+
+
+
+
+
+
+
+
+<div id='pane2' style="border:1px solid red;">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" /> -->
+
+
+<section id="layout">
+
+
+
+
+<header id="date">
+  <span class="left" >&lt;</span>
+  <span class="right">&gt;</span>
+  <h1>05/12</h1>
+</header>
+
+<div class="slideLeft2" style="border: 1px solid red;"></div>
+<div id="rtScroll" class="slideLeft2">
+<div id="resultList">
+
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/gamecontroller.png"></div>
+    <div id="rtTime">09:10~10:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">Angdroid</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/creditcard.png"></div>
+    <div id="rtTime">10:59~11:35</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">일이삼사오육칠팔구십</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/radio.png"></div>
+    <div id="rtTime">11:43~11:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">비정한 문자제한</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/tv.png"></div>
+    <div id="rtTime">11:58~12:43</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">'...'이</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/news.png"></div>
+    <div id="rtTime">12:55~13:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">훼이크로</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/water.png"></div>
+    <div id="rtTime">13:54~13:58</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">보입니까?</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/result_list.png"></div>
+    <div id="rtTime">14:20~17:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">드</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/gamecontroller.png"></div>
+    <div id="rtTime">18:10~19:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">라</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/bikerC.png"></div>
+    <div id="rtTime">19:55~20:50</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">군</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/news.png"></div>
+    <div id="rtTime">21:10~22:57</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">출</span>
+    </div>
+    
+    <div id="rtTable">
+    <div id="rtImage"><img src="css/img/result_piechart.png"></div>
+    <div id="rtTime">23:10~24:04</div>
+    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">동</span>
+    </div>
+
+
+</div>  <!-- content -->
+</div>
+
+
+
+<footer id="resultFooter">
+    <a id="goPie"><img src="css/img/result_piechart.png"></a>
+</footer>
+
+
+
+
+</section>  <!-- layout -->
+</div>  <!-- backImg -->
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+var y;
+
+function myFunction(e)  {     
+    $("#bottomBar").mouseup(function(){
+      y = e.clienty;   
+      console.log(e.clienty);
+    });
+  }
+
+
+
+
+
+
+var menu_flag = true;
+
+$(".bottomBar").click(function(){
+    
+  if (menu_flag) {
+      
+      
+    $(".center.top").animate({"top": "-=5px"/* ,"left": "-=100px" */}, "600"); 
+    $(".left.top").animate({"top": "-=75px"},"400");
+    $(".right.top").animate({"top": "-=75px"}, "400");
+        $(".left.bottom").animate({"top": "-=120px"}, "300");
+        $(".right.bottom").animate({"top": "-=120px"}, "300"); 
+        $(".center.bottom").animate({"top": "-=190px"}, "200");
+        $("#start").fadeOut(400);
+        menu_flag = false;
+        
+  } else {
+      $(".center.top").animate({"top": "+=5px"}, "600"); 
+         $(".left.top").animate({"top": "+=75px"},"400");
+        $(".right.top").animate({"top": "+=75px"}, "400");
+            $(".left.bottom").animate({"top": "+=120px"}, "300");
+            $(".right.bottom").animate({"top": "+=120px"}, "300"); 
+            $(".center.bottom").animate({"top": "+=190px"}, "200"); 
+            $("#start").fadeIn(400);
+        menu_flag = true;
+        
+  }
+});
+</script>
+
+
+
+</body>
+</html>
