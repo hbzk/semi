@@ -10,16 +10,16 @@
 :focus { outline: 0;}
 
 header { height: 100px; line-height: 100px; background: #3ba3d0; 
-text-align: center; color: #fff; font-size: 350%; font-weight: bold;}
-header>a { position: absolute; left: 10px; text-decoration: none; color: #fff;}
+text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
+header>a { position: absolute; left: 10px; text-decoration: none; color: #fff;font-size: 80%;}
 
-input { border: 0px; display: block; width: 100%; height: 80px; padding-top: 20px;
-text-indent: 30px; font-size: 200%; }
+input { border: 0px; display: block; width: 100%; height: 50px; padding-top: 20px;
+text-indent: 30px; font-size: 100%; }
 #email {}
 #password { border-top: 1px solid #999;}
-#btnStart { width: 100%; height: 100px; background: #F05630; 
+#btnStart { width: 100%; height: 80px; background: #F05630; 
 -webkit-transition: background-color .4s ease-out;
-color: #fff; font-size: 350%; font-weight: bolder;}
+color: #fff; font-size: 200%; font-weight: bolder;}
 #btnStart:disabled { background: #999; }
 
 #emailValidate, #emailCheck { position: absolute; top: 110px; 
@@ -34,7 +34,7 @@ footer { text-align: center; margin-top: 50px; }
 
 <header><a href="welcome.html">&lt;</a>SIGN UP</header>
 
-<form id="form" method="post" action="http://localhost:3000/signup">
+<form id="form" method="post" action="http://192.168.200.6:3000/signup">
     <input id="email" name="email" type="email" placeholder="Email" autofocus required oninput="oninputEmail(event)">
     <p id="emailValidate"></p>
     <p id="emailCheck"></p>
@@ -79,7 +79,7 @@ function validateEmail() {
 
 //이메일 가입 여부 확인
 function validateForm() {
-	$.post("http://localhost:3000/emailCheck", { email: $('#email').val()})
+	$.post("http://192.168.200.6:3000/emailCheck", { email: $('#email').val()})
 		.done(function(data) {
 			if (data == 'already') {
 				$('#emailCheck').text('이미 가입된 이메일입니다.');
@@ -98,6 +98,10 @@ function validateForm() {
 	});
 }
 
+$('#password').focusout(function(){
+	console.log("focus out");
+	$("#password").val("");
+});
 
 </script>
 </body>
