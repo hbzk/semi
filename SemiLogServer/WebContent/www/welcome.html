@@ -2,10 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
 <title>Welcome</title>
 <style>
 * { margin: 0; padding: 0;}
 body { background: yellow; }
+#skip { position: fixed; bottom: 300px; right: 0px;
+font-size: 90%; color: #555;}
 #footer { position: fixed; bottom: 0px; width: 100%; }
 #footer>a { height: 150px; line-height: 150px; display: block; text-decoration: none; 
 font-size: 500%; font-weight: bolder; color: #fff; text-align: center; }
@@ -15,10 +18,10 @@ font-size: 500%; font-weight: bolder; color: #fff; text-align: center; }
 </head>
 <body>
 
-
+<a id="skip" href="#">나중에 로그인</a>
 <section id="footer">
-	<a id="login" href="#">LOG IN</a>
-	<a id="signup" href="#">SIGN UP</a>
+	<a id="login" href="login.html">LOG IN</a>
+	<a id="signup" href="signup.html">SIGN UP</a>
 </section>
 
 </body>
