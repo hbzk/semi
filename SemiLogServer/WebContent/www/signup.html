@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<title>SIGN UP</title>
+<style type="text/css">
+* { margin: 0; padding: 0;}
+:focus { outline: 0;}
+
+header { height: 100px; line-height: 100px; background: #3ba3d0; 
+text-align: center; color: #fff; font-size: 350%; font-weight: bold;}
+header>a { position: absolute; left: 10px; text-decoration: none; color: #fff;}
+
+input { border: 0px; display: block; width: 100%; height: 80px; padding-top: 20px;
+text-indent: 30px; font-size: 200%; }
+#email {}
+#password { border-top: 1px solid #999;}
+#btnStart { width: 100%; height: 100px; background: #F05630; 
+-webkit-transition: background-color .4s ease-out;
+color: #fff; font-size: 350%; font-weight: bolder;}
+#btnStart:disabled { background: #999; }
+
+form>p { position: absolute; top: 180px; text-indent: 30px; color: #df4949;}
+#emailValidate { top: 110px; }
+#pwdValidate { top: 210px; }
+
+
+footer { text-align: center; margin-top: 50px; }
+#terms { margin-right: 50px; }
+</style>
+</head>
+<body>
+
+<header><a href="welcome.html">&lt;</a>SIGN UP</header>
+
+<form id="form" method="post" action="http://192.168.200.45:3000/signup">
+    <input id="email" name="email" type="email" placeholder="Email" autofocus required oninput="oninputEmail(event)">
+    <p id="emailValidate"></p>
+    <input id="password" name="password" type="password" placeholder="Password" required oninput="oninputPwd (event)">
+    <p id="pwdValidate"></p>
+    <button id="btnStart" type="submit" disabled="disabled">START</button>
+</form>
+
+<footer>
+	<a id="terms" href="#">Terms of Use</a>
+	<a href="#">Privacy Policy</a>
+</footer>
+
+<script type="text/javascript">
+var emailCheckResult;
+var emailVal;
+
+
+
+function oninputEmail() {
+	emailVal = $('#email').val();
+	
+	if (!validateEmail()) {
+		$('#email').css('font', '#df4949');
+		$(emailValidate).text('이메일 형식으로 입력해주세요');
+	} else {
+		$('#email').css('font', '');
+		$(emailValidate).text('');
+	}
+	
+	validateSignup();
+}
+
+function oninputPwd() {
+	validateSignup();
+}
+
+function validateEmail() {
+	if (emailVal.length > 4 && emailVal.match("@") &&
+		emailVal.indexOf("@") + 1 < emailVal.indexOf(".") &&
+		emailVal.length > emailVal.indexOf(".") + 1) {
+			return true;
+	} else {
+		return false;
+	}
+}
+
+function validateSignup() {
+ 	if (validateEmail() && $('#password').val().length > 0) {
+		$('#btnStart').removeAttr('disabled');
+	} else {
+		$('#btnStart').attr('disabled', 'disabled');
+	}
+}
+
+</script>
+</body>
+</html>
