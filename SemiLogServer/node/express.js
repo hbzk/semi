@@ -32,7 +32,7 @@ app.post('/signup',function(req,res){
             console.error(err);
             throw err;
         }
-        res.redirect('http://localhost:9999/SemiLogServer/www/main_no.html');
+        res.redirect('http://localhost:9999/SemiLogServer/www/main_font.html');
     });
 
 });
