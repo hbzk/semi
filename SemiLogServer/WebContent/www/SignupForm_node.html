@@ -128,12 +128,12 @@
 
 <div id="LoginHeader">
 <div id="LoginHeader1"></div>
-SIGN UP
+Welcome to Sem1colon
 </div>
 <div id="LoginMiddle">
 Please input your Email address as your ID.<br>
 Your Email identifies you on Sem1colon
-<div id="welcome">Welcome to Sem1colon</div>
+<!-- <div id="welcome">Welcome to Sem1colon</div> -->
 <div id="EmailMessage">이메일 형식으로 작성해주세요</div>
 <div id="emailCheck" style="display:none; color:red;">가입된 이메일</div>
 <div id="passwordMessage">비밀번호를 입력해주세요</div>
@@ -144,7 +144,7 @@ Your Email identifies you on Sem1colon
 <form id="form" name="form" method="post" action="http://192.168.200.45:3000/signup">
     <input oninput="OnInput (event)" id="email" name="email" type="email" data-clear-btn="true" placeholder="email@" required>
     <input oninput="OnInput1 (event)" id="password" name="password" type="password" placeholder="password" required>
-    <button id="Enter" type="submit" disabled="disabled">Enter</button>
+    <button id="Enter" type="submit" disabled="disabled">Signup</button>
     <button id="LogIn">lOG IN</button>
 </form>
 
@@ -154,7 +154,10 @@ Your Email identifies you on Sem1colon
 
 
 <script>
+var emailCheckResult;
 
+	
+	
   $("#LogIn").click(function(){
     location.href="LoginForm.html";
   });
@@ -221,7 +224,15 @@ Your Email identifies you on Sem1colon
     }
     
     function OnInput1 (event) {
-      if(event.target.value.length > 0) {
+			
+    	// 이메일 한칸이상, 암호 한칸이상, 이메일 중복 아닐때
+			if ($('#email').val() != '' && $('#password').val() != '' && emailCheckResult != 'err') {
+    		$("#Enter").removeAttr('disabled'); // 버튼 활성화
+    	} else {
+    		$("#Enter").attr('disabled', 'disabled'); // 버튼 비활성화
+    	}
+      
+    	if(event.target.value.length > 0) {
         $("#password").css("backgroundColor", "white");
         $("#pw").css("display", "none");
         $("#Enter").css({ "display": ""});
@@ -253,25 +264,18 @@ Your Email identifies you on Sem1colon
     
     
     // 이메일 가입 여부 확인
-    $("#password").focusin(function(){
+    $("#email").focusout(function(){
     	$.post("http://192.168.200.45:3000/emailCheck", { email: $('#email').val()})
     		.done(function(data) {
     			if (data == 'err') {
+    				emailCheckResult = data;
     				$('#emailCheck').css('display', '');
     			} else {
+    				emailCheckResult = data;
     				$('#emailCheck').css('display', 'none');
     			}
-    			
-    			// 이메일 한칸이상, 암호 한칸이상, 이메일 중복 아닐때
-    			if ($('#email').val() != '' && $('#password').val() != '' && data != 'err') {
-		    		$("#Enter").removeAttr('disabled'); // 버튼 활성화
-		    	} else {
-		    		$("#Enter").attr('disabled', 'disabled'); // 버튼 비활성화
-		    	}
-    			
     	});
     })
-    
     
 </script>
 
