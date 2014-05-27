@@ -1,14 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var morgan  = require('morgan');
 
-var http = require('http');
 var mysql = require('mysql');
 var sha1 = require('./sha1.js'); // password sha1 암호화
 
 var app = express();
-
-app.use(bodyParser());
-
+app.use(morgan('short')); // Logging middleware
+app.use(bodyParser());	// body parsing middleware.
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 var dbconn = mysql.createConnection({
@@ -22,9 +21,8 @@ var dbconn = mysql.createConnection({
 // /signup으로 post 요청 오면 insert 수행
 app.post('/signup',function(req,res){
 	
-	console.log(req.body);
-	console.log(req.body.email);
-	console.log(req.body.password);
+	//console.log(req.body.email);
+	//console.log(req.body.password);
 	
 	req.body.password = sha1.SHA1(req.body.password); // 암호화 
 	
@@ -34,7 +32,7 @@ app.post('/signup',function(req,res){
             console.error(err);
             throw err;
         }
-        res.send(200,'가입 되었다');
+        res.redirect('http://localhost:9999/SemiLogServer/www/main_no.html');
     });
 
 });
@@ -45,7 +43,6 @@ app.post('/login', function(req,res){
 	
 	var email = req.body.email;
 	var password = sha1.SHA1(req.body.password);
-	console.log(password);
 	dbconn.query('select * from USER where EMAIL = ?', email, function(err, rows, fields){
 		if (err) {console.log(err);}
 		if (!rows.length) { res.send('가입 안된 이메일'); } 
@@ -61,7 +58,7 @@ app.post('/login', function(req,res){
 });
 
 
-// 이메일 중복 확인
+// (테스트용 / 삭제 예정) 이메일 중복 확인
 app.get('/emailCheck',function(req,res){
 	var email = req.query.email;
 	dbconn.query('select * from USER where EMAIL = ?', email, function(err, rows){
@@ -71,27 +68,25 @@ app.get('/emailCheck',function(req,res){
 	});
 });
 
+//이메일 중복 확인
 app.post('/emailCheck',function(req,res){
-	console.log('/emailCheck -> post');
-	console.log(req.body.email);
-	
 	if (req.body.email != '') {
 		res.setHeader('Access-Control-Allow-Origin', '*');
 		var email = req.body.email;
 		dbconn.query('select * from USER where EMAIL = ?', email, function(err, rows){
 			if (err) {console.log(err);}
 			if (rows.length) { 
-				res.send('err'); 
+				res.send('already'); 
 			} 
 			else { 
-				res.send('가입 안된 이메일'); 
+				res.send('empty'); 
 			}
 		});
 	}
 });
 
 
-// (테스트 할 동안) pathname 없으면 user list 출력
+// (테스트용 / 삭제 예정) pathname 없으면 user list 출력
 app.get('/', function(req,res){
 	
 	dbconn.query('select * from USER', function(err, rows){
@@ -99,7 +94,7 @@ app.get('/', function(req,res){
 			console.log('Query err');
 			console.log(err);
 		}
-		console.log(rows);
+		//console.log(rows);
 		res.json(rows);
 	});
 });
