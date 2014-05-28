@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/layout.css">
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/common_no1.js"></script>
 <link rel="stylesheet" href="css/layout.css">
 <title>Function Edit</title>
 
@@ -11,39 +12,59 @@
 
 <style type="text/css">
 #functionEdit { margin-top: 100px; position: relative; text-align: center;}
-#timer { font-size: 200%; margin: 100px 0px; }
-#timer span { border: 2px solid #333; padding: 3px; }
+#timer { font-size: 200%; margin: 50px 0px; }
 
 #functionEdit button { font-size: 130%; padding: 10px; }
 #confirm { background: #5cb85c; margin-right: 30px; }
 #cancel { background: #d9584f; }
+#time { 
+  position: absolute; margin-top: -25px; margin-left: -50px; padding: 5px;
+  border: 2px solid black; width: 81px; height: 30px; font-size: 200%;
+  
+  }
+.timerSet { border: 0px; margin-top: 30px;}
+button { margin-top: 65px; }
 </style>
-
-
-
 </head>
 <body>
 
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" /> -->
 
-<div id="backImg">
 
-<div id="blank"></div>
 <section id="layout">
 
 
 <section id="functionEdit">
 
 	<img id="function" src="css/img/radio.png">
-	<p id="timer">Default Timer <span>60:00</span></p>
+	
+	<p id="timer">Default Timer</p>
+	<input id="time" value="60:00" readonly></input>
+	
+	
+<form id="form" name=clock>
+<input class="timerSet" name=txtMins size=1>:<input class="timerSet" name=txtSecs size=1>
+</form>
 	
 	<button id="confirm">Confirm</button>
 	<button id="cancel">Cancel</button>
 
 </section>
 
-</section>	<!-- layout -->
-</div>	<!-- backImg -->
+
+</section>	
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>
