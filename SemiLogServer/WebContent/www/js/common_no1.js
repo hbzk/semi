@@ -7,12 +7,14 @@ function myFunction(e)	{
 }
 
 $(function(){
-
+	
+	
+	
+	timeclock();
+	
+	
+	
 /* -------------------------슬라이드--------------------------- */
-	
-
-	
-	
 	 var lbDown = false;
     var msDown = false;
     var box = $('body');
@@ -55,15 +57,7 @@ $(function(){
     	 }
      });
      
-     
-     
-     
-     
-     
-     
-     
-     
-     
+
      
      var downX1;
     $('#pane').mousedown(function(e) {
@@ -91,11 +85,6 @@ $(function(){
           }
         }
       });
-    
-    
-    
-    
-    
     
     
     
@@ -235,5 +224,51 @@ $(function(){
 	      $('#pieChart').pieChart(data,250,"pie");
 
 
-
+	  
+	      
 });
+
+
+
+
+
+
+
+
+		/* ------------------------------------------------------ */
+
+		
+var now = new Date();
+var minute = now.getMinutes().toString();
+var second = now.getSeconds().toString();
+minute = 60;
+second = 00;
+end=0;
+
+function timeclock(){
+  if(second == 00) {
+    minute -= 1 ;
+    second = 60 ;
+  } else{
+    second = second-1;
+  }
+  
+  
+  if ((minute < 0) && (end==0)) {
+    alert('카운트 다운 종료');
+    end=1;
+    display.innerHTML='<font color=blue>카운트다운은 종료되었슴.</font>';
+  }
+  document.clock.txtMins.value = minute;
+  if (second < 10) {
+    document.clock.txtSecs.value = 0 + second.toString();
+  } else {
+    document.clock.txtSecs.value = second;
+  }
+  if (minute < 10) {
+      document.clock.txtMins.value = 0 + minute.toString();
+    } else {
+      document.clock.txtMins.value = minute;
+    }
+  setTimeout("timeclock()", 1000);
+}
