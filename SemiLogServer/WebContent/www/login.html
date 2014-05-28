@@ -8,10 +8,12 @@
 <style type="text/css">
 * { margin: 0; padding: 0;}
 :focus { outline: 0;}
+body { font-family: sans-serif;}
 
 header { height: 100px; line-height: 100px; background: #de0052; 
 text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
-header>a { position: absolute; left: 10px; text-decoration: none; color: #fff;font-size: 80%;}
+header>a { position: absolute; left: 0; width: 70px;
+text-decoration: none; color: #fff; font-size: 80%;}
 
 input { border: 0px; display: block; width: 100%; height: 80px; padding-top: 20px;
 text-indent: 30px; font-size: 100%; }
@@ -25,6 +27,7 @@ color: #fff; font-size: 200%; font-weight: bolder;}
 #emailValidate, #emailCheck { position: absolute; top: 110px; 
 text-indent: 30px; color: #df4949;}
 
+footer { text-align: center; margin-top: 50px; }
 #terms { margin-right: 50px; }
 </style>
 </head>
@@ -32,7 +35,7 @@ text-indent: 30px; color: #df4949;}
 
 <header><a href="welcome.html">&lt;</a>LOG IN</header>
 
-<form id="form" method="post" action="http://192.168.200.6:3000/login">
+<form id="form" method="post" action="http://192.168.200.6:1111/login">
     <input id="email" name="email" type="email" placeholder="Email" autofocus required oninput="oninputEmail(event)">
     <p id="emailValidate"></p>
     <p id="emailCheck"></p>
@@ -40,6 +43,9 @@ text-indent: 30px; color: #df4949;}
     <button id="btnStart" type="submit" disabled="disabled">START</button>
 </form>
 
+<footer>
+	<a href="#">Forgot your password?</a>
+</footer>
 
 <script type="text/javascript">
 var emailVal;
@@ -47,10 +53,10 @@ var emailVal;
 function oninputEmail() {
 	emailVal = $('#email').val();
 	
-	if (!validateEmail()) {
-		$('#emailValidate').text('이메일 형식으로 입력해주세요');
-	} else {
+	if (validateEmail()) {
 		$('#emailValidate').text('');
+	} else {
+		$('#emailValidate').text('이메일 형식으로 입력해주세요');
 	}
 	
 	validateForm();
@@ -62,8 +68,8 @@ function oninputPwd() {
 
 function validateEmail() {
 	if (emailVal.length > 4 && emailVal.match("@") &&
-		emailVal.indexOf("@") + 1 < emailVal.indexOf(".") &&
-		emailVal.length > emailVal.indexOf(".") + 1) {
+			emailVal.indexOf("@") + 1 < emailVal.indexOf(".", emailVal.indexOf("@")) &&
+			emailVal.length - 1 > emailVal.indexOf(".", emailVal.indexOf("@"))) {
 		$('#emailValidate').text('가입되지 않은 이메일 입니다.');
 			return true;
 	} else {
@@ -74,7 +80,7 @@ function validateEmail() {
 
 //이메일 가입 여부 확인
 function validateForm() {
-	$.post("http://192.168.200.6:3000/emailCheck", { email: $('#email').val()})
+	$.post("http://192.168.200.6:1111/emailCheck", { email: $('#email').val()})
 		.done(function(data) {
 			if (data == 'already') {
 				$('#emailCheck').text('이미 가입된 이메일입니다.');
@@ -92,10 +98,6 @@ function validateForm() {
 	});
 }
 
-$('#password').focusout(function(){
-	console.log("focus out");
-	$("#password").val("");
-});
 
 </script>
 </body>
