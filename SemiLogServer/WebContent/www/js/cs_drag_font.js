@@ -32,9 +32,10 @@ $(window).load(function(){
 	dragdrop_drop();
 	
 	$('#middle').mouseup(function(){ // 미들 클릭시 초기화
-		dragdrop_timerCheck();
+		dragdrop_timerCheck();		
 	});
 	
+	onDeviceReady();
 	
 	
 });
@@ -73,8 +74,8 @@ function dragdrop_drop() {
 			
 			if(a == b) {
 				
-		    var cc = a.getElementsByTagName("input")[0].value;
-		    minute = cc;
+			minute = a.getElementsByTagName("input")[0].value;
+		   
 			timeclock();	
 			
 			}
@@ -119,7 +120,7 @@ function dragdrop_timerCheck() {
 		lastDragger.html(lastIcon);
 		lastDragger.attr('style','');
 
-		dragdrop_flip(); // 빙글빙글
+		dragdrop_flip(); // 빙글빙글	
 		
 		
 		/* 타이머 초기화 */
@@ -170,7 +171,7 @@ function timeclock(){
   
   
   if ((minute < 0) && (end==0)) {
-	  showConfirm();
+	 showConfirm();
     end=1;
     
   }
@@ -203,7 +204,8 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 
 function onDeviceReady() {
-
+	navigator.notification.beep(3);
+	navigator.notification.vibrate(2000);
 }
 
 
