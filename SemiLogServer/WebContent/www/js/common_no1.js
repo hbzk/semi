@@ -75,13 +75,15 @@ function onConfirm(buttonIndex) {
 // Show a custom confirmation dialog
 //
 function showConfirm() {
+	 navigator.notification.beep(1);
+	 navigator.notification.vibrate(2000);
     navigator.notification.confirm(
         'You are the winner!', // message
          onConfirm,            // callback to invoke with index of button pressed
         'Game Over',           // title
         ['Restart','Exit']         // buttonLabels
     );
-    navigator.notification.vibrate(2000);
+    
 }
 
 
