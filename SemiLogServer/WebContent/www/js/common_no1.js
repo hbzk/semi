@@ -1,7 +1,7 @@
 var now = new Date();
 var minute = now.getMinutes().toString();
 var second = now.getSeconds().toString();
-minute = 60;
+minute = 1;
 second = 00;
 end=0;
 
@@ -45,6 +45,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
     // Empty
+	navigator.notification.vibrate(2000);
 }
 
 
@@ -76,16 +77,6 @@ $(function(){
 	
 	
 	$("#confirm").click(function(){
-		
-		
-		
-		if($("#timeA").val() != null) {
-			minute	 = $("#timeA").val();
-		} else {
-			minute = 60;
-		}
-		
-		
 		timeclock();
 	});
 
