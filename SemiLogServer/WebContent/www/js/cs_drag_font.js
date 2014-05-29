@@ -1,9 +1,31 @@
+/* timer */
+
+var now = new Date();
+var minute = now.getMinutes().toString();
+var second = now.getSeconds().toString();
+minute = 00;
+second = 00;
+end=0;
+
+/* ------- */
+
+
+
+
+
+
+
 var startIcon;
 var lastIcon;
 var lastDragger;
 var lastDraggerClass;
 
 $(window).load(function(){
+	
+	
+	$(".icons").css("display", "none");
+	
+	
 	startIcon = $('#start').html();
 	
 	dragdrop_doing();
@@ -34,13 +56,33 @@ function dragdrop_drop() {
 		// 가끔 드래그 대상이 div로 인식되는 버그 대응 
 		if (event.toElement.tagName == "I") {
 			lastIcon = $(event.toElement);
-			lastDragger = lastIcon.parent('div');
+			lastDragger = lastIcon.parent('div');		
 		} else {
 			console.log('event.toElement == div');
 			lastDragger = $(event.toElement);
 			lastIcon = lastDragger.children('i');
 		}
 
+		
+		/* 타이머 */
+		
+		var a = lastIcon.context;
+		for(var i=1;i<7;i++) {
+			
+			var b = window.document.getElementsByTagName("i")[i];
+			
+			if(a == b) {
+				
+		    var cc = a.getElementsByTagName("input")[0].value;
+		    minute = cc;
+			timeclock();	
+			
+			}
+		}
+		
+		/* ------ */
+		
+		
 		//lastDragger.draggable({revertDuration:0});
 		lastDragger.attr('style', '');
 		lastDraggerClass = lastDragger[0].className;
@@ -56,12 +98,12 @@ function dragdrop_drop() {
 		$('#timer').addClass(lastDraggerClass)
 			.removeClass('drag ui-draggable ui-draggable-dragging');
 	
-		timeclock();
-	
+		
 	}});
 	
 	
 }
+
 
 // 타이머 구동 확인 + 저장 + 초기화
 function dragdrop_timerCheck() {
@@ -78,6 +120,14 @@ function dragdrop_timerCheck() {
 		lastDragger.attr('style','');
 
 		dragdrop_flip(); // 빙글빙글
+		
+		
+		/* 타이머 초기화 */
+		
+		
+		
+		/* ---- */
+		
 	}
 }
 
@@ -103,27 +153,17 @@ function dragdrop_flip() {
 
 
 
+
+
+
+
 /* --------------------------timer------------------------------ */
 
-
-
-
-
-
-
-
-
-var now = new Date();
-var minute = now.getMinutes().toString();
-var second = now.getSeconds().toString();
-minute = 1;
-second = 00;
-end=0;
 
 function timeclock(){
   if(second == 00) {
     minute -= 1 ;
-    second = 2 ;
+    second = 59 ;
   } else{
     second = second-1;
   }
@@ -132,6 +172,7 @@ function timeclock(){
   if ((minute < 0) && (end==0)) {
 	  showConfirm();
     end=1;
+    
   }
   
   
