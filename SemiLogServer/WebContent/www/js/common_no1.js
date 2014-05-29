@@ -1,7 +1,7 @@
 var now = new Date();
 var minute = now.getMinutes().toString();
 var second = now.getSeconds().toString();
-minute = 2;
+minute = 60;
 second = 00;
 end=0;
 
@@ -20,9 +20,6 @@ function timeclock(){
   }
   
   
-  
-  
-  
   if (second < 10) {
     document.clock.txtSecs.value = 0 + second.toString();
   } else {
@@ -35,6 +32,8 @@ function timeclock(){
     }
   setTimeout("timeclock()", 1000);
 }
+
+
 
 
 
@@ -76,7 +75,17 @@ $(function(){
 	
 	
 	
-	$("#confirm").click(function(){		
+	$("#confirm").click(function(){
+		
+		
+		
+		if($("#timeA").val() != null) {
+			minute	 = $("#timeA").val();
+		} else {
+			minute = 60;
+		}
+		
+		
 		timeclock();
 	});
 
