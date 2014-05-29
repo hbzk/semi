@@ -15,8 +15,7 @@ function timeclock(){
   
   
   if ((minute < 0) && (end==0)) {
-    BnV();
-    confirmNotification();
+    showConfirm();
     end=1;
   }
   
@@ -68,13 +67,21 @@ function BnV() {
     navigator.notification.vibrate(2000);
 }
 
-function confirmNotification() {
+//process the confirmation dialog result
+function onConfirm(buttonIndex) {
+    alert('You selected button ' + buttonIndex);
+}
+
+// Show a custom confirmation dialog
+//
+function showConfirm() {
     navigator.notification.confirm(
-          '지정된 시간이 다되었습니다. 계속? / 끝?'
-        , confirmCB
-        , 'TV'
-        , 'Yes,No'
-    );  
+        'You are the winner!', // message
+         onConfirm,            // callback to invoke with index of button pressed
+        'Game Over',           // title
+        ['Restart','Exit']         // buttonLabels
+    );
+    navigator.notification.vibrate(2000);
 }
 
 
