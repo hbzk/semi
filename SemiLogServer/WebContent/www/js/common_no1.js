@@ -15,7 +15,8 @@ function timeclock(){
   
   
   if ((minute < 0) && (end==0)) {
-    showConfirm();
+	  playBeep();
+	  showConfirm();
     end=1;
   }
   
@@ -45,7 +46,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
     // Empty
-	navigator.notification.vibrate(2000);
+	navigator.notification.beep(1);
 }
 
 
@@ -75,7 +76,6 @@ function onConfirm(buttonIndex) {
 // Show a custom confirmation dialog
 //
 function showConfirm() {
-	 navigator.notification.beep(1);
 	 navigator.notification.vibrate(2000);
     navigator.notification.confirm(
         'You are the winner!', // message
