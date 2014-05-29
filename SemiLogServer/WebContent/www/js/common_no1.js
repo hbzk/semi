@@ -15,7 +15,6 @@ function timeclock(){
   
   
   if ((minute < 0) && (end==0)) {
-	  alert("Dd");
     BnV();
     end=1;
   }
