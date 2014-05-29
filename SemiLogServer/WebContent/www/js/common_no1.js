@@ -15,7 +15,6 @@ function timeclock(){
   
   
   if ((minute < 0) && (end==0)) {
-	  playBeep();
 	  showConfirm();
     end=1;
   }
@@ -45,8 +44,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 
 function onDeviceReady() {
-    // Empty
-	navigator.notification.beep(1);
+ 
 }
 
 
