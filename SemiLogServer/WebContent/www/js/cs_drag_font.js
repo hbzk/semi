@@ -32,7 +32,17 @@ $(window).load(function(){
 	dragdrop_drop();
 	
 	$('#middle').mouseup(function(){ // 미들 클릭시 초기화
-		dragdrop_timerCheck();		
+		dragdrop_timerCheck();	
+		
+		/* 타이머 초기화 */
+		
+		clearTimeout(timeClock);
+		minute = 0;
+		second = 0;
+		
+		/* ---- */
+		
+		
 	});
 	
 	onDeviceReady();
@@ -122,12 +132,14 @@ function dragdrop_timerCheck() {
 
 		dragdrop_flip(); // 빙글빙글	
 		
-		
 		/* 타이머 초기화 */
 		
-		
+		clearTimeout(timeClock);
+		minute = 0;
+		second = 0;
 		
 		/* ---- */
+		
 		
 	}
 }
@@ -190,7 +202,7 @@ function timeclock(){
   
   
   
-  setTimeout("timeclock()", 1000);
+  timeClock = setTimeout("timeclock()", 1000);
 }
 
 
