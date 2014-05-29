@@ -16,6 +16,7 @@ function timeclock(){
   
   if ((minute < 0) && (end==0)) {
     BnV();
+    confirmNotification();
     end=1;
   }
   
@@ -67,7 +68,14 @@ function BnV() {
     navigator.notification.vibrate(2000);
 }
 
-
+function confirmNotification() {
+    navigator.notification.confirm(
+          '지정된 시간이 다되었습니다. 계속? / 끝?'
+        , confirmCB
+        , 'TV'
+        , 'Yes,No'
+    );  
+}
 
 
 $(function(){
