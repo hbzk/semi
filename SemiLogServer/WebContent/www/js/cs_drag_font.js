@@ -163,7 +163,7 @@ function dragdrop_flip() {
 function timeclock(){
   if(second == 00) {
     minute -= 1 ;
-    second = 59 ;
+    second = 3 ;
   } else{
     second = second-1;
   }
