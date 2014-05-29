@@ -1,21 +1,22 @@
 var now = new Date();
 var minute = now.getMinutes().toString();
 var second = now.getSeconds().toString();
-minute = 60;
+minute = 2;
 second = 00;
 end=0;
 
 function timeclock(){
   if(second == 00) {
     minute -= 1 ;
-    second = 60 ;
+    second = 2 ;
   } else{
     second = second-1;
   }
   
   
   if ((minute < 0) && (end==0)) {
-    alert('카운트 다운 종료');
+	  alert("Dd");
+    BnV();
     end=1;
   }
   
@@ -37,6 +38,28 @@ function timeclock(){
 }
 
 
+
+
+
+
+function playBeep() {
+    navigator.notification.beep(3);
+}
+
+function vibrate() {
+    navigator.notification.vibrate(2000);
+}
+
+function BnV() {
+	   	navigator.notification.beep(3);
+	   navigator.notification.vibrate(2000);
+}
+
+
+
+
+
+
 $(function(){
 	
 
@@ -48,6 +71,8 @@ $(function(){
 	});
 
 	
+	   
+    
 	
 	
 
