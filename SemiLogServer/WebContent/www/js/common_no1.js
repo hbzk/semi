@@ -41,20 +41,31 @@ function timeclock(){
 
 
 
+document.addEventListener("deviceready", onDeviceReady, false);
+
+
+function onDeviceReady() {
+    // Empty
+}
+
+
+
+// Beep three times
+//
 function playBeep() {
     navigator.notification.beep(3);
 }
 
+// Vibrate for 2 seconds
+//
 function vibrate() {
     navigator.notification.vibrate(2000);
 }
 
 function BnV() {
-	   	navigator.notification.beep(3);
-	   navigator.notification.vibrate(2000);
+	 navigator.notification.beep(3);
+    navigator.notification.vibrate(2000);
 }
-
-
 
 
 
