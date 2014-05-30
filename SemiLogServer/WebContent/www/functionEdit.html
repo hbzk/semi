@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/common_no1.js"></script>
 <script type="text/javascript" src="spinningwheel.js"></script>
   
   
@@ -28,15 +27,21 @@ body { text-align:center; font-family:helvetica; }
   
   }
 .timerCount { border: 0px; margin-top: 30px;}
-button { margin-top: 65px; }
+button { margin-top: 85px; }
 button { font-size:16px; }
-#result { margin:10px; background:#aaa; -webkit-border-radius:8px; padding:8px; font-size:18px; }
+#result {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 128px;
+  font-size:18px; 
+  }
 </style>
 
 
 <script type="text/javascript">
 
 
+$("#sw-wrapper").css("display", "");
 
 
 function openWeight() {
@@ -47,7 +52,7 @@ function openWeight() {
   
   var hours = { };
   
-  for(var i=00;i<=24;i++) {
+  for(var i=0;i<=24;i++) {
     hours[i] = i;
   }
   
@@ -75,7 +80,7 @@ function openWeight() {
 
 function done() {
   var results = SpinningWheel.getSelectedValues();
-  document.getElementById('result').innerHTML = 'minute: ' + results.values[0] + ", second: " + results.values[1];
+  document.getElementById('result').innerHTML = results.values[0] + " : " + results.values[1];
 }
 
 function cancel() {
@@ -102,15 +107,11 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 	<img id="function" src="css/img/radio.png">
 	
 	<p id="timer">Default Timer</p>
-	<input id="time" value="60:00" readonly></input>
+	<input id="time" value="60:00" onclick="openWeight()" readonly></input>
 	
-	
-<form id="form" name=clock>
-<input class="timerCount Min" name="txtMins" size="1" readonly>
-<input class="timerCount Sec" name="txtSecs" size="1" readonly>
-</form>
 
 
+ <p id="result">results</p>
 	<button id="confirm">Confirm</button>
 	<button id="cancel">Cancel</button>
 
@@ -125,11 +126,10 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 
 
 
-<button onclick="openWeight()">weight</button>
 
 
 
-<p id="result">results</p>
+
 
 
 
