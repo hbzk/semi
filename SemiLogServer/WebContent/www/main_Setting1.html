@@ -30,24 +30,61 @@ text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
 	color: white;
 }
 
+/* 두번째페이지(setting)header 적용 */
+#main_0 .ui-header {
+	background: #de0052;
+	border: none;
+	text-shadow: none;
+	color: white;
+}
+
+/* 선택된 아이콘 div */
+.selected_icon{
+	clear: both;
+	height: 180px;
+ 	min-width: 300px;
+	border: 1px solid white;
+}
+
+/* 선택된아이콘 한줄 */
+.icon_row{
+	min-width: 300px;
+	height: 70px;
+	display: table;
+	margin: 0 auto;
+	
+}
+
+/* icon 하나 박싱 */
+.icon{
+	width: 100px;
+	height: 70px;
+	float: left;
+}
+
+/* 아이콘들 */
 i{
 	float: left;
 	margin: 5px;
 }
-.selected_act{
-		clear: both;
-	margin-top: 20px;
+
+/* icon 이름 */
+.icon span{
+	line-height: 110px;
 }
-.selected_act p{
-	margin: 10px;
-	font-size: 1.0em;
+
+/*두번째 페이지 ---- */
+#setting{
+	background: #999;
+	text-shadow: none;
 }
-.next{
- 	clear: both; 
- }
+
+
 </style>
 </head>
 <body>
+
+<!-- 첫번째페이지 (main or home) -->
 
 		<div data-role="page" id="main_0">
 			<div data-role="header" ><h2>MAIN PAGE</h2></div>
@@ -59,23 +96,177 @@ i{
 		
 		</div>
 		
+		
+		
+		
+		
+<!-- 두번째페이지 (setting) -->
+		
 		<div data-role="page" id="setting">
 			<div data-role="header"><h2>ACTIVITY SETTING</h2></div>
 			<div data-role="content">
 				<a href="#main_0" id="link1" data-transition="slidedown"> Go to window1</a>
-				<p>Selected Activity2222</p>
-				<i class="fa fa-cutlery"></i>
-				<i class="fa fa-desktop"></i>
-				
-				<i class="fa fa-mobile"></i>
-				<i class="fa fa-coffee"></i>
-				
+				<div class="selected_icon">
+					<p>Selected Activity</p>
+					<div class="icon_row">
+						<div class="icon"><i data-name="tv" class="li li_tv"></i></div>
+						<div class="icon"><i class="fa fa-cutlery"></i></div>
+						<div class="icon"><i class="fa fa-desktop"></i></div>
+					</div>
+					<div class="icon_row">
+						<div class="icon"><i class="fa fa-moon-o"></i></div>
+						<div class="icon"><i class="fa fa-mobile"></i></div>
+						<div class="icon"><i class="fa fa-coffee"></i></div>
+					</div>
+				</div>
+				<div class="all_icon">
+						<!--  *****일상 -->
+						<div class="box routins">
+							<div class="box title"><h1>ROUTIN </h1></div>
+						<!-- TV -->
+						<div class="activityIcon"><span><i class="li li_tv "></i></div>
+						
+						<!-- 식사 -->
+						<div class="activityIcon"><i class="fa fa-cutlery"></i></div>
+						
+						<!-- 컴퓨터 -->
+						<div class="activityIcon"><i class="fa fa-desktop"></i></div>
+						
+							<!-- 잠 -->
+						<div class="activityIcon"><i class="fa fa-moon-o"></i></div>
+						
+						<!-- 핸드폰 -->
+						<div class="activityIcon"><i class="fa fa-mobile"></i></div>
+						
+						<!-- 커피 마시기. 휴식 -->
+						<div class="activityIcon"><i class="fa  fa-coffee"></i></div>
+						
+						</div>
+						
+						
+						<!--  *****휴식 -->
+						<div class="box other">
+							<div class="box title"><h1>Other things</h1></div>
+						<!-- 음악감상 -->
+						<div class="activityIcon"><i class="fa fa-headphones"></i></div>
+						
+							<!-- 음악감상 -->
+						<div class="activityIcon"><i class="fa fa-music"></i></div>
+						
+						
+						<!-- 운전 -->
+						<div class="activityIcon"><i class="fa fa-automobile"></i></div>
+						
+						<!-- 전화통화 -->
+						<div class="activityIcon"><i class="fa fa-phone"></i></div>
+						
+						<!-- 달러,쇼핑 -->
+						<div class="activityIcon"><i class="li li_banknote"></i></div>
+					
+						<!-- 대화 chat -->
+						<div class="activityIcon"><i class="fa fa-comment"></i></div>
+					
+						<!-- 운동, 농구 -->
+						<div class="activityIcon"><i class="fa  fa-dribbble"></i></div>
+						
+						<!-- 여행 -->
+						<div class="activityIcon"><i class="fa   fa-plane"></i></div>
+						
+						<!-- 게임 -->
+						<div class="activityIcon"><i class="fa fa-gamepad"></i></div>
+						
+						<!--퍼즐-->
+						<div class="activityIcon"><i class="fa fa-puzzle-piece"></i></div>
+						
+						<!-- 술, 맥주  -->
+						<div class="activityIcon"><i class="fa fa-beer"></i></div>
+						
+						<!-- 와인  -->
+						<div class="activityIcon"><i class="fa fa-glass"></i></div>
+						
+							<!-- 영화보기 video -->
+						<div class="activityIcon"><i class="li li_video"></i></div>
+						
+						<!-- 병원 -->
+						<div class="activityIcon"><i class="fa fa-hospital-o"></i></div>
+						
+						</div>
+						
+					<!-- *****집안일 -->	
+					<div class="box chores">
+							<div class="box title"><h1>Chores</h1></div>
+						<!-- 세탁 -->
+						<div class="activityIcon"><i class="li  li_t-shirt"></i></div>
+						
+						<!-- 집, 집안일  -->
+						<div class="activityIcon"><i class="fa fa-home"></i></div>
+						
+					<!-- 집안일 쓰레기 -->
+						<div class="activityIcon"><i class="li li_trash"></i></div>
+						
+						<!-- 가위. 공작  -->
+						<div class="activityIcon"><i class="fa fa-scissors"></i></div>
+						
+					<!--*********** 공부 -->
+						<div class="box study">
+							<div class="box title"><h1>Study</h1></div>
+						<!-- 과학, 실험 flask -->
+						<div class="activityIcon"><i class="fa  fa-flask"></i></div>
+						
+						<!-- 과학, 생물-->
+						<div class="activityIcon"><i class="fa  fa-leaf"></i></div>
+						
+						<!-- 공부 -->
+						<div class="activityIcon"><i class="li li_pen"></i></div>
+						
+						<!-- 전구, 물리(전기) -->
+						<div class="activityIcon"><i class="li  li_bulb"></i></div>
+						
+						<!-- 책 -->
+						<div class="activityIcon"><i class="fa  fa-book"></i></div>
+						
+					<!-- 책, 북마크  -->
+						<div class="activityIcon"><i class="fa fa-bookmark"></i></div>
+						
+						</div>
+						
+					<!-- ****엄마팩------------ -->
+						<div class="box mommy">
+							<div class="box title"><h1>for Mommy</h1></div>
+						
+						<!-- 유아 -->
+						<div class="activityIcon"><i class="fa  fa-child"></i></div>
+					
+						<!-- 유아 진료 -->
+						<div class="activityIcon"><i class="fa fa-stethoscope"></i></div>
+						
+							
+							<!-- 스푼. 이유식 -->
+						<div class="activityIcon"><i class="fa fa-spoon"></i></div>
+						</div>
+						
+						<div class="box programmer">
+							<div class="box title"><h1>Programmer</h1></div>	
+						<!-- 개발자. 코딩 -->
+						<div class="activityIcon"><i class="fa fa-code"></i></div>
+						
+						<!-- 개발자. 코딩 -->
+						<div class="activityIcon"><i class="fa fa-keyboard-o"></i></div>
+					</div>
+			
 			</div>
-		
 		</div>
+		</div>
+		</div>
+<script>
+	$(window).load(function() {
+	    console.log("----window load occurred!----");
+		var icon = document.getElementsByTagName("i")[0];
+		console.log("icon >>>>>>>>>>>>>"+ icon);
+		console.log("icon >>>>>>>>>>>>>"+ icon[0]);
+		
+	});
 
-
-
-
+</script>
 </body>
 </html>
