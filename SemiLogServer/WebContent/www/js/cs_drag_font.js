@@ -137,7 +137,7 @@ function dragdrop_timerCheck() {
 		/* 타이머 초기화 */
 		
 		clearTimeout(timeClock);
-		console.log("dd");
+		
 		second = 0;
 		
 	
