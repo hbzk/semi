@@ -1,7 +1,9 @@
 #sw-wrapper {
-  position:absolute; z-index:1000;
+	margin-top: -200px;
+	margin-left: 90px;
+  position:absolute;
   left:0;
-  width:100%;
+  width:200px;
   font-family:helvetica, sans-serif;
   background:rgba(0,0,0,0.7);
   text-align:left;
