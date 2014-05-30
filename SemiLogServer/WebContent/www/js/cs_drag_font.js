@@ -186,6 +186,9 @@ function timeclock(){
   if ((minute < 0) && (end==0)) {
 	 showConfirm();
     end=1;
+    $(".timerCount").val("00");
+    minute = 00;
+    second = 00;
     clearTimeout(timeClock);
   }
   
