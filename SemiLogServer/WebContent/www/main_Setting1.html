@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script> -->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"> 
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/lineconStyle.css">
+<link rel="stylesheet" href="css/settingFont.css">
+<link rel="stylesheet" href="css/common_font.css">
+<!-- <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css"> -->
+<title>Setting</title>
+<style>
+
+body { font-family: sans-serif;}
+
+.header { height: 70px; line-height: 70px; background: #7ABF49; 
+text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
+
+/* header 적용 */
+.ui-page-theme-a .ui-bar-inherit{
+	background: #7ABF49;
+	border: none;
+	text-shadow: none;
+	color: white;
+}
+
+i{
+	float: left;
+	margin: 5px;
+}
+.selected_act{
+		clear: both;
+	margin-top: 20px;
+}
+.selected_act p{
+	margin: 10px;
+	font-size: 1.0em;
+}
+.next{
+ 	clear: both; 
+ }
+</style>
+</head>
+<body>
+
+		<div data-role="page" id="main_0">
+			<div data-role="header" ><h2>MAIN PAGE</h2></div>
+			
+			<div data-role="content">
+				<!-- <p>first page</p> -->
+				<a href="#setting" id="link1" data-transition="slideup"> Go to window2</a>
+			</div>
+		
+		</div>
+		
+		<div data-role="page" id="setting">
+			<div data-role="header"><h2>ACTIVITY SETTING</h2></div>
+			<div data-role="content">
+				<a href="#main_0" id="link1" data-transition="slidedown"> Go to window1</a>
+				<p>Selected Activity2222</p>
+				<i class="fa fa-cutlery"></i>
+				<i class="fa fa-desktop"></i>
+				
+				<i class="fa fa-mobile"></i>
+				<i class="fa fa-coffee"></i>
+				
+			</div>
+		
+		</div>
+
+
+
+
+</body>
+</html>
