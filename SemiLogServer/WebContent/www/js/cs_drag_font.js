@@ -37,8 +37,8 @@ $(window).load(function(){
 		/* 타이머 초기화 */
 		
 		clearTimeout(timeClock);
-		minute = 0;
-		second = 0;
+		minute = 00;
+		second = 00;
 		
 		/* ---- */
 		
@@ -135,8 +135,9 @@ function dragdrop_timerCheck() {
 		/* 타이머 초기화 */
 		
 		clearTimeout(timeClock);
-		minute = 0;
-		second = 0;
+		$(".timerCount").val("00");
+		minute = 00;
+		second = 00;
 		
 		/* ---- */
 		
@@ -185,7 +186,7 @@ function timeclock(){
   if ((minute < 0) && (end==0)) {
 	 showConfirm();
     end=1;
-    
+    clearTimeout(timeClock);
   }
   
   
@@ -216,8 +217,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 
 function onDeviceReady() {
-	navigator.notification.beep(3);
-	navigator.notification.vibrate(2000);
+	
 }
 
 
