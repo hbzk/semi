@@ -7,6 +7,9 @@ minute = 00;
 second = 00;
 end=0;
 
+var a;
+var b;
+
 /* ------- */
 
 
@@ -37,8 +40,7 @@ $(window).load(function(){
 		/* 타이머 초기화 */
 		
 		clearTimeout(timeClock);
-		minute = 00;
-		second = 00;
+		
 		
 		/* ---- */
 		
@@ -77,15 +79,15 @@ function dragdrop_drop() {
 		
 		/* 타이머 */
 		
-		var a = lastIcon.context;
+		 a = lastIcon.context;
 		for(var i=1;i<7;i++) {
 			
-			var b = window.document.getElementsByTagName("i")[i];
+			 b = window.document.getElementsByTagName("i")[i];
 			
 			if(a == b) {
 				
 			minute = a.getElementsByTagName("input")[0].value;
-		   
+		   end = 0;
 			timeclock();	
 			
 			}
@@ -135,10 +137,10 @@ function dragdrop_timerCheck() {
 		/* 타이머 초기화 */
 		
 		clearTimeout(timeClock);
-		$(".timerCount").val("00");
-		minute = 00;
-		second = 00;
+		console.log("dd");
+		second = 0;
 		
+	
 		/* ---- */
 		
 		
@@ -185,11 +187,7 @@ function timeclock(){
   
   if ((minute < 0) && (end==0)) {
 	 showConfirm();
-    end=1;
-    $(".timerCount").val("00");
-    minute = 00;
-    second = 00;
-    clearTimeout(timeClock);
+	 end = 1;
   }
   
   
@@ -205,10 +203,10 @@ function timeclock(){
     }
   
   
-  
   timeClock = setTimeout("timeclock()", 1000);
+  
+  
 }
-
 
 
 
@@ -259,8 +257,4 @@ function showConfirm() {
     );
     
 }
-
-
-
-
 
