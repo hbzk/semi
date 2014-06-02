@@ -109,7 +109,7 @@ line-height: 64px; text-align: center; font-weight: bolder; font-size: 145%; }
 /* Result List = rt* ======================= */
 
 #resultList { height: 319px; width: 340px; overflow: auto; margin-top: 20px;}    
-#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 30px; margin-top: 40px; } 
+#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 5px; margin-top: 0px; } 
 #rtTable { height: 70px;}
 #rtImage{ /* position: absolute; */ text-align: center; margin-top: -6px; margin-left: -280px; padding-top: 10px; }
 #rtName{ text-align: center; height: 20px; margin-left: 52px; margin-top: -10px; width: 105px; display: block; }
