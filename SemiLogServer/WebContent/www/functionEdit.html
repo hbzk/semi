@@ -21,91 +21,24 @@ body { text-align:center; font-family:helvetica;}
 #timer { font-size: 200%; margin: 50px 0px; }
 
 #functionEdit button { font-size: 130%; padding: 10px; }
-#confirm { background: #5cb85c;}
-#cancel { background: #d9584f;}
+#confirm { background: #5cb85c; margin-top: 80px; }
+#cancel { background: #d9584f; }
 #time { 
   position: absolute; margin-top: -25px; margin-left: 110px; padding: 5px;
   border: 2px solid black; width: 99px; height: 35px; font-size: 200%;
-  
   }
-.timerCount { border: 0px; margin-top: 30px;}
 
-#result {
-  position: absolute;
-  margin-top: 10px;
-  margin-left: 128px;
-  font-size:18px; 
-  }
-#button {
-  position: absolute;
-  margin-top: 24px; 
-  font-size:16px; z-index: 1;
-  width: 318px;
-  height: 202px;
-  background-color: white;
-}
+
 
 </style>
 
 
-<script type="text/javascript">
 
-
-
-function openWeight() {
-  
-	$("#time").css("display", "none");
-
-  $("#confirm").click(function(){
-	  $("#time").css("display", "");
-  });
-  
-  var hours = { };
-  
-  for(var i=0;i<=24;i++) {
-    hours[i] = i;
-  }
-  
-  
-  var minute = { };
-  
-  for(var j=0;j<=60;j++) {
-    minute[j] = j;
-  }
-  
-  
-  SpinningWheel.addSlot(hours, 'right');
-  SpinningWheel.addSlot(minute, 'left');
-  
-  
-  SpinningWheel.setCancelAction(cancel);
-  SpinningWheel.setDoneAction(done);
-  
-  SpinningWheel.open();
-}
-
-
-
-
-
-function done() {
-  var results = SpinningWheel.getSelectedValues();
-  document.getElementById('time').innerHTML = results.values[0] + " : " + results.values[1];
-}
-
-function cancel() {
-  document.getElementById('time').innerHTML = 'cancelled!';
-}
-
-
-window.addEventListener('load', function(){ setTimeout(function(){ window.scrollTo(0,0); }, 100); }, true);
-
-</script>
 
 
 
 </head>
-<body onload="openWeight()">
+<body>
 
 
 
@@ -121,12 +54,12 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 	
 
 
-<div id="button">
+
 	<button id="confirm">Confirm</button>
 	<button id="cancel">Cancel</button>
-</div>
 
-  <div id="cover"></div>
+
+
 
 
 </section>
