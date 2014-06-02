@@ -7,9 +7,9 @@ minute = 00;
 second = 00;
 end=0;
 
-var a;
-var b;
-
+var dragIcon;
+var icons;
+var defaultTime;
 /* ------- */
 
 
@@ -79,14 +79,17 @@ function dragdrop_drop() {
 		
 		/* 타이머 */
 		
-		 a = lastIcon.context;
+		dragIcon = lastIcon.context;
+		 
 		for(var i=1;i<7;i++) {
 			
-			 b = window.document.getElementsByTagName("i")[i];
+			icons = window.document.getElementsByTagName("i")[i];
 			
-			if(a == b) {
+			if(dragIcon == icons) {
 				
-			minute = a.getElementsByTagName("input")[0].value;
+			defaultTime = dragIcon.getElementsByTagName("input")[0].value;
+			minute = defaultTime;
+			
 		   end = 0;
 			timeclock();	
 			
@@ -242,18 +245,26 @@ function BnV() {
 
 //process the confirmation dialog result
 function onConfirm(buttonIndex) {
-    alert('You selected button ' + buttonIndex);
+    if(buttonIndex == 1) {
+    	second = 0;
+    	minute = defaultTime;
+    	end = 0;    	
+    	clearTimeout(timeClock);
+      timeclock();
+    } else {
+    	window.location.reload();
+    }
 }
 
 // Show a custom confirmation dialog
 //
 function showConfirm() {
-	 navigator.notification.vibrate(2000);
+	 navigator.notification.vibrate(1000);
     navigator.notification.confirm(
-        'You are the winner!', // message
+        '알림을 종료할까요?', // message
          onConfirm,            // callback to invoke with index of button pressed
-        'Game Over',           // title
-        ['Restart','Exit']         // buttonLabels
+          '알림',           // title
+        ['계속','중지']         // buttonLabels
     );
     
 }
