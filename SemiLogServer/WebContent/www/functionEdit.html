@@ -14,27 +14,37 @@
 
 
 <style type="text/css">
-body { text-align:center; font-family:helvetica; }
-#functionEdit { margin-top: 100px; position: relative; text-align: center;}
+body { text-align:center; font-family:helvetica;}
+#functionEdit { 
+  margin-top: 100px; position: relative; text-align: center; background-color: white; z-index: 1;
+}
 #timer { font-size: 200%; margin: 50px 0px; }
 
 #functionEdit button { font-size: 130%; padding: 10px; }
-#confirm { background: #5cb85c; margin-right: 30px; }
-#cancel { background: #d9584f; }
+#confirm { background: #5cb85c;}
+#cancel { background: #d9584f;}
 #time { 
-  position: absolute; margin-top: -25px; margin-left: -50px; padding: 5px;
-  border: 2px solid black; width: 81px; height: 30px; font-size: 200%;
+  position: absolute; margin-top: -25px; margin-left: 110px; padding: 5px;
+  border: 2px solid black; width: 99px; height: 35px; font-size: 200%;
   
   }
 .timerCount { border: 0px; margin-top: 30px;}
-button { margin-top: 85px; }
-button { font-size:16px; }
+
 #result {
   position: absolute;
   margin-top: 10px;
   margin-left: 128px;
   font-size:18px; 
   }
+#button {
+  position: absolute;
+  margin-top: 24px; 
+  font-size:16px; z-index: 1;
+  width: 318px;
+  height: 202px;
+  background-color: white;
+}
+
 </style>
 
 
@@ -42,12 +52,13 @@ button { font-size:16px; }
 
 
 
-
 function openWeight() {
   
-  
+	$("#time").css("display", "none");
 
-  
+  $("#confirm").click(function(){
+	  $("#time").css("display", "");
+  });
   
   var hours = { };
   
@@ -79,11 +90,11 @@ function openWeight() {
 
 function done() {
   var results = SpinningWheel.getSelectedValues();
-  document.getElementById('result').innerHTML = results.values[0] + " : " + results.values[1];
+  document.getElementById('time').innerHTML = results.values[0] + " : " + results.values[1];
 }
 
 function cancel() {
-  document.getElementById('result').innerHTML = 'cancelled!';
+  document.getElementById('time').innerHTML = 'cancelled!';
 }
 
 
@@ -106,19 +117,22 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 	<img id="function" src="css/img/radio.png">
 	
 	<p id="timer">Default Timer</p>
-	<input id="time" value="60:00" onclick="openWeight()" readonly></input>
+	<div id="time" onclick="openWeight()"></div>
 	
 
 
- <p id="result">results</p>
+<div id="button">
 	<button id="confirm">Confirm</button>
 	<button id="cancel">Cancel</button>
+</div>
+
+  <div id="cover"></div>
+
 
 </section>
 
 
 </section>	
-
 
 
 

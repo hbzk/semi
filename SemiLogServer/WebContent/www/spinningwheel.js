@@ -95,7 +95,7 @@
 		handleEvent: function (e) {
 			if (e.type == START_EV) {
 				this.lockScreen(e);
-				if (e.currentTarget.id == 'sw-cancel' || e.currentTarget.id == 'sw-done') {
+				if (e.currentTarget.id == 'cancel' || e.currentTarget.id == 'confirm') {
 					this.tapDown(e);
 				} else if (e.currentTarget.id == 'sw-frame') {
 					this.scrollStart(e);
@@ -103,13 +103,13 @@
 			} else if (e.type == MOVE_EV) {
 				this.lockScreen(e);
 
-				if (e.currentTarget.id == 'sw-cancel' || e.currentTarget.id == 'sw-done') {
+				if (e.currentTarget.id == 'cancel' || e.currentTarget.id == 'confirm') {
 					this.tapCancel(e);
 				} else if(this.scrollHasStarted/* || e.currentTarget.id == 'sw-frame'*/) {
 					this.scrollMove(e);
 				}
 			} else if (e.type == END_EV) {
-				if (e.currentTarget.id == 'sw-cancel' || e.currentTarget.id == 'sw-done') {
+				if (e.currentTarget.id == 'cancel' || e.currentTarget.id == 'confirm') {
 					this.tapUp(e);
 				} else if (this.scrollHasStarted/* || e.currentTarget.id == 'sw-frame'*/) {
 					this.scrollEnd(e);
@@ -184,11 +184,11 @@
 			div.id = 'sw-wrapper';
 			div.style.top = (this.container ? this.container.clientHeight : (window.innerHeight + window.pageYOffset)) + 'px';		// Place the SW down the actual viewing screen
 			div.style[transitionProperty] = hasTransform ? cssVendor + 'transform' : 'top left';
-			div.style[transitionDuration] = '400ms';
+			div.style[transitionDuration] = '1ms';
 			if(!hasTransform) {
 				div.style.position = 'absolute';
 			}
-			div.innerHTML = '<div id="sw-header"><div id="sw-cancel">Cancel</' + 'div><div id="sw-done">Done</' + 'div></' + 'div><div id="sw-slots-wrapper"><div id="sw-slots"></' + 'div></' + 'div><div id="sw-frame"></' + 'div>';
+			div.innerHTML = '<div id="sw-header"><div id="cancel">Cancel</' + 'div><div id="confirm">Done</' + 'div></' + 'div><div id="sw-slots-wrapper"><div id="sw-slots"></' + 'div></' + 'div><div id="sw-frame"></' + 'div>';
 
 			(this.container || document.body).appendChild(div);
 
@@ -246,8 +246,8 @@
 			window.addEventListener('scroll', this, true);				// Reposition SW on page scroll
 
 			// Cancel/Done buttons events
-			document.getElementById('sw-cancel').addEventListener(START_EV, this, false);
-			document.getElementById('sw-done').addEventListener(START_EV, this, false);
+			document.getElementById('cancel').addEventListener(START_EV, this, false);
+			document.getElementById('confirm').addEventListener(START_EV, this, false);
 
 			// Add scrolling to the slots
 			this.swFrame.addEventListener(START_EV, this, false);
@@ -278,8 +278,8 @@
 
 			this.swFrame.removeEventListener(START_EV, this, false);
 
-			document.getElementById('sw-cancel').removeEventListener(START_EV, this, false);
-			document.getElementById('sw-done').removeEventListener(START_EV, this, false);
+			document.getElementById('cancel').removeEventListener(START_EV, this, false);
+			document.getElementById('confirm').removeEventListener(START_EV, this, false);
 
 			document.removeEventListener(START_EV, this, false);
 			document.removeEventListener(MOVE_EV, this, false);
@@ -582,7 +582,7 @@
 		tapUp: function (e) {
 			this.tapCancel(e);
 
-			if (e.currentTarget.id == 'sw-cancel') {
+			if (e.currentTarget.id == 'cancel') {
 				this.cancelAction();
 			} else {
 				this.doneAction();
