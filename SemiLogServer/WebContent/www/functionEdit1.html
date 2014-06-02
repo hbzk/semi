@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+
+
+<link rel="stylesheet" href="css/layout.css">
+<title>Function Edit</title>
+
+
+
+<style type="text/css">
+body { text-align:center; font-family:helvetica; }
+#functionEdit { margin-top: 100px; position: relative; text-align: center;}
+#timer { font-size: 200%; margin: 50px 0px; }
+
+#functionEdit button { font-size: 130%; padding: 10px; }
+#confirm { background: #5cb85c; margin-right: 30px; }
+#cancel { background: #d9584f; }
+#time { 
+  position: absolute; margin-top: -25px; margin-left: -50px; padding: 5px;
+  border: 2px solid black; width: 81px; height: 30px; font-size: 200%;
+  }
+  
+button { margin-top: 85px; }
+
+</style>
+
+
+
+
+
+</head>
+<body onload="openWeight()">
+
+
+
+<section id="layout">
+
+
+<section id="functionEdit">
+
+	<img id="function" src="css/img/radio.png">
+	
+	<p id="timer">Default Timer</p>
+	<input id="time" value="60:00" onclick="openWeight()" readonly></input>
+	
+
+
+	<button id="confirm">Confirm</button>
+	<button id="cancel">Cancel</button>
+
+</section>
+
+
+</section>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
