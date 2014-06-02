@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<title>Web SQL</title>
+<style>
+</style>
+</head>
+
+<body>
+
+
+<br><br><br>
+
+<input type="text">
+<button id="start">start</button>
+<button id="end">end</button>
+
+<br><br>
+<button id="clear">clear</button>
+
+
+
+
+
+
+<div id="result">
+	<div class="start">
+		<h3>start</h3>
+		<p></p>
+	</div>
+	<div class="end">
+		<h3>end</h3>
+		<p></p>
+	</div>
+	<div class="while">
+		<h3>while</h3>
+		<p></p>
+	</div>
+</div>
+
+
+<!-- <br>
+<button id="sql">sql</button>
+ -->
+<!-- <br>
+<button id="dbReset">dbReset</button> -->
+
+
+<script type="text/javascript">
+var text, startTime, endTime, resultWhile;
+
+
+$('#clear').click(function(){
+	$('input').val('');
+	
+	$('.start p').text('');
+	$('.end p').text('');
+	$('.while p').text('');
+})
+
+
+$('#start').click(function(){
+	text = $('input').val();
+	
+	startTime = new Date().getTime();
+	
+	var startText = (new Date(startTime).toLocaleTimeString());
+	$('.start p').text(startText);
+})
+
+$('#end').click(function(){
+	endTime = new Date().getTime();
+	
+	var endText = (new Date(endTime).toLocaleTimeString());
+	$('.end p').text(endText);
+	
+	resultWhile = Math.floor((endTime - startTime) / 1000);
+	$('.while p').text(resultWhile + '초');
+	
+	
+	
+	
+	
+	db.transaction(function(tx) {
+		tx.executeSql("INSERT INTO test_table (TITLE, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?)", [text, startTime, endTime, resultWhile], function(tx, res) {
+		   tx.executeSql("select * from test_table;", [], function(tx, res) {
+		     console.log("res.rows.length --> " + res.rows.length);
+		     
+		     /* console.log(res.rows.item(0)); */
+		   });
+		
+		 }, function(e) {
+		   console.log("ERROR: " + e.message);
+		 });
+	});
+	
+	
+})
+
+var db = window.openDatabase("Database", "1.0", "Demo", 2 * 1024 * 1024);
+
+
+$('#sql').click(function(){
+	db.transaction(function(tx) {
+		tx.executeSql("INSERT INTO test_table (TITLE, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?)", [text, startTime, endTime, resultWhile], function(tx, res) {
+		   tx.executeSql("select * from test_table;", [], function(tx, res) {
+		     console.log("res.rows.length --> " + res.rows.length);
+		     
+		     /* console.log(res.rows.item(0)); */
+		   });
+		
+		 }, function(e) {
+		   console.log("ERROR: " + e.message);
+		 });
+	});
+});
+
+$('#dbReset').click(function(){
+	db.transaction(function(tx) {
+		tx.executeSql('DROP TABLE IF EXISTS test_table');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, TITLE text, START_TIME text, END_TIME date, WHILE text)');
+	});
+})
+
+
+/* var db = window.openDatabase("Database", "1.0", "Demo", 2 * 1024 * 1024);
+
+db.transaction(function(tx) {
+  tx.executeSql('DROP TABLE IF EXISTS test_table');
+  tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, TITLE text, START_TIME text, END_TIME date, WHILE text)');
+
+  tx.executeSql("INSERT INTO test_table (TITLE, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?)", [text, startTime, endTime, resultWhile], function(tx, res) {
+    //console.log("insertId: " + res.insertId + " -- probably 1");
+    //console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
+
+    tx.executeSql("select * from test_table;", [], function(tx, res) {
+      //console.log("res.rows.length: " + res.rows.length + " -- should be 1");
+      //console.log("res.rows.item(0).cnt: " + res.rows.item(0).cnt + " -- should be 1");
+      console.log("res.rows.length --> " + res.rows.length);
+      console.log(res.rows.item(0));
+    });
+
+  }, function(e) {
+    console.log("ERROR: " + e.message);
+  });
+}); */
+
+</script>
+</body>
+</html>
