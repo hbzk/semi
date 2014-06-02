@@ -90,8 +90,15 @@ line-height: 64px; text-align: center; font-weight: bolder; font-size: 145%; }
 #date span.right { right: 40px; }
 
 /* 파이차트 */
-#pieChart { margin-left: 35px; margin-top:20px;}
+/* #pieChart { margin-left: 35px; margin-top:20px;}
+.pieChart_legend {margin-top: 23px;} */
+ #pieChart1 { position: relative; float: left; width: 250px; height: 120px; margin: -35px; margin-left:0px;}
+ #pieChart2 { position: relative; float: left; width: 250px; height: 120px; margin: -35px; margin-left:0px;}
+ #pieChart3 { position: relative; float: left; width: 250px; height: 120px; margin: -35px; margin-left:0px;}
 .pieChart_legend {margin-top: 23px;}
+
+
+
 
 /* 결과창 하단 메뉴 */
 #resultFooter { position: absolute; bottom: 20px; right: 20px;}

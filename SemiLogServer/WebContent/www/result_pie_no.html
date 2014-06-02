@@ -6,6 +6,13 @@
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.pieChart.js"></script>
 <link rel="stylesheet" href="css/layout_no.css">
+<script src="js/jquery.touchslider.js"></script>
+<script>
+jQuery(function($) {
+    $(".touchslider").touchSlider({/*options*/});
+});
+</script>
+
 <title>Result_Pie</title>
 </head>
 <body>
@@ -15,34 +22,107 @@
 <div id="blank"></div>
 <section id="layout">
 
+<!-- <header id="date">
+    <span class="left">&lt;</span>
+    <span class="right">&gt;</span>
+    <h1>05/12</h1>
+</header> -->
+
 <header id="date">
-	<span class="left">&lt;</span>
-	<span class="right">&gt;</span>
-	<h1>05/12</h1>
+<div class="touchslider">
+
+<div>
+    <span class="left"><span class="touchslider-prev">&lt;</span></span>
+    <span class="right"><span class="touchslider-next">&gt;</span></span>
+   <div id="changeMap" class="touchslider-viewport" style="border: 1px solid blue; 
+   height: 100px; width:180px; margin-left:70px; overflow:hidden;">
+   
+    <div>
+        <div class="touchslider-item">
+        <h1>05/23</h1>
+        </div>
+        
+        <div class="touchslider-item">
+        <h1>06/24</h1>
+        </div>
+        
+        <div class="touchslider-item">
+        <h1>11/14</h1>
+        </div> 
+    </div>
+    
+    </div>
+    
+</div>     
+  
+</div>
 </header>
 
-<section id="content">
 
-<div id="pieChart"></div>
-<div class="pieChart_legend"></div>
-</section>	<!-- content -->
+
+<section id="content">
+<div class="touchslider">
+<div id="changeMap2" style="border: 1px solid red;  
+                            height:340px; overflow:hidden; 
+                            margin-top: 55px;
+                            margin-left: 35px;
+                            width: 250px;" class="touchslider-viewport">
+
+ <div>
+        <div class="touchslider-item">
+        <div id="pieChart1"></div>
+        <div class="pieChart_legend"></div>
+        </div>
+        
+        <div class="touchslider-item">
+        <div id="pieChart2"></div>
+        <div class="pieChart_legend"></div>
+        </div>
+        
+        <div class="touchslider-item">
+        <div id="pieChart3"></div>
+        <div class="pieChart_legend"></div>
+        </div> 
+    </div>
+
+</div>
+</div>
+</section>  <!-- content -->
 
 
 <footer id="resultFooter">
-		<a class="" href="result_text_no.html"><img src="css/img/result_list.png"></a>
+        <a class="" href="result_text_no.html"><img src="css/img/result_list.png"></a>
 </footer>
-</section>	<!-- layout -->
-</div>	<!-- backImg -->
+</section>  <!-- layout -->
+</div>  <!-- backImg -->
 
 <script type="text/javascript">
 data = [
-	['Exercise',10],
-	['Play',4],
-	['TV',3],
-	['ETC',7],
+    ['Exercise',10],
+    ['Play',4],
+    ['TV',3],
+    ['ETC',7],
 ];
 console.log(data);
-$('#pieChart').pieChart(data,250,"pie");
+$('#pieChart1').pieChart(data,250,"pie");
+
+data = [
+    ['Radio',3],
+    ['Game',10],
+    ['Drive',7],
+    ['Kamikaze',4],
+];
+console.log(data);
+$('#pieChart2').pieChart(data,250,"pie");
+
+data = [
+    ['Diablo',7],
+    ['Elsword',3],
+    ['Sudden',4],
+    ['LoL',10],
+];
+console.log(data);
+$('#pieChart3').pieChart(data,250,"pie"); 
 </script>
 </body>
 </html>
