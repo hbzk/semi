@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+<!-- <script type="text/javascript" src="cordova.js"></script> -->
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="css/layout_font.css">
+<title>Result_text</title>
+<style type="text/css">
+#mainLink { font-size: 150%; position: absolute; bottom: 20px; left: 20px; }
+#deleteAll { font-size: 100%; position: absolute; bottom: 20px; right: 20px; }
+
+.actionName { margin-left: -200px !important;}
+</style>
+</head>
+<body>
+
+<section id="layout">
+
+<header id="date">
+	<span class="left" >&lt;</span>
+	<span class="right">&gt;</span>
+	<h1>05/12</h1>
+</header>
+
+
+<div id="rtScroll">
+<div id="resultList">
+
+    <!-- <div id="rtTable">
+	    <div id="rtImage"><img src="css/img/gamecontroller.png"></div>
+	    <div id="rtTime">09:10~10:50</div>
+	    <span id="rtName" style="text-overflow: ellipsis; overflow:hidden; white-space: nowrap;">Angdroid</span>
+    </div> -->
+    
+    
+</div>
+</div>
+
+<!-- <footer id="resultFooter">
+		<a href="result_pie_no.html"><img src="css/img/result_piechart.png"></a>
+</footer>
+ -->
+
+<a id="mainLink" href="main_sql.html">Main</a>
+<a id="deleteAll" href="#">전체삭제 (임시)</a>
+
+</section>
+<script type="text/javascript">
+var actionName, startTime, endTime, resultWhile;
+var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+
+db_listText();
+
+$('#deleteAll').click(function(){
+	db_deleteAll();
+	location.reload(true);
+})
+
+function db_deleteAll(){
+	db.transaction(function(tx) {
+		tx.executeSql("DELETE FROM ACTION");
+	}, db_errorCB);
+}
+
+function db_listText(){
+	db.transaction(function(tx) {
+		tx.executeSql("select * from ACTION", [], function(tx, res) {
+			var len = res.rows.length;
+			console.log("ACTION: " + len + " rows found.");
+			
+			$('.actionName').remove();
+			
+			var resultList = $('#resultList');
+			for (var i=0; i<len; i++){
+				startTime = new Date(res.rows.item(i).START_TIME);
+				endTime = new Date(res.rows.item(i).END_TIME);
+				
+				resultList.append($('<div id="rtTable">')
+					.append('<div id="rtImage" class="actionName">' + res.rows.item(i).TITLE)
+					.append('<div id="rtTime">' + db_digitText(startTime.getHours()) + ':' + db_digitText(startTime.getMinutes())
+							+ ' ~ '  + db_digitText(endTime.getHours()) + ':' + db_digitText(endTime.getMinutes()))
+				)
+				
+				console.log('id :' + res.rows.item(i).id + ', title :'+ res.rows.item(i).TITLE
+					+ ',  start :' + res.rows.item(i).START_TIME + ',  end' + res.rows.item(i).END_TIME
+					+ ',  while :' + res.rows.item(i).WHILE);
+			}
+		});
+	}, db_errorCB);
+};
+
+function db_errorCB(e) { // query 에러시 호출
+	console.log("e :" + e);
+	console.log("e.code : "+e.code);
+	console.log("e.message :" + e.message);
+}
+
+function db_digitText(i) {
+	if (i < 10) {
+		i = '0' + i;
+	}
+	return i;
+}
+</script>
+</body>
+</html>
