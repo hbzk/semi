@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<!-- <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script> -->
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script> -->
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"> 
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 
 <link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/lineconStyle.css">
@@ -38,18 +38,24 @@ text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
 	color: white;
 }
 
+/* 분류별 아이콘 div */
+.icon_theme{
+	min-width: 300px;
+	border: 1px solid white;
+	clear: both;
+	overflow: auto;
+}
+
 /* 선택된 아이콘 div */
 .selected_icon{
-	clear: both;
 	height: 180px;
- 	min-width: 300px;
-	border: 1px solid white;
+ 	
 }
 
 /* 선택된아이콘 한줄 */
 .icon_row{
 	min-width: 300px;
-	height: 70px;
+	overflow: auto;
 	display: table;
 	margin: 0 auto;
 	
@@ -73,15 +79,23 @@ i{
 	line-height: 110px;
 }
 
-/*두번째 페이지 ---- */
+/*   두번째페이지 (setting)f---- */
 #setting{
 	background: #999;
 	text-shadow: none;
 }
 
+.activityIcon{
+	width: 70px;
+	height: 90px;
+	float: left;
+}
+
 
 </style>
 </head>
+
+
 <body>
 
 <!-- 첫번째페이지 (main or home) -->
@@ -104,168 +118,185 @@ i{
 		
 		<div data-role="page" id="setting">
 			<div data-role="header"><h2>ACTIVITY SETTING</h2></div>
+			
 			<div data-role="content">
 				<a href="#main_0" id="link1" data-transition="slidedown"> Go to window1</a>
-				<div class="selected_icon">
+				<div class="selected_icon icon_theme">
 					<p>Selected Activity</p>
+					
 					<div class="icon_row">
 						<div class="icon"><i data-name="tv" class="li li_tv"></i></div>
-						<div class="icon"><i class="fa fa-cutlery"></i></div>
-						<div class="icon"><i class="fa fa-desktop"></i></div>
+						<div class="icon"><i data-name="cultlery" class="fa fa-cutlery"></i></div>
+						<div class="icon"><i data-name="desktop" class="fa fa-desktop"></i></div>
 					</div>
 					<div class="icon_row">
-						<div class="icon"><i class="fa fa-moon-o"></i></div>
-						<div class="icon"><i class="fa fa-mobile"></i></div>
-						<div class="icon"><i class="fa fa-coffee"></i></div>
+						<div class="icon"><i data-name="moon" class="fa fa-moon-o"></i></div>
+						<div class="icon"><i data-name="mobile" class="fa fa-mobile"></i></div>
+						<div class="icon"><i data-name="coffee" class="fa fa-coffee"></i></div>
 					</div>
 				</div>
 				<div class="all_icon">
 						<!--  *****일상 -->
-						<div class="box routins">
+						<div class="icon_theme routins">
+						<div class="icon_row">
 							<div class="box title"><h1>ROUTIN </h1></div>
-						<!-- TV -->
-						<div class="activityIcon"><span><i class="li li_tv "></i></div>
+						<div class="activityIcon"><i data-name="tv" class="li li_tv "></i></div>
 						
-						<!-- 식사 -->
-						<div class="activityIcon"><i class="fa fa-cutlery"></i></div>
+						<div class="activityIcon"><i data-name="cutlery" class="fa fa-cutlery"></i></div>
 						
-						<!-- 컴퓨터 -->
-						<div class="activityIcon"><i class="fa fa-desktop"></i></div>
+						<div class="activityIcon"><i data-name="desktop" class="fa fa-desktop"></i></div>
 						
-							<!-- 잠 -->
-						<div class="activityIcon"><i class="fa fa-moon-o"></i></div>
+						<div class="activityIcon"><i data-name="moon" class="fa fa-moon-o"></i></div>
 						
-						<!-- 핸드폰 -->
-						<div class="activityIcon"><i class="fa fa-mobile"></i></div>
+						<div class="activityIcon"><i data-name="mobile" class="fa fa-mobile"></i></div>
 						
-						<!-- 커피 마시기. 휴식 -->
-						<div class="activityIcon"><i class="fa  fa-coffee"></i></div>
+						<div class="activityIcon"><i data-name="coffee" class="fa  fa-coffee"></i></div>
 						
+						</div>
 						</div>
 						
 						
 						<!--  *****휴식 -->
-						<div class="box other">
-							<div class="box title"><h1>Other things</h1></div>
-						<!-- 음악감상 -->
-						<div class="activityIcon"><i class="fa fa-headphones"></i></div>
-						
-							<!-- 음악감상 -->
-						<div class="activityIcon"><i class="fa fa-music"></i></div>
-						
-						
-						<!-- 운전 -->
-						<div class="activityIcon"><i class="fa fa-automobile"></i></div>
-						
-						<!-- 전화통화 -->
-						<div class="activityIcon"><i class="fa fa-phone"></i></div>
-						
-						<!-- 달러,쇼핑 -->
-						<div class="activityIcon"><i class="li li_banknote"></i></div>
-					
-						<!-- 대화 chat -->
-						<div class="activityIcon"><i class="fa fa-comment"></i></div>
-					
-						<!-- 운동, 농구 -->
-						<div class="activityIcon"><i class="fa  fa-dribbble"></i></div>
-						
-						<!-- 여행 -->
-						<div class="activityIcon"><i class="fa   fa-plane"></i></div>
-						
-						<!-- 게임 -->
-						<div class="activityIcon"><i class="fa fa-gamepad"></i></div>
-						
-						<!--퍼즐-->
-						<div class="activityIcon"><i class="fa fa-puzzle-piece"></i></div>
-						
-						<!-- 술, 맥주  -->
-						<div class="activityIcon"><i class="fa fa-beer"></i></div>
-						
-						<!-- 와인  -->
-						<div class="activityIcon"><i class="fa fa-glass"></i></div>
-						
-							<!-- 영화보기 video -->
-						<div class="activityIcon"><i class="li li_video"></i></div>
-						
-						<!-- 병원 -->
-						<div class="activityIcon"><i class="fa fa-hospital-o"></i></div>
-						
+						<div class="icon_theme other">
+									<div class="icon_row">
+										<div class="box title"><h1>Other things</h1></div>
+									<div class="activityIcon"><i data-name="headphones" class="fa fa-headphones"></i></div>
+									
+									<div class="activityIcon"><i data-name="music" class="fa fa-music"></i></div>
+									
+									<div class="activityIcon"><i data-name="automobile" class="fa fa-automobile"></i></div>
+									
+									<div class="activityIcon"><i data-name="phone" class="fa fa-phone"></i></div>
+									
+									<div class="activityIcon"><i data-name="banknote" class="li li_banknote"></i></div>
+								
+									<div class="activityIcon"><i data-name="comment" class="fa fa-comment"></i></div>
+								
+									<div class="activityIcon"><i data-name="dribbble" class="fa fa-dribbble"></i></div>
+									
+									<div class="activityIcon"><i data-name="plane" class="fa fa-plane"></i></div>
+									
+									<div class="activityIcon"><i data-name="gamepad" class="fa fa-gamepad"></i></div>
+									
+									<div class="activityIcon"><i data-name="puzzle" class="fa fa-puzzle-piece"></i></div>
+									
+									<div class="activityIcon"><i data-name="beer" class="fa fa-beer"></i></div>
+									
+									<div class="activityIcon"><i data-name="glass" class="fa fa-glass"></i></div>
+									
+									<div class="activityIcon"><i data-name="video" class="li li_video"></i></div>
+									
+									<div class="activityIcon"><i data-name="hospital" class="fa fa-hospital-o"></i></div>
+									</div>
 						</div>
 						
 					<!-- *****집안일 -->	
-					<div class="box chores">
+					<div class="icon_theme chores">
+						<div class="icon_row">
 							<div class="box title"><h1>Chores</h1></div>
-						<!-- 세탁 -->
-						<div class="activityIcon"><i class="li  li_t-shirt"></i></div>
+						<div class="activityIcon"><i data-name="shirt" class="li  li_t-shirt"></i></div>
 						
-						<!-- 집, 집안일  -->
-						<div class="activityIcon"><i class="fa fa-home"></i></div>
+						<div class="activityIcon"><i data-name="home" class="fa fa-home"></i></div>
 						
-					<!-- 집안일 쓰레기 -->
-						<div class="activityIcon"><i class="li li_trash"></i></div>
+						<div class="activityIcon"><i data-name="trash" class="li li_trash"></i></div>
 						
-						<!-- 가위. 공작  -->
-						<div class="activityIcon"><i class="fa fa-scissors"></i></div>
-						
+						<div class="activityIcon"><i data-name="scissors" class="fa fa-scissors"></i></div>
+						</div>
+					</div>
+					
 					<!--*********** 공부 -->
-						<div class="box study">
-							<div class="box title"><h1>Study</h1></div>
-						<!-- 과학, 실험 flask -->
-						<div class="activityIcon"><i class="fa  fa-flask"></i></div>
-						
-						<!-- 과학, 생물-->
-						<div class="activityIcon"><i class="fa  fa-leaf"></i></div>
-						
-						<!-- 공부 -->
-						<div class="activityIcon"><i class="li li_pen"></i></div>
-						
-						<!-- 전구, 물리(전기) -->
-						<div class="activityIcon"><i class="li  li_bulb"></i></div>
-						
-						<!-- 책 -->
-						<div class="activityIcon"><i class="fa  fa-book"></i></div>
-						
-					<!-- 책, 북마크  -->
-						<div class="activityIcon"><i class="fa fa-bookmark"></i></div>
-						
+						<div class="icon_theme study">
+							<div class="icon_row">
+								<div class="box title"><h1>Study</h1></div>
+								<div class="activityIcon"><i data-name="flask" class="fa  fa-flask"></i></div>
+								
+								<div class="activityIcon"><i data-name="leaf" class="fa  fa-leaf"></i></div>
+								
+								<div class="activityIcon"><i data-name="pen" class="li li_pen"></i></div>
+								
+								<div class="activityIcon"><i data-name="bulb" class="li  li_bulb"></i></div>
+								
+								<div class="activityIcon"><i data-name="book" class="fa  fa-book"></i></div>
+								
+								<div class="activityIcon"><i data-name="bookmark" class="fa fa-bookmark"></i></div>
+							</div>
 						</div>
 						
 					<!-- ****엄마팩------------ -->
-						<div class="box mommy">
-							<div class="box title"><h1>for Mommy</h1></div>
-						
-						<!-- 유아 -->
-						<div class="activityIcon"><i class="fa  fa-child"></i></div>
-					
-						<!-- 유아 진료 -->
-						<div class="activityIcon"><i class="fa fa-stethoscope"></i></div>
-						
+						<div class="icon_theme mommy">
+								<div class="icon_row">
+								<div class="box title"><h1>for Mommy</h1></div>
 							
-							<!-- 스푼. 이유식 -->
-						<div class="activityIcon"><i class="fa fa-spoon"></i></div>
+								<div class="activityIcon"><i data-name="child" class="fa  fa-child"></i></div>
+							
+								<div class="activityIcon"><i data-name="stethoscope" class="fa fa-stethoscope"></i></div>
+									
+								<div class="activityIcon"><i data-name="spoon" class="fa fa-spoon"></i></div>
+								</div>
 						</div>
 						
-						<div class="box programmer">
-							<div class="box title"><h1>Programmer</h1></div>	
-						<!-- 개발자. 코딩 -->
-						<div class="activityIcon"><i class="fa fa-code"></i></div>
-						
-						<!-- 개발자. 코딩 -->
-						<div class="activityIcon"><i class="fa fa-keyboard-o"></i></div>
+					<!-- ****개발자. 코딩-------- -->
+						<div class="icon_theme programmer">
+							<div class="icon_row">
+								<div class="box title"><h1>Programmer</h1></div>	
+	
+								<div class="activityIcon"  data-name="code"><i data-name="code" class="fa fa-code"></i></div>
+								
+								<div class="activityIcon"><i data-name="keyboard" class="fa fa-keyboard-o"></i></div>
+								</div>
 					</div>
 			
 			</div>
 		</div>
 		</div>
-		</div>
 <script>
+	  var activities;
+	  var selectedOne;
+	  var selectedList = [];
+	  var activityAll;
+	  var activityOne;
+	  var activityList = [];
+	  var activitySelected;
+	  var alreadySelected;
+	  
 	$(window).load(function() {
 	    console.log("----window load occurred!----");
-		var icon = document.getElementsByTagName("i")[0];
-		console.log("icon >>>>>>>>>>>>>"+ icon);
-		console.log("icon >>>>>>>>>>>>>"+ icon[0]);
+	  
+		activityAll = $('.activityIcon > [data-name]');
+		
+		for(i=0 ;  i < activityAll.length ;  i++){
+			activityOne = activityAll[i].getAttribute('data-name');
+			activityList.push(activityOne);
+			console.log(activityOne);
+		}
+		
+		
+	  //main창에서 선택된 icon들
+		activitySelected = $('.icon > [data-name]');
+	  
+		for (i = 0 ; i < 6 ; i++){
+			selectedOne = activitySelected[i].getAttribute('data-name');
+			console.log(i + " ====== "+ selectedOne);		
+			if($.inArray(selectedOne,activityList)){
+				console.log("yes");
+			}else{
+				console.log("no");
+			}
+		}
 		
 	});
+	
+		function inArray(selectedOne,activityList ){
+			for(var i = 0 ; i< count ; i++){
+				if(activityList[i] === activityOne){
+					return alreadySelected = $("i[data-name=" + activityOne + "]");
+				}
+				return console.log("none");
+			}
+		}
+	
+	
+	
 
 </script>
 </body>
