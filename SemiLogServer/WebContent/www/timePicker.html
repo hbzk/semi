@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <title>Mobiscroll</title>
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+    <script src="js1/mobiscroll.core.js"></script>
+    <script src="js1/mobiscroll.scroller.js" type="text/javascript"></script>
+    <script src="js1/mobiscroll.datetime.js" type="text/javascript"></script>
+    <script src="js1/mobiscroll.scroller.wp.js" type="text/javascript"></script>
+    <script src="js1/i18n/mobiscroll.i18n.de.js" type="text/javascript"></script>
+
+
+    <link href="css1/mobiscroll.icons.css" rel="stylesheet" type="text/css" />
+    <link href="css1/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
+    <link href="css1/mobiscroll.scroller.jqm.css" rel="stylesheet" type="text/css" />
+    <link href="css1/mobiscroll.scroller.wp.css" rel="stylesheet" type="text/css" />
+
+ 
+
+    <script type="text/javascript">
+        $(function () {
+            var curr = new Date().getFullYear();
+            var opt = {
+                'time': {
+                    preset: 'time'
+                }
+            }
+
+            $('.settings select').bind('change', function() {
+                var demo = $('#demo').val();
+
+                if (!demo.match(/select/i)) {
+                    $('.demo-test-' + demo).val('');
+                }
+
+                $('.demo-test-' + demo).scroller('destroy').scroller($.extend(opt[demo], {
+                    theme: $('#theme').val(),
+                    mode: $('#mode').val(),
+                    lang: $('#language').val(),
+                    display: $('#display').val(),
+                    animate: $('#animation').val()
+                }));
+                $('.demo').hide();
+                $('.demo-' + demo).show();
+            });
+
+            $('#demo').trigger('change');
+
+        });
+    </script>
+</head>
+
+<body>
+    <div data-role="page">
+        <div data-role="content">
+            <div class="settings">
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="theme">Theme</label>
+                    <select name="theme" id="theme">
+                        <option value="wp light">Windows Phone Light</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="mode">Mode</label>
+                    <select name="mode" id="mode">
+                        <option value="scroller">Scroller</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="language">Language</label>
+                    <select name="language" id="language">                     
+                        <option value="de">Deutsch</option>                
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="display">Display</label>
+                    <select name="display" id="display">
+                        <option value="modal">Modal</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="animation">Animation</label>
+                    <select name="animation" id="animation" class="settings">
+                        <option value="pop">Pop</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="demo">Demo</label>
+                    <select name="demo" id="demo">
+                        <option value="time">Time</option>
+                    </select>
+                </div>
+            </div>
+            <div data-role="fieldcontain" class="demo demo-date demo-datetime demo-time demo-credit">
+                <input name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit" />
+            </div>       
+        </div>
+    </div>
+</body>
+</html>
+
