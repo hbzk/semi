@@ -259,9 +259,9 @@ function onConfirm(buttonIndex) {
 // Show a custom confirmation dialog
 //
 function showConfirm() {
-	 navigator.notification.beep(1);
 	 navigator.notification.vibrate(1000);
     navigator.notification.confirm(
+    	navigator.notification.beep(1),
         '알림을 종료할까요?', // message
          onConfirm,            // callback to invoke with index of button pressed
           '알림',           // title
