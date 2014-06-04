@@ -65,6 +65,15 @@ body { text-align:center; font-family:helvetica;}
 <script type="text/javascript">
         $(function () {	   
         	
+        	$("#test").css("display", "none");
+        	$("#function").click(function(){
+        		$("#test").css("display", "");
+        	});
+        	$("#timer").click(function(){
+        		$("#test").css("display", "none");
+        	});
+        	
+        	
         	var defaultTime = $("#test").val();
         	console.log(defaultTime);
         	
