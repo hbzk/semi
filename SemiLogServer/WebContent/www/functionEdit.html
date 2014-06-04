@@ -64,6 +64,12 @@ body { text-align:center; font-family:helvetica;}
 </style>
 <script type="text/javascript">
         $(function () {
+        	      $(".dwbw dwb-s").click(function(){
+        	    	  var b = $("#test").val();
+        	    	  console.log(b);
+        	      });
+        	   
+        	   
             var curr = new Date().getFullYear();
             var opt = {
                 'time': {
@@ -88,8 +94,8 @@ body { text-align:center; font-family:helvetica;}
                 $('.demo').hide();
                 $('.demo-' + demo).show();
             });
-
             $('#demo').trigger('change');
+         
         });
 </script>
 

@@ -1,5 +1,4 @@
 (function ($) {
-
     var ms = $.mobiscroll,
         date = new Date(),
         defaults = {
@@ -1027,5 +1026,8 @@
 
         return date;
     };
-
+    
+    console.log(date.getHours());
+    console.log(date.getMinutes());
+    
 })(jQuery);
