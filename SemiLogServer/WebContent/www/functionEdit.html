@@ -26,6 +26,8 @@
 <link href="css1/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
 <link href="css1/mobiscroll.scroller.wp.css" rel="stylesheet" type="text/css" />
 
+<script type="text/javascript" src="jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="jquery.timepicker.min.css">
  
 <title>Function Edit</title>
 
@@ -116,7 +118,32 @@ body { text-align:center; font-family:helvetica;}
             	     
                });
             
+            $('input.timepicker').timepicker({
+                timeFormat: 'HH:mm',
+                // year, month, day and seconds are not important
+                minTime: new Date(0, 0, 0, 8, 0, 0),
+                maxTime: new Date(0, 0, 0, 15, 0, 0),
+                // time entries start being generated at 6AM but the plugin 
+                // shows only those within the [minTime, maxTime] interval
+                startHour: 6,
+                // the value of the first item in the dropdown, when the input
+                // field is empty. This overrides the startHour and startMinute 
+                // options
+                startTime: new Date(0, 0, 0, 8, 20, 0),
+                // items in the dropdown are separated by at interval minutes
+                interval: 10
+            });
             
+            $('input.change-format').click(function() {
+                // change timeFormat option here
+                $('input.timepicker').data('TimePicker').options.timeFormat = 'HH:mm:ss p';
+                // since v1.1.2 does not support changing most of the options, we need
+                // to trick the plugin into thinking the next time the dropdown needs
+                // to be displayed is the first time, so it re-generates the items, 
+                // using the new format
+                $('input.timepicker').data('TimePicker').items = null;
+                $('input.timepicker').data('TimePicker').widget.instance = null;
+            });
         });
 </script>
 
@@ -177,6 +204,7 @@ body { text-align:center; font-family:helvetica;}
                     </select>
                 </div>
             </div>
+                <input class="timepicker" name="timepicker"/>
                 <input name="test" id="test" 
                 class="demo-test-date demo-test-datetime demo-test-time demo-test-credit" 
                 value="60" placeholder="01:00"/>      
