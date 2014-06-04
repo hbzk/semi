@@ -266,6 +266,5 @@ function showConfirm() {
           '알림',           // title
         ['계속','중지']         // buttonLabels
     );
-    navigator.notification.beep(1);
 }
 
