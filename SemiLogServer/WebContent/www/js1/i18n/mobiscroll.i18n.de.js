@@ -1,8 +1,8 @@
 (function ($) {
     $.mobiscroll.i18n.de = $.extend($.mobiscroll.i18n.de, {
         // Core
-        setText: 'OK',
-        cancelText: 'Abbrechen',
+        setText: ' ',
+        cancelText: ' ',
         clearText: 'Löschen',
         selectedText: 'Ausgewählt',
         // Datetime component
