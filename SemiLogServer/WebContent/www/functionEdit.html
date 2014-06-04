@@ -58,6 +58,9 @@ body { text-align:center; font-family:helvetica;}
 .dw-i {
 	text-align: center;
 }
+::-webkit-input-placeholder {
+   color: black;
+}
 </style>
 <script type="text/javascript">
         $(function () {
@@ -147,7 +150,9 @@ body { text-align:center; font-family:helvetica;}
                     </select>
                 </div>
             </div>
-                <input name="test" id="test" class="demo-test-date demo-test-datetime demo-test-time demo-test-credit"/>           
+                <input name="test" id="test" 
+                class="demo-test-date demo-test-datetime demo-test-time demo-test-credit" 
+                value="60" placeholder="01:00"/>      
 </div>
 	
 	
