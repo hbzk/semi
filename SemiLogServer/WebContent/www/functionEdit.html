@@ -63,13 +63,11 @@ body { text-align:center; font-family:helvetica;}
 }
 </style>
 <script type="text/javascript">
-        $(function () {
-        	      $(".dwbw dwb-s").click(function(){
-        	    	  var b = $("#test").val();
-        	    	  console.log(b);
-        	      });
-        	   
-        	   
+        $(function () {	   
+        	
+        	var defaultTime = $("#test").val();
+        	console.log(defaultTime);
+        	
             var curr = new Date().getFullYear();
             var opt = {
                 'time': {
@@ -105,8 +103,8 @@ body { text-align:center; font-family:helvetica;}
             	   var hour = timeSplit[0];
             	   var minute = timeSplit[1];
             	   
-            	   console.log(hour);
-            	   console.log(minute);
+            	   console.log(time);
+            	  
             	   
             	   var tt = new Date();
             	  
