@@ -75,6 +75,8 @@ body { text-align:center; font-family:helvetica;}
         		$("#test").css("display", "none");
         	});
         	 */
+        	 
+          
         	
         	var defaultTime = $(".timepicker").val();
         	console.log(defaultTime);
@@ -112,13 +114,26 @@ body { text-align:center; font-family:helvetica;}
             	   var time = $(".timepicker").val();
             	   var time2 = $("#test").val();
             	   
-            	   console.log(time);
-            	   console.log(time2);
-            	  
+            	   if(time == "00:00" && time2 != "") {
+            		   // 시간알람지정!!!
+            		   console.log(time2);
+            		   $(".timepicker").css("display", "none");
             	   
-      
+            	   } else {
+            		   // 디폴트 시간 지정
+            	    console.log(time);
+            		 
+            	      } 
+            	
             	     
                });
+               
+              
+               
+               
+               
+               
+               // defaultTime
             
             $('input.timepicker').timepicker({
                 timeFormat: 'HH:mm',
@@ -210,7 +225,7 @@ body { text-align:center; font-family:helvetica;}
                     </select>
                 </div>
             </div>
-                <input class="timepicker" name="timepicker" value="01:00" style="text-align: center; font-size: 130%; font-weight: bold;" readonly/>
+                <input class="timepicker" name="timepicker" value="01:00" style="text-align: center; font-size: 130%; font-weight: bold;" >
                 <input name="test" 
                 id="test" 
                 class="demo-test-date demo-test-datetime demo-test-time demo-test-credit"
