@@ -38,7 +38,7 @@ body { text-align:center; font-family:helvetica;}
 #functionEdit { 
   margin-top: 100px; position: relative; text-align: center;
 }
-#timer { font-size: 200%; margin: 50px 0px; }
+#timer { font-size: 200%; margin: 10px 0px; }
 
 #functionEdit button { font-size: 130%; padding: 10px; }
 #confirm { background: #5cb85c; border-radius: 0px;}
@@ -47,11 +47,11 @@ body { text-align:center; font-family:helvetica;}
 
 .ui-content { 
 	width: 324px;
-	margin-top: -50px;
+	margin-top: -35px;
 	margin-left: -18px;
 }
 #test {
-	border: 1px solid black;
+	border: 0px;
 	text-align: center;
 	font-weight: bold;
 	border-radius: 0px;
@@ -66,7 +66,7 @@ body { text-align:center; font-family:helvetica;}
 </style>
 <script type="text/javascript">
         $(function () {	   
-        	
+   /*      	
         	$("#test").css("display", "none");
         	$("#function").click(function(){
         		$("#test").css("display", "");
@@ -74,9 +74,9 @@ body { text-align:center; font-family:helvetica;}
         	$("#timer").click(function(){
         		$("#test").css("display", "none");
         	});
+        	 */
         	
-        	
-        	var defaultTime = $("#test").val();
+        	var defaultTime = $(".timepicker").val();
         	console.log(defaultTime);
         	
             var curr = new Date().getFullYear();
@@ -109,9 +109,11 @@ body { text-align:center; font-family:helvetica;}
                // 시간지정
                
             $("#confirm").click(function(){
-            	   var time = $("#test").val();
+            	   var time = $(".timepicker").val();
+            	   var time2 = $("#test").val();
             	   
             	   console.log(time);
+            	   console.log(time2);
             	  
             	   
       
