@@ -121,17 +121,17 @@ body { text-align:center; font-family:helvetica;}
             $('input.timepicker').timepicker({
                 timeFormat: 'HH:mm',
                 // year, month, day and seconds are not important
-                minTime: new Date(0, 0, 0, 8, 0, 0),
-                maxTime: new Date(0, 0, 0, 15, 0, 0),
+                minTime: new Date(0, 0, 0, 0, 0, 0),
+                maxTime: new Date(0, 0, 0, 12, 0, 0),
                 // time entries start being generated at 6AM but the plugin 
                 // shows only those within the [minTime, maxTime] interval
                 startHour: 6,
                 // the value of the first item in the dropdown, when the input
                 // field is empty. This overrides the startHour and startMinute 
                 // options
-                startTime: new Date(0, 0, 0, 8, 20, 0),
+                startTime: new Date(0, 0, 0, 0, 0, 0),
                 // items in the dropdown are separated by at interval minutes
-                interval: 10
+                interval: 5
             });
             
             $('input.change-format').click(function() {
@@ -204,7 +204,7 @@ body { text-align:center; font-family:helvetica;}
                     </select>
                 </div>
             </div>
-                <input class="timepicker" name="timepicker"/>
+                <input class="timepicker" name="timepicker" readonly/>
                 <input name="test" id="test" 
                 class="demo-test-date demo-test-datetime demo-test-time demo-test-credit" 
                 value="60" placeholder="01:00"/>      
