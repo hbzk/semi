@@ -12,9 +12,9 @@
 
 
 <!-- timepicker -->
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" /> -->
+<!-- <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script> -->
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
 
 <script src="js1/mobiscroll.core.js"></script>
 <script src="js1/mobiscroll.scroller.js" type="text/javascript"></script>
@@ -41,7 +41,7 @@ body { text-align:center; font-family:helvetica;}
 #timer { font-size: 200%; margin: 10px 0px; }
 
 #functionEdit button { font-size: 130%; padding: 10px; }
-#confirm { background: #5cb85c; border-radius: 0px;}
+#confirm { background: #5cb85c; border-radius: 0px; margin-top: 50px;}
 #cancel { background: #d9584f; border-radius: 0px;}
 
 
@@ -51,11 +51,12 @@ body { text-align:center; font-family:helvetica;}
 	margin-left: -18px;
 }
 #test {
-	border: 0px;
+	width: 318px;
+	height: 70px;
 	text-align: center;
 	font-weight: bold;
 	border-radius: 0px;
-	font-size: 130%;
+	font-size: 180%;
 }
 .dw-i {
 	text-align: center;
@@ -63,20 +64,17 @@ body { text-align:center; font-family:helvetica;}
 ::-webkit-input-placeholder {
    color: black;
 }
+.timepicker { margin-top: 15px; width: 318px; height: 70px; 
+              text-align: center; font-size: 180%; font-weight: bold;"
+}
 </style>
 <script type="text/javascript">
+var time;
+var time2;
         $(function () {	   
-   /*      	
-        	$("#test").css("display", "none");
-        	$("#function").click(function(){
-        		$("#test").css("display", "");
-        	});
-        	$("#timer").click(function(){
-        		$("#test").css("display", "none");
-        	});
-        	 */
-        	 
-          
+           
+        
+    
         	
         	var defaultTime = $(".timepicker").val();
         	console.log(defaultTime);
@@ -108,29 +106,32 @@ body { text-align:center; font-family:helvetica;}
             $('#demo').trigger('change');
          
             
-               // 시간지정
                
+            
+               // 시간지정
+                  
             $("#confirm").click(function(){
-            	   var time = $(".timepicker").val();
-            	   var time2 = $("#test").val();
+            	   time = $(".timepicker").val();
+            	   time2 = $("#test").val();
+
+            	   
             	   
             	   if(time == "00:00" && time2 != "") {
             		   // 시간알람지정!!!
-            		   console.log(time2);
-            		   $(".timepicker").css("display", "none");
+            		 console.log(time2);
+            		      
             	   
             	   } else {
             		   // 디폴트 시간 지정
-            	    console.log(time);
+            	   console.log(time);
             		 
             	      } 
             	
             	     
                });
+         
                
-              
-               
-               
+
                
                
                // defaultTime
@@ -225,7 +226,7 @@ body { text-align:center; font-family:helvetica;}
                     </select>
                 </div>
             </div>
-                <input class="timepicker" name="timepicker" value="01:00" style="text-align: center; font-size: 130%; font-weight: bold;" >
+                <input class="timepicker" name="timepicker" value="01:00" oninput="timeValue(event)"/>
                 <input name="test" 
                 id="test" 
                 class="demo-test-date demo-test-datetime demo-test-time demo-test-credit"
