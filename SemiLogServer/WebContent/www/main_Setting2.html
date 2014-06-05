@@ -4,93 +4,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
-
-<script type="text/javascript" src="js/cs_drag_font.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"> 
 
 <link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/lineconStyle.css">
 <link rel="stylesheet" href="css/settingFont.css">
-<link rel="stylesheet" href="css/layout_font.css">
 <link rel="stylesheet" href="css/common_font.css">
-<!-- <link rel="stylesheet" href="css/jquery.mobile-1.4.2.min.css"> -->
 <title>Setting</title>
 <style>
 
 body { font-family: sans-serif;}
 
-.header { height: 70px; line-height: 70px; background: #7ABF49; 
-text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
-
-/* header 적용 */
-.ui-page-theme-a .ui-bar-inherit{
+.header { 
+	height: 50px; line-height: 50px; background: #7ABF49; 
+	text-align: center; color: #fff;  font-weight: bold;
 	background: #7ABF49;
 	border: none;
 	text-shadow: none;
 	color: white;
 }
 
-/* 두번째페이지(setting)header 적용 */
-#main_0 .ui-header {
-	background: #de0052;
-	border: none;
-	text-shadow: none;
-	color: white;
+.activity_group{
+	padding: 10px 10px 10px 10px;
+	color: black;
+	font-weight: bold;
+	text-indent: 3px;
 }
+
+/* 두번째페이지(setting)header 적용 */
+#main_0 .ui-header {background: #de0052;border: none;text-shadow: none;color: white;}
 
 /* 분류별 아이콘 div */
-.icon_theme{
-	min-width: 300px;
-	border: 1px solid white;
-	clear: both;
-	overflow: auto;
-}
+.icon_theme{min-width: 300px;	min-height: 140px;/* border: 1px solid white */;	clear: both;	overflow: auto;}
 
 /* 선택된 아이콘 div */
-.selected_icon{
-	height: 180px;
- 	
-}
+.selected_icon{height: 180px; 		background: white;}
 
 /* 선택된아이콘 한줄 */
-.icon_row{
-	min-width: 300px;
-	overflow: auto;
-	display: table;
-	margin: 0 auto;
-	
-}
+.icon_row{min-width: 300px; overflow: auto;display: table;margin: 0 auto;}
 
 /* icon 하나 박싱 */
-.icon{
-	width: 100px;
-	height: 70px;
-	float: left;
-}
+.icon{width: 100px;	height: 70px; float: left;}
 
 /* 아이콘들 */
-i{
-	float: left;
-	margin: 5px;
-}
+i{float: left;	margin: 5px;}
 
-/* icon 이름 */
-.icon span{
-	line-height: 110px;
-}
 
 /*   두번째페이지 (setting)f---- */
 #setting{
- background: #999; 
+ background: white; 
 	text-shadow: none;
 }
 
+.selected_icon .icon_row{
+	width: 220px;
+	padding: 10px;
+
+}
+
+.all_icon .icon_theme{
+	background: #BABABA;
+	padding: 5px 0px 5px 15px;
+
+}
+
 .activityIcon{
-	width: 70px;
+	width: 50px;
+	padding:0px 10px;
 	height: 90px;
 	float: left;
+	text-align: center;
 }
+
+.actName{
+	margin-top: -7px;
+	width: 50px;
+	text-shadow: none;
+	color: black;
+	font-size: 12px;
+	font-family: sans; 
+	height: 20px;
+	text-align: center;
+}
+
 
 .fa-mobile{font-size: 3.0em;}
 
@@ -113,73 +108,29 @@ i{
 
 <body>
 
-<!-- 첫번째페이지 (main or home) -->
-
-		<div data-role="page" id="main_0">
-			<div data-role="header" ><h2>MAIN PAGE</h2></div>
-			
-			<div data-role="content">
-				<!-- <p>first page</p> -->
-				<a href="#setting" id="link1" data-transition="slideup"> Go to window2</a>
-				
-				<div id="layout">
-	<div id="iconMainDiv">
-		<div id="start"><i class="fa fa-play"></i></div>
-		
-		<div id="middle"><!-- <i class="li li_tv"></i> 아이콘이 여기로 --></div>
-		
-	  <div id="one" class="drag iconMain center top"><i class="li li_tv"></i></div>
-	  <div id="two" class="drag iconMain left top"><i class="fa fa-cutlery"></i></div>
-	  <div id="three" class="drag iconMain right top"><i class="fa fa-desktop"></i></div>
-	  <div id="four" class="drag iconMain left bottom"><i class="fa fa-moon-o"></i></div>
-	  <div id="five" class="drag iconMain right bottom"><i class="fa fa-mobile"></i></div>
-	  <div id="six" class="drag iconMain center bottom"><i class="fa fa-coffee"></i></div>
-	  
-	  <p id="timer"></p>
-	</div>
-</div>
-
-<!-- <p id="result"></p>
-
-<form id="form" name=clock>
-<input class="timerCount Min" name="txtMins" size="1" readonly>
-<input class="timerCount Sec" name="txtSecs" size="1" readonly>
-</form> -->
-				
-				
-				
-				
-			</div>
-		
-		</div>
-		
-		
-		
-<!-- 두번째페이지 (setting) -->
-		
 		<div data-role="page" id="setting">
-			<div data-role="header"><h2>ACTIVITY SETTING</h2></div>
+			<div class="header" data-role="header"><h2>ACTIVITY SETTING</h2></div>
 			
 			<div data-role="content">
-				<a href="#main_0" id="link1" data-transition="slidedown"> Go to window1</a>
+				<a href="#main_0" id="link1" data-transition="slidedown"> main page</a>
 				<div class="selected_icon icon_theme">
-					<p>Selected Activity</p>
+					<!-- <p>SELECTED ACTIVITY</p> -->
 					
 					<div class="icon_row">
 					<div class="icon"><i data-name="tv" class="li li_tv"></i></div>
 					<div class="icon"><i data-name="cutlery" class="fa fa-cutlery"></i></div>
 					<div class="icon"><i data-name="desktop" class="fa fa-desktop"></i></div>
-					
-						<div class="icon"><i data-name="moon" class="fa fa-moon-o"></i></div>
-						<div class="icon"><i data-name="mobile" class="fa fa-mobile"></i></div>
-						<div class="icon"><i data-name="coffee" class="fa fa-coffee"></i></div>
+					<div class="icon"><i data-name="moon" class="fa fa-moon-o"></i></div>
+					<div class="icon"><i data-name="mobile" class="fa fa-mobile"></i></div>
+					<div class="icon"><i data-name="coffee" class="fa fa-coffee"></i></div>
 					</div>
 				</div>
+				
 				<div class="all_icon">
 						<!--  *****휴식 -->
 						<div class="icon_theme other">
 									<div class="icon_row">
-										<div class="box title"><h1>Other things</h1></div>
+										<div class="box title"><p class="activity_group">BREATH TIME</p></div>
 									<div class="activityIcon"><i data-name="headphones" class="fa fa-headphones"></i></div>
 									<div class="activityIcon"><i data-name="music" class="fa fa-music"></i></div>
 									<div class="activityIcon"><i data-name="automobile" class="fa fa-automobile"></i></div>
@@ -201,7 +152,7 @@ i{
 						<!--  *****일상 -->
 						<div class="icon_theme routins">
 						<div class="icon_row">
-							<div class="box title"><h1>ROUTIN </h1></div>
+							<div class="box title"><p class="activity_group">ROUTIN </p></div>
 						
 						<div class="activityIcon"><i data-name="cutlery" class="fa fa-cutlery"></i></div>
 						<div class="activityIcon"><i data-name="desktop" class="fa fa-desktop"></i></div>
@@ -217,7 +168,7 @@ i{
 					<!-- *****집안일 -->	
 					<div class="icon_theme chores">
 									<div class="icon_row">
-										<div class="box title"><h1>Chores</h1></div>
+										<div class="box title"><p class="activity_group">CHORES</p></div>
 									<div class="activityIcon"><i data-name="shirt" class="li  li_t-shirt"></i></div>
 									<div class="activityIcon"><i data-name="home" class="fa fa-home"></i></div>
 									<div class="activityIcon"><i data-name="trash" class="li li_trash"></i></div>
@@ -228,7 +179,7 @@ i{
 					<!--*********** 공부 -->
 						<div class="icon_theme study">
 									<div class="icon_row">
-										<div class="box title"><h1>Study</h1></div>
+										<div class="box title"><p class="activity_group">STUDY</p></div>
 									<div class="activityIcon"><i data-name="flask" class="fa  fa-flask"></i></div>
 									<div class="activityIcon"><i data-name="leaf" class="fa  fa-leaf"></i></div>
 									<div class="activityIcon"><i data-name="pen" class="li li_pen"></i></div>
@@ -241,7 +192,7 @@ i{
 					<!-- ****엄마팩------------ -->
 						<div class="icon_theme mommy">
 								<div class="icon_row">
-								<div class="box title"><h1>for Mommy</h1></div>
+								<div class="box title"><p class="activity_group">for MOMMY</p></div>
 								<div class="activityIcon"><i data-name="child" class="fa  fa-child"></i></div>
 								<div class="activityIcon"><i data-name="stethoscope" class="fa fa-stethoscope"></i></div>
 								<div class="activityIcon"><i data-name="spoon" class="fa fa-spoon"></i></div>
@@ -251,7 +202,7 @@ i{
 					<!-- ****개발자. 코딩-------- -->
 						<div class="icon_theme programmer">
 							<div class="icon_row">
-								<div class="box title"><h1>Programmer</h1></div>	
+								<div class="box title"><p class="activity_group">PROGRAMMER</p></div>	
 								<div class="activityIcon"  data-name="code"><i data-name="code" class="fa fa-code"></i></div>
 								<div class="activityIcon"><i data-name="keyboard" class="fa fa-keyboard-o"></i></div>
 								</div>
@@ -274,15 +225,16 @@ i{
 	$(window).load(function() {
 	    console.log("----window load occurred!----");
 	  
-	    dragdrop_doing()
-	    
 		activityAll = $('.activityIcon > [data-name]');
 		activityAll.attr("data-flag",false);
 		
+//		$(activityAll).children().append("<p>"+$('.activityIcon > [data-name]').data('name')+"</p>");
 		
 		//모든 액티비티이름 배열 만들기
 		for(i = 0 ;  i < activityAll.length ;  i++){
 			var activityOne = activityAll[i].getAttribute('data-name');
+			$(activityAll[i]).prepend("<div class='actName'>" + activityOne + "</div>");
+			
 			activityList.push(activityOne);
 			//console.log("##############################");
 			//console.log(activityAll[i].getAttribute('data-flag'));
@@ -331,7 +283,6 @@ i{
 			
 	});
 	
-	
 	//아이콘 선택 취소하기
 	function select(selectTarget){
 		var clickSelectActivty = $(selectTarget).attr("class");
@@ -360,48 +311,6 @@ i{
 		iconCount = $(".fa-check").length;
 		console.log(iconCount);
 	}
-	
-	
-	//old version
-		 /*	
-		$(".activityIcon").on("click",$("i[data-name]"),function(event){
-			if( iconCount == 6 || iconCount < 6){
-				select(event.target);
-			}else{
-				console.log("It is unappropriate.");
-				console.log($(this));
-			}
-		});
-	});
-	
-	//아이콘 선택 취소하기
-	function select(selectTarget){
-		if($(selectTarget).hasClass("fa-check") == true){
-			console.log($(selectTarget));
-			console.log($(selectTarget).attr('data-name'));
-			$(selectTarget).parent().siblings("div").remove();
-			$(selectTarget).parent().remove();
-			console.log("selected ===" + activitySelected.length);
-			selectCount();
-		}else if($(selectTarget).hasClass("fa-check") == false ){
-			console.log("this isn't yet selected");
-			$(selectTarget).parent()
-			.append('<div class="checkBack"></div>')
-			.append('<div class="check"><i class="fa fa-check" data-flag= "true"></i></div>');
-			selectCount();
-		}else{
-			console.log("unexpected error is occured");
-			console.log($(selectTarget));
-		}
-	}
-	
-	//check표시 된 아이콘 count하기
-	function selectCount(){
-		console.log("check class = = = = = = = = = =");
-		iconCount = $(".fa-check").length;
-		console.log(iconCount);
-	}  */
-	
 	
 
 </script>
