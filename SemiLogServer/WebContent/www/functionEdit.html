@@ -26,8 +26,7 @@
 <link href="css1/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
 <link href="css1/mobiscroll.scroller.wp.css" rel="stylesheet" type="text/css" />
 
-<script type="text/javascript" src="jquery.timepicker.min.js"></script>
-<link rel="stylesheet" href="jquery.timepicker.min.css">
+
  
 <title>Function Edit</title>
 
@@ -64,14 +63,10 @@ body { text-align:center; font-family:helvetica;}
 ::-webkit-input-placeholder {
    color: black;
 }
-.timepicker { margin-top: 15px; width: 318px; height: 70px; 
-              text-align: center; font-size: 180%; font-weight: bold;"
-}
-.timepicker { width: 80px; }
+
+
 </style>
 <script type="text/javascript">
-var time;
-var time2;
         $(function () {	   
            
         
@@ -104,69 +99,7 @@ var time2;
                 $('.demo').hide();
                 $('.demo-' + demo).show();
             });
-            $('#demo').trigger('change');
-         
-            
-               
-            
-               // 시간지정
-                  
-            $("#confirm").click(function(){
-            	   time = $(".timepicker").val();
-            	   time2 = $("#test").val();
-
-            	   
-            	   
-            	   if(time == "00:00" && time2 != "") {
-            		   // 시간알람지정!!!
-            		 console.log(time2);
-            		      
-            	   
-            	   } else {
-            		   // 디폴트 시간 지정
-            	   console.log(time);
-            		 
-            	      } 
-            	
-            	     
-               });
-         
-               
-
-               
-               
-               // defaultTime
-            
-            $('input.timepicker').timepicker({
-                timeFormat: 'HH:mm',
-                // year, month, day and seconds are not important
-                minTime: new Date(0, 0, 0, 0, 0, 0),
-                maxTime: new Date(0, 0, 0, 1, 0, 0),
-                // time entries start being generated at 6AM but the plugin 
-                // shows only those within the [minTime, maxTime] interval
-                startHour: 6,
-                // the value of the first item in the dropdown, when the input
-                // field is empty. This overrides the startHour and startMinute 
-                // options
-                startTime: new Date(0, 0, 0, 0, 0, 0),
-                // items in the dropdown are separated by at interval minutes
-                interval: 5
-            });
-            
-            $('input.change-format').click(function() {
-                // change timeFormat option here
-                $('input.timepicker').data('TimePicker').options.timeFormat = 'HH:mm:ss p';
-                // since v1.1.2 does not support changing most of the options, we need
-                // to trick the plugin into thinking the next time the dropdown needs
-                // to be displayed is the first time, so it re-generates the items, 
-                // using the new format
-                $('input.timepicker').data('TimePicker').items = null;
-                $('input.timepicker').data('TimePicker').widget.instance = null;
-            });   
-            
-            
-            
-            
+            $('#demo').trigger('change');                 
         });
 </script>
 
@@ -227,7 +160,6 @@ var time2;
                     </select>
                 </div>
             </div>
-                <input class="timepicker" name="timepicker" value="01:00" oninput="timeValue(event)" readonly/>
                 <input name="test" 
                 id="test" 
                 class="demo-test-date demo-test-datetime demo-test-time demo-test-credit"
