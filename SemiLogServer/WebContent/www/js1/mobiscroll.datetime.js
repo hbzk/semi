@@ -1,6 +1,7 @@
 (function ($) {
     var ms = $.mobiscroll,
         date = new Date(),
+        timeSet = [0 , 0],
         defaults = {
             startYear: date.getFullYear() - 100,
             endYear: date.getFullYear() + 1,
@@ -766,7 +767,7 @@
                         validateTimes(valid, temp, y, m, mins, maxs, dir, dw, 1);
                     }
 
-                    inst.temp = temp;
+                    inst.temp = timeSet;
                 }
             };
         };
