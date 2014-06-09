@@ -12,6 +12,16 @@ margin: 0px auto 0px; width: 100%; }
 	color: white; text-align: center;	
 }
 
+.activityIcon .fa, .activityIcon .li, .checkBack{
+	display: block; width: 50px; height: 50px; line-height: 50px; font-size: 2.1em;
+	border-radius: 25px; -webkit-border-radius: 25px;	-moz-border-radius: 25px;
+	text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15); border: 0px; margin : inherit;
+	color: white; text-align: center;	
+		
+}
+
+
+
 /* 빙글빙글 */
 .flipping { -webkit-transform: rotateY(720deg); -webkit-transition: 1.0s;}
 
