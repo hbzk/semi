@@ -40,8 +40,6 @@ body { text-align:center; font-family:helvetica;}
 #timer { font-size: 200%; margin: 10px 0px; }
 
 #functionEdit button { font-size: 130%; padding: 10px; }
-#confirm { background: #5cb85c; border-radius: 0px; margin-top: 50px;}
-#cancel { background: #d9584f; border-radius: 0px;}
 
 
 .ui-content { 
@@ -63,8 +61,46 @@ body { text-align:center; font-family:helvetica;}
 ::-webkit-input-placeholder {
    color: black;
 }
+.btn{
+ width:130px;
+ height:50px;
+ margin-top: 50px;
+ margin-left: 20px;
+ float: left;
 
-
+}
+.button1 {
+ width:125px;
+ height:45px;
+ border: none;
+ outline:none;
+ box-shadow: 0px 3px 2px 0px #703789;
+ color: #fff;
+ font-size: 14px;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+ background-color: #8d44ad;
+ font-weight: bold;
+}
+.button1:active {
+ padding-top: 2px;
+ box-shadow:none;
+}
+.button2 {
+ width:125px;
+ height:45px;
+ border: none;
+ outline:none;
+ color: #fff;
+ font-size: 14px;
+ background-color: #2dcc70;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+ box-shadow: 0px 3px 2px 0px #219452;
+ font-weight: bold;
+}
+.button2:active {
+ padding-top: 2px;
+ box-shadow:none;
+}
 </style>
 <script type="text/javascript">
         $(function () {	   
@@ -168,10 +204,9 @@ body { text-align:center; font-family:helvetica;}
 	
 	
 	
+	<div id="confirm" class="btn"><input type="button" class="button1" value="CONFIRM"/></div>
+ 	<div id="cancel" class="btn"><input type="button" class="button2" value="CANCEL"/></div>
 	
-	
-	<button id="confirm">Confirm</button>
-	<button id="cancel">Cancel</button>
 </section>
 
 
