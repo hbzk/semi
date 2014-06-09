@@ -38,7 +38,11 @@ $(window).load(function(){
 	
 	
 	$(".drag").click(function(){
+		
+		var clickIcon = this.innerHTML;
+		
 		console.log(this.innerHTML);
+		
 	});
 	
 	
