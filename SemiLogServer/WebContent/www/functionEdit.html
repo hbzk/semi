@@ -114,6 +114,10 @@ body { text-align:center; font-family:helvetica;}
 #iconSet { margin-left: 125px; }
 </style>
 <script type="text/javascript">
+var iconName, defaultTime;
+var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+
+
         $(function () {	   
        
         	
@@ -143,9 +147,22 @@ body { text-align:center; font-family:helvetica;}
             });
             $('#demo').trigger('change');
             
-           console.log($(".icons").val());
+          // db --------------------------
+          
             
+            
+            db_iconTime();
+   
         });
+        
+        
+        function db_iconTime(){
+        	db.transaction(function(tx) {
+        		tx.executeSql("select * from TIMESET", [], function(tx, res) {
+        			
+        		});
+        	}, db_errorCB);
+        };
 </script>
 
 
@@ -162,7 +179,7 @@ body { text-align:center; font-family:helvetica;}
 
 <section id="functionEdit">
 <div id="iconSet">
-  <i class="li li_tv"><input class="icons" value="60"></i>
+  
 </div>
 	<p id="timer">Default Timer</p>
 	
