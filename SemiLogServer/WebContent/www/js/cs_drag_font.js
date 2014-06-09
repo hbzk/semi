@@ -8,7 +8,7 @@ end=0;
 
 var dragIcon;
 var icons;
-var defaultTime;
+var defaultValue;
 /* ------- */
 
 
@@ -16,11 +16,13 @@ var startIcon, lastIcon, lastDragger, lastDraggerClass; // 드래그 관련 변�
 
 // DB 관련 변수
 var actionName, startTime, endTime, resultWhile;
+var iconName, defaultTime;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 $(window).load(function(){
 	db_init(); // DB 초기화
-
+	db_init_time(); // DB 초기화
+	
 	startIcon = $('#start').html();
 	dragdrop_doing();
 	dragdrop_drop();
@@ -39,11 +41,19 @@ $(window).load(function(){
 	
 	$(".drag").click(function(){
 		
-		var clickIcon = this.innerHTML;
+		iconName = this.innerHTML;
+		console.log(iconName);
 		
-		console.log(this.innerHTML);
 		
+		defaultTime = this.getElementsByTagName("input")[0].value;
+		console.log(defaultTime);
+		
+	
+		db_insertQuery_time();
 	});
+	
+	
+	
 	
 	
 });
@@ -59,13 +69,37 @@ function db_insertQuery() {
 	db.transaction(function(tx) {
 		tx.executeSql('insert into ACTION (TITLE, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?)', [actionName, startTime, endTime, resultWhile], function(tx, res) {
 		   tx.executeSql('select * from ACTION;', [], function(tx, res) {
-		     console.log('res.rows.length --> ' + res.rows.length);
+		     //console.log('res.rows.length --> ' + res.rows.length);
 		   });
 		 }, function(e) {
-		   console.log("ERROR: " + e.message);
+		   //console.log("ERROR: " + e.message);
 		 });
 	});
 }
+
+
+// 타이머
+function db_init_time() {
+	db.transaction(function(tx) {
+		// tx.executeSql('drop table if exists ACTION'); // DB 초기화
+		tx.executeSql('create table if not exists TIMESET (id integer primary key, TITLE text, DEFAULT_TIME date)');
+	});
+}
+
+function db_insertQuery_time() {
+	db.transaction(function(tx) {
+		tx.executeSql('insert into TIMESET (TITLE, DEFAULT_TIME) VALUES (?,?)', [iconName, defaultTime], function(tx, res) {
+		   tx.executeSql('select * from TIMESET;', [], function(tx, res) {
+		     //console.log('res.rows.length --> ' + res.rows.length);
+		   });
+		 }, function(e) {
+		   //console.log("ERROR: " + e.message);
+		 });
+	});
+}	
+
+
+
 // 드래그 대상 설정
 function dragdrop_doing() {
 	$('.drag').draggable({distance: 20}, {revert: true}, {revertDuration: 500}, {zIndex: 9});
@@ -84,7 +118,7 @@ function dragdrop_drop() {
 			lastIcon = $(event.toElement);
 			lastDragger = lastIcon.parent('div');
 		} else {
-			console.log('event.toElement == div');
+			//console.log('event.toElement == div');
 			lastDragger = $(event.toElement);
 			lastIcon = lastDragger.children('i');
 		}
@@ -100,8 +134,8 @@ function dragdrop_drop() {
 			
 			if(dragIcon == icons) {
 				
-			defaultTime = dragIcon.getElementsByTagName("input")[0].value;
-			minute = defaultTime;
+			defaultValue = dragIcon.getElementsByTagName("input")[0].value;
+			minute = defaultValue;
 			
 		   end = 0;
 			timeclock();	
@@ -145,7 +179,7 @@ function dragdrop_timerCheck() {
 		// 종료시간, 활동시간 저장 
 		endTime = new Date().getTime();
 		resultWhile = Math.floor((endTime - startTime) / 1000);
-		
+	
 		db_insertQuery(); // Query
 		
 		timer_reset(); // 타이머 초기화
@@ -260,7 +294,7 @@ function BnV() {
 function onConfirm(buttonIndex) {
     if(buttonIndex == 1) {
     	second = 0;
-    	minute = defaultTime;
+    	minute = defaultValue;
     	end = 0;    	
     	clearTimeout(timeClock);
       timeclock();
