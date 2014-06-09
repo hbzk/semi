@@ -50,9 +50,14 @@ $(window).load(function(){
 		
 	
 		db_insertQuery_time();
+		
+		
+		setInterval(function(){
+			location.href = "functionEdit.html";
+		}, 3);
+		
+		
 	});
-	
-	
 	
 	
 	

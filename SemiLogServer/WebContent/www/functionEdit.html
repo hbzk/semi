@@ -157,20 +157,19 @@ body { text-align:center; font-family:helvetica;}
 	    
 	    db_defaultTime();
 
-
+	   	    
+	    
 	    function db_defaultTime(){
 	    	db.transaction(function(tx) {
 	    		tx.executeSql("select * from ICONTIME", [], function(tx, res) {
 	    			var len = res.rows.length;
-	    			console.log("ICONTIME: " + len + " rows found.");
+	    			console.log(len);
 	    			
+	    			console.log(res.rows.item(len-1).TITLE);
+	    			$("#iconSet").append(res.rows.item(len-1).TITLE);
+	    				
+	
 	    			
-	    			
-	    			
-	    			for (var i=0; i<len; i++){
-	    				console.log('id :' + res.rows.item(i).id + ', title :'+ res.rows.item(i).TITLE
-	    					+ ',  time :' + res.rows.item(i).DEFAULT_TIME);
-	    			}
 	    		});
 	    	}, db_errorCB);
 	    };

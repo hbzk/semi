@@ -79,6 +79,7 @@ function db_listText(){
 			var resultList = $('#resultList');
 			for (var i=0; i<len; i++){
 				startTime = new Date(res.rows.item(i).START_TIME);
+				console.log(startTime);
 				endTime = new Date(res.rows.item(i).END_TIME);
 				
 				resultList.append($('<div id="rtTable">')
