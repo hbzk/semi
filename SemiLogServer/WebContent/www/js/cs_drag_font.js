@@ -42,11 +42,11 @@ $(window).load(function(){
 	$(".drag").click(function(){
 		
 		iconName = this.innerHTML;
-		console.log(iconName);
+		//console.log(iconName);
 		
 		
 		defaultTime = this.getElementsByTagName("input")[0].value;
-		console.log(defaultTime);
+		//console.log(defaultTime);
 		
 	
 		db_insertQuery_time();
@@ -82,15 +82,15 @@ function db_insertQuery() {
 function db_init_time() {
 	db.transaction(function(tx) {
 		// tx.executeSql('drop table if exists ACTION'); // DB 초기화
-		tx.executeSql('create table if not exists TIMESET (id integer primary key, TITLE text, DEFAULT_TIME date)');
+		tx.executeSql('create table if not exists ICONTIME (id integer primary key, TITLE text, DEFAULT_TIME date)');
 	});
 }
 
 function db_insertQuery_time() {
 	db.transaction(function(tx) {
-		tx.executeSql('insert into TIMESET (TITLE, DEFAULT_TIME) VALUES (?,?)', [iconName, defaultTime], function(tx, res) {
-		   tx.executeSql('select * from TIMESET;', [], function(tx, res) {
-		     //console.log('res.rows.length --> ' + res.rows.length);
+		tx.executeSql('insert into ICONTIME (TITLE, DEFAULT_TIME) VALUES (?,?)', [iconName, defaultTime], function(tx, res) {
+		   tx.executeSql('select * from ICONTIME;', [], function(tx, res) {
+			//console.log('res.rows.length --> ' + res.rows.length);
 		   });
 		 }, function(e) {
 		   //console.log("ERROR: " + e.message);

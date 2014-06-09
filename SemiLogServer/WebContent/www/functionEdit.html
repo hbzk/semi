@@ -114,10 +114,6 @@ body { text-align:center; font-family:helvetica;}
 #iconSet { margin-left: 125px; }
 </style>
 <script type="text/javascript">
-var iconName, defaultTime;
-var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
-
-
         $(function () {	   
        
         	
@@ -146,23 +142,51 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
                 $('.demo-' + demo).show();
             });
             $('#demo').trigger('change');
-            
-          // db --------------------------
-          
-            
-            
-            db_iconTime();
-   
+               
         });
         
         
-        function db_iconTime(){
-        	db.transaction(function(tx) {
-        		tx.executeSql("select * from TIMESET", [], function(tx, res) {
-        			
-        		});
-        	}, db_errorCB);
-        };
+        
+          // db --------------------------
+          
+          
+        var iconName, defaultTime;
+	     var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+	    
+	    
+	    
+	    db_defaultTime();
+
+
+	    function db_defaultTime(){
+	    	db.transaction(function(tx) {
+	    		tx.executeSql("select * from ICONTIME", [], function(tx, res) {
+	    			var len = res.rows.length;
+	    			console.log("ICONTIME: " + len + " rows found.");
+	    			
+	    			
+	    			
+	    			
+	    			for (var i=0; i<len; i++){
+	    				console.log('id :' + res.rows.item(i).id + ', title :'+ res.rows.item(i).TITLE
+	    					+ ',  time :' + res.rows.item(i).DEFAULT_TIME);
+	    			}
+	    		});
+	    	}, db_errorCB);
+	    };
+
+	    function db_errorCB(e) { // query 에러시 호출
+	    	console.log("e :" + e);
+	    	console.log("e.code : "+e.code);
+	    	console.log("e.message :" + e.message);
+	    }
+
+	    function db_digitText(i) {
+	    	if (i < 10) {
+	    		i = '0' + i;
+	    	}
+	    	return i;
+	    }
 </script>
 
 

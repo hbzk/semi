@@ -61,30 +61,6 @@ window.addEventListener("load", function(){
 function loaded(){
   window.scrollTo(0, 1);
 }
-
-
-
-
-function db_init_time() {
-	db.transaction(function(tx) {
-		// tx.executeSql('drop table if exists ACTION'); // DB 초기화
-		tx.executeSql('create table if not exists timeSet (id integer primary key, TITLE text, DEFAULT_TIME date)');
-	});
-}
-
-function db_insertQuery_time() {
-	db.transaction(function(tx) {
-		tx.executeSql('insert into timeSet (TITLE, DEFAULT_TIME) VALUES (?,?)', [iconName, defaultTime], function(tx, res) {
-		   tx.executeSql('select * from ACTION;', [], function(tx, res) {
-		     console.log('res.rows.length --> ' + res.rows.length);
-		   });
-		 }, function(e) {
-		   console.log("ERROR: " + e.message);
-		 });
-	});
-}	
-
-
 </script>
 </body>
 </html>
