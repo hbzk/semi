@@ -1,0 +1,97 @@
+@CHARSET "UTF-8";
+
+body { font-family: sans-serif;}
+
+.header { 
+	height: 50px; line-height: 50px; background: #7ABF49; 
+	text-align: center; color: #fff;  font-weight: bold;
+	background: #7ABF49;
+	border: none;
+	text-shadow: none;
+	color: white;
+}
+
+
+.activity_group{
+	padding: 10px 10px 10px 10px;
+	color: black;
+	font-weight: bold;
+	text-indent: 3px;
+}
+
+/* 두번째페이지(setting)header 적용 */
+#main_0 .ui-header {background: #de0052;border: none;text-shadow: none;color: white;}
+
+/* 분류별 아이콘 div */
+.icon_theme{min-width: 300px;	min-height: 140px;/* border: 1px solid white */;	clear: both;	overflow: auto;}
+
+/* 선택된 아이콘 div */
+.selected_icon{height: 180px; 		background: white;}
+
+/* 선택된아이콘 한줄 */
+.icon_row{min-width: 300px; overflow: auto;display: table;margin: 0 auto;}
+
+/* icon 하나 박싱 */
+.icon{width: 100px;	height: 70px; float: left;}
+
+/* 아이콘들 */
+i{float: left;	margin: 5px;}
+
+
+/*   두번째페이지 (setting)f---- */
+#setting{
+ background: white; 
+	text-shadow: none;
+}
+
+.selected_icon .icon_row{
+	width: 220px;
+	padding: 10px;
+
+}
+
+.all_icon .icon_theme{
+	background: #BABABA;
+	padding: 5px 0px 5px 15px;
+
+}
+
+.activityIcon{
+	width: 50px;
+	padding:0px 10px;
+	height: 90px;
+	float: left;
+	text-align: center;
+}
+
+.actName{
+	margin-top: -7px;
+	width: 50px;
+	text-shadow: none;
+	color: black;
+	font-size: 12px;
+	font-family: sans; 
+	height: 20px;
+	text-align: center;
+}
+
+
+.fa-mobile{font-size: 3.0em;}
+
+.fa-check{ z-index: 99;}
+
+.checkBack{
+	position: absolute;
+	background: black;
+	opacity: 0.6;
+}
+
+.check{
+	position: absolute;
+	float: none;
+}
+.fa-arrow-left{
+	width: 30px;
+	height: 30px;
+	margin-left: 30px;
+}

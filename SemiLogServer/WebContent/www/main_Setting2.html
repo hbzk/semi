@@ -9,110 +9,10 @@
 <link rel="stylesheet" href="css/lineconStyle.css">
 <link rel="stylesheet" href="css/settingFont.css">
 <link rel="stylesheet" href="css/common_font.css">
+<link rel="stylesheet" href="css/iconSetting.css">
 <title>Setting</title>
-<style>
-
-body { font-family: sans-serif;}
-
-.header { 
-	height: 50px; line-height: 50px; background: #7ABF49; 
-	text-align: center; color: #fff;  font-weight: bold;
-	background: #7ABF49;
-	border: none;
-	text-shadow: none;
-	color: white;
-}
-
-
-.activity_group{
-	padding: 10px 10px 10px 10px;
-	color: black;
-	font-weight: bold;
-	text-indent: 3px;
-}
-
-/* 두번째페이지(setting)header 적용 */
-#main_0 .ui-header {background: #de0052;border: none;text-shadow: none;color: white;}
-
-/* 분류별 아이콘 div */
-.icon_theme{min-width: 300px;	min-height: 140px;/* border: 1px solid white */;	clear: both;	overflow: auto;}
-
-/* 선택된 아이콘 div */
-.selected_icon{height: 180px; 		background: white;}
-
-/* 선택된아이콘 한줄 */
-.icon_row{min-width: 300px; overflow: auto;display: table;margin: 0 auto;}
-
-/* icon 하나 박싱 */
-.icon{width: 100px;	height: 70px; float: left;}
-
-/* 아이콘들 */
-i{float: left;	margin: 5px;}
-
-
-/*   두번째페이지 (setting)f---- */
-#setting{
- background: white; 
-	text-shadow: none;
-}
-
-.selected_icon .icon_row{
-	width: 220px;
-	padding: 10px;
-
-}
-
-.all_icon .icon_theme{
-	background: #BABABA;
-	padding: 5px 0px 5px 15px;
-
-}
-
-.activityIcon{
-	width: 50px;
-	padding:0px 10px;
-	height: 90px;
-	float: left;
-	text-align: center;
-}
-
-.actName{
-	margin-top: -7px;
-	width: 50px;
-	text-shadow: none;
-	color: black;
-	font-size: 12px;
-	font-family: sans; 
-	height: 20px;
-	text-align: center;
-}
-
-
-.fa-mobile{font-size: 3.0em;}
-
-.fa-check{ z-index: 99;}
-
-.checkBack{
-	position: absolute;
-	background: black;
-	opacity: 0.6;
-}
-
-.check{
-	position: absolute;
-	float: none;
-}
-.fa-arrow-left{
-	width: 30px;
-	height: 30px;
-	margin-left: 30px;
-}
-</style>
 </head>
-
-
 <body>
-
 		<div data-role="page" id="setting">
 			<div class="header" data-role="header"><p>ACTIVITY SETTING</p></div>
 			
@@ -120,7 +20,6 @@ i{float: left;	margin: 5px;}
 				<a href="main_sql.html"><i style="color:black; font-size: 1.5em" class="fa fa-arrow-left"></i></a>
 				<div class="selected_icon icon_theme">
 					<!-- <p>SELECTED ACTIVITY</p> -->
-					
 					<div class="icon_row">
 					<div class="icon"><i data-name="tv" class="li li_tv"></i></div>
 					<div class="icon"><i data-name="cutlery" class="fa fa-cutlery"></i></div>
@@ -153,7 +52,6 @@ i{float: left;	margin: 5px;}
 									</div>
 						</div>
 				
-				
 						<!--  *****일상 -->
 						<div class="icon_theme routins">
 						<div class="icon_row">
@@ -167,7 +65,6 @@ i{float: left;	margin: 5px;}
 						<div class="activityIcon"><i data-name="tv" class="li li_tv"></i></div>
 						</div>
 						</div>
-						
 						
 						
 					<!-- *****집안일 -->	
@@ -197,7 +94,7 @@ i{float: left;	margin: 5px;}
 					<!-- ****엄마팩------------ -->
 						<div class="icon_theme mommy">
 								<div class="icon_row">
-								<div class="box title"><p class="activity_group">for MOMMY</p></div>
+								<div class="box title"><p class="activity_group">MOMMY</p></div>
 								<div class="activityIcon"><i data-name="child" class="fa  fa-child"></i></div>
 								<div class="activityIcon"><i data-name="stethoscope" class="fa fa-stethoscope"></i></div>
 								<div class="activityIcon"><i data-name="spoon" class="fa fa-spoon"></i></div>
@@ -216,108 +113,6 @@ i{float: left;	margin: 5px;}
 			</div>
 		</div>
 		</div>
-<script>
-	  var activities;
-	  var selectedOne;
-	  var selectedList = [];
-	  var activityAll;
-	  var activityList = [];
-	  var activitySelected;
-	  var alreadySelected;
-	  var iconCount;
-	  
-	  
-	$(window).load(function() {
-	    console.log("----window load occurred!----");
-	  
-		activityAll = $('.activityIcon > [data-name]');
-		activityAll.attr("data-flag",false);
-		
-//		$(activityAll).children().append("<p>"+$('.activityIcon > [data-name]').data('name')+"</p>");
-		
-		//모든 액티비티이름 배열 만들기
-		for(i = 0 ;  i < activityAll.length ;  i++){
-			var activityOne = activityAll[i].getAttribute('data-name');
-			$(activityAll[i]).prepend("<div class='actName'>" + activityOne + "</div>");
-			
-			activityList.push(activityOne);
-			//console.log("##############################");
-			//console.log(activityAll[i].getAttribute('data-flag'));
-		}
-		
-	  //main창에서 선택된 icon들
-		activitySelected = $('.icon > [data-name]');
-	  
-	  console.log("activitySelected length is " + activitySelected.length);
-		
-	  for (k =0 ; k < activitySelected.length ; k++){
-			selectedOne = activitySelected[k].getAttribute('data-name');
-			console.log(k + " == "+ selectedOne);		
-			if($.inArray(selectedOne,activityList)){
-					$(".activityIcon i[data-name =" + selectedOne + " ]")
-											.parent()
-											.append('<div class="checkBack"></div>')
-											.append('<div class="check"><i class="fa fa-check" data-flag= "true"></i></div>');
-					
-			}
-		}
-	//check표시 된 아이콘 count하기
-		selectCount();
-		
-		// tap -> click 
-		//아이콘 click했을 시 이벤트
-		
-		
-		$(".activityIcon").on("click",$("i[data-name]"),function(event){
-			
-			if( iconCount == 6){
-				if($(event.target).hasClass("fa-check") == true	){
-					unselect(event.target);
-				}else{
-					//alert("already fully selected");
-					console.log("already fully selected");
-				}
-			}else if(iconCount < 6){
-				if($(event.target).hasClass("fa-check") == true	){
-					unselect(event.target);
-				}else if($(event.target).hasClass("fa-check") == false ){
-					select(event.target);
-				}
-			}
-		});
-			
-	});
-	
-	//아이콘 선택 취소하기
-	function select(selectTarget){
-		var clickSelectActivty = $(selectTarget).attr("class");
-		console.log(clickSelectActivty);
-		$(".selected_icon .icon_row").append("<div class='icon'><i data-name=" +$(selectTarget).attr('data-name')+" class=" + "'" +clickSelectActivty +"'" +"></i></div>");
-		console.log($(selectTarget).attr('data-name'));
-		$(selectTarget).parent()
-				.append('<div class="checkBack"></div>')
-				.append('<div class="check"><i class="fa fa-check" data-flag= "true"></i></div>');
-		selectCount();
-	}
-	
-	function unselect(selectTarget){
-		var alreadySelectedActivity = $(selectTarget).parent().parent().children("[data-name]");
-		var activityName = $(alreadySelectedActivity).attr('data-name');
-		$(".icon i[data-name =" + activityName + " ]").parent().remove();
-		//$(".activityIcon i[data-name =" + selectedOne + " ]")
-		$(selectTarget).parent().siblings("div").remove();
-		$(selectTarget).parent().remove();
-		selectCount();
-	}
-	
-	//check표시 된 아이콘 count하기
-	function selectCount(){
-		console.log("check class = = = = = = = = = =");
-		iconCount = $(".fa-check").length;
-		console.log(iconCount);
-	}
-	
-
-</script>
+<script type="text/javascript" src="js/iconSetting.js"></script>
 </body>
 </html>
