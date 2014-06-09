@@ -6,6 +6,10 @@
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="spinningwheel.js"></script>
   
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/lineconStyle.css">
+<link rel="stylesheet" href="css/layout_font.css">
+<link rel="stylesheet" href="css/common_font.css">  
   
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="spinningwheel.css" type="text/css" media="all" />
@@ -101,6 +105,14 @@ body { text-align:center; font-family:helvetica;}
  padding-top: 2px;
  box-shadow:none;
 }
+.fa, .li{  
+  display: block; width: 70px; height: 70px; line-height: 70px; font-size: 2.8em;
+  border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px;
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15); border: 0px; 
+  color: white; text-align: center; 
+}
+.icons { display: none; }
+#iconSet { margin-left: 125px; }
 </style>
 <script type="text/javascript">
         $(function () {	   
@@ -152,7 +164,9 @@ body { text-align:center; font-family:helvetica;}
 
 
 <section id="functionEdit">
-	<img id="function" src="css/img/radio.png">
+<div id="iconSet">
+  <i class="li li_tv"><input class="icons" value="60"></i>
+</div>
 	<p id="timer">Default Timer</p>
 	
 
