@@ -36,6 +36,12 @@ $(window).load(function(){
 		/* ---- */
 	});
 	
+	
+	$(".drag").click(function(){
+		console.log(this.innerHTML);
+	});
+	
+	
 });
 
 function db_init() {
