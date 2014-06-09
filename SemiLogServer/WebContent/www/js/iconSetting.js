@@ -1,14 +1,17 @@
  var activities, selectedOne, selectedList = [],activityAll, activityList = [] 
 	  		,activitySelected, alreadySelected, iconCount;
-	  
+
+ //DB 변수
+ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+ 
 	$(window).load(function() {
-	  
+		db_init();
 		activityAll = $('.activityIcon > [data-name]');
 		activityAll.attr("data-flag",false);
 		
 		
 		//모든 액티비티이름 배열 만들기
-		for(i = 0 ;  i < activityAll.length ;  i++){
+		for(var i = 0 ;  i < activityAll.length ;  i++){
 			var activityOne = activityAll[i].getAttribute('data-name');
 			$(activityAll[i]).prepend("<div class='actName'>" + activityOne + "</div>");
 			activityList.push(activityOne);
@@ -17,16 +20,14 @@
 	  //main창에서 선택된 icon들
 		activitySelected = $('.icon > [data-name]');
 	  console.log("activitySelected length is " + activitySelected.length);
-		
-	  for (k =0 ; k < activitySelected.length ; k++){
+	  for (var k = 0 ; k < activitySelected.length ; k++){
 			selectedOne = activitySelected[k].getAttribute('data-name');
-			console.log(k + " == "+ selectedOne);		
+			//console.log(k + " == "+ selectedOne);		
 			if($.inArray(selectedOne,activityList)){
 					$(".activityIcon i[data-name =" + selectedOne + " ]")
 											.parent()
 											.append('<div class="checkBack"></div>')
 											.append('<div class="check"><i class="fa fa-check" data-flag= "true"></i></div>');
-					
 			}
 		}
 	//check표시 된 아이콘 count하기
@@ -41,8 +42,8 @@
 					unselect(event.target);
 				//6개 일때 클릭하면 알림창 띄우기 (not yet)
 				}else{
-					//alert("already fully selected");
-					console.log("already fully selected");
+					//alert("already fully selected ");
+					console.log("already fully selected ; 6 icons");
 				}
 			}else if(iconCount < 6){
 				if($(event.target).hasClass("fa-check") == true	){
@@ -54,7 +55,7 @@
 		});
 	});
 	
-	//아이콘 선택하기
+	//아이콘 선택
 	function select(selectTarget){
 		var clickSelectActivty = $(selectTarget).attr("class");
 		console.log(clickSelectActivty);
@@ -65,7 +66,7 @@
 				.append('<div class="check"><i class="fa fa-check" data-flag= "true"></i></div>');
 		selectCount();
 	}
-	//아이콘 선택취소하기
+	//아이콘 선택취소기
 	function unselect(selectTarget){
 		var alreadySelectedActivity = $(selectTarget).parent(".check").parent(".activityIcon").children("[data-name]");
 		var activityName = $(alreadySelectedActivity).attr('data-name');
@@ -77,7 +78,38 @@
 	}
 	//check표시 된 아이콘개수 count하기
 	function selectCount(){
-		console.log("check class = = = = = = = = = =");
 		iconCount = $(".fa-check").length;
 		console.log(iconCount);
+		if(iconCount == 6){
+			selectedIcon_db_insert();
+		}
 	}
+	
+	// 6개 선택된 ICON DB에 저장하기
+	
+	function selectedIcon_db_insert(){
+		db.transaction(function(tx) {
+			var sixSelected = $(".selected_icon .icon_row .icon > [data-name]");
+			for( var i=0 ; i< sixSelected.length; i++){
+				var dataName = sixSelected[i].getAttribute("data-name");
+				var className = sixSelected[i].getAttribute("class");
+				tx.executeSql('insert into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (?,?,?)', [ i, dataName, className], function(tx, res) {
+					tx.executeSql('select * from ICONSELECT;', [], function(tx, res) {
+						console.log('res.rows.length --> ' + res.rows.length);
+					});
+				}, function(e) {
+					console.log("ERROR: " + e.message);
+				});
+			}
+			
+		});
+	}
+	//DB 초기화
+	function db_init() {
+		db.transaction(function(tx) {
+			tx.executeSql('create table if not exists ICONSELECT (NO integer, ICON_NAME text, CLASS_NAME text)');
+		});
+	}
+
+
+	
