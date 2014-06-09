@@ -16,28 +16,33 @@
 <link rel="stylesheet" href="css/common_font.css">
 <!-- <link rel="stylesheet" href="css/jquery-ui.css"> -->
 <title>Main</title>
+<style type="text/css">
+#resultLink { position: absolute; bottom: 10px; right: 10px; font-size: 150%; text-decoration: none; }
+.resultLink{ position: absolute; bottom: 10px; right: 80px; font-size: 150%; text-decoration: none;}
+</style>
 <style>
-body { background: url('css/tex2res5.png') repeat center center #fafafa; }
 #iconMainDiv { margin-top: 80px; }
 </style>
 </head>
 <body>
 
 <section id="layout">
-	<section id="iconMainDiv">
-		<div id="start"><i class="fa fa-play"></i></div>
-		
-		<div id="middle"><!-- <i class="li li_tv"></i> 아이콘이 여기로 --></div>
-		
-	  <div id="one" class="drag iconMain center top"><i class="li li_tv"><input class="icons" value="1"></i></div>
-	  <div id="two" class="drag iconMain left top"><i class="fa fa-cutlery"><input class="icons" value="2"></i></div>
-	  <div id="three" class="drag iconMain right top"><i class="fa fa-desktop"><input class="icons" value="3"></i></div>
-	  <div id="four" class="drag iconMain left bottom"><i class="fa fa-moon-o"><input class="icons" value="4"></i></div>
-	  <div id="five" class="drag iconMain right bottom"><i class="fa fa-mobile"><input class="icons" value="5"></i></div>
-	  <div id="six" class="drag iconMain center bottom"><i class="fa fa-coffee"><input class="icons" value="6"></i></div>
-	  
-	  <p id="timer"></p>
-	</section>
+  <section id="iconMainDiv">
+    <div id="start"><i class="fa fa-play"></i></div>
+    
+    <div id="middle"><!-- <i class="li li_tv"></i> 아이콘이 여기로 --></div>
+    
+    <div id="one" class="drag iconMain center top"><i class="li li_tv"><input class="icons" value="1"></i></div>
+    <div id="two" class="drag iconMain left top"><i class="fa fa-cutlery"><input class="icons" value="2"></i></div>
+    <div id="three" class="drag iconMain right top"><i class="fa fa-desktop"><input class="icons" value="3"></i></div>
+    <div id="four" class="drag iconMain left bottom"><i class="fa fa-moon-o"><input class="icons" value="4"></i></div>
+    <div id="five" class="drag iconMain right bottom"><i class="fa fa-mobile"><input class="icons" value="5"></i></div>
+    <div id="six" class="drag iconMain center bottom"><i class="fa fa-coffee"><input class="icons" value="6"></i></div>
+    
+    <p id="timer"></p>
+  </section>
+  <a class="resultLink" href="main_Setting2.html"><i style="color:black; font-size: 1.5em" class="fa fa-cog"></i></a>
+  <a id="resultLink" href="result_text_sql.html"><i style="color:black; font-size: 1.5em" class="fa fa-list-ul"></i></a>
 </section>
 
 <p id="result"></p>
@@ -47,5 +52,15 @@ body { background: url('css/tex2res5.png') repeat center center #fafafa; }
 <input class="timerCount Sec" name="txtSecs" size="1" readonly>
 </form>
 
+
+<script type="text/javascript">
+window.addEventListener("load", function(){
+  setTimeout(loaded, 100);
+}, false);
+   
+function loaded(){
+  window.scrollTo(0, 1);
+}
+</script>
 </body>
 </html>
