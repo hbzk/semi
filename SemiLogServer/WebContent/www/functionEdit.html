@@ -164,8 +164,10 @@ body { text-align:center; font-family:helvetica;}
 	    		tx.executeSql("select * from ICONTIME", [], function(tx, res) {
 	    			var len = res.rows.length;
 	    			console.log(len);
-	    			
 	    			console.log(res.rows.item(len-1).TITLE);
+	    			console.log(res.rows.item(len-1).DEFAULT_TIME);
+	    			
+	    			
 	    			$("#iconSet").append(res.rows.item(len-1).TITLE);
 
 	    			

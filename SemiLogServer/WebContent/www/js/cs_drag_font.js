@@ -39,6 +39,11 @@ $(window).load(function(){
 	});
 	
 	
+		
+		
+	
+	
+
 	$(".drag").click(function(){
 		
 		iconName = this.innerHTML;
