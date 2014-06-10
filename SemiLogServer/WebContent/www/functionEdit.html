@@ -167,8 +167,36 @@ body { text-align:center; font-family:helvetica;}
 	    			
 	    			console.log(res.rows.item(len-1).TITLE);
 	    			$("#iconSet").append(res.rows.item(len-1).TITLE);
-	    				
-	
+
+	    			
+	    		  var dTime = res.rows.item(len-1).DEFAULT_TIME;
+	    		  var hTime = dTime / 60;
+	        var mTime = dTime % 60;
+	        var hsTime = Math.floor(hTime);
+	        
+	    		  if(dTime < 60) {
+	    			  
+	    		   $("#test").attr("placeholder", "00:" + dTime);	  
+	    		   
+	    		  } else if(mTime != "0") {
+	    			     				 
+	    			  $("#test").attr("placeholder", hsTime + ":" + mTime);
+	 	  
+	    		  } else {
+	    			  
+	    			  $("#test").attr("placeholder", hTime + ":00");
+	    			
+	    		  }
+	    		  
+	    			$("#test").attr("value", dTime);
+	    		  
+	    		 $("#confirm").click(function(){
+	    			 var bTime = $("#test").val();
+	    			 if(bTime != "" && bTime != "00:00") {	    				 
+	    			 console.log(bTime);
+	    			 }
+	    		 });
+	    			
 	    			
 	    		});
 	    	}, db_errorCB);
@@ -248,9 +276,9 @@ body { text-align:center; font-family:helvetica;}
                 </div>
             </div>
                 <input name="test" 
-                id="test" 
+                id="test" name="test"
                 class="demo-test-date demo-test-datetime demo-test-time demo-test-credit"
-                placeholder="알림예약"/>      
+                     />      
 </div>
 	
 	
