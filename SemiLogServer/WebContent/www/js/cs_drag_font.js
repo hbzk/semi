@@ -10,6 +10,7 @@ var dragIcon;
 var icons;
 var defaultValue;
 var iconsName;
+var clickIcon;
 /* ------- */
 
 
@@ -23,7 +24,6 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 $(window).load(function(){
 	db_init(); // DB 초기화
-	db_init_reSet();
 	db_init_time();  // DB 디폴트시간 저장		
 
 	
@@ -51,7 +51,7 @@ $(window).load(function(){
 	
 	$(".drag").click(function(){
 		
-		var clickIcon = $(this).find('i')[0].className;
+		clickIcon = $(this).find('i')[0].className;
 		//console.log(clickIcon);
 		db.transaction(function(tx) {
 			// tx.executeSql('drop table if exists ACTION'); // DB 초기화
@@ -59,14 +59,13 @@ $(window).load(function(){
 		});
 		
 		
-	
+	/*
 		setInterval(function(){
 			location.href = "functionEdit.html";
 		}, 3);
-		
-
+		*/
+		db_init_reSet();
 	});
-	
 	
 	
 	
@@ -160,22 +159,23 @@ function db_init_reSet() {
 	db.transaction(function(tx) {
 tx.executeSql('select * from ICONSTIME;', [], function(tx, res) {
 	dbLoad = res.rows.length;
-	console.log(dragIcon);
-	defaultValue = res.rows.item(3).TIMER_VAL;
+
+	
 	//console.log(defaultValue);
 	for(var i=0;i<res.rows.length-1;i++) {
 		
+		
 		iconsName = res.rows.item(i).CLASS_NAME;
-		console.log(dragIcon);
-		if(dragIcon == iconsName) {
-			console.log(iconsName.TIMER_VAL);
+		
+		
+		if(clickIcon == iconsName) {
+			defaultValue = res.rows.item(i).TIMER_VAL;
+			//console.log(defaultValue);
 		}
 	}
 	
 	
-	
-	
-	
+
 	
 	
 	
@@ -214,22 +214,18 @@ function dragdrop_drop() {
 		 //console.log(dragIcon);
 		for(var i=1;i<7;i++) {
 			
-			icons = document.getElementsByTagName("i")[i];
+			icons = document.getElementsByTagName("i")[i].className;
 			//console.log(icons);
 			
-			if(dragIcon == iconsName) {
+			if(dragIcon == icons) {
 				
-				
-				
-				
+			
 				
 			minute = defaultValue;
 			
+
 			
-			
-			
-			
-		   end = 0;
+		    end = 0;
 			timeclock();	
 			
 			}
