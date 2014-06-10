@@ -1,7 +1,7 @@
 var startIcon, lastIcon, lastDragger, lastDraggerClass; // 드래그 관련 변수
 
 // DB 관련 변수
-var actionName, startTime, endTime, resultWhile;
+var actionName, className, startTime, endTime, resultWhile;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 $(window).load(function(){
@@ -19,14 +19,14 @@ $(window).load(function(){
 
 function db_init() {
 	db.transaction(function(tx) {
-		// tx.executeSql('drop table if exists ACTION'); // DB 초기화
-		tx.executeSql('create table if not exists ACTION (id integer primary key, TITLE text, START_TIME date, END_TIME date, WHILE integer)');
+		//tx.executeSql('drop table if exists ACTION'); // DB 초기화
+		tx.executeSql('create table if not exists ACTION (id integer primary key, TITLE text,CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
 	});
 }
 
 function db_insertQuery() {
 	db.transaction(function(tx) {
-		tx.executeSql('insert into ACTION (TITLE, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?)', [actionName, startTime, endTime, resultWhile], function(tx, res) {
+		tx.executeSql('insert into ACTION (TITLE, CLASSNAME, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?,?)', [actionName, className, startTime, endTime, resultWhile], function(tx, res) {
 		   tx.executeSql('select * from ACTION;', [], function(tx, res) {
 		     console.log('res.rows.length --> ' + res.rows.length);
 		   });
@@ -74,8 +74,11 @@ function dragdrop_drop() {
 			.removeClass('drag ui-draggable ui-draggable-dragging');
 		
 		// 액션 이름, 시작 시간 저장
-		actionName = lastIcon[0].className;
-		actionName = actionName.replace(/-/g, '').replace(/_/g, '').replace(/fa/g, '').replace(/li/g, '');
+		actionName = lastIcon[0].attributes[0].value;
+		//class이름
+		className = lastIcon[0].className;
+		className = className.replace(/ui-draggable/g,'').replace(/ui-droppable/g,'');
+		//actionName = actionName.replace(/-/g, '').replace(/_/g, '').replace(/fa/g, '').replace(/li/g, '');
 		startTime = new Date().getTime();
 	}});
 }
