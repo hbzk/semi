@@ -6,9 +6,11 @@
  
 	$(window).load(function() {
 		db_init();
+		
+		loadSelectedIcon();
+	
 		activityAll = $('.activityIcon > [data-name]');
 		activityAll.attr("data-flag",false);
-		
 		
 		//모든 액티비티이름 배열 만들기
 		for(var i = 0 ;  i < activityAll.length ;  i++){
@@ -17,23 +19,10 @@
 			activityList.push(activityOne);
 		}
 		
-	  //main창에서 선택된 icon들
-		activitySelected = $('.icon > [data-name]');
-	  console.log("activitySelected length is " + activitySelected.length);
-	  for (var k = 0 ; k < activitySelected.length ; k++){
-			selectedOne = activitySelected[k].getAttribute('data-name');
-			//console.log(k + " == "+ selectedOne);		
-			if($.inArray(selectedOne,activityList)){
-					$(".activityIcon i[data-name =" + selectedOne + " ]")
-											.parent()
-											.append('<div class="checkBack"></div>')
-											.append('<div class="check"><i class="fa fa-check" data-flag= "true"></i></div>');
-			}
-		}
-	//check표시 된 아이콘 count하기
+		//check표시 된 아이콘 count하기
 		selectCount();
 	
-	//icon클릭했을때 동작
+		//icon클릭했을때 동작
 		$(".activityIcon").on("click",$("i[data-name]"),function(event){
 				//icon은 총 6개만선택가능
 			if( iconCount == 6){
@@ -54,6 +43,8 @@
 			}
 		});
 	});
+	
+
 	
 	//아이콘 선택
 	function select(selectTarget){
@@ -79,7 +70,7 @@
 	//check표시 된 아이콘개수 count하기
 	function selectCount(){
 		iconCount = $(".fa-check").length;
-		console.log(iconCount);
+		console.log("iconCount == "+iconCount);
 		if(iconCount == 6){
 			selectedIcon_db_insert();
 		}
@@ -106,7 +97,8 @@
 	}
 	//DB 초기화
 	function db_init() {
-/*		db.transaction(
+			//DB 테이블 삭제 
+			/*	db.transaction(
 				function(tx){
 					tx.executeSql('DROP TABLE ICONSELECT');
 				}, function(err){
@@ -120,7 +112,30 @@
 			tx.executeSql('create table if not exists ICONSELECT (NO integer primary key, ICON_NAME text, CLASS_NAME text)');
 		});
 	}
-
-	
+	//DB에 저장된 아이콘 로드
+	function loadSelectedIcon(){
+		var iconDiv = $(".selected_icon .icon_row .icon");
+		console.log("Load DB - data (selectedIcon)");
+		db.transaction(function(tx){
+			tx.executeSql('SELECT * FROM ICONSELECT',
+					[],
+					function(tx, rs){
+						for( var i=0 ; i < rs.rows.length ; i++){
+							var row = rs.rows.item(i);
+							$($(iconDiv)[i]).append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
+							//main창에 있는 아이콘들 체크표시하기
+							selectedOne = $($(iconDiv)[i]).children().attr('data-name');
+							console.log(i + " == "+ selectedOne);		
+							if($.inArray(selectedOne,activityList)){
+									$(".activityIcon i[data-name =" + selectedOne + " ]")
+															.parent()
+															.append('<div class="checkBack"></div>')
+															.append('<div class="check"><i class="fa fa-check" data-flag= "true"></i></div>');
+							}
+						}
+					});
+		});
+		
+	}
 
 	
