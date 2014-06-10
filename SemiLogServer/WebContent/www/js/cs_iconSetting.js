@@ -141,7 +141,7 @@ function db_init() {
 //=======================================
 // setting icon replace
 function setting_drag() {
-	$('.icon>i').draggable({distance: 20}, {revert: true}, {revertDuration: 0}, {zIndex: 999999});
+	$('.icon>i').draggable({distance: 20}, {revert: true}, {revertDuration: 0}, {containment: ".selected_icon"}, {zIndex: 9});
 }
 
 function setting_drop() {
@@ -155,3 +155,7 @@ function setting_drop() {
 		selectedIcon_db_insert();
 	}});
 }
+
+window.onchange = function(){
+	console.log(123);
+};
