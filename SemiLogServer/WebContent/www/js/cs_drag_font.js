@@ -38,11 +38,6 @@ $(window).load(function(){
 		/* ---- */
 	});
 	
-	
-		
-		
-	
-	
 
 	$(".drag").click(function(){
 		
