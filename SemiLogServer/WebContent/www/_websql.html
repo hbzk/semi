@@ -44,13 +44,15 @@
 <!-- <br>
 <button id="sql">sql</button>
  -->
-<!-- <br>
-<button id="dbReset">dbReset</button> -->
+ <button id="dbList">dbList</button>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<button id="dbReset">dbReset</button>
 
 
 <script type="text/javascript">
 var text, startTime, endTime, resultWhile;
 
+var db = window.openDatabase("Database", "1.0", "Demo", 2 * 1024 * 1024);
 
 $('#clear').click(function(){
 	$('input').val('');
@@ -64,14 +66,14 @@ $('#clear').click(function(){
 $('#start').click(function(){
 	text = $('input').val();
 	
-	startTime = new Date().getTime();
+	startTime = new Date();
 	
 	var startText = (new Date(startTime).toLocaleTimeString());
 	$('.start p').text(startText);
 })
 
 $('#end').click(function(){
-	endTime = new Date().getTime();
+	endTime = new Date();
 	
 	var endText = (new Date(endTime).toLocaleTimeString());
 	$('.end p').text(endText);
@@ -80,11 +82,8 @@ $('#end').click(function(){
 	$('.while p').text(resultWhile + '초');
 	
 	
-	
-	
-	
 	db.transaction(function(tx) {
-		tx.executeSql("INSERT INTO test_table (TITLE, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?)", [text, startTime, endTime, resultWhile], function(tx, res) {
+		tx.executeSql("INSERT INTO test_table (TITLE, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?)", [text, startTime.toISOString(), endTime.toISOString(), resultWhile], function(tx, res) {
 		   tx.executeSql("select * from test_table;", [], function(tx, res) {
 		     console.log("res.rows.length --> " + res.rows.length);
 		     
@@ -95,32 +94,40 @@ $('#end').click(function(){
 		   console.log("ERROR: " + e.message);
 		 });
 	});
-	
 	
 })
 
-var db = window.openDatabase("Database", "1.0", "Demo", 2 * 1024 * 1024);
+$('#dbList').click(function(){
+	db.transaction(function(tx) {
+		tx.executeSql("select id, datetime(START_TIME, 'localtime'), datetime(END_TIME, 'localtime'), WHILE from test_table;", [], function(tx, res) {
+			console.log("res.rows.length --> " + res.rows.length);
+			for (var i = 0; i < res.rows.length; i++) {
+				console.log(res.rows.item(i));
+			}
+			
+		});
+	});
+});
 
-
-$('#sql').click(function(){
+/* $('#sql').click(function(){
 	db.transaction(function(tx) {
 		tx.executeSql("INSERT INTO test_table (TITLE, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?)", [text, startTime, endTime, resultWhile], function(tx, res) {
 		   tx.executeSql("select * from test_table;", [], function(tx, res) {
 		     console.log("res.rows.length --> " + res.rows.length);
 		     
-		     /* console.log(res.rows.item(0)); */
+		     console.log(res.rows.item(0));
 		   });
 		
 		 }, function(e) {
 		   console.log("ERROR: " + e.message);
 		 });
 	});
-});
+}); */
 
 $('#dbReset').click(function(){
 	db.transaction(function(tx) {
 		tx.executeSql('DROP TABLE IF EXISTS test_table');
-		tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, TITLE text, START_TIME text, END_TIME date, WHILE text)');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, TITLE text, START_TIME aa, END_TIME aaa, WHILE text)');
 	});
 })
 
