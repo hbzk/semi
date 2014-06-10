@@ -9,6 +9,7 @@ end=0;
 var dragIcon;
 var icons;
 var defaultValue;
+var iconsName;
 /* ------- */
 
 
@@ -146,10 +147,9 @@ tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VA
 tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['keyboard', 'fa fa-keyboard-o', 88]);
 
 		
-		
+	
 		tx.executeSql('select * from ICONSTIME;', [], function(tx, res) {
 			//console.log('res.rows.length --> ' + dbLoad);
-			console.log(res.rows.item(0).TIMER_VAL);
 		  });
 		}, function(e) {
 		   //console.log("ERROR: " + e.message);
@@ -160,7 +160,19 @@ function db_init_reSet() {
 	db.transaction(function(tx) {
 tx.executeSql('select * from ICONSTIME;', [], function(tx, res) {
 	dbLoad = res.rows.length;
-	//console.log('res.rows.length --> ' + res.rows.length);
+	
+	defaultValue = res.rows.item(3).TIMER_VAL;
+	console.log(defaultValue);
+	for(var i=0;i<res.rows.length-1;i++) {
+		iconsName = res.rows.item(i).CLASS_NAME;
+		console.log(iconsName);
+	}
+	
+	
+	
+	
+	
+	
 	});
 	}, function(e) {
 	   //console.log("ERROR: " + e.message);
@@ -178,7 +190,6 @@ function dragdrop_drop() {
 	$('#start').droppable({tolerance: 'touch'}, {accept: '.drag'}, {drop: function(event, ui){
 		
 		dragdrop_timerCheck(); // 이미 실행중인지 확인 후 초기화
-		
 		
 		// 드래그 대상 관련
 		// 가끔 드래그 대상이 div로 인식되는 버그 대응 
@@ -199,6 +210,35 @@ function dragdrop_drop() {
 		for(var i=1;i<7;i++) {
 			
 			icons = window.document.getElementsByTagName("i")[i];
+			console.log(iconsName);
+			
+			if(dragIcon == icons) {
+				
+				
+				
+				
+				
+			minute = defaultValue;
+			
+			
+			
+			
+			
+		   end = 0;
+			timeclock();	
+			
+			}
+		}
+		
+		
+		
+		
+		/*
+		dragIcon = lastIcon.context;
+		 
+		for(var i=1;i<7;i++) {
+			
+			icons = window.document.getElementsByTagName("i")[i];
 			
 			if(dragIcon == icons) {
 				
@@ -210,6 +250,9 @@ function dragdrop_drop() {
 			
 			}
 		}
+		*/
+		
+		
 		
 		/* ------ */
 		
