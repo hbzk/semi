@@ -212,14 +212,66 @@ body { text-align:center; font-family:helvetica;}
 	    
 	  
 	    function db_defaultTime(){
-	             var iconSet = $("#iconSet");
 	      db.transaction(function(tx){
 	        tx.executeSql('SELECT * FROM ICONSTIME', [], function(tx, rs){
 	              
 	        	var row = rs.rows.item(35);
-	            		  
+	        	var iconO = row.CLASS_NAME;
+	        	var iconVal;
+	        	
+	        	
 	         $("#iconSet").append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
 	            		  
+	         for(var i=0;i<rs.rows.length-1;i++) {
+	        	 var iconT = rs.rows.item(i);
+	        	 
+	        	 if(iconO == iconT.CLASS_NAME) {
+	        		  iconVal = iconT.TIMER_VAL;
+	         }
+	        	 
+	         }
+	         
+	         
+	         
+	         
+	         
+	         
+	         
+	       
+
+	            
+	          
+	          var hTime = iconVal / 60;
+	          var mTime = iconVal % 60;
+	          var hsTime = Math.floor(hTime);
+	          
+	            if(iconVal < 60) {
+	              
+	             $("#test").attr("placeholder", "00:" + iconVal);   
+	             
+	            } else if(mTime != "0") {
+	                         
+	              $("#test").attr("placeholder", hsTime + ":" + mTime);
+	      
+	            } else {
+	              
+	              $("#test").attr("placeholder", hTime + ":00");
+	            
+	            }
+	            
+	            $("#test").attr("value", iconVal);
+	            
+	           $("#confirm").click(function(){
+	             var iconVal = $("#test").val();
+	             if(iconVal != "" && iconVal != "00:00") {               
+	             console.log(iconVal);
+	             }
+	           });
+	         
+	         
+	         
+	         
+	         
 
 	     
 	            });
