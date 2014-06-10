@@ -210,7 +210,11 @@ body { text-align:center; font-family:helvetica;}
 	    
 	    
 	    
-	    
+	    function updateRecord(id, textEl) {
+	    	  db.transaction(function(tx) {
+	    	    tx.executeSql("UPDATE ICONSTIME SET TIMER_VAL = ? WHERE ICON_NAME = ?", [textEl.innerHTML, id], null, onError);
+	    	  });
+	    	}
 	    
 	    
 	    
