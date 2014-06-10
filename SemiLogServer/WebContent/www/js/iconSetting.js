@@ -19,13 +19,14 @@
 			activityList.push(activityOne);
 		}
 		
-		//check표시 된 아이콘 count하기
+		//check표시 된 아이콘 count하기(왜 0이지)
 		selectCount();
 	
 		//icon클릭했을때 동작
 		$(".activityIcon").on("click",$("i[data-name]"),function(event){
 				//icon은 총 6개만선택가능
 			if( iconCount == 6){
+				
 				//6개일때는 unselect만 가능
 				if($(event.target).hasClass("fa-check") == true	){
 					unselect(event.target);
@@ -35,6 +36,10 @@
 					console.log("already fully selected ; 6 icons");
 				}
 			}else if(iconCount < 6){
+				$(".back").children().css("display","none");
+				$(".back").click(function(e){
+					e.preventDefault();
+				});
 				if($(event.target).hasClass("fa-check") == true	){
 					unselect(event.target);
 				}else if($(event.target).hasClass("fa-check") == false &&$(event.target).attr("data-name") != null  ){
@@ -42,8 +47,8 @@
 				}
 			}
 		});
+		
 	});
-	
 
 	
 	//아이콘 선택
@@ -135,7 +140,6 @@
 						}
 					});
 		});
-		
 	}
 
 	
