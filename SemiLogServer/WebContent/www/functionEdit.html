@@ -157,13 +157,18 @@ body { text-align:center; font-family:helvetica;}
 	    
 	    db_defaultTime();
 
+	      var row;
+        var iconO;
+        var iconVal;
+	    
+	    
 	    function db_defaultTime(){
 	      db.transaction(function(tx){
 	        tx.executeSql('SELECT * FROM ICONSTIME', [], function(tx, rs){
 	              
-	        	var row = rs.rows.item(35);
-	        	var iconO = row.CLASS_NAME;
-	        	var iconVal;
+	        	row = rs.rows.item(35);
+	        	iconO = row.CLASS_NAME;
+	        	iconVal;
 	        	
 	        	
 	         $("#iconSet").append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
@@ -210,9 +215,9 @@ body { text-align:center; font-family:helvetica;}
 	    
 	    
 	    
-	    function updateRecord(id, textEl) {
+	    function updateRecord(iconO, timeValue) {
 	    	  db.transaction(function(tx) {
-	    	    tx.executeSql("UPDATE ICONSTIME SET TIMER_VAL = ? WHERE ICON_NAME = ?", [textEl.innerHTML, id], null, onError);
+	    	    tx.executeSql("UPDATE ICONSTIME SET TIMER_VAL = ? WHERE ICON_NAME = ?", [timeValue, iconO], null, onError);
 	    	  });
 	    	}
 	    

@@ -149,6 +149,7 @@ tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VA
 		
 		tx.executeSql('select * from ICONSTIME;', [], function(tx, res) {
 			//console.log('res.rows.length --> ' + dbLoad);
+			console.log(res.rows.item(0).TIMER_VAL);
 		  });
 		}, function(e) {
 		   //console.log("ERROR: " + e.message);
