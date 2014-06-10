@@ -157,60 +157,6 @@ body { text-align:center; font-family:helvetica;}
 	    
 	    db_defaultTime();
 
-	   	    
-	    /* 
-	    function db_defaultTime(){
-	    	db.transaction(function(tx) {
-	    		tx.executeSql("select * from ICONTIME", [], function(tx, res) {
-	    			var len = res.rows.length;
-	    			console.log(len);
-	    			console.log(res.rows.item(len-1).TITLE);
-	    			console.log(res.rows.item(len-1).DEFAULT_TIME);
-	    			
-	    			
-	    			$("#iconSet").append(res.rows.item(len-1).TITLE);
-
-	    			
-	    		  var dTime = res.rows.item(len-1).DEFAULT_TIME;
-	    		  var hTime = dTime / 60;
-	        var mTime = dTime % 60;
-	        var hsTime = Math.floor(hTime);
-	        
-	    		  if(dTime < 60) {
-	    			  
-	    		   $("#test").attr("placeholder", "00:" + dTime);	  
-	    		   
-	    		  } else if(mTime != "0") {
-	    			     				 
-	    			  $("#test").attr("placeholder", hsTime + ":" + mTime);
-	 	  
-	    		  } else {
-	    			  
-	    			  $("#test").attr("placeholder", hTime + ":00");
-	    			
-	    		  }
-	    		  
-	    			$("#test").attr("value", dTime);
-	    		  
-	    		 $("#confirm").click(function(){
-	    			 var bTime = $("#test").val();
-	    			 if(bTime != "" && bTime != "00:00") {	    				 
-	    			 console.log(bTime);
-	    			 }
-	    		 });
-	    			
-	    			
-	    		});
-	    	}, db_errorCB);
-	    };
- */
-	    
-	    
-	    
-	    
-	    
-	    
-	  
 	    function db_defaultTime(){
 	      db.transaction(function(tx){
 	        tx.executeSql('SELECT * FROM ICONSTIME', [], function(tx, rs){
@@ -230,16 +176,6 @@ body { text-align:center; font-family:helvetica;}
 	         }
 	        	 
 	         }
-	         
-	         
-	         
-	         
-	         
-	         
-	         
-	       
-
-	            
 	          
 	          var hTime = iconVal / 60;
 	          var mTime = iconVal % 60;
@@ -267,16 +203,9 @@ body { text-align:center; font-family:helvetica;}
 	             console.log(iconVal);
 	             }
 	           });
-	         
-	         
-	         
-	         
-	         
-
-	     
-	            });
+	         });
 	      });
-	    }
+	   }
 	    
 	    
 	    
