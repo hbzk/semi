@@ -160,13 +160,19 @@ function db_init_reSet() {
 	db.transaction(function(tx) {
 tx.executeSql('select * from ICONSTIME;', [], function(tx, res) {
 	dbLoad = res.rows.length;
-	
+	console.log(dragIcon);
 	defaultValue = res.rows.item(3).TIMER_VAL;
-	console.log(defaultValue);
+	//console.log(defaultValue);
 	for(var i=0;i<res.rows.length-1;i++) {
+		
 		iconsName = res.rows.item(i).CLASS_NAME;
-		console.log(iconsName);
+		console.log(dragIcon);
+		if(dragIcon == iconsName) {
+			console.log(iconsName.TIMER_VAL);
+		}
 	}
+	
+	
 	
 	
 	
@@ -204,15 +210,14 @@ function dragdrop_drop() {
 		
 		
 		/* 타이머 */
-		
-		dragIcon = lastIcon.context;
-		 
+		dragIcon = lastIcon.context.className;
+		 //console.log(dragIcon);
 		for(var i=1;i<7;i++) {
 			
-			icons = window.document.getElementsByTagName("i")[i];
-			console.log(iconsName);
+			icons = document.getElementsByTagName("i")[i];
+			//console.log(icons);
 			
-			if(dragIcon == icons) {
+			if(dragIcon == iconsName) {
 				
 				
 				
