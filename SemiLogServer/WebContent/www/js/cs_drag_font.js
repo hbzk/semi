@@ -15,13 +15,21 @@ var defaultValue;
 var startIcon, lastIcon, lastDragger, lastDraggerClass; // 드래그 관련 변수
 
 // DB 관련 변수
+var dbLoad;
 var actionName, startTime, endTime, resultWhile;
 var iconName, defaultTime;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 $(window).load(function(){
 	db_init(); // DB 초기화
-	db_init_time(); // DB 초기화
+	
+	if(dbLoad == 0) {
+		db_init_time();  // DB 디폴트시간 저장		
+	}
+	
+	
+	
+	
 	
 	startIcon = $('#start').html();
 	dragdrop_doing();
@@ -39,29 +47,39 @@ $(window).load(function(){
 	});
 	
 
-	$(".drag").click(function(){
-		
-		iconName = this.innerHTML;
-		//console.log(iconName);
-		
-		
-		defaultTime = this.getElementsByTagName("input")[0].value;
-		//console.log(defaultTime);
-		
 	
-		db_insertQuery_time();
+	$(".drag").click(function(){
+		db_init_time();  // DB 디폴트시간 저장		
+		
+		var clickIcon = $(this).find('i')[0].className;
+		db.transaction(function(tx) {
+			// tx.executeSql('drop table if exists ACTION'); // DB 초기화
+			tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME) VALUES ("lastclick", ?)', [clickIcon]);
+		});
 		
 		
+	/*
 		setInterval(function(){
 			location.href = "functionEdit.html";
 		}, 3);
-		
+		*/
 		
 	});
 	
 	
 	
+	
+	
+		
+
+	
+	
+	
+
 });
+
+
+
 
 function db_init() {
 	db.transaction(function(tx) {
@@ -84,24 +102,64 @@ function db_insertQuery() {
 
 
 // 타이머
+
 function db_init_time() {
 	db.transaction(function(tx) {
-		// tx.executeSql('drop table if exists ACTION'); // DB 초기화
-		tx.executeSql('create table if not exists ICONTIME (id integer primary key, TITLE text, DEFAULT_TIME date)');
-	});
+		tx.executeSql('drop table if exists ICONSTIME'); // DB 초기화
+		tx.executeSql('create table if not exists ICONSTIME (NO integer primary key, ICON_NAME text unique, CLASS_NAME text, TIMER_VAL integer)');
+		
+		
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['headphones', 'fa fa-headphones', 70]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['music', 'fa fa-music', 30]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['automobile', 'fa fa-automobile', 20]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['phone', 'fa fa-phone', 50]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['banknote', 'li li_banknote', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['comment', 'fa fa-comment', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['dribbble', 'fa fa-dribbble', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['plane', 'fa fa-plane', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['gamepad', 'fa fa-gamepad', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['puzzle', 'fa fa-puzzle-piece', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['beer', 'fa fa-beer', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['glass', 'fa fa-glass', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['video', 'li li_video', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['hospital', 'fa fa-hospital-o', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['cutlery', 'fa fa-cutlery', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['desktop', 'fa fa-desktop', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['moon', 'fa fa-moon-o', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['mobile', 'fa fa-mobile', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['coffee', 'fa fa-coffee', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['tv', 'li li_tv', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['shirt', 'li li_t-shirt', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['home', 'fa fa-home', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['trash', 'li li_trash', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['scissors', 'fa fa-scissors', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['flask', 'fa fa-flask', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['leaf', 'fa fa-leaf', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['pen', 'li li_pen', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['bulb', 'li li_bulb', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['book', 'fa fa-book', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['bookmark', 'fa fa-bookmark', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['child', 'fa fa-child', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['stethoscope', 'fa fa-stethoscope', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['spoon', 'fa fa-spoon', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['code', 'fa fa-code', 60]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['keyboard', 'fa fa-keyboard-o', 60]);
+
+		
+		
+		tx.executeSql('select * from ICONSTIME;', [], function(tx, res) {
+			dbLoad = res.rows.length;
+			//console.log('res.rows.length --> ' + dbLoad);
+			console.log(res.rows.item(0).ICON_NAME);
+	
+	
+			
+		  });
+		}, function(e) {
+		   //console.log("ERROR: " + e.message);
+		});
 }
 
-function db_insertQuery_time() {
-	db.transaction(function(tx) {
-		tx.executeSql('insert into ICONTIME (TITLE, DEFAULT_TIME) VALUES (?,?)', [iconName, defaultTime], function(tx, res) {
-		   tx.executeSql('select * from ICONTIME;', [], function(tx, res) {
-			//console.log('res.rows.length --> ' + res.rows.length);
-		   });
-		 }, function(e) {
-		   //console.log("ERROR: " + e.message);
-		 });
-	});
-}	
 
 
 

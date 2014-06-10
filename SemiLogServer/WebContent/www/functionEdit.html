@@ -150,7 +150,7 @@ body { text-align:center; font-family:helvetica;}
           // db --------------------------
           
           
-        var iconName, defaultTime;
+       var iconName, defaultTime;
 	     var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 	    
 	    
@@ -158,7 +158,7 @@ body { text-align:center; font-family:helvetica;}
 	    db_defaultTime();
 
 	   	    
-	    
+	    /* 
 	    function db_defaultTime(){
 	    	db.transaction(function(tx) {
 	    		tx.executeSql("select * from ICONTIME", [], function(tx, res) {
@@ -203,7 +203,43 @@ body { text-align:center; font-family:helvetica;}
 	    		});
 	    	}, db_errorCB);
 	    };
+ */
+	    
+	    
+	    
+	    
+	    
+	    
+	  
+	    function db_defaultTime(){
+	             var iconSet = $("#iconSet");
+	      db.transaction(function(tx){
+	        tx.executeSql('SELECT * FROM ICONSTIME', [], function(tx, rs){
+	              
+	        	var row = rs.rows.item(35);
+	            		  
+	         $("#iconSet").append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
+	            		  
 
+	     
+	            });
+	      });
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 	    function db_errorCB(e) { // query 에러시 호출
 	    	console.log("e :" + e);
 	    	console.log("e.code : "+e.code);
