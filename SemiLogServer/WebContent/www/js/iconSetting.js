@@ -93,7 +93,7 @@
 			for( var i=0 ; i< sixSelected.length; i++){
 				var dataName = sixSelected[i].getAttribute("data-name");
 				var className = sixSelected[i].getAttribute("class");
-				tx.executeSql('insert into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (?,?,?)', [ i, dataName, className], function(tx, res) {
+				tx.executeSql('INSERT or REPLACE into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (?,?,?)', [ i, dataName, className], function(tx, res) {
 					tx.executeSql('select * from ICONSELECT;', [], function(tx, res) {
 						console.log('res.rows.length --> ' + res.rows.length);
 					});
@@ -106,10 +106,21 @@
 	}
 	//DB 초기화
 	function db_init() {
+/*		db.transaction(
+				function(tx){
+					tx.executeSql('DROP TABLE ICONSELECT');
+				}, function(err){
+					console.log(err.message);
+				}, function(){
+					console.log('delete success');
+				}
+		);*/
+	
 		db.transaction(function(tx) {
-			tx.executeSql('create table if not exists ICONSELECT (NO integer, ICON_NAME text, CLASS_NAME text)');
+			tx.executeSql('create table if not exists ICONSELECT (NO integer primary key, ICON_NAME text, CLASS_NAME text)');
 		});
 	}
 
+	
 
 	
