@@ -5,6 +5,10 @@
  var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
  
 	$(window).load(function() {
+		// 아이콘 위치 교체 드래그 드롭 활성화
+		setting_drag();
+		setting_drop();
+		
 		db_init();
 		
 		loadSelectedIcon();
@@ -18,33 +22,37 @@
 			$(activityAll[i]).prepend("<div class='actName'>" + activityOne + "</div>");
 			activityList.push(activityOne);
 		}
-		
-		//check표시 된 아이콘 count하기(왜 0이지)
-		selectCount();
 	
 		//icon클릭했을때 동작
 		$(".activityIcon").on("click",$("i[data-name]"),function(event){
 				//icon은 총 6개만선택가능
 			if( iconCount == 6){
-				
 				//6개일때는 unselect만 가능
 				if($(event.target).hasClass("fa-check") == true	){
 					unselect(event.target);
 				//6개 일때 클릭하면 알림창 띄우기 (not yet)
 				}else{
-					//alert("already fully selected ");
+					errorFull();
 					console.log("already fully selected ; 6 icons");
 				}
 			}else if(iconCount < 6){
-				$(".back").children().css("display","none");
-				$(".back").click(function(e){
-					e.preventDefault();
-				});
+			
 				if($(event.target).hasClass("fa-check") == true	){
 					unselect(event.target);
 				}else if($(event.target).hasClass("fa-check") == false &&$(event.target).attr("data-name") != null  ){
 					select(event.target);
 				}
+			}
+			
+			// 아이콘 위치 교체 드래그 드롭 활성화
+			setting_drag();
+			setting_drop();
+		});
+		
+		$(".back").click(function(e){
+			if(iconCount < 6){
+				e.preventDefault();
+				errorUnderSix();
 			}
 		});
 		
@@ -81,8 +89,8 @@
 		}
 	}
 	
-	// 6개 선택된 ICON DB에 저장하기
 	
+	// 6개 선택된 ICON DB에 저장하기
 	function selectedIcon_db_insert(){
 		db.transaction(function(tx) {
 			var sixSelected = $(".selected_icon .icon_row .icon > [data-name]");
@@ -102,8 +110,9 @@
 	}
 	//DB 초기화
 	function db_init() {
-			//DB 테이블 삭제 
-			/*	db.transaction(
+			
+		//DB 테이블 삭제 
+/*				db.transaction(
 				function(tx){
 					tx.executeSql('DROP TABLE ICONSELECT');
 				}, function(err){
@@ -136,10 +145,52 @@
 															.parent()
 															.append('<div class="checkBack"></div>')
 															.append('<div class="check"><i class="fa fa-check" data-flag= "true"></i></div>');
+									
 							}
 						}
+						setting_drag();
+						setting_drop();
+						selectCount();
 					});
 		});
+		
 	}
 
+	// setting icon replace
+	function setting_drag() {
+		$('.icon>i').draggable({distance: 20}, {revert: true}, {revertDuration: 0}, {containment: ".selected_icon"}, {zIndex: 9});
+	}
+
+	function setting_drop() {
+		$('.icon>i').droppable({tolerance: 'intersect'},{drop: function(event, ui){
+			var settingDraggerParent = $(event.toElement).parent();
+			var settingDropperParent = $(event.target).parent();
+			
+			settingDraggerParent.append(event.target);
+			settingDropperParent.append(event.toElement);
+			
+			selectedIcon_db_insert();
+		}});
+	}
+	function errorFull() {
+		$().toastmessage('showToast',{
+		    text     : 'Already selected 6 Activities',
+		    stayTime : 1500,
+		    sticky   : false,
+		    position : 'middle-center',
+		    type     : 'error',
+		    close    : function () {console.log("toast is closed ...");}
+		});
+	}
 	
+	function errorUnderSix() {
+		$().toastmessage('showToast',{
+		    text     : 'Selecte six Activities!!',
+		    inEffectDuration : 100,
+		    stayTime : 1500,
+		    sticky   : false,
+		    position : 'middle-center',
+		    type     : 'error',
+		    close    : function () {console.log("toast is closed ...");}
+		});
+	}
