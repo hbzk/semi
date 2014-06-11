@@ -60,7 +60,7 @@ $('#clear').click(function(){
 	$('.start p').text('');
 	$('.end p').text('');
 	$('.while p').text('');
-})
+});
 
 
 $('#start').click(function(){
@@ -70,7 +70,7 @@ $('#start').click(function(){
 	
 	var startText = (new Date(startTime).toLocaleTimeString());
 	$('.start p').text(startText);
-})
+});
 
 $('#end').click(function(){
 	endTime = new Date();
@@ -95,7 +95,7 @@ $('#end').click(function(){
 		 });
 	});
 	
-})
+});
 
 $('#dbList').click(function(){
 	db.transaction(function(tx) {
@@ -126,10 +126,10 @@ $('#dbList').click(function(){
 
 $('#dbReset').click(function(){
 	db.transaction(function(tx) {
-		tx.executeSql('DROP TABLE IF EXISTS test_table');
+		//tx.executeSql('DROP TABLE IF EXISTS test_table');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, TITLE text, START_TIME aa, END_TIME aaa, WHILE text)');
 	});
-})
+});
 
 
 /* var db = window.openDatabase("Database", "1.0", "Demo", 2 * 1024 * 1024);

@@ -50,6 +50,8 @@ $(window).load(function(){
 	
 	
 	$(".drag").click(function(){
+		console.log(this);
+		
 		
 		clickIcon = $(this).find('i')[0].className;
 		//console.log(clickIcon);

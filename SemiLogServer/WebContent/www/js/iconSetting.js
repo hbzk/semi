@@ -97,7 +97,7 @@
 			for( var i=0 ; i< sixSelected.length; i++){
 				var dataName = sixSelected[i].getAttribute("data-name");
 				var className = sixSelected[i].getAttribute("class");
-				tx.executeSql('INSERT or REPLACE into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (?,?,?)', [ i, dataName, className], function(tx, res) {
+				tx.executeSql('INSERT or REPLACE into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (?,?,?)', [ i + 1, dataName, className], function(tx, res) {
 					tx.executeSql('select * from ICONSELECT;', [], function(tx, res) {
 						console.log('res.rows.length --> ' + res.rows.length);
 					});

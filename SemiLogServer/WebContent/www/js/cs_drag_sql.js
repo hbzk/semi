@@ -20,13 +20,13 @@ $(window).load(function(){
 function db_init() {
 	db.transaction(function(tx) {
 		//tx.executeSql('drop table if exists ACTION'); // DB 초기화
-		tx.executeSql('create table if not exists ACTION (id integer primary key, TITLE text,CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
+		tx.executeSql('create table if not exists ACTION (id integer primary key, TITLE text, CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
 	});
 }
 
 function db_insertQuery() {
 	db.transaction(function(tx) {
-		tx.executeSql('insert into ACTION (TITLE, CLASSNAME, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?,?)', [actionName, className, startTime, endTime, resultWhile], function(tx, res) {
+		tx.executeSql('insert into ACTION (TITLE, CLASSNAME, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?,?)', [actionName, className, startTime.toISOString(), endTime.toISOString(), resultWhile], function(tx, res) {
 		   tx.executeSql('select * from ACTION;', [], function(tx, res) {
 		     console.log('res.rows.length --> ' + res.rows.length);
 		   });
@@ -79,7 +79,7 @@ function dragdrop_drop() {
 		className = lastIcon[0].className;
 		className = className.replace(/ ui-draggable/g,'').replace(/ ui-droppable/g,'');
 		//actionName = actionName.replace(/-/g, '').replace(/_/g, '').replace(/fa/g, '').replace(/li/g, '');
-		startTime = new Date().getTime();
+		startTime = new Date();
 	}});
 }
 
@@ -89,7 +89,7 @@ function dragdrop_timerCheck() {
 		$('#result').append(formatTime(x.time()) + ' '); // DB 구현 전까지 타이머 저장 대용
 		
 		// 종료시간, 활동시간 저장 
-		endTime = new Date().getTime();
+		endTime = new Date();
 		resultWhile = Math.floor((endTime - startTime) / 1000);
 		
 		db_insertQuery(); // Query
