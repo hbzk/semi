@@ -77,7 +77,7 @@ function dragdrop_drop() {
 		actionName = lastIcon[0].attributes[0].value;
 		//class이름
 		className = lastIcon[0].className;
-		className = className.replace(/ui-draggable/g,'').replace(/ui-droppable/g,'');
+		className = className.replace(/ ui-draggable/g,'').replace(/ ui-droppable/g,'');
 		//actionName = actionName.replace(/-/g, '').replace(/_/g, '').replace(/fa/g, '').replace(/li/g, '');
 		startTime = new Date().getTime();
 	}});
