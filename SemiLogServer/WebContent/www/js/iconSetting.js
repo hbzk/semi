@@ -139,8 +139,13 @@
 							$($(iconDiv)[i]).append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
 							//main창에 있는 아이콘들 체크표시하기
 							selectedOne = $($(iconDiv)[i]).children().attr('data-name');
-							console.log(i + " == "+ selectedOne);		
-							if($.inArray(selectedOne,activityList)){
+							console.log(i + " == "+ selectedOne);
+							console.log($.inArray(selectedOne,activityList));
+							/* 못 찾으면 - 1, 찾으면 "배열에서 찾은 인덱스"를 리턴
+							 * 0번 리턴(첫번째)인 경우에는 false로 실행이 안되고 있던게 원인으로 확인됨
+							 *  if 문에 >= 0  추가해서 해결*/
+							 
+							if($.inArray(selectedOne,activityList >= 0)){
 									$(".activityIcon i[data-name =" + selectedOne + " ]")
 															.parent()
 															.append('<div class="checkBack"></div>')
