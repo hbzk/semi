@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 /* 레이아웃 */
-#layout { border: 1px solid #000;
+#layout { /* border: 1px solid #000; */
 margin: 50px auto 0px; width: 320px; height: 533px; position: relative;}
 
 /* 메인아이콘 */
@@ -55,21 +55,6 @@ line-height: 64px; text-align: center; font-weight: bolder; font-size: 145%; }
 #pieChart { margin-left: 35px; margin-top:20px;}
 .pieChart_legend {margin-top: 23px;}
 
-/* 결과창 하단 메뉴 */
-#resultFooter { position: absolute; bottom: 20px; right: 20px;}
-#resultFooter a { display: inline-block; margin-left: 5px; }
-#resultFooter img { width: 50px; height: 50px; }
-
-
-/* Result List = rt* ======================= */
-
-#resultList { height: 319px; width: 340px; overflow: auto; margin-top: 20px;}    
-#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-left: 30px; margin-top: 40px; } 
-#rtTable { height: 70px;}
-#rtImage{ /* position: absolute; */ text-align: center; margin-top: -6px; margin-left: -280px; padding-top: 10px; }
-#rtName{ text-align: center; height: 20px; margin-left: 52px; margin-top: -10px; width: 105px; display: block; }
-#rtTime{ text-align: center; float:right; margin-right: 66px; margin-top: -10px; }
-#resultList img { width: 40px; height: 40px; margin-bottom: -4%; }
 
 
 /* 슬라이드 */
