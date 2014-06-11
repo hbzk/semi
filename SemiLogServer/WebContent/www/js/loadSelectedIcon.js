@@ -25,7 +25,17 @@ function loadSelectedIcon(){
 
 function db_icon_init() {
 	db.transaction(function(tx) {
-		// tx.executeSql('drop table if exists ACTION'); // DB 초기화
+		tx.executeSql('drop table if exists ICONSELECT'); // DB 초기화
 		tx.executeSql('create table if not exists ICONSELECT (NO integer primary key, ICON_NAME text, CLASS_NAME text)');
+		tx.executeSql(' IF (SELECT COUNT(*) FROM ICONSELECT) = 0 ' +
+				'BEGIN' +
+		'INSERT INTO ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("0","flask","fa fa-flask")' +
+		/*'INSERT into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("1","keyboard","fa fa-keyboard-o");' +
+		'INSERT into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("2","code","fa fa-code");' +
+		'INSERT into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("3","desktop","fa fa-desktop");' +
+		'INSERT into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("4","home","fa fa-home");' +
+		'INSERT into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("5","stethoscope","fa fa-stethoscope");' +*/
+		'END');
+		
 	});
 }
