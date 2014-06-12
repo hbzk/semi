@@ -6,7 +6,7 @@ minute = 00;
 second = 00;
 end=0;
 
-var dragIcon;
+
 var icons;
 var defaultValue;
 var iconsName;
@@ -211,51 +211,33 @@ function dragdrop_drop() {
 		}
 		
 		
+		
 		/* 타이머 */
-		dragIcon = lastIcon.context.className;
-		 //console.log(dragIcon);
-		for(var i=1;i<7;i++) {
-			
-			icons = document.getElementsByTagName("i")[i].className;
-			//console.log(icons);
-			
-			if(dragIcon == icons) {
-				
-			
-				
-			minute = defaultValue;
-			
-
-			
-		    end = 0;
-			timeclock();	
-			
-			}
-		}
-		
-		
-		
-		
-		/*
-		dragIcon = lastIcon.context;
 		 
-		for(var i=1;i<7;i++) {
-			
-			icons = window.document.getElementsByTagName("i")[i];
-			
-			if(dragIcon == icons) {
-				
-			defaultValue = dragIcon.getElementsByTagName("input")[0].value;
-			minute = defaultValue;
-			
-		   end = 0;
-			timeclock();	
-			
-			}
-		}
-		*/
-		
-		
+		      db.transaction(function(tx){
+		        tx.executeSql('SELECT * FROM ICONSTIME', [], function(tx, rs){
+		        	
+		        	
+		        	var dragIcon = lastIcon.context.className;
+		        	
+		        	for(var i=0;i<35;i++) {
+		        		iconsName = rs.rows.item(i).CLASS_NAME;
+		        		//console.log(iconsName);
+		        		
+		        		
+		        		if(dragIcon == iconsName) {
+		        			
+		        			
+		        			minute = rs.rows.item(i).TIMER_VAL;
+		        			console.log(minute);
+		        			
+		        			end = 0;
+		        			timeclock();	
+		        			
+		        		}
+		        	}
+		        });
+		    });
 		
 		/* ------ */
 		
