@@ -1,8 +1,11 @@
-		
-tx.executeSql('INSERT OR IGNORE INTO zzzz '  
-	+ ' SELECT "cutlery" AS "fa fa-cutlery" AS ICON_NAME, CLASS_NAME, 60 AS TIMER_VAL '
-	+ ' UNION "desktop", "fa fa-desktop", 60 '
-	+ ' UNION "mobile", "fa fa-mobile", 60 '
-	+ ' UNION "mobile", "fa fa-mobile", 60 '
-	
-	...
+
+	tx.executeSql('INSERT OR IGNORE INTO table '  
+			+ ' SELECT "cutlery" AS "fa fa-cutlery" AS ICON_NAME, CLASS_NAME, 60 AS TIMER_VAL '
+			+ ' UNION SELECT "desktop", "fa fa-desktop", 60 '
+			+ ' UNION SELECT "mobile", "fa fa-mobile", 60 '
+			+ ' UNION SELECT "aaa", "fa fa-aaa", 60 '
+			
+			...
+			
+			+ ' UNION SELECT "zzz", "fa fa-zzz", 60 '
+	);
