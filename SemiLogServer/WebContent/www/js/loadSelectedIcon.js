@@ -27,24 +27,21 @@ function db_icon_init() {
 	db.transaction(function(tx) {
 		//tx.executeSql('drop table if exists ICONSELECT'); // DB 초기화
 		tx.executeSql('create table if not exists ICONSELECT (NO integer unique, ICON_NAME text, CLASS_NAME text)');
-		tx.executeSql('INSERT OR IGNORE INTO ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (1,"flask","fa fa-flask")');
+		
+		tx.executeSql('INSERT OR IGNORE INTO ICONSELECT ' +  
+			' SELECT 1 AS NO, "flask" AS ICON_NAME, "fa fa-flask" AS CLASS_NAME '
+			+ ' UNION SELECT 2,"code","fa fa-code" '
+			+ ' UNION SELECT 3,"desktop","fa fa-desktop" '
+			+ ' UNION SELECT 4,"home","fa fa-home" '
+			+ ' UNION SELECT 5,"stethoscope","fa fa-stethoscope" '
+			+ ' UNION SELECT 6,"keyboard","fa fa-keyboard-o" '
+		);
+		
+		/*tx.executeSql('INSERT OR IGNORE INTO ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (1,"flask","fa fa-flask")');
 		tx.executeSql('INSERT OR IGNORE INTO ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (2,"code","fa fa-code")');
 		tx.executeSql('INSERT OR IGNORE INTO ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (3,"desktop","fa fa-desktop")');
 		tx.executeSql('INSERT OR IGNORE INTO ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (4,"home","fa fa-home")');
 		tx.executeSql('INSERT OR IGNORE INTO ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (5,"stethoscope","fa fa-stethoscope")');
-		tx.executeSql('INSERT OR IGNORE INTO ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (6,"keyboard","fa fa-keyboard-o")');
-		
-		
-		
-		/*tx.executeSql(' IF (SELECT COUNT(*) FROM ICONSELECT) = 0 ' +
-				'BEGIN' +
-		'INSERT INTO ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("0","flask","fa fa-flask")' +
-		'INSERT into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("1","keyboard","fa fa-keyboard-o");' +
-		'INSERT into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("2","code","fa fa-code");' +
-		'INSERT into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("3","desktop","fa fa-desktop");' +
-		'INSERT into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("4","home","fa fa-home");' +
-		'INSERT into ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES ("5","stethoscope","fa fa-stethoscope");' +
-		'END');*/
-		
+		tx.executeSql('INSERT OR IGNORE INTO ICONSELECT (NO, ICON_NAME, CLASS_NAME) VALUES (6,"keyboard","fa fa-keyboard-o")');*/
 	});
 }
