@@ -61,11 +61,11 @@ $(window).load(function(){
 		});
 		
 		
-	/*
+	
 		setInterval(function(){
 			location.href = "functionEdit.html";
 		}, 3);
-		*/
+		
 		
 	});
 	
@@ -155,36 +155,6 @@ tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VA
 		}, function(e) {
 		   //console.log("ERROR: " + e.message);
 		});
-}
-
-function db_init_reSet() {
-	db.transaction(function(tx) {
-tx.executeSql('select * from ICONSTIME;', [], function(tx, res) {
-	dbLoad = res.rows.length;
-
-	
-	//console.log(defaultValue);
-	for(var i=0;i<res.rows.length-1;i++) {
-		
-		
-		iconsName = res.rows.item(i).CLASS_NAME;
-		
-		
-		if(clickIcon == iconsName) {
-			defaultValue = res.rows.item(i).TIMER_VAL;
-			//console.log(defaultValue);
-		}
-	}
-	
-	
-
-	
-	
-	
-	});
-	}, function(e) {
-	   //console.log("ERROR: " + e.message);
-	});
 }
 
 
