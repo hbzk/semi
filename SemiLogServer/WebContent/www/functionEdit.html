@@ -46,20 +46,20 @@ body { text-align:center; font-family:helvetica;}
 
 
 .ui-content { 
-	width: 324px;
-	margin-top: -35px;
-	margin-left: -18px;
+  width: 324px;
+  margin-top: -35px;
+  margin-left: -18px;
 }
 #test {
-	width: 318px;
-	height: 70px;
-	text-align: center;
-	font-weight: bold;
-	border-radius: 0px;
-	font-size: 180%;
+  width: 318px;
+  height: 70px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0px;
+  font-size: 180%;
 }
 .dw-i {
-	text-align: center;
+  text-align: center;
 }
 ::-webkit-input-placeholder {
    color: black;
@@ -114,9 +114,9 @@ body { text-align:center; font-family:helvetica;}
 #iconSet { margin-left: 125px; }
 </style>
 <script type="text/javascript">
-        $(function () {	   
+        $(function () {    
        
-        	
+          
             var curr = new Date().getFullYear();
             var opt = {
                 'time': {
@@ -151,101 +151,134 @@ body { text-align:center; font-family:helvetica;}
           
           
        var iconName, defaultTime;
-	     var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
-	    
-	    
-	    
-	    db_defaultTime();
+       var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+      
+      
+      
+      db_defaultTime();
 
-	      var row;
+        var row;
         var iconO;
         var iconVal;
-	    
-	    
-	    function db_defaultTime(){
-	      db.transaction(function(tx){
-	        tx.executeSql('SELECT * FROM ICONSTIME', [], function(tx, rs){
-	              
-	        	row = rs.rows.item(35);
-	        	iconO = row.CLASS_NAME;
-	        	iconVal;
-	        	
-	        	
-	         $("#iconSet").append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
-	            		  
-	         for(var i=0;i<rs.rows.length-1;i++) {
-	        	 var iconT = rs.rows.item(i);
-	        	 
-	        	 if(iconO == iconT.CLASS_NAME) {
-	        		  iconVal = iconT.TIMER_VAL;
-	         }
-	        	 
-	         }
-	          
-	          var hTime = iconVal / 60;
-	          var mTime = iconVal % 60;
-	          var hsTime = Math.floor(hTime);
-	          
-	            if(iconVal < 60) {
-	              
-	             $("#test").attr("placeholder", "00:" + iconVal);   
-	             
-	            } else if(mTime != "0" && mTime < 10) {
-	            	
-	            	  $("#test").attr("placeholder", hsTime + ":0" + mTime);
-	            	
-	            } else if(mTime != "0") {
-	                         
-	              $("#test").attr("placeholder", hsTime + ":" + mTime);
-	      
-	            } else {
-	              
-	              $("#test").attr("placeholder", hTime + ":00");
-	            
-	            }
-	            
-	            $("#test").attr("value", iconVal);
-	            
-	           $("#confirm").click(function(){
-	             var iconVal = $("#test").val();
-	             if(iconVal != "" && iconVal != "00:00") {               
-	             console.log(iconVal);
-	             }
-	           });
-	         });
-	      });
-	   }
-	    
-	    
-	    
-	    
-	    function updateRecord(iconO, timeValue) {
-	    	  db.transaction(function(tx) {
-	    	    tx.executeSql("UPDATE ICONSTIME SET TIMER_VAL = ? WHERE ICON_NAME = ?", [timeValue, iconO], null, onError);
-	    	  });
-	    	}
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    function db_errorCB(e) { // query 에러시 호출
-	    	console.log("e :" + e);
-	    	console.log("e.code : "+e.code);
-	    	console.log("e.message :" + e.message);
-	    }
+      
+        var tIcon;
+        
+        
+      function db_defaultTime(){
+        db.transaction(function(tx){
+          tx.executeSql('SELECT * FROM ICONSTIME', [], function(tx, rs){
+                
+            row = rs.rows.item(35);
+            iconO = row.CLASS_NAME;
+            iconVal;
+            
+            
+            
+           $("#iconSet").append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
+                    
+           for(var i=0;i<rs.rows.length-1;i++) {
+             var iconT = rs.rows.item(i);
+             if(iconO == iconT.CLASS_NAME) {
+                iconVal = iconT.TIMER_VAL;
+                tIcon = iconT;
+           }
+             
+           }
+            
+            var hTime = iconVal / 60;
+            var mTime = iconVal % 60;
+            var hsTime = Math.floor(hTime);
+              if(iconVal < 60 && mTime < 10) {
+                
+               $("#test").attr("placeholder", "00:0" + mTime);   
+               
+              } else if(iconVal < 60 && mTime > 10) {
+                
+                  $("#test").attr("placeholder", hsTime + "0:" + mTime);
+                
+              } else if( iconVal < 540 && mTime < 10) {
+                           
+                $("#test").attr("placeholder", "0" + hsTime + ":0" + mTime);
+        
+              } else if( iconVal < 540 && mTime > 10) {
+                
+            	  $("#test").attr("placeholder", "0" + hsTime + ":" + mTime);
+              
+              } else if( mTime < 10 ){
+            	  $("#test").attr("placeholder", hsTime + ":0" + mTime);
+              } else {
+            	  $("#test").attr("placeholder", hsTime + ":" + mTime);
+                }
+              
+              
+             $("#confirm").click(function(){
+               var iconVal = $("#test").val();
+               var thisIcon = tIcon.ICON_NAME;
+               if(iconVal != "" && iconVal != "00:00") {   
+        
+                 
+               
+             
+            
+               var splitValue = iconVal.split(":");
+               
+               if(splitValue[0] == "00") {
+              
+            	   
+            	 console.log(splitValue[1]);
+               updateRecord(thisIcon, splitValue[1]);
+                
+                
+               } else {
+            	
+               var totalTime = parseInt(splitValue[0] * 60) + parseInt(splitValue[1]);
+               updateRecord(thisIcon, totalTime);
+               
+               }
+               
+               location.href = "main.html";
+               
+               }
+             });
+             
+            $("#cancel").click(function(){
+            	location.href = "main.html";
+            });
+             
+           });
+        });
+     }
+      
+      
+      
+      
+      function updateRecord(thisIcon, iconVal) {
+          db.transaction(function(tx) {
+            tx.executeSql("UPDATE ICONSTIME SET TIMER_VAL = ? WHERE ICON_NAME = ?", [iconVal, thisIcon], null);
+          });
+        }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      function db_errorCB(e) { // query 에러시 호출
+        console.log("e :" + e);
+        console.log("e.code : "+e.code);
+        console.log("e.message :" + e.message);
+      }
 
-	    function db_digitText(i) {
-	    	if (i < 10) {
-	    		i = '0' + i;
-	    	}
-	    	return i;
-	    }
+      function db_digitText(i) {
+        if (i < 10) {
+          i = '0' + i;
+        }
+        return i;
+      }
 </script>
 
 
@@ -264,10 +297,10 @@ body { text-align:center; font-family:helvetica;}
 <div id="iconSet">
   
 </div>
-	<p id="timer">Default Timer</p>
-	
+  <p id="timer">Default Timer</p>
+  
 
-	
+  
 <div data-role="content">
             <div class="settings">
                 <div data-role="fieldcontain" class = 'demo'>
@@ -312,16 +345,16 @@ body { text-align:center; font-family:helvetica;}
                 class="demo-test-date demo-test-datetime demo-test-time demo-test-credit"
                      />      
 </div>
-	
-	
-	
-	<div id="confirm" class="btn"><input type="button" class="button1" value="CONFIRM"/></div>
- 	<div id="cancel" class="btn"><input type="button" class="button2" value="CANCEL"/></div>
-	
+  
+  
+  
+  <div id="confirm" class="btn"><input type="button" class="button1" value="CONFIRM"/></div>
+  <div id="cancel" class="btn"><input type="button" class="button2" value="CANCEL"/></div>
+  
 </section>
 
 
-</section>	
+</section>  
 
 
 
