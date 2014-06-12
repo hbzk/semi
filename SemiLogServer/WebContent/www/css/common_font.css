@@ -1,7 +1,9 @@
-.fa-play { background: #BFBFBF; margin: 29px 0 0 9px;}
-/* Activity List */
 
-.routins { }
+/* 모든 html에 공통 적용 되는 icon font 관련 css file */
+
+.fa-play { background: #BFBFBF; margin: 29px 0 0 9px;}
+
+/* Activity List */
 
 .li_tv { background: #66D9B8; text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);}
 .fa-cutlery { background: #87C038;}
@@ -9,7 +11,7 @@
 .fa-desktop{ background: #F2C12E;}
 /*잠*/
 .fa-moon-o { background: #F27127;}
-.fa-mobile { background: #F24E29; font-size: 4em;}
+.fa-mobile { background: #F24E29;}
 /*휴식*/
 .fa-coffee {background: #267FB8;}
 
@@ -30,7 +32,7 @@
 /*맥주*/
 .fa-beer { background: #FE5850;}
 /*와인*/
-.fa-glass { background: #164065; font-size: 2.5em;}
+.fa-glass { background: #164065; }
 /*영화보기*/
 .li_video {	background: #37A1FE;}
 /*병원*/
@@ -52,7 +54,7 @@
 .fa-flask { background: #B7C11E;} 
 .fa-leaf { background: #88A825;}
 /*공부*/
-.li_pen { background: #911146; font-size: 2.5em;}
+.li_pen { background: #911146;}
 /*전구, 물리(전기)*/
 .li_bulb { background: #CF4A30;}
 /*책*/
@@ -62,7 +64,7 @@
 
 /*--------------------------------------*/
 /* 유아 */
-.fa-child { background: #813DAC; font-size: 3.0em;}
+.fa-child { background: #813DAC; }
 /*유아 진료 */
 .fa-stethoscope { background: #FF5760;}
 /*이유식*/

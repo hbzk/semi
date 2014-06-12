@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
+
+
 /* 레이아웃 */
-#secondPage { border: 1px solid #000;
-margin: 0px auto 0px; width: 100%; }
 
 
 /* 폰트 아이콘 */
@@ -19,8 +19,6 @@ margin: 0px auto 0px; width: 100%; }
 	color: white; text-align: center;	
 		
 }
-
-
 
 /* 빙글빙글 */
 .flipping { -webkit-transform: rotateY(720deg); -webkit-transition: 1.0s;}
