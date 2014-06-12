@@ -1,14 +1,8 @@
-function db_init_time_수정한거() {
-	db.transaction(function(tx) {
-		tx.executeSql('drop table if exists zzzz'); // DB 초기화
-		tx.executeSql('create table if not exists zzzz (NO integer primary key, ICON_NAME text, CLASS_NAME text unique, TIMER_VAL integer)');
 		
-		
-		tx.executeSql('INSERT or REPLACE into zzzz (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['cutlery', 'fa fa-cutlery', 70]);
-		tx.executeSql('INSERT or REPLACE into zzzz (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['desktop', 'fa fa-desktop', 30]);
-		tx.executeSql('INSERT or REPLACE into zzzz (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['mobile', 'fa fa-mobile', 20]);
-		
-		
-		
-	});
-}
+tx.executeSql('INSERT OR IGNORE INTO zzzz '  
+	+ ' SELECT "cutlery" AS "fa fa-cutlery" AS ICON_NAME, CLASS_NAME, 60 AS TIMER_VAL '
+	+ ' UNION "desktop", "fa fa-desktop", 60 '
+	+ ' UNION "mobile", "fa fa-mobile", 60 '
+	+ ' UNION "mobile", "fa fa-mobile", 60 '
+	
+	...
