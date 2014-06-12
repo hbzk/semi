@@ -108,27 +108,9 @@ function db_insertQuery() {
 function db_init_time() {
 	db.transaction(function(tx) {
 		tx.executeSql('drop table if exists ICONSTIME'); // DB 초기화
-		tx.executeSql('create table if not exists ICONSTIME (NO integer primary key, ICON_NAME text unique, CLASS_NAME text, TIMER_VAL integer)');
-		
-		
-		tx.executeSql('INSERT OR IGNORE INTO ICONSTIME '  
-				+ ' SELECT "aa" AS ICON_NAME, "aa" AS CLASS_NAME, "60" AS TIMER_VAL '
-				+ ' UNION SELECT "bb", "bb", 123');
-		
-		//tx.executeSql('INSERT INTO ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES ("123", "123", 123)');
-		
-		/*tx.executeSql('create table if not exists ICONSTIME (NO integer unique, ICON_NAME text, CLASS_NAME text)');
+		tx.executeSql('create table if not exists ICONSTIME (ICON_NAME text primary key, CLASS_NAME text, TIMER_VAL integer)');
 		
 		tx.executeSql('INSERT OR IGNORE INTO ICONSTIME '  
-			+ ' SELECT 1 AS NO, "flask" AS ICON_NAME, "fa fa-flask" AS CLASS_NAME '
-			+ ' UNION SELECT 2,"code","fa fa-code" '
-			+ ' UNION SELECT 3,"desktop","fa fa-desktop" '
-			+ ' UNION SELECT 4,"home","fa fa-home" '
-			+ ' UNION SELECT 5,"stethoscope","fa fa-stethoscope" '
-			+ ' UNION SELECT 6,"keyboard","fa fa-keyboard-o" '
-		);*/
-		
-		/*tx.executeSql('INSERT OR IGNORE INTO ICONSTIME '  
 				+ ' SELECT "headphones" AS ICON_NAME, "fa fa-headphones" AS CLASS_NAME, 60 AS TIMER_VAL '
 				+ ' UNION SELECT "music", "fa fa-music", 60 '
 				+ ' UNION SELECT "automobile", "fa fa-automobile", 60 '
@@ -163,16 +145,7 @@ function db_init_time() {
 				+ ' UNION SELECT "stethoscope", "fa fa-stethoscope", 60 '
 				+ ' UNION SELECT "spoon", "fa fa-spoon", 60 '
 				+ ' UNION SELECT "code", "fa fa-code", 60 '
-				+ ' UNION SELECT "keyboard", "fa fa-keyboard-o", 60 ');*/
-		
-
-	
-		/*tx.executeSql('select * from ICONSTIME;', [], function(tx, res) {
-			//console.log('res.rows.length --> ' + dbLoad);
-		  });
-		}, function(e) {
-		   //console.log("ERROR: " + e.message);
-		});*/
+				+ ' UNION SELECT "keyboard", "fa fa-keyboard-o", 60 ');
 		
 	});
 }
