@@ -190,6 +190,10 @@ body { text-align:center; font-family:helvetica;}
 	              
 	             $("#test").attr("placeholder", "00:" + iconVal);   
 	             
+	            } else if(mTime != "0" && mTime < 10) {
+	            	
+	            	  $("#test").attr("placeholder", hsTime + ":0" + mTime);
+	            	
 	            } else if(mTime != "0") {
 	                         
 	              $("#test").attr("placeholder", hsTime + ":" + mTime);
