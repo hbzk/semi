@@ -111,50 +111,70 @@ function db_init_time() {
 		tx.executeSql('create table if not exists ICONSTIME (NO integer primary key, ICON_NAME text unique, CLASS_NAME text, TIMER_VAL integer)');
 		
 		
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['headphones', 'fa fa-headphones', 70]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['music', 'fa fa-music', 30]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['automobile', 'fa fa-automobile', 20]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['phone', 'fa fa-phone', 50]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['banknote', 'li li_banknote', 80]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['comment', 'fa fa-comment', 50]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['dribbble', 'fa fa-dribbble', 40]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['plane', 'fa fa-plane', 65]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['gamepad', 'fa fa-gamepad', 35]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['puzzle', 'fa fa-puzzle-piece', 22]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['beer', 'fa fa-beer', 15]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['glass', 'fa fa-glass', 77]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['video', 'li li_video', 50]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['hospital', 'fa fa-hospital-o', 05]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['cutlery', 'fa fa-cutlery', 96]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['desktop', 'fa fa-desktop', 56]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['moon', 'fa fa-moon-o', 45]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['mobile', 'fa fa-mobile', 52]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['coffee', 'fa fa-coffee', 54]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['tv', 'li li_tv', 65]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['shirt', 'li li_t-shirt', 65]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['home', 'fa fa-home', 50]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['trash', 'li li_trash', 21]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['scissors', 'fa fa-scissors', 22]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['flask', 'fa fa-flask', 33]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['leaf', 'fa fa-leaf', 44]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['pen', 'li li_pen', 66]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['bulb', 'li li_bulb', 88]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['book', 'fa fa-book', 77]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['bookmark', 'fa fa-bookmark', 85]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['child', 'fa fa-child', 43]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['stethoscope', 'fa fa-stethoscope', 67]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['spoon', 'fa fa-spoon', 53]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['code', 'fa fa-code', 60]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['keyboard', 'fa fa-keyboard-o', 88]);
-
+		tx.executeSql('INSERT OR IGNORE INTO ICONSTIME '  
+				+ ' SELECT "aa" AS ICON_NAME, "aa" AS CLASS_NAME, "60" AS TIMER_VAL '
+				+ ' UNION SELECT "bb", "bb", 123');
 		
+		//tx.executeSql('INSERT INTO ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES ("123", "123", 123)');
+		
+		/*tx.executeSql('create table if not exists ICONSTIME (NO integer unique, ICON_NAME text, CLASS_NAME text)');
+		
+		tx.executeSql('INSERT OR IGNORE INTO ICONSTIME '  
+			+ ' SELECT 1 AS NO, "flask" AS ICON_NAME, "fa fa-flask" AS CLASS_NAME '
+			+ ' UNION SELECT 2,"code","fa fa-code" '
+			+ ' UNION SELECT 3,"desktop","fa fa-desktop" '
+			+ ' UNION SELECT 4,"home","fa fa-home" '
+			+ ' UNION SELECT 5,"stethoscope","fa fa-stethoscope" '
+			+ ' UNION SELECT 6,"keyboard","fa fa-keyboard-o" '
+		);*/
+		
+		/*tx.executeSql('INSERT OR IGNORE INTO ICONSTIME '  
+				+ ' SELECT "headphones" AS ICON_NAME, "fa fa-headphones" AS CLASS_NAME, 60 AS TIMER_VAL '
+				+ ' UNION SELECT "music", "fa fa-music", 60 '
+				+ ' UNION SELECT "automobile", "fa fa-automobile", 60 '
+				+ ' UNION SELECT "phone", "fa fa-phone", 60 '
+				+ ' UNION SELECT "banknote", "li li_banknote", 60 '
+				+ ' UNION SELECT "comment", "fa fa-comment", 60 '
+				+ ' UNION SELECT "dribbble", "fa fa-dribbble", 60 '
+				+ ' UNION SELECT "plane", "fa fa-plane", 60 '
+				+ ' UNION SELECT "gamepad", "fa fa-gamepad", 60 '
+				+ ' UNION SELECT "puzzle", "fa fa-puzzle-piece", 60 '
+				+ ' UNION SELECT "beer", "fa fa-beer", 60 '
+				+ ' UNION SELECT "glass", "fa fa-glass", 60 '
+				+ ' UNION SELECT "video", "li li_video", 60 '
+				+ ' UNION SELECT "hospital", "fa fa-hospital-o", 60 '
+				+ ' UNION SELECT "cutlery", "fa fa-cutlery", 60 '
+				+ ' UNION SELECT "desktop", "fa fa-desktop", 60 '
+				+ ' UNION SELECT "moon", "fa fa-moon-o", 60 '
+				+ ' UNION SELECT "mobile", "fa fa-mobile", 60 '
+				+ ' UNION SELECT "coffee", "fa fa-coffee", 60 '
+				+ ' UNION SELECT "tv", "li li_tv", 60 '
+				+ ' UNION SELECT "shirt", "li li_t-shirt", 60 '
+				+ ' UNION SELECT "home", "fa fa-home", 60 '
+				+ ' UNION SELECT "trash", "li li_trash", 60 '
+				+ ' UNION SELECT "scissors", "fa fa-scissors", 60 '
+				+ ' UNION SELECT "flask", "fa fa-flask", 60 '
+				+ ' UNION SELECT "leaf", "fa fa-leaf", 60 '
+				+ ' UNION SELECT "pen", "li li_pen", 60 '
+				+ ' UNION SELECT "bulb", "li li_bulb", 60 '
+				+ ' UNION SELECT "book", "fa fa-book", 60 '
+				+ ' UNION SELECT "bookmark", "fa fa-bookmark", 60 '
+				+ ' UNION SELECT "child", "fa fa-child", 60 '
+				+ ' UNION SELECT "stethoscope", "fa fa-stethoscope", 60 '
+				+ ' UNION SELECT "spoon", "fa fa-spoon", 60 '
+				+ ' UNION SELECT "code", "fa fa-code", 60 '
+				+ ' UNION SELECT "keyboard", "fa fa-keyboard-o", 60 ');*/
+		
+
 	
-		tx.executeSql('select * from ICONSTIME;', [], function(tx, res) {
+		/*tx.executeSql('select * from ICONSTIME;', [], function(tx, res) {
 			//console.log('res.rows.length --> ' + dbLoad);
 		  });
 		}, function(e) {
 		   //console.log("ERROR: " + e.message);
-		});
+		});*/
+		
+	});
 }
 
 
