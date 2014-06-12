@@ -12,7 +12,9 @@ $(window).load(function(){
 	dragdrop_drop();
 	
 	$('#middle').mouseup(function(){ // 미들 클릭시 초기화
-		dragdrop_timerCheck();
+		if ($('#timer').hasClass('iconMain') && dragdrop_timerCheck() == false) {
+			$('#middle').attr('style','');
+		}
 	});
 	
 });
@@ -44,71 +46,81 @@ function dragdrop_doing() {
 function dragdrop_drop() {
 	$('#start').droppable({tolerance: 'touch'}, {accept: '.drag'}, {drop: function(event, ui){
 		
-		dragdrop_timerCheck(); // 이미 실행중인지 확인 후 초기화
-		
-		
-		// 드래그 대상 관련
-		// 가끔 드래그 대상이 div로 인식되는 버그 대응 
-		if (event.toElement.tagName == "I") {
-			lastIcon = $(event.toElement);
-			lastDragger = lastIcon.parent('div');
-		} else {
-			console.log('event.toElement == div');
-			lastDragger = $(event.toElement);
-			lastIcon = lastDragger.children('i');
-		}
-
-		//lastDragger.draggable({revertDuration:0});
-		lastDragger.attr('style', '');
-		lastDraggerClass = lastDragger[0].className;
-		
-		// 아이콘 중앙 배치
-		$('#middle').html(lastIcon).draggable({zIndex: 9});
-		
-		// 시작 아이콘 관련
-		$('#start').children().remove();
-		
-		// 타이머 출력
-		timer_doing('timer');
-		$('#timer').addClass(lastDraggerClass)
+		// 이미 실행중인지 확인 후 초기화 
+		if (dragdrop_timerCheck() == true) { // 시작을 안했거나, 시작한 행동이 최소 시간을 넘은 경우 > 새로 시작
+			
+			// 드래그 대상 관련
+			// 가끔 드래그 대상이 div로 인식되는 버그 대응 
+			if (event.toElement.tagName == "I") {
+				lastIcon = $(event.toElement);
+				lastDragger = lastIcon.parent('div');
+			} else {
+				console.log('event.toElement == div');
+				lastDragger = $(event.toElement);
+				lastIcon = lastDragger.children('i');
+			}
+			
+			//lastDragger.draggable({revertDuration:0});
+			lastDragger.attr('style', '');
+			lastDraggerClass = lastDragger[0].className;
+			
+			// 아이콘 중앙 배치
+			$('#middle').html(lastIcon).draggable({zIndex: 9});
+			
+			// 시작 아이콘 관련
+			$('#start').children().remove();
+			
+			// 타이머 출력
+			timer_doing('timer');
+			$('#timer').addClass(lastDraggerClass)
 			.removeClass('drag ui-draggable ui-draggable-dragging');
-		
-		// 액션 이름, 시작 시간 저장
-		actionName = lastIcon[0].attributes[0].value;
-		//class이름
-		className = lastIcon[0].className;
-		className = className.replace(/ ui-draggable/g,'').replace(/ ui-droppable/g,'');
-		//actionName = actionName.replace(/-/g, '').replace(/_/g, '').replace(/fa/g, '').replace(/li/g, '');
-		startTime = new Date();
+			
+			// 액션 이름, 시작 시간 저장
+			actionName = lastIcon[0].attributes[0].value;
+			//class이름
+			className = lastIcon[0].className;
+			className = className.replace(/ ui-draggable/g,'').replace(/ ui-droppable/g,'');
+			//actionName = actionName.replace(/-/g, '').replace(/_/g, '').replace(/fa/g, '').replace(/li/g, '');
+			startTime = new Date();
+			
+		}
 	}});
 }
 
 // 타이머 구동 확인 + 저장 + 초기화
 function dragdrop_timerCheck() {
 	if ($('#timer').hasClass('iconMain')) { // 실행 중인지 확인
-		$('#result').append(formatTime(x.time()) + ' '); // DB 구현 전까지 타이머 저장 대용
-		
-		// 종료시간, 활동시간 저장 
-		endTime = new Date();
-		resultWhile = Math.floor((endTime - startTime) / 1000);
-		
-		if (resultWhile >-1) {
-			db_insertQuery(); // Query
-		} else {
-			alert('몇초 이상 해야함');
-		}
-		
-		timer_reset(); // 타이머 초기화
-		$('#timer').html('').removeClass(); // 타이머 출력 제거
-		
-		// 시작 아이콘 복구
-		$('#start').html(startIcon); 
-		$('#middle').attr('style','').removeClass();
-		
-		lastDragger.html(lastIcon);
-		lastDragger.attr('style','');
+		minimumWhileCheck = Math.floor((new Date() - startTime) / 1000);
 
-		dragdrop_flip(); // 빙글빙글
+		if (minimumWhileCheck < 0) {	// <==========================   최소 저장 가능 (초)
+			alert("몇 초 이상 해야함");
+			return false;
+
+		} else {
+			
+			//$('#result').append(formatTime(x.time()) + ' '); // DB 구현 전까지 타이머 저장 대용
+			
+			// 종료시간, 활동시간 저장 
+			endTime = new Date();
+			resultWhile = Math.floor((endTime - startTime) / 1000);
+			
+			db_insertQuery(); // Query
+			
+			timer_reset(); // 타이머 초기화
+			$('#timer').html('').removeClass(); // 타이머 출력 제거
+			
+			// 시작 아이콘 복구
+			$('#start').html(startIcon); 
+			$('#middle').attr('style','').removeClass();
+			
+			lastDragger.html(lastIcon);
+			lastDragger.attr('style','');
+			
+			dragdrop_flip(); // 빙글빙글
+			return true;
+		}
+	} else {
+		return true;
 	}
 }
 
