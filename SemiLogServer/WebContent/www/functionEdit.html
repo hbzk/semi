@@ -202,12 +202,12 @@ body { text-align:center; font-family:helvetica;}
         
               } else if( iconVal < 540 && mTime > 10) {
                 
-            	  $("#test").attr("placeholder", "0" + hsTime + ":" + mTime);
+                $("#test").attr("placeholder", "0" + hsTime + ":" + mTime);
               
               } else if( mTime < 10 ){
-            	  $("#test").attr("placeholder", hsTime + ":0" + mTime);
+                $("#test").attr("placeholder", hsTime + ":0" + mTime);
               } else {
-            	  $("#test").attr("placeholder", hsTime + ":" + mTime);
+                $("#test").attr("placeholder", hsTime + ":" + mTime);
                 }
               
               
@@ -224,13 +224,13 @@ body { text-align:center; font-family:helvetica;}
                
                if(splitValue[0] == "00") {
               
-            	   
-            	 console.log(splitValue[1]);
+                 
+               console.log(splitValue[1]);
                updateRecord(thisIcon, splitValue[1]);
                 
                 
                } else {
-            	
+              
                var totalTime = parseInt(splitValue[0] * 60) + parseInt(splitValue[1]);
                updateRecord(thisIcon, totalTime);
                
@@ -242,7 +242,7 @@ body { text-align:center; font-family:helvetica;}
              });
              
             $("#cancel").click(function(){
-            	location.href = "main.html";
+              location.href = "main.html";
             });
              
            });
