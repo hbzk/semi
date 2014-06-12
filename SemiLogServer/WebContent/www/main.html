@@ -2,18 +2,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+<!-- <script type="text/javascript" src="cordova.js"></script> -->
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript" src="js/jquery.ui.touch.js"></script>
 <script type="text/javascript" src="js/timer.js"></script>
+<script type="text/javascript" src="js/loadSelectedIcon.js"></script>
 <script type="text/javascript" src="js/cs_drag_font.js"></script>
-<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
 
 <link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/lineconStyle.css">
 <link rel="stylesheet" href="css/layout_font.css">
 <link rel="stylesheet" href="css/common_font.css">
+
 <!-- <link rel="stylesheet" href="css/jquery-ui.css"> -->
 <title>Main</title>
 <style type="text/css">
@@ -25,19 +29,19 @@
 </style>
 </head>
 <body>
-
+<div class="header" data-role="header"><p>MAIN PAGE</p></div>
 <section id="layout">
   <section id="iconMainDiv">
     <div id="start"><i class="fa fa-play"></i></div>
     
     <div id="middle"><!-- <i class="li li_tv"></i> 아이콘이 여기로 --></div>
     
-    <div id="one" class="drag iconMain center top"><i class="li li_tv"></i></div>
-    <div id="two" class="drag iconMain left top"><i class="fa fa-cutlery"></i></div>
-    <div id="three" class="drag iconMain right top"><i class="fa fa-desktop"></i></div>
-    <div id="four" class="drag iconMain left bottom"><i class="fa fa-moon-o"></i></div>
-    <div id="five" class="drag iconMain right bottom"><i class="fa fa-mobile"></i></div>
-    <div id="six" class="drag iconMain center bottom"><i class="fa fa-coffee"></i></div>
+    <div id="one" class="drag iconMain center top"></div>
+    <div id="two" class="drag iconMain left top"></div>
+    <div id="three" class="drag iconMain right top"></div>
+    <div id="four" class="drag iconMain left bottom"></div>
+    <div id="five" class="drag iconMain right bottom"></div>
+    <div id="six" class="drag iconMain center bottom"></div>
     
     <p id="timer"></p>
   </section>
