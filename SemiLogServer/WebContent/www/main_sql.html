@@ -55,13 +55,12 @@
 
 
 <script type="text/javascript">
-window.addEventListener("load", function(){
-	setTimeout(loaded, 100);
-}, false);
-	 
-function loaded(){
-	window.scrollTo(0, 1);
-}
+var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+
+db.transaction(function(tx) {
+	tx.executeSql('drop table if exists ICONSTIME'); // DB 초기화
+});
+
 </script>
 </body>
 </html>
