@@ -130,7 +130,7 @@ tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VA
 tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['moon', 'fa fa-moon-o', 45]);
 tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['mobile', 'fa fa-mobile', 52]);
 tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['coffee', 'fa fa-coffee', 54]);
-tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['tv', 'li li_tv', 45]);
+tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['tv', 'li li_tv', 65]);
 tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['shirt', 'li li_t-shirt', 65]);
 tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['home', 'fa fa-home', 50]);
 tx.executeSql('INSERT or REPLACE into ICONSTIME (ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?)', ['trash', 'li li_trash', 21]);
