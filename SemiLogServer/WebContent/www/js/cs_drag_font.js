@@ -66,7 +66,7 @@ $(window).load(function(){
 			location.href = "functionEdit.html";
 		}, 3);
 		*/
-		db_init_reSet();
+		
 	});
 	
 	
