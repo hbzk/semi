@@ -15,11 +15,11 @@ margin: 50px auto 0px; width: 320px; height: 533px; position: relative;}
 #mainLink { font-size: 200%; position: absolute; bottom: 10px; right: 90px; text-decoration: none;}
 #deleteAll { font-size: 150%; position: absolute; bottom: 10px; right: 20px;  text-decoration: none;}
 
-#resultList { height: 319px; width: 340px; overflow: auto; margin-top: 20px;}    
-#rtScroll { overflow: hidden; position:absolute; height: 385px; width:300px; margin-top: 30px; }
+#resultList { height: 370px; width: 340px; overflow: auto; margin-top: 20px;}    
+#rtScroll { overflow: hidden; position:absolute; height: 385px; width:320px;}
 
-#date { height: 60px; text-align: center; line-height: 100px; position: relative; }
-#date p { font-family: 'junction', sans-serif; font-size: 400%; font-weight: bold; margin: 0; text-align: center; }
+#date { height: auto; text-align: center; line-height: 80px; position: relative; vertical-align: middle; }
+#date p { font-family: 'junction', sans-serif; font-size: 350%; font-weight: bold; margin: 0; text-align: center; }
 #date span { position: absolute; }
 #date span.left { left: 40px; }
 #date span.right { right: 40px; }
