@@ -92,7 +92,7 @@ function dragdrop_timerCheck() {
 		endTime = new Date();
 		resultWhile = Math.floor((endTime - startTime) / 1000);
 		
-		if (resultWhile > 5) {
+		if (resultWhile >-1) {
 			db_insertQuery(); // Query
 		} else {
 			alert('몇초 이상 해야함');
