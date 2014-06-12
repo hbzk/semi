@@ -92,7 +92,11 @@ function dragdrop_timerCheck() {
 		endTime = new Date();
 		resultWhile = Math.floor((endTime - startTime) / 1000);
 		
-		db_insertQuery(); // Query
+		if (resultWhile > 5) {
+			db_insertQuery(); // Query
+		} else {
+			alert('몇초 이상 해야함');
+		}
 		
 		timer_reset(); // 타이머 초기화
 		$('#timer').html('').removeClass(); // 타이머 출력 제거
