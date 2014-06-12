@@ -173,13 +173,12 @@
 			
 			settingDraggerParent.append(event.target);
 			settingDropperParent.append(event.toElement);
-			
 			selectedIcon_db_insert();
 		}});
 	}
 	function errorFull() {
 		$().toastmessage('showToast',{
-		    text     : 'Already selected 6 Activities',
+		    text     : '벌써 6개 선택 다 됐거등요',
 		    stayTime : 1500,
 		    sticky   : false,
 		    position : 'middle-center',
@@ -190,7 +189,7 @@
 	
 	function errorUnderSix() {
 		$().toastmessage('showToast',{
-		    text     : 'Selecte six Activities!!',
+		    text     : '여섯개 선택해야 돼요옷!!!',
 		    inEffectDuration : 100,
 		    stayTime : 1500,
 		    sticky   : false,
