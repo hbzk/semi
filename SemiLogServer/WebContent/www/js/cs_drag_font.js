@@ -107,11 +107,11 @@ function db_insertQuery() {
 
 function db_init_time() {
 	db.transaction(function(tx) {
-		tx.executeSql('drop table if exists ICONSTIME'); // DB 초기화
+		//tx.executeSql('drop table if exists ICONSTIME'); // DB 초기화
 		tx.executeSql('create table if not exists ICONSTIME (ICON_NAME text primary key, CLASS_NAME text, TIMER_VAL integer)');
 		
 		tx.executeSql('INSERT OR IGNORE INTO ICONSTIME '  
-				+ ' SELECT "headphones" AS ICON_NAME, "fa fa-headphones" AS CLASS_NAME, 60 AS TIMER_VAL '
+				+ ' SELECT "headphones" AS ICON_NAME, "fa fa-headphones" AS CLASS_NAME, 80 AS TIMER_VAL '
 				+ ' UNION SELECT "music", "fa fa-music", 60 '
 				+ ' UNION SELECT "automobile", "fa fa-automobile", 60 '
 				+ ' UNION SELECT "phone", "fa fa-phone", 80 '
