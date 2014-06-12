@@ -36,7 +36,9 @@ function db_listText(){
 				resultList.append($('<div class="rtTable">')
 					.append('<div data-id= "'+res.rows.item(i).id +'" class="rtIcon actionName">'+'<i class= "'+res.rows.item(i).CLASSNAME+'"></i></div>')
 					.append('<div class="rtTime">' + db_digitText(startTime.getHours()) + ':' + db_digitText(startTime.getMinutes())
-							+ ' ~ '  + db_digitText(endTime.getHours()) + ':' + db_digitText(endTime.getMinutes())).append('<div class="rtDelete"><i class="fa fa-times"></i></div>')
+							+ ' ~ '  + db_digitText(endTime.getHours()) + ':' + db_digitText(endTime.getMinutes()))
+					.append('<div class="rtDuration">' + res.rows.item(i).WHILE +'sec </div>')
+					.append('<div class="rtDelete"><i class="fa fa-times"></i></div>')
 				);
 			}});
 	}, db_errorCB);};
