@@ -30,10 +30,10 @@ $('#target').pieChart(data,300,"pie");
 		var angle = 0;
 		var perc = [];
 		var temp = [];
-		var color = ["#555","#666","#777","#888","#999","#aaa","#bbb","#ccc","#ddd","#eee"];
-		var color2 = ["#555","#666","#777","#888","#999","#aaa","#bbb","#ccc","#ddd","#eee"];
-		//var color = ["#BC3603","#D97904","#F2B705","#86AD00","#0092B9","#a461c4","#eeeeee","#9f9f9f","#7b6150","#024167"];
-		//var color2 = ["#de3d00","#fb8a00","#ffc517","#9bc800","#00addb","#b986d2","#f3f3f3","#b9b9b9","#ae9483","#04639f"];
+		//var color = ["#555","#666","#777","#888","#999","#aaa","#bbb","#ccc","#ddd","#eee"];
+		//var color2 = ["#555","#666","#777","#888","#999","#aaa","#bbb","#ccc","#ddd","#eee"];
+		var color = ["#BC3603","#D97904","#F2B705","#86AD00","#0092B9","#a461c4","#eeeeee","#9f9f9f","#7b6150","#024167"];
+		var color2 = ["#de3d00","#fb8a00","#ffc517","#9bc800","#00addb","#b986d2","#f3f3f3","#b9b9b9","#ae9483","#04639f"];
 		//calculate
 			for(i = 0; i < numberof; i++){
 				sum = sum+ data[i][1];
