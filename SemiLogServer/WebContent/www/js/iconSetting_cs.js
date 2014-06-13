@@ -85,57 +85,33 @@ function selectCount(){
 	iconCount = $(".fa-check").length;
 	console.log("iconCount == "+iconCount);
 	if(iconCount == 6){
-		selectedIcon_db_insert();
+		db_selectIconUpdate();
 	}
 }
 
 
 // 6개 선택된 ICON DB에 저장하기
-function selectedIcon_db_insert(){
+function db_selectIconUpdate(){
 	db.transaction(function(tx) {
 		
 		var sixSelected = $(".selected_icon .icon_row .icon > [data-name]");
 		var selectedNames = new Array();
-		for (var i=0; i<6;i++){
+		
+		for (var i=0; i < 6 ;i++){
 			selectedNames.push($(sixSelected[i]).attr('data-name'));
 		}
-		console.log(selectedNames);
 		
 		for( var i=0 ; i < activityList.length; i++){
-			//console.log(activityList[i]);
-			
-			//console.log($.inArray(activityList[i],selectedNames));
-			var selectedPosition = $.inArray(activityList[i],selectedNames);
+			var selectedPosition = $.inArray(activityList[i],selectedNames) + 1;
 			if ($.inArray(activityList[i],selectedNames) >= 0){
-				//console.log('ok');
-				tx.executeSql('UPDATE ICONLIST SET POSITION=? WHERE ICON_NAME=? ', [selectedPosition + 1, activityList[i]], function(tx, res) {
-					//console.log(res.rows.item(0).TIMER_VAL);
+				tx.executeSql('UPDATE ICONLIST SET POSITION=? WHERE ICON_NAME=? ', [selectedPosition.toString(), activityList[i]], function(tx, res) {
 				}, db_errorCB);
 			} else {
-				//console.log('no');
 				tx.executeSql('UPDATE ICONLIST SET POSITION=? WHERE ICON_NAME=? ', ['-', activityList[i]], function(tx, res) {
-					//console.log(res.rows.item(0).TIMER_VAL);
 				}, db_errorCB);
 			}
 			
 		}
-		
-		
-/*		var sixSelected = $(".selected_icon .icon_row .icon > [data-name]");
-		for( var i=0 ; i< sixSelected.length; i++){
-			var dataName = sixSelected[i].getAttribute("data-name");
-			var className = sixSelected[i].getAttribute("class");
-			tx.executeSql('SELECT TIMER_VAL FROM ICONLIST WHERE ICON_NAME=?', [dataName], function(tx, res) {
-				console.log(res.rows.item(0).TIMER_VAL);
-			}, db_errorCB);
-			
-			tx.executeSql('INSERT OR REPLACE INTO ICONLIST (POSITION, ICON_NAME, CLASS_NAME, TIMER_VAL) VALUES (?,?,?, (SELECT TIMER_VAL FROM ICONLIST WHERE ICON_NAME=?) )',
-					[ i + 1, dataName, className, dataName], function(tx, res) {
-				tx.executeSql('select * from ICONLIST;', [], function(tx, res) {
-					console.log('res.rows.length --> ' + res.rows.length);
-				}, db_errorCB);
-			}, db_errorCB);
-		}*/
 		
 	});
 }
@@ -195,38 +171,26 @@ function loadSelectedIcon(){
 	var iconDiv = $(".selected_icon .icon_row .icon");
 	console.log("Load DB - data (selectedIcon)");
 	db.transaction(function(tx){
-		tx.executeSql('SELECT * FROM ICONLIST',
-				[],
-				function(tx, rs){
-					for( var i=0 ; i < rs.rows.length ; i++){
-						var row = rs.rows.item(i);
-						console.log(rs.rows.item(i).POSITION);
-						
-						if (rs.rows.item(i).POSITION > 0) {
-							console.log('yes');
-							
-							
-							
-							
-						} else {
-							console.log('no');
-						}
-						
-						/*$($(iconDiv)[i]).append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
-						//main창에 있는 아이콘들 체크표시하기
-						selectedOne = $($(iconDiv)[i]).children().attr('data-name');
-						 
-						if($.inArray(selectedOne,activityList >= 0)){
-								$(".activityIcon i[data-name =" + selectedOne + " ]")
-														.parent()
-														.append('<div class="checkBack"></div>')
-														.append('<div class="check"><i class="fa fa-check" data-flag= "true"></i></div>');
-						}*/
-					}
-					setting_drag();
-					setting_drop();
-					selectCount();
-				});
+		tx.executeSql('SELECT * FROM ICONLIST', [], function(tx, rs){
+			for( var i=0 ; i < rs.rows.length ; i++){
+				var row = rs.rows.item(i);
+				
+				if (row.POSITION > 0) {
+					$($(iconDiv)[row.POSITION - 1]).append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
+				}
+				
+				//main창에 있는 아이콘들 체크표시하기
+				selectedOne = $($(iconDiv)[row.POSITION - 1]).children().attr('data-name');
+				if($.inArray(selectedOne,activityList >= 0)){
+						$(".activityIcon i[data-name =" + selectedOne + " ]").parent()
+							.append('<div class="checkBack"></div>')
+							.append('<div class="check"><i class="fa fa-check" data-flag= "true"></i></div>');
+				}
+			}
+			setting_drag();
+			setting_drop();
+			selectCount();
+		});
 	});
 	
 }
@@ -243,7 +207,7 @@ function setting_drop() {
 		
 		settingDraggerParent.append(event.target);
 		settingDropperParent.append(event.toElement);
-		selectedIcon_db_insert();
+		db_selectIconUpdate();
 	}});
 }
 function errorFull() {
