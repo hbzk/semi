@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="js/jquery.toastmessage.js"></script>
+
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/lineconStyle.css">
+<link rel="stylesheet" href="css/common_font.css">
+<link rel="stylesheet" href="css/iconSetting.css">
+<link rel="stylesheet" href="css/jquery.toastmessage.css">
+<title>Setting</title>
+</head>
+<body>
+    <div data-role="page" id="setting">
+      <div class="header" data-role="header"><p>ACTIVITY SETTING</p></div>
+      
+      <div class= "content" data-role="content">
+        <a class="back" href="main_sql.html"><i style="color:black; font-size: 1.5em" class="fa fa-arrow-left"></i></a>
+        <div class="selected_icon icon_theme">
+          <!-- <p>SELECTED ACTIVITY</p> -->
+          <div class="icon_row">
+          <div class="icon"></div>
+          <div class="icon"></div>
+          <div class="icon"></div>
+          <div class="icon"></div>
+          <div class="icon"></div>
+          <div class="icon"></div>
+          </div>
+        </div>
+        
+        <div class="all_icon">
+              <!--  *****일상 -->
+            <div class="icon_theme routins">
+            <div class="icon_row">
+              <div class="box title"><p class="activity_group">ROUTIN </p></div>
+            
+            <div class="activityIcon"><i data-name="cutlery" class="fa fa-cutlery"></i></div>
+            <div class="activityIcon"><i data-name="desktop" class="fa fa-desktop"></i></div>
+            <div class="activityIcon"><i data-name="moon" class="fa fa-moon-o"></i></div>
+            <div class="activityIcon"><i data-name="mobile" class="fa fa-mobile"></i></div>
+            <div class="activityIcon"><i data-name="coffee" class="fa  fa-coffee"></i></div>
+            <div class="activityIcon"><i data-name="tv" class="li li_tv"></i></div>
+            </div>
+            </div>
+        
+            <!--  *****휴식 -->
+            <div class="icon_theme other">
+                  <div class="icon_row">
+                    <div class="box title"><p class="activity_group">BREATH TIME</p></div>
+                  <div class="activityIcon"><i data-name="headphones" class="fa fa-headphones" ></i></div>
+                  <div class="activityIcon"><i data-name="music" class="fa fa-music"></i></div>
+                  <div class="activityIcon"><i data-name="automobile" class="fa fa-automobile"></i></div>
+                  <div class="activityIcon"><i data-name="phone" class="fa fa-phone"></i></div>
+                  <div class="activityIcon"><i data-name="banknote" class="li li_banknote"></i></div>
+                  <div class="activityIcon"><i data-name="comment" class="fa fa-comment"></i></div>
+                  <div class="activityIcon"><i data-name="dribbble" class="fa fa-dribbble"></i></div>
+                  <div class="activityIcon"><i data-name="plane" class="fa fa-plane"></i></div>
+                  <div class="activityIcon"><i data-name="gamepad" class="fa fa-gamepad"></i></div>
+                  <div class="activityIcon"><i data-name="puzzle" class="fa fa-puzzle-piece"></i></div>
+                  <div class="activityIcon"><i data-name="beer" class="fa fa-beer"></i></div>
+                  <div class="activityIcon"><i data-name="glass" class="fa fa-glass"></i></div>
+                  <div class="activityIcon"><i data-name="video" class="li li_video"></i></div>
+                  <div class="activityIcon"><i data-name="hospital" class="fa fa-hospital-o"></i></div>
+                  </div>
+            </div>
+        
+          <!-- *****집안일 --> 
+          <div class="icon_theme chores">
+                  <div class="icon_row">
+                    <div class="box title"><p class="activity_group">CHORES</p></div>
+                  <div class="activityIcon"><i data-name="shirt" class="li  li_t-shirt"></i></div>
+                  <div class="activityIcon"><i data-name="home" class="fa fa-home"></i></div>
+                  <div class="activityIcon"><i data-name="trash" class="li li_trash"></i></div>
+                  <div class="activityIcon"><i data-name="scissors" class="fa fa-scissors"></i></div>
+                  </div>
+          </div>
+          
+          <!--*********** 공부 -->
+            <div class="icon_theme study">
+                  <div class="icon_row">
+                    <div class="box title"><p class="activity_group">STUDY</p></div>
+                  <div class="activityIcon"><i data-name="flask" class="fa  fa-flask"></i></div>
+                  <div class="activityIcon"><i data-name="leaf" class="fa  fa-leaf"></i></div>
+                  <div class="activityIcon"><i data-name="pen" class="li li_pen"></i></div>
+                  <div class="activityIcon"><i data-name="bulb" class="li  li_bulb"></i></div>
+                  <div class="activityIcon"><i data-name="book" class="fa  fa-book"></i></div>
+                  <div class="activityIcon"><i data-name="bookmark" class="fa fa-bookmark"></i></div>
+                  </div>
+            </div>
+            
+          <!-- ****엄마팩------------ -->
+            <div class="icon_theme mommy">
+                <div class="icon_row">
+                <div class="box title"><p class="activity_group">MOMMY</p></div>
+                <div class="activityIcon"><i data-name="child" class="fa  fa-child"></i></div>
+                <div class="activityIcon"><i data-name="stethoscope" class="fa fa-stethoscope"></i></div>
+                <div class="activityIcon"><i data-name="spoon" class="fa fa-spoon"></i></div>
+                </div>
+            </div>
+            
+          <!-- ****개발자. 코딩-------- -->
+            <div class="icon_theme programmer">
+              <div class="icon_row">
+                <div class="box title"><p class="activity_group">PROGRAMMER</p></div> 
+                <div class="activityIcon"  data-name="code"><i data-name="code" class="fa fa-code"></i></div>
+                <div class="activityIcon"><i data-name="keyboard" class="fa fa-keyboard-o"></i></div>
+                </div>
+          </div>
+      </div>
+      
+    </div>
+    </div>
+    
+<script type="text/javascript" src="js/iconSetting.js"></script>
+
+</body>
+</html>

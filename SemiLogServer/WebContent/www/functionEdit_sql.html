@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="spinningwheel.js"></script>
+  
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/lineconStyle.css">
+<link rel="stylesheet" href="css/common_font.css">  
+  
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="spinningwheel.css" type="text/css" media="all" />
+
+
+<!-- timepicker -->
+<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" /> -->
+<!-- <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script> -->
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script src="js1/mobiscroll.core.js"></script>
+<script src="js1/mobiscroll.scroller.js" type="text/javascript"></script>
+<script src="js1/mobiscroll.datetime.js" type="text/javascript"></script>
+<script src="js1/mobiscroll.scroller.wp.js" type="text/javascript"></script>
+<script src="js1/i18n/mobiscroll.i18n.de.js" type="text/javascript"></script>
+
+<link href="css1/mobiscroll.icons.css" rel="stylesheet" type="text/css" />
+<link href="css1/mobiscroll.scroller.css" rel="stylesheet" type="text/css" />
+<link href="css1/mobiscroll.scroller.wp.css" rel="stylesheet" type="text/css" />
+
+
+ 
+<title>Function Edit</title>
+
+
+
+<style type="text/css">
+body { text-align:center; font-family:helvetica;}
+#functionEdit { 
+  margin-top: 100px; position: relative; text-align: center;
+}
+#timer { font-size: 200%; margin: 10px 0px; }
+
+#functionEdit button { font-size: 130%; padding: 10px; }
+
+
+.ui-content { 
+  width: 324px;
+  margin-top: -35px;
+  margin-left: -18px;
+}
+#test {
+  width: 318px;
+  height: 70px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0px;
+  font-size: 180%;
+}
+.dw-i {
+  text-align: center;
+}
+::-webkit-input-placeholder {
+   color: black;
+}
+.btn{
+ width:130px;
+ height:50px;
+ margin-top: 50px;
+ margin-left: 20px;
+ float: left;
+
+}
+.button1 {
+ width:125px;
+ height:45px;
+ border: none;
+ outline:none;
+ box-shadow: 0px 3px 2px 0px #703789;
+ color: #fff;
+ font-size: 14px;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+ background-color: #8d44ad;
+ font-weight: bold;
+}
+.button1:active {
+ padding-top: 2px;
+ box-shadow:none;
+}
+.button2 {
+ width:125px;
+ height:45px;
+ border: none;
+ outline:none;
+ color: #fff;
+ font-size: 14px;
+ background-color: #2dcc70;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+ box-shadow: 0px 3px 2px 0px #219452;
+ font-weight: bold;
+}
+.button2:active {
+ padding-top: 2px;
+ box-shadow:none;
+}
+.fa, .li{  
+  display: block; width: 70px; height: 70px; line-height: 70px; font-size: 2.8em;
+  border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px;
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15); border: 0px; 
+  color: white; text-align: center; 
+}
+.icons { display: none; }
+#iconSet { margin-left: 125px; }
+</style>
+<script type="text/javascript">
+        $(function () {    
+       
+          
+            var curr = new Date().getFullYear();
+            var opt = {
+                'time': {
+                    preset: 'time'
+                }
+            }
+
+            $('.settings select').bind('change', function() {
+                var demo = $('#demo').val();
+
+                if (!demo.match(/select/i)) {
+                    $('.demo-test-' + demo).val('');
+                }
+
+                $('.demo-test-' + demo).scroller('destroy').scroller($.extend(opt[demo], {
+                    theme: $('#theme').val(),
+                    mode: $('#mode').val(),
+                    lang: $('#language').val(),
+                    display: $('#display').val(),
+                    animate: $('#animation').val()
+                }));
+                $('.demo').hide();
+                $('.demo-' + demo).show();
+            });
+            $('#demo').trigger('change');
+               
+        });
+        
+        
+        
+          // db --------------------------
+          
+          
+       var iconName, defaultTime;
+       var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+      
+      
+      
+      db_defaultTime();
+
+        var row;
+        var iconO;
+        var iconVal;
+      
+        var tIcon;
+        
+        
+      function db_defaultTime(){
+        db.transaction(function(tx){
+          tx.executeSql('SELECT * FROM ICONLIST', [], function(tx, rs){
+                
+            row = rs.rows.item(35);
+            iconO = row.CLASS_NAME;
+            iconVal;
+            
+            
+            
+           $("#iconSet").append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
+                    
+           for(var i=0;i<rs.rows.length-1;i++) {
+             var iconT = rs.rows.item(i);
+             if(iconO == iconT.CLASS_NAME) {
+                iconVal = iconT.TIMER_VAL;
+                tIcon = iconT;
+           }
+             
+           }
+            
+            var hTime = iconVal / 60;
+            var mTime = iconVal % 60;
+            var hsTime = Math.floor(hTime);
+              if(iconVal < 60 && mTime < 10) {
+                
+               $("#test").attr("placeholder", "00:0" + mTime);   
+               
+              } else if(iconVal < 60 && mTime > 10) {
+                
+                  $("#test").attr("placeholder", hsTime + "0:" + mTime);
+                
+              } else if( iconVal < 540 && mTime < 10) {
+                           
+                $("#test").attr("placeholder", "0" + hsTime + ":0" + mTime);
+        
+              } else if( iconVal < 540 && mTime > 10) {
+                
+                $("#test").attr("placeholder", "0" + hsTime + ":" + mTime);
+              
+              } else if( mTime < 10 ){
+                $("#test").attr("placeholder", hsTime + ":0" + mTime);
+              } else {
+                $("#test").attr("placeholder", hsTime + ":" + mTime);
+                }
+              
+              
+             $("#confirm").click(function(){
+               var iconVal = $("#test").val();
+               var thisIcon = tIcon.ICON_NAME;
+               if(iconVal != "" && iconVal != "00:00") {   
+        
+                 
+               
+             
+            
+               var splitValue = iconVal.split(":");
+               
+               if(splitValue[0] == "00") {
+              
+                 
+               console.log(splitValue[1]);
+               updateRecord(thisIcon, splitValue[1]);
+                
+                
+               } else {
+              
+               var totalTime = parseInt(splitValue[0] * 60) + parseInt(splitValue[1]);
+               updateRecord(thisIcon, totalTime);
+               
+               }
+               
+               location.href = "main_sql.html";
+               
+               }
+             });
+             
+            $("#cancel").click(function(){
+              location.href = "main_sql.html";
+            });
+             
+           });
+        });
+     }
+      
+      
+      
+      
+      function updateRecord(thisIcon, iconVal) {
+          db.transaction(function(tx) {
+            tx.executeSql("UPDATE ICONLIST SET TIMER_VAL = ? WHERE ICON_NAME = ?", [iconVal, thisIcon], null);
+          });
+        }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      function db_errorCB(e) { // query 에러시 호출
+        console.log("e :" + e);
+        console.log("e.code : "+e.code);
+        console.log("e.message :" + e.message);
+      }
+
+      function db_digitText(i) {
+        if (i < 10) {
+          i = '0' + i;
+        }
+        return i;
+      }
+</script>
+
+
+
+
+
+</head>
+<body>
+
+
+
+<section id="layout">
+
+
+<section id="functionEdit">
+<div id="iconSet">
+  
+</div>
+  <p id="timer">Default Timer</p>
+  
+
+  
+<div data-role="content">
+            <div class="settings">
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="theme">Theme</label>
+                    <select name="theme" id="theme">
+                        <option value="wp light">Windows Phone Light</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="mode">Mode</label>
+                    <select name="mode" id="mode">
+                        <option value="scroller">Scroller</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="language">Language</label>
+                    <select name="language" id="language">                     
+                        <option value="de">Deutsch</option>                
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="display">Display</label>
+                    <select name="display" id="display">
+                        <option value="modal">Modal</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="animation">Animation</label>
+                    <select name="animation" id="animation" class="settings">
+                        <option value="pop">Pop</option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain" class = 'demo'>
+                    <label for="demo">Demo</label>
+                    <select name="demo" id="demo">
+                        <option value="time">Time</option>
+                    </select>
+                </div>
+            </div>
+                <input name="test" 
+                id="test" name="test"
+                class="demo-test-date demo-test-datetime demo-test-time demo-test-credit"
+                     />      
+</div>
+  
+  
+  
+  <div id="confirm" class="btn"><input type="button" class="button1" value="CONFIRM"/></div>
+  <div id="cancel" class="btn"><input type="button" class="button2" value="CANCEL"/></div>
+  
+</section>
+
+
+</section>  
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
