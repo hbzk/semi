@@ -9,7 +9,7 @@
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript" src="js/jquery.ui.touch.js"></script>
 <script type="text/javascript" src="js/timer.js"></script>
-<script type="text/javascript" src="js/loadSelectedIcon.js"></script>
+<!-- <script type="text/javascript" src="js/loadSelectedIcon.js"></script> -->
 <script type="text/javascript" src="js/cs_drag_sql.js"></script>
 
 <link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
@@ -58,7 +58,7 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 db.transaction(function(tx) {
-	tx.executeSql('drop table if exists ICONSTIME'); // DB 초기화
+	//tx.executeSql('drop table if exists ICONSTIME'); // DB 초기화
 });
 
 </script>

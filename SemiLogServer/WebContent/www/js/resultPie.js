@@ -43,7 +43,7 @@ function db_resultPie() {
 			$('#pieChart').pieChart(selectAll,280,"pie"); 
 		});
 	}, db_errorCB);
-};
+}
 
 function db_errorCB(e) { // query 에러시 호출 함수
 	console.log(e);
