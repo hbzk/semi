@@ -26,21 +26,15 @@
 		
 		<div id="middle"><!-- <i class="li li_tv"></i> 아이콘이 여기로 --></div>
 		
-<!-- 	  <div id="one" class="drag iconMain center top"><i class="li li_tv"><input class="icons" value="1"></i></div>
-	  <div id="two" class="drag iconMain left top"><i class="fa fa-cutlery"><input class="icons" value="2"></i></div>
-	  <div id="three" class="drag iconMain right top"><i class="fa fa-desktop"><input class="icons" value="3"></i></div>
-	  <div id="four" class="drag iconMain left bottom"><i class="fa fa-moon-o"><input class="icons" value="4"></i></div>
-	  <div id="five" class="drag iconMain right bottom"><i class="fa fa-mobile"><input class="icons" value="5"></i></div>
-	  <div id="six" class="drag iconMain center bottom"><i class="fa fa-coffee"><input class="icons" value="6"></i></div> -->
+		<div id="one" class="drag iconMain left top"></div>
+		<div id="two" class="drag iconMain center top"></div>
+		<div id="three" class="drag iconMain right top"></div>
+		<div id="four" class="drag iconMain left bottom"></div>
+		<div id="five" class="drag iconMain center bottom"></div>
+		<div id="six" class="drag iconMain right bottom"></div>
 	  
-	  <div id="one" class="drag iconMain left top"></div>
-    <div id="two" class="drag iconMain center top"></div>
-	  <div id="three" class="drag iconMain right top"></div>
-	  <div id="four" class="drag iconMain left bottom"></div>
-	  <div id="five" class="drag iconMain center bottom"></div>
-	  <div id="six" class="drag iconMain right bottom"></div>
-	  
-	  <p id="timer"></p>
+		<p id="timer"></p>
+		
 	</section>
 	<a class="resultLink" href="main_Setting2.html"><i class="fa fa-cog"></i></a>
 	<a id="resultLink" href="result_text_sql.html"><i  class="fa fa-list-ul"></i></a>
@@ -58,9 +52,8 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 db.transaction(function(tx) {
-	//tx.executeSql('drop table if exists ICONSTIME'); // DB 초기화
+	//tx.executeSql('drop table if exists ICONSTIME'); // DB 삭제 - 테스트 용
 });
-
 </script>
 </body>
 </html>
