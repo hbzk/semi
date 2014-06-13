@@ -23,9 +23,21 @@
 	<div id="resultList"></div>
 </div>
 <a id="mainLink" href="main_sql.html"><i class=" fa fa-bullseye fa-1"></i></a>
-<a id="deleteAll" href="#"><i class="fa fa-trash-o fa-1"></i></a>
+<a id="deleteAll" href="main.html"><i class="fa fa-trash-o fa-1"></i></a>
 </section>
-
+<!-- <script>
+	$("#mainLink").click(function(e){
+		e.preventDefault();
+		console.log("main");
+		$(e.target).fadeOut(100);
+	});
+	
+	$("#deleteAll").on("click","i",function(e){
+		e.preventDefault();
+		console.log("trash");
+			$("#mainLink").click();
+	});
+</script> -->
 <script type="text/javascript" src="js/resultList.js"></script>
 </body>
 </html>
