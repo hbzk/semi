@@ -6,8 +6,10 @@
 		font-family: 'orbitron';
 		src: url('../font/orbitron-black-webfont.woff') format('woff');
 }
-
-	
+@font-face{
+		font-family: 'orbitron-l';
+		src: url('../font/orbitron-light-webfont.woff') format('woff');		
+}
 
 body {font-family: 'orbitron', sans-serif; }
 
@@ -82,7 +84,7 @@ i{float: left;	margin: 5px;}
 }
 
 .all_icon .icon_theme{
-	background: #BABABA;
+	background: #EEE;
 	padding: 5px 0px 5px 15px;
 
 }
