@@ -1,6 +1,6 @@
 var actionName, startTime, endTime, resultWhile;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
-var dbId; 
+var dbId, clickedTable; 
 
 db_listText();
 
@@ -12,8 +12,14 @@ $('#deleteAll').click(function(){
  $(document).on("click",".rtDelete",function(e){
 	dbId = $(e.target).parent(".rtDelete").siblings(".rtIcon")[0].attributes[0].value;
 	console.log(dbId);
+	clickedTable = $(e.target).parent(".rtDelete").parent(".rtTable");
+	console.log(clickedTable);
 	db_delete(dbId);
 }); 
+ 
+ $(document).on("click",".rtTable",function(){
+	 $(clickedTable).fadeOut(700);
+ });
 
 function db_deleteAll(){
 	db.transaction(function(tx) {
@@ -59,8 +65,7 @@ function db_delete(no){
 		tx.executeSql("DELETE FROM ACTION WHERE id = ?",
 									[no],
 									function(){
-										$("#resultList").children(".rtTable").remove();
-										db_listText();
+										//db_listText();
 									});
 	});
 }
