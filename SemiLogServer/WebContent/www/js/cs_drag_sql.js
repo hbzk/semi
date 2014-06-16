@@ -35,7 +35,6 @@ $(window).load(function(){
 		
 		clearTimeout(timeClock);
 		
-		
 		/* ---- */
 	});
 	
@@ -75,7 +74,7 @@ function db_insertQuery() {
 		   tx.executeSql('select * from ACTION;', [], function(tx, res) {
 		     console.log('res.rows.length --> ' + res.rows.length);
 		   });
-		 }, function(e) {
+		 }, function(tx, e) {
 		   console.log("ERROR: " + e.message);
 		 });
 	});
@@ -105,45 +104,27 @@ function dragdrop_drop() {
 		}
 		
 		
-		
-		
-		
-		
 		/* 타이머 */
-		 
 	      db.transaction(function(tx){
 	        tx.executeSql('SELECT * FROM ICONLIST', [], function(tx, rs){
 	        	
-	        	
 	        	var dragIcon = lastIcon.context.className;
-	        	
 	        	for(var i=0;i<35;i++) {
 	        		iconsName = rs.rows.item(i).CLASS_NAME;
 	        		//console.log(iconsName);
 	        		
-	        		
 	        		if(dragIcon == iconsName) {
-	        			
-	        			
 	        			minute = rs.rows.item(i).TIMER_VAL;
 	        			console.log(minute);
 	        			
 	        			end = 0;
 	        			timeclock();	
-	        			
 	        		}
 	        	}
 	        });
 	    });
 	
 	/* ------ */
-		
-		
-		
-		
-		
-		
-		
 		
 		
 
