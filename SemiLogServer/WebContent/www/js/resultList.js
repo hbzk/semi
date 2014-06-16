@@ -1,9 +1,8 @@
 var actionName, startTime, endTime, resultWhile;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 var dbId, clickedTable; 
-window.
-db_selectLastDay();		// 마지막 날 출력
 
+db_selectLastDay();		// 마지막 날 출력
 /*searchS = '2014-06-12';
 db_listText();*/
 
@@ -45,8 +44,16 @@ function db_selectSearch(date) {
 	});
 };
 
-
 function db_selectLastDay() {
+	var lastActionSql = "(SELECT date(START_TIME) AS stDay FROM ACTION ORDER BY START_TIME DESC LIMIT 1)";
+	db.transaction(function(tx) {
+		tx.executeSql("SELECT * FROM ACTION WHERE START_TIME BETWEEN date("+lastActionSql+") AND date("+lastActionSql+", ?)", ['+1 day'], function(tx, res) {
+			db_listing(res);
+		}, db_errorCB);
+	});
+};
+
+/*function db_selectLastDay() {
 	db.transaction(function(tx) {
 		tx.executeSql("SELECT date(START_TIME) AS stDay FROM ACTION ORDER BY START_TIME DESC LIMIT 1", [], function(tx, res) {
 			var searchDay = res.rows.item(0).stDay;
@@ -57,7 +64,7 @@ function db_selectLastDay() {
 			
 		}, db_errorCB);
 	});
-};
+};*/
 
 
 // 결과를 HTML에 출력

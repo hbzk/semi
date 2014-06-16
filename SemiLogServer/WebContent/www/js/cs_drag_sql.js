@@ -155,6 +155,7 @@ function dragdrop_drop() {
 
 // 타이머 구동 확인 + 저장 + 초기화
 function dragdrop_timerCheck() {
+	console.log(actionName);
 	if ($('#timer').hasClass('iconMain')) { // 실행 중인지 확인
 		$('#result').append(formatTime(x.time()) + ' '); // DB 구현 전까지 타이머 저장 대용
 		
