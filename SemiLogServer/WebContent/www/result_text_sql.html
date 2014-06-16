@@ -12,11 +12,59 @@
 <link rel="stylesheet" href="css/common_font.css">
 <title>Result_text</title>
 </head>
+
+<script type="text/javascript">
+
+window.onload = function(){
+  
+  var dt = new Date();
+
+  document.getElementById('stDt').innerHTML = converDateString(dt);
+  
+  }
+  
+function converDateString(dt){
+  return addZero(eval(dt.getMonth()+1)) + "/" + addZero(dt.getDate());
+  }
+
+//몇일 전
+function getDt9(s, i){
+var newDt = new Date(s);
+newDt.setDate( newDt.getDate() - i );
+return converDateString(newDt);
+}
+//몇일 후
+function getDt10(s, i){
+var newDt = new Date(s);
+newDt.setDate( newDt.getDate() + i );
+return converDateString(newDt);
+}
+
+function addZero(i){
+var rtn = i + 100;
+return rtn.toString().substring(1,3);
+}
+
+function calc4(){
+var s = document.getElementById('stDt').innerHTML;
+var i = 1;
+
+document.getElementById("stDt").innerHTML = getDt9(s, parseInt(i)); //몇일 전 
+}
+function calc5(){
+var s = document.getElementById('stDt').innerHTML;
+var i = 1;
+
+document.getElementById("stDt").innerHTML = getDt10(s, parseInt(i)); //몇일 후 
+}
+
+</script>
+
 <body>
 <div class="header" data-role="header"><p>LOG LIST</p></div>
 <div id="date">
-	<span class="left" >&lt;</span><span class="right">&gt;</span>
-	<p>05/12</p>
+	<span class="left" onclick="calc4()">&lt;</span><span class="right" onclick="calc5()">&gt;</span>
+	<p id="stDt"></p>
 </div>
 <section id="layout">
 <div id="rtScroll">
