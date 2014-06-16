@@ -109,6 +109,19 @@ $('#dbList').click(function(){
 	});
 });
 
+/*db_test();
+function db_test() {
+	db.transaction(function(tx) {
+		tx.executeSql("SELECT * FROM ACTION WHERE START_TIME BETWEEN date(?, ?) AND (SELECT date(START_TIME, '+1 day') FROM ACTION ORDER BY START_TIME DESC LIMIT 1) ", ['now', '-1 month'], function(tx, res) {
+			var len = res.rows.length;
+			console.log("ACTION: " + len + " rows found.");
+			
+			var result = res.rows.item(0);
+			console.log(result);
+		}, db_errorCB);
+	});
+}*/
+
 /* $('#sql').click(function(){
 	db.transaction(function(tx) {
 		tx.executeSql("INSERT INTO test_table (TITLE, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?)", [text, startTime, endTime, resultWhile], function(tx, res) {
