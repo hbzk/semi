@@ -16,12 +16,9 @@
 <script type="text/javascript">
 
 window.onload = function(){
-  
-  var dt = new Date();
-
-  document.getElementById('stDt').innerHTML = converDateString(dt);
-  
-  }
+	var dt = new Date();
+	document.getElementById('stDt').innerHTML = converDateString(dt);
+}
   
 function converDateString(dt){
   return addZero(eval(dt.getMonth()+1)) + "/" + addZero(dt.getDate());
@@ -73,6 +70,11 @@ document.getElementById("stDt").innerHTML = getDt10(s, parseInt(i)); //몇일 �
 <a id="mainLink" href="main_sql.html"><i class=" fa fa-bullseye fa-1"></i></a>
 <a id="deleteAll" href="#"><i class="fa fa-trash-o fa-1"></i></a>
 </section>
+
+<input id="searchText" type="text">
+<button id="search">검색</button>
+
+
 <!-- <script>
 	$("#mainLink").click(function(e){
 		e.preventDefault();
