@@ -6,20 +6,32 @@
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <title>SIGN UP</title>
 <style type="text/css">
+@font-face{
+		font-family: 'orbitron';
+		src: url('./font/orbitron-black-webfont.woff') format('woff');
+}
+@font-face{
+		font-family: 'orbitron-l';
+		src: url('./font/orbitron-light-webfont.woff') format('woff');		
+}
+@font-face{
+		font-family: 'nanumGothic;
+		src: url('./font/NanumGothic.woff') format('woff');		
+}
 * { margin: 0; padding: 0;}
 :focus { outline: 0;}
-body { font-family: sans-serif;}
+body { font-family: 'orbitron',' sans-serif;}
 
-header { height: 100px; line-height: 100px; background: #3ba3d0; 
+header {font-family: 'orbitron'; height: 100px; line-height: 100px; background: #3ba3d0; 
 text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
 header>a { position: absolute; left: 0; width: 70px;
 text-decoration: none; color: #fff; font-size: 80%;}
 
-input { border: 0px; display: block; width: 100%; height: 50px; padding-top: 20px;
+input {font-family: 'nanumGothic'; border: 0px; display: block; width: 100%; height: 50px; padding-top: 20px;
 text-indent: 30px; font-size: 100%; }
-#email {}
+#email { border-top: 1px solid #999;}
 #password { border-top: 1px solid #999;}
-#btnStart { width: 100%; height: 80px; background: #F05630; 
+#btnStart {font-family: 'orbitron'; width: 100%; height: 80px; background: #F05630; 
 -webkit-transition: background-color .4s ease-out;
 color: #fff; font-size: 200%; font-weight: bolder;}
 #btnStart:disabled { background: #999; }
@@ -29,6 +41,23 @@ text-indent: 30px; color: #df4949;}
 
 footer { text-align: center; margin-top: 50px; }
 #terms { margin-right: 50px; }
+
+/* 성별선택관련 */
+#form img{max-width: 80%; width:auto; height: auto; align: center;padding:10px;}
+.input_hidden {
+    position: absolute;
+    left: -9999px;
+}
+.selected {
+    background-color: #999;
+}
+
+#form label {
+    display: inline-block;
+    cursor: pointer;
+    width: 49%;
+}
+
 </style>
 </head>
 <body>
@@ -36,10 +65,16 @@ footer { text-align: center; margin-top: 50px; }
 <header><a href="welcome.html">&lt;</a>SIGN UP</header>
 
 <form id="form" method="post" action="http://192.168.200.6:1111/signup">
-    <input id="email" name="email" type="email" placeholder="Email" autofocus required oninput="oninputEmail(event)">
+		 <span><input type="radio" name="sex" id="female" />
+        <label for="female"><img src="./css/img/female.png" alt="I'm a woman" /></label>
+
+    <input type="radio" name="sex" id="male" />
+        <label for="male"><img src="./css/img/male.png" alt="I'm a man" /></label></span>
+        
+    <input id="email" name="email" type="email" placeholder="EMAIL" autofocus required oninput="oninputEmail(event)">
     <p id="emailValidate"></p>
     <p id="emailCheck"></p>
-    <input id="password" name="password" type="password" placeholder="Password" required oninput="oninputPwd (event)">
+    <input id="password" name="password" type="password" placeholder="PASSWORD" required oninput="oninputPwd (event)">
     <button id="btnStart" type="submit" disabled="disabled">START</button>
 </form>
 
@@ -50,6 +85,11 @@ footer { text-align: center; margin-top: 50px; }
 
 <script type="text/javascript">
 var emailVal;
+
+$('#form input:radio').addClass('input_hidden');
+$('#form label').click(function(){
+    $(this).addClass('selected').siblings().removeClass('selected');
+});
 
 function oninputEmail() {
 	emailVal = $('#email').val();
