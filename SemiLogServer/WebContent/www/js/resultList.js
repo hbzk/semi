@@ -4,18 +4,15 @@ var dbId, clickedTable;
 var pageList = new Array();
 
 db_pageList();	// 페이징을 위한 전체 목록
-console.log(pageList);
 db_selectLastDay();		// 마지막 날 출력
 
 $('#date .left').click(function(){
 	var target = pageList[$.inArray(resultDate, pageList) - 1];
-	console.log(target);
 	db_selectSearch(target, '+1 day');
 });
 
 $('#date .right').click(function(){
 	var target = pageList[$.inArray(resultDate, pageList) + 1];
-	console.log(target);
 	db_selectSearch(target, '+1 day');
 });
 

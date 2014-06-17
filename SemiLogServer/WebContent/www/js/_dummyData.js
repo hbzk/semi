@@ -194,11 +194,5 @@ function dummy() {
 		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
 			+ " VALUES ('book', 'fa fa-book', '2014-06-30T19:48:37.135Z', 32)");
 		
-		/*// 이런식
-		// *tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, END_TIME, WHILE) "
-				// + " VALUES ('home', 'fa fa-home', '2014-05-05T08:23:06.559Z', 11)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, END_TIME, WHILE) "
-				+ " VALUES ('home', 'fa fa-home', '2014-05-05T08:23:06.559Z', 11)");*/
-		
 	});
 }
