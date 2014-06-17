@@ -61,7 +61,6 @@ function db_pageList() { // 페이징 용 날짜 목록 만들기
 					pageList.push(res.rows.item(i).strtDay);
 				}
 			}
-			//console.log(pageList);
 		}, db_errorCB);
 	});
 };
@@ -117,8 +116,6 @@ function db_listing(res) {
 		} else {
 			whileT = Math.floor(whileT/3600) + '시간 ' + Math.floor(whileT%3600/60) + '분 ' + whileT%60 + '초';
 		}
-		
-		console.log(whileT);
 		
 		startTime = new Date(res.rows.item(i).START_TIME);
 		endTime = new Date(res.rows.item(i).END_TIME);
