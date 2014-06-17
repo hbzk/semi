@@ -109,13 +109,24 @@ function db_listing(res) {
 	resultList.html('');	// 리스트 초기화
 	
 	for (var i=0; i<len; i++){
+		whileT = res.rows.item(i).WHILE;
+		if (whileT < 60) {
+			whileT = whileT + '초';
+		} else if (whileT < 3600){
+			whileT = Math.floor(whileT%3600/60) + '분 ' + whileT%60 + '초';
+		} else {
+			whileT = Math.floor(whileT/3600) + '시간 ' + Math.floor(whileT%3600/60) + '분 ' + whileT%60 + '초';
+		}
+		
+		console.log(whileT);
+		
 		startTime = new Date(res.rows.item(i).START_TIME);
 		endTime = new Date(res.rows.item(i).END_TIME);
 		resultList.append($('<div class="rtTable">')
 				.append('<div data-id= "'+res.rows.item(i).id +'" class="rtIcon actionName">'+'<i class= "'+res.rows.item(i).CLASSNAME+'"></i></div>')
 				.append('<div class="rtTime">' + db_digitText(startTime.getHours()) + ':' + db_digitText(startTime.getMinutes())
 						+ ' ~ '  + db_digitText(endTime.getHours()) + ':' + db_digitText(endTime.getMinutes()))
-						.append('<div class="rtDuration">' + res.rows.item(i).WHILE +'sec </div>')
+						.append('<div class="rtDuration">' + whileT +'</div>')
 						.append('<div class="rtDelete"><i class="fa fa-times"></i></div>')
 		);
 	}
