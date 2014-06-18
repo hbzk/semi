@@ -89,6 +89,10 @@ function selectCount(){
 	}
 }
 
+function db_errorCB(e) { // query 에러시 호출 함수
+	console.log(e);
+	console.log("e.message :" + e.message);
+}
 
 // 6개 선택된 ICON DB에 저장하기
 function db_selectIconUpdate(){
@@ -161,10 +165,7 @@ function db_init() {
 	}, db_errorCB);
 }
 
-function db_errorCB(e) { // query 에러시 호출 함수
-	console.log(e);
-	console.log("e.message :" + e.message);
-}
+
 
 //DB에 저장된 아이콘 로드
 function loadSelectedIcon(){

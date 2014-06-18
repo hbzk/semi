@@ -21,6 +21,7 @@ var actionName, className, startTime, endTime, resultWhile;
 var iconName, defaultTime;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
+
 $(window).load(function(){
 	db_init(); // DB 초기화
 	
@@ -61,6 +62,12 @@ $(window).load(function(){
 	
 });
 
+// DB에 저장할 날짜 형태 (예 : 2014-06-18T16:37:50.203Z) 만들어주는 함수 
+Date.prototype.toLocaleISOString = function() {
+	this.setMinutes(this.getMinutes() - new Date().getTimezoneOffset());
+	return this.toISOString();
+};
+
 function db_init() {
 	db.transaction(function(tx) {
 		//tx.executeSql('drop table if exists ACTION'); // DB 초기화
@@ -70,13 +77,12 @@ function db_init() {
 
 function db_insertQuery() {
 	db.transaction(function(tx) {
-		tx.executeSql('insert into ACTION (TITLE, CLASSNAME, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?,?)', [actionName, className, startTime.toISOString(), endTime.toISOString(), resultWhile], function(tx, res) {
-		   tx.executeSql('select * from ACTION;', [], function(tx, res) {
-		     console.log('res.rows.length --> ' + res.rows.length);
-		   });
-		 }, function(tx, e) {
-		   console.log("ERROR: " + e.message);
-		 });
+		tx.executeSql('insert into ACTION (TITLE, CLASSNAME, START_TIME, END_TIME, WHILE) VALUES (?,?,?,?,?)', 
+				[actionName, className, startTime.toLocaleISOString, endTime.toLocaleISOString, resultWhile], function(tx, res) {
+			tx.executeSql('select * from ACTION;', [], function(tx, res) {
+				console.log('res.rows.length --> ' + res.rows.length);
+			});
+		}, db_errorCB(tx, e));
 	});
 }
 
@@ -88,7 +94,6 @@ function dragdrop_doing() {
 // 드롭
 function dragdrop_drop() {
 	$('#start').droppable({tolerance: 'touch'}, {accept: '.drag'}, {drop: function(event, ui){
-		
 		dragdrop_timerCheck(); // 이미 실행중인지 확인 후 초기화
 		
 		
@@ -149,18 +154,19 @@ function dragdrop_drop() {
 		className = lastIcon[0].className;
 		className = className.replace(/ ui-draggable/g,'').replace(/ ui-droppable/g,'');
 		//actionName = actionName.replace(/-/g, '').replace(/_/g, '').replace(/fa/g, '').replace(/li/g, '');
-		startTime = new Date();
+		startTime = new Date().toLocaleISOString();
 	}});
 }
+
+
 
 // 타이머 구동 확인 + 저장 + 초기화
 function dragdrop_timerCheck() {
 	console.log(actionName);
 	if ($('#timer').hasClass('iconMain')) { // 실행 중인지 확인
-		$('#result').append(formatTime(x.time()) + ' '); // DB 구현 전까지 타이머 저장 대용
 		
 		// 종료시간, 활동시간 저장 
-		endTime = new Date();
+		endTime = new Date().toLocaleISOString();
 		resultWhile = Math.floor((endTime - startTime) / 1000);
 		
 		db_insertQuery(); // Query
@@ -182,7 +188,6 @@ function dragdrop_timerCheck() {
 		clearTimeout(timeClock);
 		
 		second = 0;
-		
 	
 		/* ---- */
 	}

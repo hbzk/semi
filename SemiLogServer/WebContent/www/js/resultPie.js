@@ -1,5 +1,6 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
+// 데이터 형식 샘플
 var pieData = [];
 pieData.push(['aaa', 2]);
 pieData.push(['bbb', 5]);
@@ -11,9 +12,7 @@ $(window).load(function(){
 	
 });
 
-
-
-
+// 출력용 함수
 function db_resultPie() {
 	db.transaction(function(tx) {
 		tx.executeSql("select * from ACTION ", [], function(tx, res) {
@@ -39,14 +38,10 @@ function db_resultPie() {
 			});
 			console.log(selectAll);
 			
-			// 화면에 출력 ======== 배열, 크기, 형태
+			// 화면에 출력 --------- (배열, 크기, 형태)
 			$('#pieChart').pieChart(selectAll,280,"pie"); 
 		});
 	}, db_errorCB);
 }
 
-function db_errorCB(e) { // query 에러시 호출 함수
-	console.log(e);
-	console.log("e.message :" + e.message);
-}
 
