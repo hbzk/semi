@@ -50,6 +50,11 @@ function db_delete(no){
 	});
 }
 
+function db_errorCB(tx, e) { // query 에러시 호출 함수
+	console.log(e);
+	console.log("e.message :" + e.message);
+}
+
 function db_pageList() { // 페이징 용 날짜 목록 만들기
 	db.transaction(function(tx) {
 		tx.executeSql("SELECT strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION ORDER BY strtDay", [], function(tx, res) {
@@ -120,9 +125,10 @@ function db_listing(res) {
 		startTime = res.rows.item(i).START_TIME;
 		endTime = res.rows.item(i).END_TIME;
 		
-		var testSt = res.rows.item(i).START_TIME;
-		console.log(testSt);
-		console.log(testSt.substring(11, 16));
+		// 더미 데이터에 endTime이 없어서 조건문 추가 
+		if (endTime == null) {
+			endTime = res.rows.item(i).START_TIME;
+		}
 		
 		resultList.append($('<div class="rtTable">')
 				.append('<div data-id= "'+res.rows.item(i).id +'" class="rtIcon actionName">'+'<i class= "'+res.rows.item(i).CLASSNAME+'"></i></div>')
