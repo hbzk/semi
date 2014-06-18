@@ -39,23 +39,177 @@ color: #fff; font-size: 200%; font-weight: bolder;}
 #emailValidate, #emailCheck { position: absolute; top: 110px; 
 text-indent: 30px; color: #df4949;}
 
-footer { text-align: center; margin-top: 50px; }
-#terms { margin-right: 50px; }
+footer { text-align: center; margin-top: 50px; bottom: 0px; }
+#terms { margin-right: 50px;}
 
 /* 성별선택관련 */
-#form img{max-width: 80%; width:auto; height: auto; align: center;padding:10px;}
+#form img{max-width: 80%; width:auto; height: auto; padding: 10px;}
 .input_hidden {
     position: absolute;
     left: -9999px;
 }
-.selected {
+.sexSelect.selected {
     background-color: #999;
 }
 
-#form label {
+.sexSelect, .job, .age{
+	float: left; z-index: 99999;
+}
+
+#form .sexSelect {
     display: inline-block;
-    cursor: pointer;
-    width: 49%;
+    width: 32%;
+}
+.select{z-index: 999;}
+/* job선택 */
+
+.search-select {
+  margin: 30px auto;
+  width: 32%;
+}
+.search-select .field {
+	margin: 0px auto;
+  border: 1px solid #cbbeb9;
+  box-shadow: 0 1px 0px #f1efee;
+  height: 20px;
+  width: 100%;
+  line-height: 20px;
+  padding: 15px 0px;
+  display: inline-block;
+  background-image: -moz-linear-gradient(#fafafa, #fdfbfa);
+  background-image: -webkit-linear-gradient(#fafafa, #fdfbfa);
+  background-image: linear-gradient(#fafafa, #fdfbfa);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.search-select .icon:after {
+  font-style: normal;
+  font-family: FontA;
+  color: #a79b97;
+  font-size: 20px;
+  position: relative;
+  right: 10px;
+  opacity: 0.8;
+  float: right;
+}
+.search-select .icon.user:after {
+  content: "\f007";
+}
+.search-select .icon.list:after {
+  content: "\f0ca";
+}
+.search-select .icon.stat:after {
+  content: "\f080";
+}
+.search-select .icon.accs:after {
+  content: "\f085";
+}
+.search-select .icon.sign:after {
+  content: "\f08b";
+}
+.search-select .icon.arrow:after {
+  content: "\F0DE";
+}
+.search-select input {
+  display: none;
+}
+.search-select input:checked + .select {
+  opacity: 1;
+  top: 15px;
+}
+.search-select ul.select {
+  -moz-transition-property: opacity, top;
+  -o-transition-property: opacity, top;
+  -webkit-transition-property: opacity, top;
+  transition-property: opacity, top;
+  -moz-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+  opacity: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  border-radius: 4px;
+  width: 100%;
+  position: relative;
+  top: 10px;
+  left: 1px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.search-select ul.select li {
+position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  height: 20px;
+  width: 100%;
+  line-height: 20px;
+  padding: 15px 0px;
+  text-transform: uppercase;
+  color: #a79b97;
+  font-family: "PT Sans Caption";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;
+  text-indent: 20px;
+  color: #c0b7b4;
+  border-bottom: 1px solid #ddd8d7;
+}
+
+.search-select ul.select li.arrow {
+  display: inline;
+  position: absolute;
+  top: -20px;
+  left: 270px;
+  width: 20px;
+  height: 20px;
+  z-index: 0;
+  border: none;
+}
+.search-select ul.select li.arrow:after {
+  font-size: 40px;
+  color: white;
+  opacity: 1;
+}
+.search-select ul.select li:nth-child(2) {
+  border-radius: 4px 4px 0 0;
+}
+.search-select ul.select li:last-child {
+  border-radius: 0 0 4px 4px;
+}
+.search-select ul.select li:not(.icon):hover {
+  margin-top: -1px;
+  background-color: #e38461;
+  color: white;
+  border-top: 1px solid #df6e52;
+  border-bottom: 1px solid #df6e52;
+}
+.search-select ul.select li:not(.icon):hover i:after {
+  color: white;
+}
+.search-select ul.select li:last-child {
+  border: none;
+}
+.search-select ul.select li i:after {
+  color: #c0b7b4;
+}
+.search-select label {
+  cursor: pointer;
+  height: 20px;
+  width: 100%;
+  line-height: 20px;
+  padding: 15px 10px;
+  text-transform: uppercase;
+  color: #a79b97;
+  font-family: "PT Sans Caption";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;
 }
 
 </style>
@@ -65,12 +219,28 @@ footer { text-align: center; margin-top: 50px; }
 <header><a href="welcome.html">&lt;</a>SIGN UP</header>
 
 <form id="form" method="post" action="http://192.168.200.6:1111/signup">
-		 <span><input type="radio" name="sex" id="female" />
-        <label for="female"><img src="./css/img/female.png" alt="I'm a woman" /></label>
+		 <input type="radio" name="sex" id="female"/>
+        <label class="sexSelect" for="female"><img src="./css/img/female.png" alt="I'm a woman" /></label>
 
     <input type="radio" name="sex" id="male" />
-        <label for="male"><img src="./css/img/male.png" alt="I'm a man" /></label></span>
-        
+        <label class="sexSelect" for="male"><img src="./css/img/male.png" alt="I'm a man" /></label>
+    <div>
+   		<div class="age"></div>
+    	<div class="job search-select">
+    	<span class="field">
+    	<label class="seltext" for="open">JOB</label>
+    	</span>
+    	<input id="open" type="checkbox" />
+    	<ul class="select">
+		    	
+		    	<li class="sel">STUDENT</li>
+		    	<li>OFFICE WORKER</li>
+		    	<li>FREELANCE</li>
+		    	<li>BUSINESS</li>
+    	</ul>
+    	</div>
+    	
+    </div>
     <input id="email" name="email" type="email" placeholder="EMAIL" autofocus required oninput="oninputEmail(event)">
     <p id="emailValidate"></p>
     <p id="emailCheck"></p>
@@ -85,11 +255,23 @@ footer { text-align: center; margin-top: 50px; }
 
 <script type="text/javascript">
 var emailVal;
-
 $('#form input:radio').addClass('input_hidden');
 $('#form label').click(function(){
     $(this).addClass('selected').siblings().removeClass('selected');
 });
+var relWidth = $('#form label img').width();
+
+$('.select').on('click','li',function(){
+	  $('#open').click();
+	  var $t = $(this),
+	      $f = $('.field')
+	      text = $t.text(),
+	  $f.find('label').text(text);
+	});
+	$('.field').click(function(e){
+	  e.preventDefault();
+	  $('#open').click();
+	})
 
 function oninputEmail() {
 	emailVal = $('#email').val();
