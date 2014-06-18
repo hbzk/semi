@@ -3,8 +3,8 @@ var actionName, startTime, endTime, resultWhile, resultDate;
 var dbId, clickedTable; 
 var pageList = new Array();
 
-db_pageList();	// 페이징을 위한 전체 목록
-db_selectLastDay();		// 마지막 날 출력
+db_pageList();			// 페이징을 위한 전체 목록
+db_selectLastDay();	// 마지막 날 출력
 
 $('#date .left').click(function(){
 	var target = pageList[$.inArray(resultDate, pageList) - 1];
@@ -43,7 +43,7 @@ $(document).on("click",".rtDelete",function(e){
  });
 
 
-// ========================= 함수 정의 
+// ========================= 함수 정의
 function db_delete(no){
 	db.transaction(function(tx){
 		tx.executeSql("DELETE FROM ACTION WHERE id = ?",	[no]);
@@ -69,7 +69,7 @@ function db_selectLastDay() { // 마지막 행동이 있는 날짜 출력
 	var lastActionSql = "(SELECT date(START_TIME) AS stDay FROM ACTION ORDER BY START_TIME DESC LIMIT 1)";
 	db.transaction(function(tx) {
 		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
-			+" WHERE START_TIME BETWEEN date("+lastActionSql+") AND date("+lastActionSql+", ?) ORDER BY strtDay", ['+1 day'], function(tx, res) {
+			+" WHERE START_TIME BETWEEN date("+lastActionSql+") AND date("+lastActionSql+", ?) ORDER BY START_TIME", ['+1 day'], function(tx, res) {
 				db_listing(res);
 		}, db_errorCB);
 	});
@@ -78,7 +78,7 @@ function db_selectLastDay() { // 마지막 행동이 있는 날짜 출력
 function db_selectSearch(date, range) { // 날짜, 범위 받고 출력
 	db.transaction(function(tx) {
 		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
-			+" WHERE START_TIME BETWEEN date(?) AND date(?, ?) ORDER BY strtDay", [date, date, range], function(tx, res) {
+			+" WHERE START_TIME BETWEEN date(?) AND date(?, ?) ORDER BY START_TIME", [date, date, range], function(tx, res) {
 				db_listing(res);
 		}, db_errorCB);
 	});
@@ -117,22 +117,20 @@ function db_listing(res) {
 			whileT = Math.floor(whileT/3600) + '시간 ' + Math.floor(whileT%3600/60) + '분 ' + whileT%60 + '초';
 		}
 		
-		startTime = new Date(res.rows.item(i).START_TIME);
-		endTime = new Date(res.rows.item(i).END_TIME);
+		startTime = res.rows.item(i).START_TIME;
+		endTime = res.rows.item(i).END_TIME;
+		
+		var testSt = res.rows.item(i).START_TIME;
+		console.log(testSt);
+		console.log(testSt.substring(11, 16));
+		
 		resultList.append($('<div class="rtTable">')
 				.append('<div data-id= "'+res.rows.item(i).id +'" class="rtIcon actionName">'+'<i class= "'+res.rows.item(i).CLASSNAME+'"></i></div>')
-				.append('<div class="rtTime">' + db_digitText(startTime.getHours()) + ':' + db_digitText(startTime.getMinutes())
-						+ ' ~ '  + db_digitText(endTime.getHours()) + ':' + db_digitText(endTime.getMinutes()))
-						.append('<div class="rtDuration">' + whileT +'</div>')
-						.append('<div class="rtDelete"><i class="fa fa-times"></i></div>')
+				.append('<div class="rtTime">' + startTime.substring(11, 16) + ' ~ ' + endTime.substring(11, 16))
+				.append('<div class="rtDuration">' + whileT +'</div>')
+				.append('<div class="rtDelete"><i class="fa fa-times"></i></div>')
 		);
 	}
-}
-
-// Query 에러시 호출 함수
-function db_errorCB(tx, e) { 
-	console.log(e);
-	console.log("e.message :" + e.message);
 }
 
 // 00:00:00 형태 만들기 함수

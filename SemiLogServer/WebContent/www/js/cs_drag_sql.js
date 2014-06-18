@@ -62,7 +62,7 @@ $(window).load(function(){
 	
 });
 
-// DB에 저장할 날짜 형태 (예 : 2014-06-18T16:37:50.203Z) 만들어주는 함수 
+// DB에 저장할 날짜 형태 (예 : 2014-06-18T16:37:50.203Z) 만들어주는 함수
 Date.prototype.toLocaleISOString = function() {
 	this.setMinutes(this.getMinutes() - new Date().getTimezoneOffset());
 	return this.toISOString();
