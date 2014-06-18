@@ -32,6 +32,8 @@ header{
 
 /** Main content area **/
 
+i {margin-right: 10px;}
+
 #layout { margin: 0px auto 0px; width: 320px; height: 518px; position: relative; }
 
 section#content { margin-top: 0px; height: 100%; width: 100%; 
@@ -65,7 +67,7 @@ nav ul#nlists li a {
 	font-weight: bold;
 	overflow: hidden;
 }
-nav ul#nlists li a:hover { color: black; }
+nav ul#nlists li a:hover { color: black; background-color: #dcdcdc;}
 
 nav ul#nlists li a::after {
 	/*  content: '';  */
