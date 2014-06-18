@@ -74,7 +74,6 @@ return d.getFullYear()+'-'
   + pad(d.getMilliseconds());
 };
 
-
 function db_init() {
 	db.transaction(function(tx) {
 		//tx.executeSql('drop table if exists ACTION'); // DB 초기화

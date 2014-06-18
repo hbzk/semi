@@ -10,55 +10,15 @@
 <link rel="stylesheet" href="css/lineconStyle.css">
 <link rel="stylesheet" href="css/resultList.css">
 <link rel="stylesheet" href="css/common_font.css">
+<style type="text/css">
+.range { position: absolute; bottom: 0;}
+</style>
 <title>Result_text</title>
 
 <!-- 더미 데이터 삽입 -->
 <!-- <script type="text/javascript" src="js/_dummyData.js"></script> -->
 
 </head>
-
-<script type="text/javascript">
-
-/* window.onload = function(){
-	var dt = new Date();
-	document.getElementById('stDt').innerHTML = converDateString(dt);
-}
-  
-function converDateString(dt){
-  return addZero(eval(dt.getMonth()+1)) + "/" + addZero(dt.getDate());
-}
-
-//몇일 전
-function getDt9(s, i){
-	var newDt = new Date(s);
-	newDt.setDate( newDt.getDate() - i );
-	return converDateString(newDt);
-}
-//몇일 후
-function getDt10(s, i){
-	var newDt = new Date(s);
-	newDt.setDate( newDt.getDate() + i );
-	return converDateString(newDt);
-}
-
-function addZero(i){
-	var rtn = i + 100;
-	return rtn.toString().substring(1,3);
-}
-
-function calc4(){
-	var s = document.getElementById('stDt').innerHTML;
-	var i = 1;
-	
-	document.getElementById("stDt").innerHTML = getDt9(s, parseInt(i)); //몇일 전 
-}
-function calc5(){
-	var s = document.getElementById('stDt').innerHTML;
-	var i = 1;
-	
-	document.getElementById("stDt").innerHTML = getDt10(s, parseInt(i)); //몇일 후 
-} */
-</script>
 
 <body>
 <div class="header" data-role="header"><p>LOG LIST</p></div>
@@ -69,6 +29,12 @@ function calc5(){
 <section id="layout">
 <div id="rtScroll">
 	<div id="resultList"></div>
+</div>
+
+<div class="range">
+	<a id="day" href="#">일</a>...
+	<!-- <a id="week" href="#">주</a>... -->
+	<a  id="month" href="#">월</a>...
 </div>
 <a id="mainLink" href="main_sql.html"><i class=" fa fa-bullseye fa-1"></i></a>
 <a id="deleteAll" href="#"><i class="fa fa-trash-o fa-1"></i></a>

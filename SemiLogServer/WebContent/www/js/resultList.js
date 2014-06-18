@@ -1,25 +1,40 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
-var actionName, startTime, endTime, resultWhile, resultDate;
+var actionName, startTime, endTime, resultWhile, resultDate, targetDate, scope, lastActionSql;
 var dbId, clickedTable; 
 var pageList = new Array();
 
 db_pageList();			// 페이징을 위한 전체 목록
 db_selectLastDay();	// 마지막 날 출력
 
+// 일간
+$('#day').click(function(){
+	console.log('day');
+	db_selectLastDay();
+});
+
+// 주간
+$('#week').click(function(){
+	console.log('week');
+	db_selectWeek(pageList[pageList.length-1]);
+});
+
+// 월간
+$('#month').click(function(){
+	console.log('month');
+	db_selectMonth(pageList[pageList.length-1]);
+});
+
+
 $('#date .left').click(function(){
-	var target = pageList[$.inArray(resultDate, pageList) - 1];
-	db_selectSearch(target, '+1 day');
+	targetDate = pageList[$.inArray(resultDate, pageList) - 1];
+	db_selectSearch(targetDate);
 });
 
 $('#date .right').click(function(){
-	var target = pageList[$.inArray(resultDate, pageList) + 1];
-	db_selectSearch(target, '+1 day');
+	targetDate = pageList[$.inArray(resultDate, pageList) + 1];
+	db_selectSearch(targetDate);
 });
 
-$('#search').click(function(){
-	var searchText = $('#searchText').val();
-	db_selectSearch(searchText, '+1 day');
-});
 
 $('#deleteAll').click(function(){
 	if (confirm('정말 다 지움?')) {
@@ -70,44 +85,74 @@ function db_pageList() { // 페이징 용 날짜 목록 만들기
 	});
 };
 
-function db_selectLastDay() { // 마지막 행동이 있는 날짜 출력 
-	var lastActionSql = "(SELECT date(START_TIME) AS stDay FROM ACTION ORDER BY START_TIME DESC LIMIT 1)";
+function db_selectLastDay() { // 마지막 행동이 있는 날짜 출력
+	scope = 'day';
+	lastActionSql = "(SELECT date(START_TIME) AS stDay FROM ACTION ORDER BY START_TIME DESC LIMIT 1)";
 	db.transaction(function(tx) {
 		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
 			+" WHERE START_TIME BETWEEN date("+lastActionSql+") AND date("+lastActionSql+", ?) ORDER BY START_TIME", ['+1 day'], function(tx, res) {
-				db_listing(res);
+				db_listing(res, scope);
 		}, db_errorCB);
 	});
 };
 
-function db_selectSearch(date, range) { // 날짜, 범위 받고 출력
+function db_selectDay(date) { // 날짜, 범위 받고 출력
+	scope = 'day';
 	db.transaction(function(tx) {
 		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
-			+" WHERE START_TIME BETWEEN date(?) AND date(?, ?) ORDER BY START_TIME", [date, date, range], function(tx, res) {
-				db_listing(res);
+			+" WHERE START_TIME BETWEEN date(?) AND date(?, '+1 day') ORDER BY START_TIME", [date, date], function(tx, res) {
+				db_listing(res, scope);
+		}, db_errorCB);
+	});
+};
+
+/*function db_selectWeek(date) { // 주간 출력
+	scope = 'week';
+	db.transaction(function(tx) {
+		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
+			+" WHERE START_TIME BETWEEN date('2014-06-11', 'start of month') AND date('2014-06-11','start of month','+1 month','-1 day') ORDER BY START_TIME", [], function(tx, res) {
+				db_listing(res, scope);
+		}, db_errorCB);
+	});
+};*/
+
+function db_selectMonth(date) { // 월간 출력
+	scope = 'month';
+	db.transaction(function(tx) {
+		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
+			+" WHERE START_TIME BETWEEN date(?, 'start of month') AND date(?,'start of month','+1 month','-1 day') ORDER BY START_TIME", [date, date], function(tx, res) {
+				db_listing(res, scope);
 		}, db_errorCB);
 	});
 };
 
 // 결과를 HTML에 출력
-function db_listing(res) {
+function db_listing(res, scope) {
 	var len = res.rows.length;
 	console.log("ACTION (page): " + len + " rows found.");
 	
 	resultDate = res.rows.item(0).strtDay;
-	if ($.inArray(resultDate, pageList) == 0) {
-		$('#date .left').css('display', 'none');
-	} else {
-		$('#date .left').css('display', '');
-	} 
+	
+	var firstMonth = pageList[0].substring(0, 7);
+	var lastMonth = pageList[pageList.length-1].substring(0, 7);
+	
+	if (scope == 'day') {
+		$('#date>p').text(resultDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
 		
-	if ($.inArray(resultDate, pageList) > pageList.length -2) {
-		$('#date .right').css('display', 'none');
-	} else {
-		$('#date .right').css('display', '');
+		// 좌우측 네비게이터 활성/비활성화
+		($.inArray(resultDate, pageList) != 0) ? $('#date .left').css('display', '') : $('#date .left').css('display', 'none'); 
+		($.inArray(resultDate, pageList) < pageList.length -1) ? $('#date .right').css('display', '') : $('#date .right').css('display', 'none');
+		
+	} else if (scope == 'week') {
+		$('#date>p').text(resultDate.replace(/-/g, '/').substring(0, 7));
+	} else if (scope == 'month')  {
+		
+		(resultDate.substring(0, 7) > firstMonth) ? $('#date .left').css('display', '') : $('#date .left').css('display', 'none');
+		(resultDate.substring(0, 7) < lastMonth) ? $('#date .right').css('display', '') : $('#date .right').css('display', 'none');
+		
+		$('#date>p').text(resultDate.replace(/-/g, '/').substring(0, 7));
 	}
 	
-	$('#date>p').text(resultDate.replace(/-/g, '/').substring(5));
 	
 	var resultList = $('#resultList');
 	resultList.html('');	// 리스트 초기화
