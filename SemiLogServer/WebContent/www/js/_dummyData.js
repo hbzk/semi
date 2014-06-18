@@ -9,10 +9,51 @@ function dummy() {
 		//tx.executeSql('DROP TABLE IF EXISTS ACTION ');
 		tx.executeSql('create table if not exists ACTION (id integer primary key, TITLE text, CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
 		
-		// 여기부터 
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+				+ " VALUES ('home', 'fa fa-home', '2014-03-19T07:00:00.332Z', 7)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('book', 'fa fa-book', '2014-03-19T08:08:18.011Z', 776)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('tv', 'li li_tv', '2014-03-19T09:55:16.222Z', 9596)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('shirt', 'li li_t-shirt', '2014-03-19T11:25:31.333Z', 4)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('flask', 'fa fa-flask', '2014-03-19T14:05:01.220Z', 3780)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('book', 'fa fa-book', '2014-03-19T16:23:32.516Z', 1972)");		
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('coffee', 'fa fa-coffee', '2014-03-19T19:00:08.217Z', 55)");
+		
+		
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('child', 'fa fa-child', '2014-03-22T20:21:33.152Z', 3727)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('book', 'fa fa-book', '2014-03-22T23:32:58.311Z', 19)");
+			
+		
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('bulb', 'li li_bulb', '2014-03-27T16:49:26.218Z', 1279)");
+						
+		
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('automobile', 'fa fa-automobile', '2014-03-30T09:09:10.440Z', 5729)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('flask', 'fa fa-flask', '2014-03-30T10:33:26.330Z', 12)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('moon', 'fa fa-moon-o', '2014-03-30T11:45:06.444Z', 924)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('pen', 'li li_pen', '2014-03-30T15:05:11.238Z', 19)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('book', 'fa fa-book', '2014-03-30T19:48:37.135Z', 3892)");
+		
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('pen', 'li li_pen', '2014-03-30T20:05:11.238Z', 3600)");
+		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
+			+ " VALUES ('book', 'fa fa-book', '2014-03-30T21:48:37.135Z', 60)");
+			
+			
 		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
 			+ " VALUES ('home', 'fa fa-home', '2014-04-13T07:31:06.559Z', 2558)");
-		// 여기까지
 		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
 			+ " VALUES ('phone', 'fa fa-phone', '2014-04-13T08:23:06.459Z', 1030)");
 		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
@@ -156,47 +197,5 @@ function dummy() {
 		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
 			+ " VALUES ('code', 'fa fa-code', '2014-06-11T21:07:31.310Z', 22)");
 			
-		
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('home', 'fa fa-home', '2014-06-19T07:00:00.332Z', 7)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('book', 'fa fa-book', '2014-06-19T08:08:18.011Z', 776)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('tv', 'li li_tv', '2014-06-19T09:55:16.222Z', 9596)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('shirt', 'li li_t-shirt', '2014-06-19T11:25:31.333Z', 4)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('flask', 'fa fa-flask', '2014-06-19T14:05:01.220Z', 3780)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('book', 'fa fa-book', '2014-06-19T16:23:32.516Z', 1972)");		
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('coffee', 'fa fa-coffee', '2014-06-19T19:00:08.217Z', 55)");
-		
-		
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('child', 'fa fa-child', '2014-06-22T20:21:33.152Z', 3727)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('book', 'fa fa-book', '2014-06-22T23:32:58.311Z', 19)");
-			
-		
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('bulb', 'li li_bulb', '2014-06-27T16:49:26.218Z', 1279)");
-						
-		
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('automobile', 'fa fa-automobile', '2014-06-30T09:09:10.440Z', 5729)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('flask', 'fa fa-flask', '2014-06-30T10:33:26.330Z', 12)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('moon', 'fa fa-moon-o', '2014-06-30T11:45:06.444Z', 924)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('pen', 'li li_pen', '2014-06-30T15:05:11.238Z', 19)");
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-			+ " VALUES ('book', 'fa fa-book', '2014-06-30T19:48:37.135Z', 3892)");
-		
-		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-				+ " VALUES ('pen', 'li li_pen', '2014-06-30T20:05:11.238Z', 3600)");
-			tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) "
-				+ " VALUES ('book', 'fa fa-book', '2014-06-30T21:48:37.135Z', 60)");
 	});
 }
