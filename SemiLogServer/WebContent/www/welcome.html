@@ -5,20 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
 <title>Welcome</title>
 <style>
+@font-face{
+		font-family: 'orbitron';
+		src: url('./font/orbitron-black-webfont.woff') format('woff');
+}
+@font-face{
+		font-family: 'nanumGothic;
+		src: url('./font/NanumGothic.woff') format('woff');		
+}
 * { margin: 0; padding: 0;}
 body { background: ; }
-#skip { position: fixed; bottom: 300px; right: 0px;
+#skip {font-family: 'nanumGothic; position: fixed; bottom: 300px; right: 0px;
 font-size: 90%; color: #555;}
 #footer { position: fixed; bottom: 0px; width: 100%; }
 #footer>a { height: 150px; line-height: 150px; display: block; text-decoration: none; 
 font-size: 200%; font-weight: bolder; color: #fff; text-align: center; }
-#login { background: #de0052; }
-#signup { background: #3ba3d0; }
+#login {font-family: 'orbitron'; background: #de0052; }
+#signup {font-family: 'orbitron'; background: #3ba3d0; }
 </style>
 </head>
 <body>
 
-<a id="skip" href="main_font.html">나중에 로그인</a>
+<a id="skip" href="main_sql.html">나중에 로그인</a>
 <section id="footer">
 	<a id="login" href="login.html">LOG IN</a>
 	<a id="signup" href="signup.html">SIGN UP</a>
