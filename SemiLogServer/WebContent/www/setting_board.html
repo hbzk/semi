@@ -3,12 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, 
+    minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/common_font.css">
     <link rel="stylesheet" href="css/setting_board.css">
+
+<style type="text/css">
+    .pop-layer {display:none; position: absolute; top: 0%; left: 0%; width: 100%; 
+    height:90%;  background-color:#fff; border: 1px solid #b4c699; z-index: 10;} 
+    .pop-layer .pop-container {padding: 20px 25px;}
+    .pop-layer p.ctxt {color: #666; line-height: 25px;}
+    .pop-layer .btn-r {}
+    a.cbtn {display:inline-block; height:25px; padding:0 14px 0; border:1px solid #304a8a; 
+    background-color:silver; font-size:13px; color:#fff; line-height:25px;} 
+    a.cbtn:hover {border: 1px solid #091940; background-color:#1f326a; color:#fff;}
+</style>
+
+<script type="text/javascript">
+    function layer_open(el){
+        var temp = $('#' + el);     //레이어의 id를 temp변수에 저장
+        var bg = temp.prev().hasClass('bg');    //dimmed 레이어를 감지하기 위한 boolean 변수
+        if(bg){
+            $('.layer').fadeIn();
+        }else{
+            temp.fadeIn();  //bg 클래스가 없으면 일반레이어로 실행한다.
+        }
+        // 화면의 중앙에 레이어를 띄운다.
+        /* if (temp.outerHeight() < $(document).height() ) temp.css('margin-top', '-'+temp.outerHeight()/2+'px');
+        else temp.css('top', '0px');
+        if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '-'+temp.outerWidth()/2+'px');
+        else temp.css('left', '0px'); */
+        if (temp.outerHeight() < $(document).height() ) temp.css('margin-top', '-'+temp.outerHeight('px'));
+        else temp.css('top', '0px');
+        if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '-'+temp.outerWidth('px'));
+        else temp.css('left', '0px');
+        temp.find('a.cbtn').click(function(e){
+            if(bg){
+                $('.layer').fadeOut();
+            }else{
+                temp.fadeOut();     //'닫기'버튼을 클릭하면 레이어가 사라진다.
+            }
+            e.preventDefault();
+        });
+        $('.layer .bg').click(function(e){
+            $('.layer').fadeOut();
+            e.preventDefault();
+        });
+    }               
+</script>
+
+
 </head>
+
 <title>setting</title>
 <body>
     <header>
@@ -17,34 +65,93 @@
     
     <section id="content">
         
-        <nav>
-            <ul id="nlists">
-                <li class="head">simple setting</li>
-                <li><a href="#"><i class=" fa fa-bullseye fa-1"></i>wi-fi</a></li>
-                <li><a href="#"><i class=" fa fa-trash-o fa-1"></i>download booster</a></li>
-                <li><a href="#"><i class=" fa fa-bullseye fa-1"></i>blue tooth</a></li>
-                <li><a href="#"><i class=" fa fa-trash-o fa-1"></i>suzaku, mizuwo kure.</a></li>
+<nav>
+ <ul id="nlists">
+ 
+   <li class="head">simple setting 1</li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer01');return false;"><i class=" fa fa-bullseye fa-1"></i>wi-fi</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer02');return false;"><i class=" fa fa-trash-o fa-1"></i>download booster</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer03');return false;"><i class=" fa fa-bullseye fa-1"></i>blue tooth</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer04');return false;"><i class=" fa fa-trash-o fa-1"></i>suzaku, mizuwo kure.</a></li>
+           
+   <li class="head">simple setting 2</li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer05');return false;"><i class=" fa fa-bullseye fa-1"></i>wi-fi</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer06');return false;"><i class=" fa fa-trash-o fa-1"></i>download booster</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer07');return false;"><i class=" fa fa-bullseye fa-1"></i>blue tooth</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer08');return false;"><i class=" fa fa-trash-o fa-1"></i>suzaku, mizuwo kure.</a></li>
                 
-                <li class="head">-2-</li>
-                <li><a href="#">2-1</a></li>
-                <li><a href="#">2-2</a></li>
-                <li><a href="#">2-3</a></li>
-                <li><a href="#">2-4</a></li>
+   <li class="head">simple setting 3</li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer09');return false;"><i class=" fa fa-bullseye fa-1"></i>wi-fi</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer10');return false;"><i class=" fa fa-trash-o fa-1"></i>download booster</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer11');return false;"><i class=" fa fa-bullseye fa-1"></i>blue tooth</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer12');return false;"><i class=" fa fa-trash-o fa-1"></i>suzaku, mizuwo kure.</a></li>
                 
-                <li class="head">-3-</li>
-                <li><a href="#">3-1</a></li>
-                <li><a href="#">3-2</a></li>
-                <li><a href="#">3-3</a></li>
-                <li><a href="#">3-4</a></li>
-                
-                <li class="head">-4-</li>
-                <li><a href="#">4-1</a></li>
-                <li><a href="#">4-2</a></li>
-                <li><a href="#">4-3</a></li>
-                <li><a href="#">4-4</a></li>
-            </ul>
-        </nav>
-        
+   <li class="head">simple setting 4</li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer13');return false;"><i class=" fa fa-bullseye fa-1"></i>wi-fi</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer14');return false;"><i class=" fa fa-trash-o fa-1"></i>download booster</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer15');return false;"><i class=" fa fa-bullseye fa-1"></i>blue tooth</a></li>
+    <li><a href="#" class="btn-example" onclick="layer_open('layer16');return false;"><i class=" fa fa-trash-o fa-1"></i>suzaku, mizuwo kure.</a></li>
+ 
+ </ul>
+</nav>
+
+
+<div id="layer01" class="pop-layer">
+<div class="pop-container">
+<div class="pop-conts">
+<a href="#" class="cbtn">&lt;</a>
+<p>layer01 'ㅂ'</p>
+<div class="btn-r">
+</div></div></div></div>
+
+<div id="layer02" class="pop-layer">
+<div class="pop-container">
+<div class="pop-conts">
+<a href="#" class="cbtn">&lt;</a>
+<p>layer02 'ㅂ'</p>
+<div class="btn-r">
+</div></div></div></div>
+
+<div id="layer03" class="pop-layer">
+<div class="pop-container">
+<div class="pop-conts">
+<a href="#" class="cbtn">&lt;</a>
+<p>layer03 'ㅂ'</p>
+<div class="btn-r">
+</div></div></div></div>
+
+<div id="layer04" class="pop-layer">
+<div class="pop-container">
+<div class="pop-conts">
+<a href="#" class="cbtn">&lt;</a>
+<p>layer04 'ㅂ'</p>
+<div class="btn-r">
+</div></div></div></div>
+
+<div id="layer05" class="pop-layer">
+<div class="pop-container">
+<div class="pop-conts">
+<a href="#" class="cbtn">&lt;</a>
+<p>layer05 'ㅂ' (5번까지만.)</p>
+<div class="btn-r">
+</div></div></div></div>
+
+
+ <!--  
+ <a href="#popupMenu" data-rel="popup" data-transition="turn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Actions...</a>
+<div data-role="popup" id="popupMenu" data-theme="b">
+        <ul data-role="listview" data-inset="true" style="min-width:210px;">
+            <li data-role="list-divider">Choose an action</li>
+            <li><a href="#">View details</a></li>
+            <li><a href="#">Edit</a></li>
+            <li><a href="#">Disable</a></li>
+            <li><a href="#">Delete</a></li>
+        </ul>
+</div>
+ <script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" /> 
+    -->
+  
     </section>
 </body>
 </html>
