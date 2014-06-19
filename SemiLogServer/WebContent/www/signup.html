@@ -10,15 +10,15 @@
 <style type="text/css">
 @font-face{
 		font-family: 'orbitron';
-		src: url('./font/orbitron-black-webfont.woff') format('woff');
+		src: url('font/orbitron-black-webfont.woff') format('woff');
 }
 @font-face{
 		font-family: 'orbitron-l';
-		src: url('./font/orbitron-light-webfont.woff') format('woff');		
+		src: url('font/orbitron-light-webfont.woff') format('woff');		
 }
 @font-face{
 		font-family: 'nanumGothic;
-		src: url('./font/NanumGothic.woff') format('woff');		
+		src: url('font/NanumGothic.woff') format('woff');		
 }
 * { margin: 0; padding: 0;}
 :focus { outline: 0;}
@@ -31,15 +31,15 @@ text-decoration: none; color: #fff; font-size: 80%;}
 
 input {font-family: 'nanumGothic'; border: 0px; display: block; width: 100%; height: 30px; padding-top: 20px;
 text-indent: 30px; font-size: 100%; }
-#email { border-top: 1px solid #999;}
+#email { /* border-top: 1px solid #999; */}
 #password { border-top: 1px solid #999;}
 #btnStart {font-family: 'orbitron'; width: 100%; height: 55px; background: #F05630; 
 -webkit-transition: background-color .4s ease-out;
 color: #fff; font-size: 200%; font-weight: bolder;}
 #btnStart:disabled { background: #999; }
 
-#emailValidate, #emailCheck { position: absolute; top: 110px; 
-text-indent: 30px; color: #df4949;}
+#emailValidate, #emailCheck {font-family: 'nanumGothic'; position: absolute; top: 6px; font-size: 0.8em;
+text-indent: 10px; color: #df4949;}
 
 footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; }
 #terms { margin-right: 50px;}

@@ -68,12 +68,12 @@ hr {
 
 
 /* 선택된 아이콘 div */
-.selected_icon{height: 180px; width: 100%; background: white;  position: fixed; margin-top: 50px;}
+.selected_icon{height: 180px; width: 100%; background: white;  position: fixed; margin-top: 50px; }
 
-.selected_icon .back{ margin-top: 10px; display: table;}
+.back{z-index: 9999;width: 25px; height: 25px; margin: 0px 0px 0px 10px;  }
 
 /* 선택된아이콘 한줄 */
-.icon_row{min-width: 300px; overflow: auto;display: table;margin: 0 auto;}
+.icon_row{min-width: 300px; overflow: auto;margin: 0 auto;}
 
 /* icon 하나 박싱 */
 .icon{width: 100px;	height: 70px; float: left;}
@@ -90,8 +90,8 @@ i{float: left;	margin: 5px;}
 
 .selected_icon .icon_row{
 	width: 220px;
-	padding: 10px;
-	margin-left: 80px;
+	padding: 10px 10px 10px 40px;
+	margin: 0px auto 0px;
 }
 
 .all_icon .icon_theme{
@@ -135,10 +135,9 @@ i{float: left;	margin: 5px;}
 }
 .fa-glass{font-size: 2.5em;}
 .fa-mobile {font-size: 4em;}
-.li_pen {font-size: 3.0em;}
+.li_pen {font-size: 2.8em;}
 .fa-arrow-left{
 	width: 30px;
 	height: 30px;
-	margin-left: 30px;
 	position: absolute;
 }
