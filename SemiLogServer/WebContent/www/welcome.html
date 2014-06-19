@@ -15,16 +15,57 @@
 }
 * { margin: 0; padding: 0;}
 body { background: ; }
-#skip {font-family: 'nanumGothic; position: fixed; bottom: 300px; right: 0px;
+
+.logo{
+	margin-top: 10%; margin-left: auto; margin-right: auto; margin-bottom: 50%;
+	width: auto;
+	max-heigh: 300px;
+	position: relative;
+	padding: 10px;
+}
+
+ .logoWatch{
+ margin-top: 5%; margin-left: auto; margin-right: auto; background: #5BBC99;
+	display: block; width: 240px; height: 240px; line-height: 240px; font-size: 2.5em;
+	border-radius: 120px; -webkit-border-radius: 120px;	-moz-border-radius: 120px;
+	 border: 0px; 
+	color: black; text-align: center;	
+} 
+.logoWatch img{
+	position: relative;
+	top: 10px;
+	width: 200px;
+	height: 200px;
+}
+.logoText{	
+		text-align: -webkit-right;
+		color: #2D3E50;
+		width: 200px;
+		height: 110px;
+		font-family: 'orbitron';
+		font-size: 30px;
+		position: absolute;
+		bottom: -20px;
+		right: 40px;		
+		
+}
+
+#skip {font-family: 'nanumGothic; position: fixed; bottom: 130px; right: 0px;
 font-size: 90%; color: #555;}
-#footer { position: fixed; bottom: 0px; width: 100%; }
-#footer>a { height: 150px; line-height: 150px; display: block; text-decoration: none; 
+#footer>a {position:fixed; bottom: 0px;height: 120px; width: 49.99999%; float: left;line-height: 120px; display: block; text-decoration: none; 
 font-size: 200%; font-weight: bolder; color: #fff; text-align: center; }
 #login {font-family: 'orbitron'; background: #de0052; }
-#signup {font-family: 'orbitron'; background: #3ba3d0; }
+#signup {font-family: 'orbitron'; background: #3ba3d0; margin-left:49.9999%}
+
+
 </style>
 </head>
 <body>
+
+<div class="logo">
+<div class="logoWatch"><img src="css/img/Stopwatch.png"/></div>
+<div class="logoText">Make <br>your TIME <br>valuable.</div>
+</div>
 
 <a id="skip" href="main_sql.html">나중에 로그인</a>
 <section id="footer">
