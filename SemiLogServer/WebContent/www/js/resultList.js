@@ -96,7 +96,7 @@ function db_selectLastDay() { // 마지막 행동이 있는 날짜 출력
 	});
 };
 
-function db_selectDay(date) { // 날짜, 범위 받고 출력
+function db_selectSearch(date) { // 날짜, 범위 받고 출력
 	scope = 'day';
 	db.transaction(function(tx) {
 		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
