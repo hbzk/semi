@@ -29,11 +29,11 @@ text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
 header>a { position: absolute; left: 0; width: 70px;
 text-decoration: none; color: #fff; font-size: 80%;}
 
-input {font-family: 'nanumGothic'; border: 0px; display: block; width: 100%; height: 50px; padding-top: 20px;
+input {font-family: 'nanumGothic'; border: 0px; display: block; width: 100%; height: 30px; padding-top: 20px;
 text-indent: 30px; font-size: 100%; }
 #email { border-top: 1px solid #999;}
 #password { border-top: 1px solid #999;}
-#btnStart {font-family: 'orbitron'; width: 100%; height: 80px; background: #F05630; 
+#btnStart {font-family: 'orbitron'; width: 100%; height: 55px; background: #F05630; 
 -webkit-transition: background-color .4s ease-out;
 color: #fff; font-size: 200%; font-weight: bolder;}
 #btnStart:disabled { background: #999; }
@@ -41,7 +41,7 @@ color: #fff; font-size: 200%; font-weight: bolder;}
 #emailValidate, #emailCheck { position: absolute; top: 110px; 
 text-indent: 30px; color: #df4949;}
 
-footer { text-align: center; margin-top: 50px; bottom: 0px; }
+footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; }
 #terms { margin-right: 50px;}
 
 /* 성별선택관련 */
@@ -62,8 +62,10 @@ footer { text-align: center; margin-top: 50px; bottom: 0px; }
     display: inline-block;
     width: 49.9999%;
 }
-.fancy-select{float: left; width: 40%;margin: 10px 0% 10px 5%; padding: 0px;}
-.trigger{width: auto;}
+.fancy-select{float: left; width: 48%;margin: 1px 3px 10px 0px; padding: 0px;text-indent: 10px;}
+.trigger{width:100%; }
+.options{ width: 100%;}
+.bottomEle{position: fixed; bottom: 0px;width: 100%;}
 </style>
 </head>
 <body>
@@ -90,6 +92,9 @@ footer { text-align: center; margin-top: 50px; bottom: 0px; }
 	  <option>Early 40's</option>
 	  <option>Middle 40's</option>
 	  <option>Late 40's</option>
+	  <option>Early 50's</option>
+	  <option>Middle 50's</option>
+	  <option>Late 50's</option>
 		</select>
 	   <select class="jobSelect">
 	  <option value="">JOB</option>
@@ -99,18 +104,19 @@ footer { text-align: center; margin-top: 50px; bottom: 0px; }
 	  <option>BUSINESS MAN</option>
 		</select>
 	
-    
+<div class="bottomEle">    
     <input id="email" name="email" type="email" placeholder="EMAIL" autofocus required oninput="oninputEmail(event)">
     <p id="emailValidate"></p>
     <p id="emailCheck"></p>
     <input id="password" name="password" type="password" placeholder="PASSWORD" required oninput="oninputPwd (event)">
     <button id="btnStart" type="submit" disabled="disabled">START</button>
-</form>
-
 <footer>
 	<a id="terms" href="termOfUse.html">Terms of Use</a>
 	<a href="privacyPolicy.html">Privacy Policy</a>
 </footer>
+</div>
+</form>
+
 
 <script type="text/javascript">
 var emailVal;
@@ -118,17 +124,7 @@ $('#form input:radio').addClass('input_hidden');
 $('#form .sexSelect').click(function(){
     $(this).addClass('selected').siblings().removeClass('selected');
 });
-$('.select').on('click','li',function(){
-	  $('#open').click();
-	  var $t = $(this),
-	      $f = $('.field')
-	      text = $t.text(),
-	  $f.find('label').text(text);
-	});
-	$('.field').click(function(e){
-	  e.preventDefault();
-	  $('#open').click();
-	})
+
 $('.jobSelect').fancySelect();
 	$('.ageSelect').fancySelect();
 function oninputEmail() {
