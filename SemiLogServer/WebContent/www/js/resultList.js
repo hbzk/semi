@@ -147,8 +147,9 @@ function db_listing(res, scope) {
 		$('#date>p').text(resultDate.replace(/-/g, '/').substring(0, 7));
 	} else if (scope == 'month')  {
 		
-		(resultDate.substring(0, 7) > firstMonth) ? $('#date .left').css('display', '') : $('#date .left').css('display', 'none');
-		(resultDate.substring(0, 7) < lastMonth) ? $('#date .right').css('display', '') : $('#date .right').css('display', 'none');
+		$('#date .left').css('display', 'none') ; $('#date .left').css('display', 'none');
+		//(resultDate.substring(0, 7) > firstMonth) ? $('#date .left').css('display', '') : $('#date .left').css('display', 'none');
+		//(resultDate.substring(0, 7) < lastMonth) ? $('#date .right').css('display', '') : $('#date .right').css('display', 'none');
 		
 		$('#date>p').text(resultDate.replace(/-/g, '/').substring(0, 7));
 	}
