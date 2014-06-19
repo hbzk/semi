@@ -51,7 +51,7 @@ footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; }
     left: -9999px;
 }
 .sexSelect.selected {
-    background-color: #999;
+   opacity: 0.5;
 }
 
 .sexSelect, .job, .age{
@@ -62,7 +62,7 @@ footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; }
     display: inline-block;
     width: 49.9999%;
 }
-.fancy-select{float: left; width: 48%;margin: 1px 3px 10px 0px; padding: 0px;text-indent: 10px;}
+.fancy-select{float: left; width: 48%;margin: 20px 3px 10px 2px; padding: 0px;text-indent: 10px;}
 .trigger{width:100%; }
 .options{ width: 100%;}
 .bottomEle{position: fixed; bottom: 0px;width: 100%;}
@@ -122,7 +122,7 @@ footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; }
 var emailVal;
 $('#form input:radio').addClass('input_hidden');
 $('#form .sexSelect').click(function(){
-    $(this).addClass('selected').siblings().removeClass('selected');
+    $(this).removeClass('selected').siblings().addClass('selected');
 });
 
 $('.jobSelect').fancySelect();
