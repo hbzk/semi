@@ -11,7 +11,7 @@
 		src: url('../font/orbitron-light-webfont.woff') format('woff');		
 }
 
-body {font-family: 'orbitron', sans-serif; }
+body { font-family: 'orbitron', sans-serif; }
 
 hr {
   width: 62px;
@@ -59,11 +59,12 @@ hr {
 }
 .all_icon{
 		padding-top: 230px;
+		background: #EEE;
 }
 
 
 /* 분류별 아이콘 div */
-.icon_theme{min-width: 300px;	min-height: 140px;/* border: 1px solid white */;	clear: both;}
+.icon_theme{min-width: 300px;	min-height: 140px;heigh: auto;/* border: 1px solid white */;	clear: both;}
 
 
 
@@ -73,7 +74,7 @@ hr {
 .back{z-index: 9999;width: 25px; height: 25px; margin: 0px 0px 0px 10px;  }
 
 /* 선택된아이콘 한줄 */
-.icon_row{min-width: 300px; overflow: auto;margin: 0 auto;}
+.icon_row{min-width: 300px;margin: 0 auto;}
 
 /* icon 하나 박싱 */
 .icon{width: 100px;	height: 70px; float: left;}
@@ -95,7 +96,7 @@ i{float: left;	margin: 5px;}
 }
 
 .all_icon .icon_theme{
-	background: #EEE;
+/* 	background: #EEE; */
 	padding: 5px 0px 5px 15px;
 
 }
