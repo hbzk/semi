@@ -20,19 +20,23 @@ var dbconn = mysql.createConnection({
 
 // /signup으로 post 요청 오면 insert 수행
 app.post('/signup',function(req,res){
-	
-	//console.log(req.body.email);
-	//console.log(req.body.password);
-	
-	req.body.password = sha1.SHA1(req.body.password); // 암호화 
-	
 	var user = req.body;
+	user.password = sha1.SHA1(user.password); // 암호화 
+	
+	console.log(req.headers);
+
+	reqPath = req.headers.origin;
+	console.log(reqPath);
+	
+	
+	console.log(user);
     dbconn.query('insert into USER set ?', user, function(err,result){
         if (err) {
-            console.error(err);
+            console.log(err);
+            next(err);
             throw err;
         }
-        res.redirect('http://localhost:9999/SemiLogServer/www/main_font.html');
+        res.redirect(''+reqPath+'/www/main_sql.html');
     });
 
 });
