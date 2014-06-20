@@ -6,6 +6,7 @@
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script src="js/fancySelect.js"></script>
 <link rel="stylesheet" media="screen, projection" href="css/fancySelect.css">
+<link rel="stylesheet" href="css/jquery.toastmessage.css">
 <title>SIGN UP</title>
 <style type="text/css">
 @font-face{
@@ -41,7 +42,8 @@ color: #fff; font-size: 200%; font-weight: bolder;}
 #emailValidate, #emailCheck {font-family: 'nanumGothic'; position: absolute; top: 6px; font-size: 0.8em;
 text-indent: 10px; color: #df4949;}
 
-footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; }
+footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; font-size: 0.8em;}
+footer a{ text-decoration: none;}
 #terms { margin-right: 50px;}
 
 /* 성별선택관련 */
@@ -50,19 +52,19 @@ footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; }
     position: absolute;
     left: -9999px;
 }
-.sexSelect.selected {
-   opacity: 0.5;
+.genderSelect.unselected {
+   opacity: 0.4;
 }
 
-.sexSelect, .job, .age{
+.genderSelect, .job, .age{
 	float: left; z-index: 99999;
 }
 
-#form .sexSelect {
+#form .genderSelect {
     display: inline-block;
     width: 49.9999%;
 }
-.fancy-select{float: left; width: 48%;margin: 20px 3px 10px 2px; padding: 0px;text-indent: 10px;}
+.fancy-select{float: left; width: 48%;margin: 10px 3px 10px 2px; padding: 0px;text-indent: 10px;}
 .trigger{width:100%; }
 .options{ width: 100%;}
 .bottomEle{position: fixed; bottom: 0px;width: 100%;}
@@ -73,35 +75,35 @@ footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; }
 <header><a href="welcome.html">&lt;</a>SIGN UP</header>
 
 <form id="form" method="post" action="http://192.168.200.6:1111/signup">
-		 <input type="radio" name="sex" id="female"/>
-        <label class="sexSelect" for="female"><img src="./css/img/female.png" alt="I'm a woman" /></label>
+		 <input type="radio" name="gender" id="female"/>
+        <label class="genderSelect" for="female"><img src="./css/img/female.png" alt="I'm a woman" /></label>
 
-    <input type="radio" name="sex" id="male" />
-        <label class="sexSelect" for="male"><img src="./css/img/male.png" alt="I'm a man" /></label>
+    <input type="radio" name="gender" id="male" />
+        <label class="genderSelect" for="male"><img src="./css/img/male.png" alt="I'm a man" /></label>
     
     
     <select class="ageSelect">
 	  <option value="">AGE</option>
-	  <option>Teenagers</option>
-	  <option>Early 20's</option>
-	  <option>Middle 20's</option>
-	  <option>Late 20's</option>
-	  <option>Early 30's</option>
-	  <option>Middle 30's</option>
-	  <option>Late 30's</option>
-	  <option>Early 40's</option>
-	  <option>Middle 40's</option>
-	  <option>Late 40's</option>
-	  <option>Early 50's</option>
-	  <option>Middle 50's</option>
-	  <option>Late 50's</option>
+	  <option value="1">Teenagers</option>
+	  <option value="2">Early 20's</option>
+	  <option value="3">Middle 20's</option>
+	  <option value="4">Late 20's</option>
+	  <option value="5">Early 30's</option>
+	  <option value="6">Middle 30's</option>
+	  <option value="7">Late 30's</option>
+	  <option value="8">Early 40's</option>
+	  <option value="9">Middle 40's</option>
+	  <option value="10">Late 40's</option>
+	  <option value="11">Early 50's</option>
+	  <option value="12">Middle 50's</option>
+	  <option value="13">Late 50's</option>
 		</select>
 	   <select class="jobSelect">
 	  <option value="">JOB</option>
-	  <option>STUDENT</option>
-	  <option>OFFICE WORKER</option>
-	  <option>FREE-LANCE</option>
-	  <option>BUSINESS MAN</option>
+	  <option value="1">STUDENT</option>
+	  <option value="2">OFFICE WORKER</option>
+	  <option value="3">FREE-LANCE</option>
+	  <option value="4">BUSINESS MAN</option>
 		</select>
 	
 <div class="bottomEle">    
@@ -109,7 +111,8 @@ footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; }
     <p id="emailValidate"></p>
     <p id="emailCheck"></p>
     <input id="password" name="password" type="password" placeholder="PASSWORD" required oninput="oninputPwd (event)">
-    <button id="btnStart" type="submit" disabled="disabled">START</button>
+    <button id="btnStart" disabled="disabled">START</button>
+    <button id="signUpSubmit" type="submit" hidden="hidden"></button>
 <footer>
 	<a id="terms" href="termOfUse.html">Terms of Use</a>
 	<a href="privacyPolicy.html">Privacy Policy</a>
@@ -117,17 +120,85 @@ footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; }
 </div>
 </form>
 
-
+<script type="text/javascript" src="js/jquery.toastmessage.js"></script>
 <script type="text/javascript">
 var emailVal;
+
 $('#form input:radio').addClass('input_hidden');
-$('#form .sexSelect').click(function(){
-    $(this).removeClass('selected').siblings().addClass('selected');
+$('#form .genderSelect').click(function(){
+    $(this).removeClass('unselected').siblings().addClass('unselected');
+    $(this).addClass('genderSelected').siblings().removeClass('genderSelected');
 });
 
 $('.jobSelect').fancySelect();
 	$('.ageSelect').fancySelect();
-function oninputEmail() {
+
+	function genderSelect(){
+		if($("input[name='gender']:checked").length > 0){
+			console.log("User's gender is checked");
+			return true;
+		}else{
+			errorGender();
+			return false;
+		}
+	}
+	
+	function ageSelect(){
+		if($(".ageSelect option:selected").val()!= ""){
+			console.log($(".ageSelect option:selected").val());
+			return true;
+		}else{
+			errorAge();
+			console.log("age is not selected");
+			return false;
+		}
+	}
+	
+	function jobSelect(){
+		if($(".jobSelect option:selected").val()!=""){
+			console.log($(".jobSelect option:selected").val());
+			return true;
+		}else{
+			errorJob();
+			console.log("job is not selected");
+			return false;
+		}
+	}
+	
+	function errorGender() {
+		$().toastmessage('showToast',{
+		    text     : 'Select your gender!',
+		    stayTime : 1000,
+		    sticky   : false,
+		    position : 'middle-center',
+		    type     : 'error',
+		    close    : function () {console.log("Gender alarm is closed ...");}
+		});
+	}
+	
+	function errorAge() {
+		$().toastmessage('showToast',{
+		    text     : 'Select your age!',
+		    stayTime : 1000,
+		    sticky   : false,
+		    position : 'middle-center',
+		    type     : 'error',
+		    close    : function () {console.log("Age alarm is closed ...");}
+		});
+	}
+	
+	function errorJob() {
+		$().toastmessage('showToast',{
+		    text     : 'Select your Job!',
+		    stayTime : 1000,
+		    sticky   : false,
+		    position : 'middle-center',
+		    type     : 'error',
+		    close    : function () {console.log("Job alarm is closed ...");}
+		});
+	}
+	
+	function oninputEmail() {
 	emailVal = $('#email').val();
 	
 	if (validateEmail()) {
@@ -168,6 +239,7 @@ function validateForm() {
 				
 				// 추가 조건 확인 후 버튼 활성화
 				if (validateEmail() && $('#password').val().length > 0) {
+					
 					$('#btnStart').removeAttr('disabled');
 				} else {
 					$('#btnStart').attr('disabled', 'disabled');
@@ -176,6 +248,21 @@ function validateForm() {
 	});
 }
 
+//submit
+$("#signUpSubmit").on("click",function(e){
+	console.log("submit button is clicked");
+});
+
+//start btn 활성화 된 후에 gender와 age,job 체크여부확인 후 submit
+$('#btnStart').click(function(e){
+	e.preventDefault();
+	if(genderSelect() && ageSelect() && jobSelect()){
+		console.log("signUp");
+		$("#signUpSubmit").click();
+	}else{
+		console.log("something unchecked!!!!!!!!");
+	}
+});
 
 </script>
 </body>
