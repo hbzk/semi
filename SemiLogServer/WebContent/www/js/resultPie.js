@@ -44,4 +44,7 @@ function db_resultPie() {
 	}, db_errorCB);
 }
 
-
+function db_errorCB(tx, e) { // query 에러시 호출 함수
+	console.log(e);
+	console.log("e.message :" + e.message);
+}
