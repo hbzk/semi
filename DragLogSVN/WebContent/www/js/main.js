@@ -1,0 +1,198 @@
+// 드래그 관련 변수
+var startIcon, lastIcon, lastDragger, lastDraggerClass; 
+
+// DB 관련 변수
+var actionName, className, startTime, endTime, resultWhile, lastRow;
+var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+
+$(document).ready(function(){
+	startIcon = $('#start').html();
+	
+	db_init(); // DB 없으면 생성
+	loadMainIcon();
+	
+	dragdrop_doing();
+	dragdrop_drop();
+	
+	$('#middle').mouseup(function(){ // 미들 클릭시 초기화
+		dragdrop_timerCheck();
+	});
+});
+
+
+//=====================================================================
+//드롭
+function dragdrop_drop() {
+	$('#start').droppable({tolerance: 'touch'}, {accept: '.drag'}, {drop: function(event, ui){
+		dragdrop_timerCheck(); // 이미 실행중인지 확인 후 초기화
+		
+		// 드래그 대상 관련
+		// 가끔 드래그 대상이 div로 인식되는 버그 대응 
+		if (event.toElement.tagName == "I") {
+			lastIcon = $(event.toElement);
+			lastDragger = lastIcon.parent('div');
+		} else {
+			console.log('event.toElement == div');
+			lastDragger = $(event.toElement);
+			lastIcon = lastDragger.children('i');
+		}
+		
+		showAction(0);		// 아이콘 배치, 타이머 출력
+		
+		// 액션 이름, 시작 시간 저장
+		actionName = lastIcon[0].attributes[0].value;
+		className = lastIcon[0].className;
+		className = className.replace(/ ui-draggable/g,'').replace(/ ui-droppable/g,'');
+		
+		startTime = new Date();
+		db_startQuery();	// 시작 기록
+	}});
+}
+
+function showAction(lastWhile) {
+	lastDragger.attr('style', '');
+	lastDraggerClass = lastDragger[0].className;
+	
+	$('#middle').html(lastIcon).draggable({zIndex: 9});		// 아이콘 중앙 배치
+	$('#start').children().remove();		// 시작 아이콘 관련
+	
+	stopwatch_doing(lastWhile); // 타이머 출력
+	$('#timer').addClass(lastDraggerClass).removeClass('drag ui-draggable ui-draggable-dragging');
+	
+}
+
+
+//타이머 구동 확인 + 저장 + 초기화
+function dragdrop_timerCheck() {
+	if ($('#timer').hasClass('iconMain')) { // 실행 중인지 확인
+		
+		// 종료시간, 활동시간 저장 
+		endTime = new Date();
+		
+		db_endQuery(); // Query
+		
+		stopwatch_reset(); // 타이머 초기화
+		$('#timer').html('').removeClass(); // 타이머 출력 제거
+		
+		// 시작 아이콘 복구
+		$('#start').html(startIcon); 
+		$('#middle').attr('style','').removeClass();
+		
+		lastDragger.html(lastIcon);
+		lastDragger.attr('style','');
+
+		dragdrop_flip(); // 빙글빙글
+		
+	}
+}
+
+
+// 메인 아이콘 로드
+function loadMainIcon(){
+	db_selectLastRow();
+	
+	var iconDiv = $("#iconMainDiv .drag");
+	console.log("Load DB - data (selectedIcon)");
+	db.transaction(function(tx){
+		tx.executeSql('SELECT * FROM ICONLIST', [], function(tx, rs){
+			for( var i=0 ; i < rs.rows.length ; i++){
+				var row = rs.rows.item(i);
+				if (row.POSITION > 0) {
+					$($(iconDiv)[row.POSITION - 1]).append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
+				}
+			}
+			
+			// ACTION 실행중이면
+			if (lastRow.END_TIME == null) {
+				lastIcon = $('[data-name="'+lastRow.TITLE+'"]');
+				lastDragger = lastIcon.parent('div');
+				lastWhile = new Date() - new Date(lastRow.WHILE);
+				showAction(lastWhile);
+				
+			}
+		});
+		
+		
+		
+	});
+}
+
+//DB 초기화
+function db_init() {
+	db.transaction(function(tx) {
+		//tx.executeSql('drop table if exists ACTION'); 
+		tx.executeSql('CREATE TABLE IF NOT EXISTS ACTION (ID integer primary key, TITLE text, CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
+	});
+}
+
+// ACTION 시작시 쿼리
+function db_startQuery() {
+	db.transaction(function(tx) {
+		tx.executeSql('INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) VALUES (?,?,?,?)', 
+				[actionName, className, localISOString(startTime), startTime], function(tx, res) {
+			tx.executeSql('SELECT * FROM ACTION;', [], function(tx, res) {
+			});
+		}, db_errorCB);
+	});
+}
+
+// 마지막 INSERT row 얻기
+function db_selectLastRow() {
+	db.transaction(function(tx) {
+		tx.executeSql('SELECT * FROM ACTION ORDER BY ID DESC', [], function(tx, res){
+			lastRow = res.rows.item(0);
+			console.log(lastRow);
+		}, db_errorCB);
+	});
+}
+
+// ACTION 종료 쿼리
+function db_endQuery() {
+	db_selectLastRow(); 		// 마지막 행 얻기
+	
+	db.transaction(function(tx) {
+		startTime = new Date(lastRow.WHILE);
+		resultWhile = Math.floor((endTime - startTime) / 1000);
+		
+		tx.executeSql('UPDATE ACTION SET END_TIME=?, WHILE=? WHERE ID=?', [localISOString(endTime), resultWhile, lastRow.ID],
+				function() {}, db_errorCB);
+	});
+}
+
+
+// ================================			 거의 수정 안하는 함수
+
+//빙글빙글
+function dragdrop_flip() {
+	lastDragger.addClass('flipping');
+	$('.drag').draggable({disabled:true}); // 전체 드래그 비활성화
+	
+	// 일정 시간 후 다시 드래그 활성화
+	setTimeout(function(){
+		$('.flipping').removeClass('flipping');
+		$('.drag').draggable({disabled: false});
+		lastDragger.attr('style','');
+	}, 1000);
+}
+
+function db_errorCB(tx, e) { // query 에러시 호출 함수
+	console.log(e);
+	console.log("e.message :" + e.message);
+}
+
+//드래그 대상 설정
+function dragdrop_doing() {
+	$('.drag').draggable({distance: 20}, {revert: true}, {revertDuration: 500}, {zIndex: 9});
+}
+
+//날짜 형태 만들기 (2014-06-19T14:12:35.261)
+var localISOString = function(d) {
+var pad = function (n){return n<10 ? '0'+n : n;};
+return d.getFullYear()+'-'
+  + pad(d.getMonth()+1)+'-'
+  + pad(d.getDate())+'T'
+  + pad(d.getHours())+':'
+  + pad(d.getMinutes())+':'
+  + pad(d.getSeconds())+'.'
+  + pad(d.getMilliseconds());
+};
