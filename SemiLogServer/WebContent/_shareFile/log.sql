@@ -9,93 +9,96 @@ DROP TABLE IF EXISTS `LOG` RESTRICT;
 
 -- 사용자
 CREATE TABLE `USER` (
-  `USER_NO`  INTEGER      NOT NULL COMMENT '사용자번호', -- 사용자번호
-  `EMAIL`    VARCHAR(40)  NULL     COMMENT '이메일', -- 이메일
-  `PASSWORD` VARCHAR(255) NULL     COMMENT '암호' -- 암호
+	`USER_NO`  INTEGER      NOT NULL COMMENT '사용자번호', -- 사용자번호
+	`EMAIL`    VARCHAR(40)  NULL     COMMENT '이메일', -- 이메일
+	`PASSWORD` VARCHAR(255) NULL     COMMENT '암호', -- 암호
+	`GENDER`   INTEGER      NULL     COMMENT '성별', -- 성별
+	`AGE`      INTEGER      NULL     COMMENT '나이', -- 나이
+	`JOB`      VARCHAR(255) NULL     COMMENT '직업' -- 직업
 )
 COMMENT '사용자';
 
 -- 사용자
 ALTER TABLE `USER`
-  ADD CONSTRAINT `PK_USER` -- 사용자 기본키
-    PRIMARY KEY (
-      `USER_NO` -- 사용자번호
-    );
+	ADD CONSTRAINT `PK_USER` -- 사용자 기본키
+		PRIMARY KEY (
+			`USER_NO` -- 사용자번호
+		);
 
 -- 사용자 유니크 인덱스
 CREATE UNIQUE INDEX `UIX_USER`
-  ON `USER` ( -- 사용자
-    `EMAIL` ASC -- 이메일
-  );
+	ON `USER` ( -- 사용자
+		`EMAIL` ASC -- 이메일
+	);
 
 ALTER TABLE `USER`
-  MODIFY COLUMN `USER_NO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '사용자번호';
+	MODIFY COLUMN `USER_NO` INTEGER NOT NULL AUTO_INCREMENT COMMENT '사용자번호';
 
 -- 일
 CREATE TABLE `ACTION` (
-  `ACTION_ID`  INTEGER      NOT NULL COMMENT '일번호', -- 일번호
-  `ENG_NAME`   VARCHAR(50)  NOT NULL COMMENT '영문이름', -- 영문이름
-  `KOR_NAME`   VARCHAR(50)  NULL     COMMENT '한글이름', -- 한글이름
-  `DEF_MINUTE` INTEGER      NULL     COMMENT '기본설정시간', -- 기본설정시간
-  `ICON_FILE`  VARCHAR(255) NULL     COMMENT '아이콘파일위치' -- 아이콘파일위치
+	`ACTION_ID`  INTEGER      NOT NULL COMMENT '일번호', -- 일번호
+	`ENG_NAME`   VARCHAR(50)  NOT NULL COMMENT '영문이름', -- 영문이름
+	`KOR_NAME`   VARCHAR(50)  NULL     COMMENT '한글이름', -- 한글이름
+	`DEF_MINUTE` INTEGER      NULL     COMMENT '기본설정시간', -- 기본설정시간
+	`ICON_FILE`  VARCHAR(255) NULL     COMMENT '아이콘파일위치' -- 아이콘파일위치
 )
 COMMENT '일';
 
 -- 일
 ALTER TABLE `ACTION`
-  ADD CONSTRAINT `PK_ACTION` -- 일 기본키
-    PRIMARY KEY (
-      `ACTION_ID` -- 일번호
-    );
+	ADD CONSTRAINT `PK_ACTION` -- 일 기본키
+		PRIMARY KEY (
+			`ACTION_ID` -- 일번호
+		);
 
 -- 일 인덱스
 CREATE INDEX `IX_ACTION`
-  ON `ACTION`( -- 일
-    `ENG_NAME` ASC -- 영문이름
-  );
+	ON `ACTION`( -- 일
+		`ENG_NAME` ASC -- 영문이름
+	);
 
 ALTER TABLE `ACTION`
-  MODIFY COLUMN `ACTION_ID` INTEGER NOT NULL AUTO_INCREMENT COMMENT '일번호';
+	MODIFY COLUMN `ACTION_ID` INTEGER NOT NULL AUTO_INCREMENT COMMENT '일번호';
 
 -- 기록
 CREATE TABLE `LOG` (
-  `LOG_ID`     INTEGER NOT NULL COMMENT '아이디', -- 아이디
-  `USER_NO`    INTEGER NULL     COMMENT '사용자번호', -- 사용자번호
-  `ACTION_ID`  INTEGER NULL     COMMENT '일번호', -- 일번호
-  `START_TIME` DATE    NULL     COMMENT '시작시간', -- 시작시간
-  `END_TIME`   DATE    NULL     COMMENT '종료시간' -- 종료시간
+	`LOG_ID`     INTEGER NOT NULL COMMENT '아이디', -- 아이디
+	`USER_NO`    INTEGER NULL     COMMENT '사용자번호', -- 사용자번호
+	`ACTION_ID`  INTEGER NULL     COMMENT '일번호', -- 일번호
+	`START_TIME` DATE    NULL     COMMENT '시작시간', -- 시작시간
+	`END_TIME`   DATE    NULL     COMMENT '종료시간' -- 종료시간
 )
 COMMENT '기록';
 
 -- 기록
 ALTER TABLE `LOG`
-  ADD CONSTRAINT `PK_LOG` -- 기록 기본키
-    PRIMARY KEY (
-      `LOG_ID` -- 아이디
-    );
+	ADD CONSTRAINT `PK_LOG` -- 기록 기본키
+		PRIMARY KEY (
+			`LOG_ID` -- 아이디
+		);
 
 ALTER TABLE `LOG`
-  MODIFY COLUMN `LOG_ID` INTEGER NOT NULL AUTO_INCREMENT COMMENT '아이디';
-
--- 기록
-ALTER TABLE `LOG`
-  ADD CONSTRAINT `FK_USER_TO_LOG` -- 사용자 -> 기록
-    FOREIGN KEY (
-      `USER_NO` -- 사용자번호
-    )
-    REFERENCES `USER` ( -- 사용자
-      `USER_NO` -- 사용자번호
-    ),
-  ADD INDEX `FK_USER_TO_LOG` (
-    `USER_NO` ASC -- 사용자번호
-  );
+	MODIFY COLUMN `LOG_ID` INTEGER NOT NULL AUTO_INCREMENT COMMENT '아이디';
 
 -- 기록
 ALTER TABLE `LOG`
-  ADD CONSTRAINT `FK_ACTION_TO_LOG` -- 일 -> 기록
-    FOREIGN KEY (
-      `ACTION_ID` -- 일번호
-    )
-    REFERENCES `ACTION` ( -- 일
-      `ACTION_ID` -- 일번호
-    );
+	ADD CONSTRAINT `FK_USER_TO_LOG` -- 사용자 -> 기록
+		FOREIGN KEY (
+			`USER_NO` -- 사용자번호
+		)
+		REFERENCES `USER` ( -- 사용자
+			`USER_NO` -- 사용자번호
+		),
+	ADD INDEX `FK_USER_TO_LOG` (
+		`USER_NO` ASC -- 사용자번호
+	);
+
+-- 기록
+ALTER TABLE `LOG`
+	ADD CONSTRAINT `FK_ACTION_TO_LOG` -- 일 -> 기록
+		FOREIGN KEY (
+			`ACTION_ID` -- 일번호
+		)
+		REFERENCES `ACTION` ( -- 일
+			`ACTION_ID` -- 일번호
+		);
