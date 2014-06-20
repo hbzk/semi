@@ -64,7 +64,7 @@
 }
 
 .toast-item-image-error {
-    background:url(toastImg/error.png);
+  /*   background:url(toastImg/error.png); */
 }
 
 
