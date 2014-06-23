@@ -1,10 +1,12 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 var actionName, startTime, endTime, resultWhile, resultDate, targetDate, scope, lastActionSql;
 var dbId, clickedTable; 
-var pageList = new Array();
+var dayList = new Array();
+var weekList = new Array();
+var monthList = new Array();
 
 $(document).ready(function(){
-	db_pageList();			// 페이징을 위한 전체 목록
+	db_dayList();			// 페이징을 위한 전체 목록
 	db_selectLastDay();	// 마지막 날 출력
 	
 	$('#deleteAll').click(function(){
@@ -17,17 +19,53 @@ $(document).ready(function(){
 	});
 	
 	$('#date .left').click(function(){
-		targetDate = pageList[$.inArray(resultDate, pageList) - 1];
-		db_selectSearch(targetDate);
+		if (scope == 'day') {
+			targetDate = dayList[$.inArray(resultDate, dayList) - 1];
+		} else if (scope == 'month') {
+			targetDate = monthList[$.inArray(resultDate.substring(0,7), monthList) - 1].concat('-01');
+		}
+		db_selectSearch(targetDate, scope);
 	});
 
 	$('#date .right').click(function(){
-		targetDate = pageList[$.inArray(resultDate, pageList) + 1];
-		db_selectSearch(targetDate);
+		if (scope == 'day') {
+			targetDate = dayList[$.inArray(resultDate, dayList) + 1];
+		} else if (scope == 'month') {
+			targetDate = monthList[$.inArray(resultDate.substring(0,7), monthList) + 1].concat('-01');
+		}
+		db_selectSearch(targetDate, scope);
 	});
-
+	
+	
+	
+	// 일, 주, 월 지정
+	$('#day').click(function(){
+		scope = 'day';
+		targetDate = dayList[dayList.length-1];
+		db_selectSearch(targetDate, scope);
+	});
+	$('#week').click(function(){
+		db_selectWeek(date);
+	});
+	$('#month').click(function(){
+		scope = 'month';
+		targetDate = monthList[monthList.length-1].concat('-01'); 	// 마지막 월을 추출해서 2014-06-01 형태로 만듬
+		db_selectSearch(targetDate, scope);
+	});
 });
 // <-- $(document).ready
+
+function db_selectWeek(date) { // 주간 출력
+	db.transaction(function(tx) {
+		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
+			+" WHERE START_TIME BETWEEN date('2014-06-08', 'weekday 0') AND date('2014-06-08', 'weekday 6') ORDER BY START_TIME", [], function(tx, res) {
+				db_listing(res, scope);
+		}, db_errorCB);
+	});
+};
+
+
+
 $(document).on("click",".rtDelete",function(e){
 	if (confirm('정말 지움?')) {
 		dbId = $(e.target).parent(".rtDelete").siblings(".rtIcon")[0].attributes[0].value;
@@ -53,17 +91,23 @@ function db_errorCB(tx, e) { // query 에러시 호출 함수
 	console.log("e.message :" + e.message);
 }
 
-function db_pageList() { // 페이징 용 날짜 목록 만들기
+function db_dayList() { // 페이징 용 날짜 목록 만들기
 	db.transaction(function(tx) {
-		tx.executeSql("SELECT strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION ORDER BY strtDay", [], function(tx, res) {
+		tx.executeSql("SELECT strftime('%Y-%m-%d', START_TIME) AS strtDay, strftime('%Y-%m', START_TIME) AS strtMonth FROM ACTION ORDER BY strtDay", [], function(tx, res) {
 			var len = res.rows.length;
 			console.log("ACTION (All): " + len + " rows found.");
 			
 			for (var i=0; i<len; i++){
-				if ($.inArray(res.rows.item(i).strtDay, pageList) == -1) {
-					pageList.push(res.rows.item(i).strtDay);
+				if ($.inArray(res.rows.item(i).strtDay, dayList) == -1) {	// 일 목록(dayList) 만들기
+					dayList.push(res.rows.item(i).strtDay);
+					if ($.inArray(res.rows.item(i).strtMonth, monthList) == -1) { 		// 월 목록(monthList) 만들기
+						monthList.push(res.rows.item(i).strtMonth);
+					}
+					//weekDay = new Date(res.rows.item(i).strtDay).getDay();
+					//console.log();
 				}
 			}
+			console.log(dayList);
 		}, db_errorCB);
 	});
 };
@@ -79,35 +123,24 @@ function db_selectLastDay() { // 마지막 행동이 있는 날짜 출력
 	});
 };
 
-function db_selectSearch(date) { // 날짜, 범위 받고 출력
-	scope = 'day';
+var whereSql;
+function db_selectSearch(date, scope) { // 날짜, 범위 받고 쿼리 수행
+	
+	if (scope == 'day') { 	// 범위에 따른 WHERE 문 선택
+		whereSql = " WHERE START_TIME BETWEEN date(?) AND date(?, '+1 day') ORDER BY START_TIME";
+	} else if (scope == 'month') {
+		whereSql = " WHERE START_TIME BETWEEN date(?) AND date(?,'+1 month') ORDER BY START_TIME";
+	}
+	
 	db.transaction(function(tx) {
-		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
-			+" WHERE START_TIME BETWEEN date(?) AND date(?, '+1 day') ORDER BY START_TIME", [date, date], function(tx, res) {
+		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION " + whereSql, [date, date], function(tx, res) {
 				db_listing(res, scope);
 		}, db_errorCB);
 	});
 };
 
-/*function db_selectWeek(date) { // 주간 출력
-	scope = 'week';
-	db.transaction(function(tx) {
-		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
-			+" WHERE START_TIME BETWEEN date('2014-06-11', 'start of month') AND date('2014-06-11','start of month','+1 month','-1 day') ORDER BY START_TIME", [], function(tx, res) {
-				db_listing(res, scope);
-		}, db_errorCB);
-	});
-};*/
 
-function db_selectMonth(date) { // 월간 출력
-	scope = 'month';
-	db.transaction(function(tx) {
-		tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
-			+" WHERE START_TIME BETWEEN date(?, 'start of month') AND date(?,'start of month','+1 month','-1 day') ORDER BY START_TIME", [date, date], function(tx, res) {
-				db_listing(res, scope);
-		}, db_errorCB);
-	});
-};
+
 
 // 결과를 HTML에 출력
 function db_listing(res, scope) {
@@ -116,15 +149,15 @@ function db_listing(res, scope) {
 	
 	resultDate = res.rows.item(0).strtDay;
 	
-	var firstMonth = pageList[0].substring(0, 7);
-	var lastMonth = pageList[pageList.length-1].substring(0, 7);
+	var firstMonth = dayList[0].substring(0, 7);
+	var lastMonth = dayList[dayList.length-1].substring(0, 7);
 	
 	if (scope == 'day') {
 		$('#date>p').text(resultDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
 		
 		// 좌우측 네비게이터 활성/비활성화
-		($.inArray(resultDate, pageList) != 0) ? $('#date .left').css('display', '') : $('#date .left').css('display', 'none'); 
-		($.inArray(resultDate, pageList) < pageList.length -1) ? $('#date .right').css('display', '') : $('#date .right').css('display', 'none');
+		($.inArray(resultDate, dayList) != 0) ? $('#date .left').css('display', '') : $('#date .left').css('display', 'none'); 
+		($.inArray(resultDate, dayList) < dayList.length -1) ? $('#date .right').css('display', '') : $('#date .right').css('display', 'none');
 		
 	} else if (scope == 'week') {
 		$('#date>p').text(resultDate.replace(/-/g, '/').substring(0, 7));
@@ -155,7 +188,6 @@ function db_listing(res, scope) {
 		
 		// 더미 데이터에 endTime이 없어서 조건문 추가
 		if (endTime == null) {
-			//endTime = res.rows.item(i).START_TIME;
 			break;
 		}
 		
