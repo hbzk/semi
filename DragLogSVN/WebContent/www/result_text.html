@@ -12,21 +12,21 @@
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/result.js"></script>
 <!-- 더미 데이터 삽입 -->
- <!-- <script type="text/javascript" src="js/_dummyData.js"></script>  -->
+ <script type="text/javascript" src="js/_dummyData.js"></script> 
 <style type="text/css">
 </style>
 <title>Result_text</title>
 </head>
 
 <body>
-<div class="header" data-role="header"><p>LOG LIST</p></div>
+<div class="header" data-role="header"><a class="mainLink"onclick="location.href='main.html';">&lt;</a><p>LOG LIST</p></div>
 <div id="date">
 	<span class="left">&lt;</span><span class="right">&gt;</span>
-	<p id="stDt"></p>
+	<p onclick="location.href='result_pie.html';" id="stDt"></p>
 </div>
 <div class="range listNavi">
 	<div id="day" class="dateNavi">1D</div>
-	<div id="week" class="weekNavi">1W</div>
+ 	<div id="week" class="weekNavi">1W</div>
 	<div id="month" class="monthNavi">1M</div>
 </div>
 <section id="layout">
@@ -36,8 +36,6 @@
 
 </section>
 
-<a class="resultLink mainLink"  onclick="location.href='main.html'; "><i class=" fa fa-bullseye fa-1"></i></a>
-<a class="resultLink resultPie" onclick="location.href='result_pie_sql.html';"><i class="fa fa-circle-o-notch"></i></a>
 <a class="resultLink deleteAll" href="#"><i class="fa fa-trash-o fa-1"></i></a>
 
 </body>
