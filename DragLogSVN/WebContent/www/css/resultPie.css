@@ -21,11 +21,14 @@
 	text-shadow: none;
 	color: white;
 }
+.header .mainLink{ position: absolute; left: 0; width: 70px;
+text-decoration: none; color: #fff; font-size: 100%;}
+
 #layout { 
 margin: 0px auto 0px; width: 320px; height: 518px; position: relative;}
 #date { height: auto; text-align: center; line-height: 80px; position: relative; vertical-align: middle; }
 #date p { font-family: 'orbitron', sans-serif; font-size: 250%; width: 320px; 
-	color: #2E3233; font-weight: bold; margin: 15px auto 0px; text-align: center; }
+	color: #2E3233; font-weight: bold; margin: 0px auto 0px; text-align: center; }
 	
 #resultTextLink { height: 450px; width: 340px; overflow: auto;}    
 #rtScroll { overflow: hidden; position:absolute; height: 450px; width:320px;}
@@ -74,9 +77,5 @@ margin: 0px auto 0px; width: 320px; height: 518px; position: relative;}
 
 
 
-.mainLink { font-size: 200%; position: absolute; bottom: 10px; right: 100px; text-decoration: none;}
 .deleteAll{font-size: 150%; position: absolute; bottom: 10px; right: 1px;  text-decoration: none;}
-.resultTextLink{ font-size: 200%; position: absolute; bottom: 10px; right: 50px; text-decoration: none;}
-.mainLink i{font-size: 1.0em;	color: #3E606F;}
-.deleteAll i{font-size: 1.5em;color: #3E606F;}
-.resultTextLink i{font-size: 1.0em;color: #3E606F;}
+.deleteAll i{font-size: 1.4em;color: #3E606F;}

@@ -44,11 +44,10 @@ hr {
 	border: none;
 	text-shadow: none;
 	color: white;
+	z-index: 99;
 }
-.header{
-		z-index: 99;
-}
-
+.header a{ position: absolute; left: 0; width: 70px;
+text-decoration: none; color: #fff; font-size: 100%;}
 * { margin: 0px; padding: 0px;}
 
 .activity_group{
