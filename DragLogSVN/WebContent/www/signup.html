@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script src="js/fancySelect.js"></script>
+<link rel="stylesheet" media="screen, projection" href="css/fancySelect.css">
+<link rel="stylesheet" href="css/jquery.toastmessage.css">
+<title>SIGN UP</title>
+<style type="text/css">
+@font-face{
+		font-family: 'orbitron';
+		src: url('font/orbitron-black-webfont.woff') format('woff');
+}
+@font-face{
+		font-family: 'orbitron-l';
+		src: url('font/orbitron-light-webfont.woff') format('woff');		
+}
+@font-face{
+		font-family: 'nanumGothic;
+		src: url('font/NanumGothic.woff') format('woff');		
+}
+* { margin: 0; padding: 0;}
+:focus { outline: 0;}
+body { font-family: 'orbitron',' sans-serif;}
+
+header {font-family: 'orbitron'; height: 100px; line-height: 100px; background: #3ba3d0; 
+text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
+header>a { position: absolute; left: 0; width: 70px;
+text-decoration: none; color: #fff; font-size: 80%;}
+
+input {font-family: 'nanumGothic'; border: 0px; display: block; width: 100%; height: 30px; padding-top: 20px;
+text-indent: 30px; font-size: 100%; }
+#email { /* border-top: 1px solid #999; */}
+#password { border-top: 1px solid #999;}
+#btnStart {font-family: 'orbitron'; width: 100%; height: 55px; background: #F05630; 
+-webkit-transition: background-color .4s ease-out;
+color: #fff; font-size: 200%; font-weight: bolder;}
+#btnStart:disabled { background: #999; }
+
+#emailValidate, #emailCheck {font-family: 'nanumGothic'; position: absolute; top: 6px; font-size: 0.8em;
+text-indent: 10px; color: #df4949;}
+
+footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; font-size: 0.8em;}
+footer a{ text-decoration: none;}
+#terms { margin-right: 50px;}
+
+/* 성별선택관련 */
+#form img{max-width: 80%; width:auto; height: auto; padding: 10px 10% 10px 10%;}
+.input_hidden {
+    position: absolute;
+    left: -9999px;
+}
+.genderSelect.unselected {
+   opacity: 0.4;
+}
+
+.genderSelect, .job, .age{
+	float: left; z-index: 99999;
+}
+
+#form .genderSelect {
+    display: inline-block;
+    width: 49.9999%;
+}
+.fancy-select{float: left; width: 48%;margin: 10px 3px 10px 2px; padding: 0px;text-indent: 10px;}
+.trigger{width:100%; }
+.options{ width: 100%;}
+.bottomEle{position: fixed; bottom: 0px;width: 100%;}
+</style>
+</head>
+<body>
+
+<header><a href="welcome.html">&lt;</a>SIGN UP</header>
+
+<form id="form" method="post" action="http://192.168.200.6:1111/signup">
+		 <input type="radio" name="gender" value='2' id="female"/>
+        <label class="genderSelect" for="female"><img src="./css/img/female.png" alt="I'm a woman" /></label>
+
+    <input type="radio" name="gender" value='1' id="male" />
+        <label class="genderSelect" for="male"><img src="./css/img/male.png" alt="I'm a man" /></label>
+    
+    
+    <select name="age" class="ageSelect">
+	  <option value="">AGE</option>
+	  <option value="1">Teenagers</option>
+	  <option value="21">Early 20's</option>
+	  <option value="25">Middle 20's</option>
+	  <option value="29">Late 20's</option>
+	  <option value="30"> 30's</option>
+	  <option value="40">40's</option>
+	  <option value="50">50's</option>
+	  <option value="60">60's</option>
+		</select>
+	   <select name="job" class="jobSelect">
+	  <option value="">JOB</option>
+	  <option value="student">STUDENT</option>
+	  <option value="office_worker">OFFICE WORKER</option>
+	  <option value="free-lance">FREE-LANCE</option>
+	  <option value="business_man">BUSINESS MAN</option>
+		</select>
+	
+<div class="bottomEle">    
+    <input id="email" name="email" type="email" placeholder="EMAIL" autofocus required oninput="oninputEmail(event)">
+    <p id="emailValidate"></p>
+    <p id="emailCheck"></p>
+    <input id="password" name="password" type="password" placeholder="PASSWORD" required oninput="oninputPwd (event)">
+    <button id="btnStart" disabled="disabled">START</button>
+    <button id="signUpSubmit" type="submit" hidden="hidden"></button>
+<footer>
+	<a id="terms" href="termOfUse.html">Terms of Use</a>
+	<a href="privacyPolicy.html">Privacy Policy</a>
+</footer>
+</div>
+</form>
+
+<script type="text/javascript" src="js/jquery.toastmessage.js"></script>
+<script type="text/javascript">
+var emailVal;
+
+$('#form input:radio').addClass('input_hidden');
+$('#form .genderSelect').click(function(){
+    $(this).removeClass('unselected').siblings().addClass('unselected');
+    $(this).addClass('genderSelected').siblings().removeClass('genderSelected');
+});
+
+$('.jobSelect').fancySelect();
+	$('.ageSelect').fancySelect();
+
+	function genderSelect(){
+		if($("input[name='gender']:checked").length > 0){
+			console.log("User's gender is checked");
+			return true;
+		}else{
+			errorGender();
+			return false;
+		}
+	}
+	
+	function ageSelect(){
+		if($(".ageSelect option:selected").val()!= ""){
+			console.log($(".ageSelect option:selected").val());
+			return true;
+		}else{
+			errorAge();
+			console.log("age is not selected");
+			return false;
+		}
+	}
+	
+	function jobSelect(){
+		if($(".jobSelect option:selected").val()!=""){
+			console.log($(".jobSelect option:selected").val());
+			return true;
+		}else{
+			errorJob();
+			console.log("job is not selected");
+			return false;
+		}
+	}
+	
+	function errorGender() {
+		$().toastmessage('showToast',{
+		    text     : 'Select your gender!',
+		    stayTime : 1000,
+		    sticky   : false,
+		    position : 'middle-center',
+		    type     : 'error',
+		    close    : function () {console.log("Gender alarm is closed ...");}
+		});
+	}
+	
+	function errorAge() {
+		$().toastmessage('showToast',{
+		    text     : 'Select your age!',
+		    stayTime : 1000,
+		    sticky   : false,
+		    position : 'middle-center',
+		    type     : 'error',
+		    close    : function () {console.log("Age alarm is closed ...");}
+		});
+	}
+	
+	function errorJob() {
+		$().toastmessage('showToast',{
+		    text     : 'Select your Job!',
+		    stayTime : 1000,
+		    sticky   : false,
+		    position : 'middle-center',
+		    type     : 'error',
+		    close    : function () {console.log("Job alarm is closed ...");}
+		});
+	}
+	
+	function oninputEmail() {
+	emailVal = $('#email').val();
+	
+	if (validateEmail()) {
+		$('#emailValidate').text('');
+	} else {
+		$('#emailValidate').text('이메일 형식으로 입력해주세요');
+	}
+	
+	validateForm();
+}
+
+function oninputPwd() {
+	validateForm();
+}
+
+// 메일 형식 검증
+function validateEmail() {
+	if (emailVal.length > 4 && emailVal.match("@") &&
+		emailVal.indexOf("@") + 1 < emailVal.indexOf(".", emailVal.indexOf("@")) &&
+		emailVal.length - 1 > emailVal.indexOf(".", emailVal.indexOf("@"))) {
+			return true;
+	} else {
+		return false;
+	}
+}
+
+
+//이메일 가입 여부 확인
+function validateForm() {
+	$.post("http://192.168.200.6:1111/emailCheck", { email: $('#email').val()})
+		.done(function(data) {
+			if (data == 'already') {
+				$('#emailCheck').text('이미 가입된 이메일입니다.');
+				$('#btnStart').attr('disabled', 'disabled');
+				
+			} else { // 가입된 이메일이 아닐때
+				$('#emailCheck').text('');
+				
+				// 추가 조건 확인 후 버튼 활성화
+				if (validateEmail() && $('#password').val().length > 0) {
+					
+					$('#btnStart').removeAttr('disabled');
+				} else {
+					$('#btnStart').attr('disabled', 'disabled');
+				}
+			}
+	});
+}
+
+//submit
+$("#signUpSubmit").on("click",function(e){
+	console.log("submit button is clicked");
+});
+
+//start btn 활성화 된 후에 gender와 age,job 체크여부확인 후 submit
+$('#btnStart').click(function(e){
+	e.preventDefault();
+	if(genderSelect() && ageSelect() && jobSelect()){
+		console.log("signUp");
+		$("#signUpSubmit").click();
+	}else{
+		console.log("something unchecked!!!!!!!!");
+	}
+});
+
+</script>
+</body>
+</html>

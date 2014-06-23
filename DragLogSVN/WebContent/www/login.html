@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<title>LOG IN</title>
+<style type="text/css">
+@font-face{
+		font-family: 'orbitron';
+		src: url('./font/orbitron-black-webfont.woff') format('woff');
+}
+@font-face{
+		font-family: 'nanumGothic;
+		src: url('./font/NanumGothic.woff') format('woff');		
+}
+* { margin: 0; padding: 0;}
+:focus { outline: 0;}
+body { font-family: 'orbitron',sans-serif;}
+
+header { height: 100px; line-height: 100px; background: #de0052; 
+text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
+header>a { position: absolute; left: 0; width: 70px;
+text-decoration: none; color: #fff; font-size: 80%;}
+
+input { font-family: 'nanumGothic'; border: 0px; display: block; width: 100%; height: 80px; padding-top: 20px;
+text-indent: 30px; font-size: 100%; }
+#email {}
+#password { border-top: 1px solid #999;}
+#btnStart {font-family: 'orbitron'; width: 100%; height: 100px; background: #7ABF49; 
+-webkit-transition: background-color .4s ease-out;
+color: #fff; font-size: 200%; font-weight: bolder;}
+#btnStart:disabled { background: #999; }
+
+#emailValidate, #emailCheck { position: absolute; top: 110px; 
+text-indent: 30px; color: #df4949;}
+
+footer { text-align: center; margin-top: 50px;}
+footer a{font-family: 'nanumGothic'; text-decoration: none;}
+#terms { margin-right: 50px; }
+</style>
+</head>
+<body>
+
+<header><a href="welcome.html">&lt;</a>LOG IN</header>
+
+<form id="form" method="post" action="http://192.168.200.6:1111/login">
+    <input id="email" name="email" type="email" placeholder="Email" autofocus required oninput="oninputEmail(event)">
+    <p id="emailValidate"></p>
+    <p id="emailCheck"></p>
+    <input id="password" name="password" type="password" placeholder="Password" required oninput="oninputPwd (event)">
+    <button id="btnStart" type="submit" disabled="disabled">START</button>
+</form>
+
+<footer>
+	<a href="#">Forgot your password?</a>
+</footer>
+
+<script type="text/javascript">
+var emailVal;
+
+function oninputEmail() {
+	emailVal = $('#email').val();
+	
+	if (validateEmail()) {
+		$('#emailValidate').text('');
+	} else {
+		$('#emailValidate').text('이메일 형식으로 입력해주세요');
+	}
+	
+	validateForm();
+}
+
+function oninputPwd() {
+	validateForm();
+}
+
+function validateEmail() {
+	if (emailVal.length > 4 && emailVal.match("@") &&
+			emailVal.indexOf("@") + 1 < emailVal.indexOf(".", emailVal.indexOf("@")) &&
+			emailVal.length - 1 > emailVal.indexOf(".", emailVal.indexOf("@"))) {
+		$('#emailValidate').text('가입되지 않은 이메일 입니다.');
+			return true;
+	} else {
+		return false;
+	}
+}
+
+
+//이메일 가입 여부 확인
+function validateForm() {
+	$.post("http://192.168.200.6:1111/emailCheck", { email: $('#email').val()})
+		.done(function(data) {
+			if (data == 'already') {
+				$('#emailCheck').text('이미 가입된 이메일입니다.');
+				$('#btnStart').removeAttr('disabled');
+				
+			} else { // 가입된 이메일이 아닐때
+				$('#emailCheck').text('');
+				// 추가 조건 확인 후 버튼 활성화
+				if (validateEmail() && $('#password').val().length > 0) {
+					$('#btnStart').attr('disabled', 'disabled');
+				} else {
+					$('#btnStart').attr('disabled', 'disabled');
+				}
+			}
+	});
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<title>Welcome</title>
+<style>
+@font-face{
+		font-family: 'orbitron';
+		src: url('./font/orbitron-black-webfont.woff') format('woff');
+}
+@font-face{
+		font-family: 'nanumGothic;
+		src: url('./font/NanumGothic.woff') format('woff');		
+}
+* { margin: 0; padding: 0;}
+body { background: ; }
+
+.logo{
+	margin-top: 10%; margin-left: auto; margin-right: auto; margin-bottom: 50%;
+	width: auto;
+	max-heigh: 300px;
+	position: relative;
+	padding: 10px;
+}
+
+ .logoWatch{
+ margin-top: 5%; margin-left: auto; margin-right: auto; background: #5BBC99;
+	display: block; width: 200px; height: 200px; line-height: 200px; font-size: 2.5em;
+	border-radius: 100px; -webkit-border-radius: 100px;	-moz-border-radius: 100px;
+	 border: 0px; 
+	color: black; text-align: center;	
+} 
+.logoWatch img{
+	position: relative;
+	top: 20px;
+	width: 150px;
+	height: 150px;
+}
+.logoText{	
+		text-align: -webkit-right;
+		color: #2D3E50;
+		width: 200px;
+		height: 110px;
+		font-family: 'orbitron';
+		font-size: 30px;
+		position: absolute;
+		bottom: -20px;
+		right: 20px;		
+		
+}
+
+#skip {font-family: 'nanumGothic; position: fixed; bottom: 130px; right: 0px;
+font-size: 90%; color: #555;}
+#footer>a {position:fixed; bottom: 0px;height: 120px; width: 49.99999%; float: left;line-height: 120px; display: block; text-decoration: none; 
+font-size: 200%; font-weight: bolder; color: #fff; text-align: center; }
+#login {font-family: 'orbitron'; background: #de0052; }
+#signup {font-family: 'orbitron'; background: #3ba3d0; margin-left:49.9999%}
+#typed-cursor{
+  display:none;
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="logo">
+<div class="logoWatch"><img src="css/img/Stopwatch.png"/></div>
+<div class="logoText"><!-- Make <br>your TIME <br>valuable.  --> </div>
+</div>
+
+<a id="skip" href="main.html">나중에 로그인</a>
+<section id="footer">
+	<a id="login" href="login.html">LOG IN</a>
+	<a id="signup" href="signup.html">SIGN UP</a>
+</section>
+<script src="js/typed.js"></script>
+<script>
+	
+		$(".logoText").typed({
+			 strings: ["Make your TIME valuable.","semi-LOG"],
+		        typeSpeed: 30, // typing speed
+		        backDelay: 1500, // pause before backspacing
+		        callback: function(){ } // call function after typing is done
+		});
+</script>
+</body>
+</html>
