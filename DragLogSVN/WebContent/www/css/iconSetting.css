@@ -68,7 +68,7 @@ hr {
 
 
 /* 선택된 아이콘 div */
-#selected_icon {height: 180px; width: 100%; background: white;  position: fixed; margin-top: 50px; }
+#selected_icon {	z-index: 999;height: 180px; width: 100%; background: white;  position: fixed; margin-top: 50px; }
 
 .back{z-index: 9999;width: 25px; height: 25px; margin: 0px 0px 0px 10px;  }
 
@@ -89,10 +89,12 @@ i{float: left;	margin: 5px;}
 }
 
 #selected_icon_row {
-	max-width: 320px;
+	width: 320px;
 	padding: 10px 10px 10px 40px;
 	margin: 0px auto;
 }
+
+.check{z-index:9px;}
 
 .all_icon .icon_theme{
 	background: #EEE;
@@ -131,7 +133,7 @@ i{float: left;	margin: 5px;}
 
 .check{
 	position: absolute;
-	float: none;
+	float: left;
 }
 .fa-glass{font-size: 2.5em;}
 .fa-mobile {font-size: 4em;}

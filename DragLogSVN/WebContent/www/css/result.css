@@ -6,6 +6,9 @@
 @font-face { font-family: 'orbitron'; src: url('../font/orbitron-black-webfont.woff') format('woff');}
 @font-face { font-family: 'orbitron-l';	src: url('../font/orbitron-light-webfont.woff') format('woff'); }
 
+html,body{height: 100%;}
+
+
 .header{
 	font-family: 'orbitron', sans-serif;
 	font-size: 1.7em;
@@ -15,12 +18,12 @@
 	text-shadow: none;
 	color: white;
 }
-#layout { margin: 0px auto 0px; width: 320px; height: 518px; position: relative;}
-#date { height: auto; text-align: center; line-height: 80px; position: relative; vertical-align: middle; }
+#layout { margin: 0px auto 0px; width: 320px; height: 70%; position: relative;}
+#date { height: auto; text-align: center; line-height: 70px; position: relative; vertical-align: middle; }
 #date p { font-family: 'orbitron', sans-serif; font-size: 250%; width: 320px; 
-	color: #2E3233; font-weight: bold; margin: 15px auto 0px; text-align: center; }
-#resultList { height: 450px; width: 340px; overflow: auto;}    
-#rtScroll { overflow: hidden; position:absolute; height: 450px; width:320px;}
+	color: #2E3233; font-weight: bold; margin: 0px auto 0px; text-align: center; }
+#resultList { height: 100%; width: 340px; overflow: auto;}    
+#rtScroll { overflow: hidden; position:absolute; height: 100%; width:320px;}
 #date span { position: absolute; width: 40px;}
 #date span.left { left: 20px; }
 #date span.right { right: 20px; }
