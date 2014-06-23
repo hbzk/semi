@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 function dummy() {
 	db.transaction(function(tx) {
-		//tx.executeSql('DROP TABLE IF EXISTS ACTION ');
+		tx.executeSql('DROP TABLE IF EXISTS ACTION ');
 		tx.executeSql('create table if not exists ACTION (id integer primary key, TITLE text, CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
 		
 		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, END_TIME, WHILE) "
