@@ -150,6 +150,8 @@ function db_selectLastRow() {
 function db_endQuery() {
 	db_selectLastRow(); 		// 마지막 행 얻기
 	
+	
+	
 	db.transaction(function(tx) {
 		startTime = new Date(lastRow.WHILE);
 		resultWhile = Math.floor((endTime - startTime) / 1000);
