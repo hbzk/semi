@@ -52,8 +52,22 @@ $(document).ready(function(){
 		targetDate = monthList[monthList.length-1].concat('-01'); 	// 마지막 월을 추출해서 2014-06-01 형태로 만듬
 		db_selectSearch(targetDate, scope);
 	});
+	
+	console.log(getLastSunday('2014-06-23'));
 });
 // <-- $(document).ready
+
+
+
+
+function getLastSunday(d) {
+	var t = new Date(d);
+	console.log(t);
+	console.log(t.getTimezoneOffset());
+	console.log(new Date(t - t.getTimezoneOffset()));
+	t.setDate(t.getDate() - t.getDay());
+	return t;
+}
 
 function db_selectWeek(date) { // 주간 출력
 	db.transaction(function(tx) {
@@ -138,8 +152,6 @@ function db_selectSearch(date, scope) { // 날짜, 범위 받고 쿼리 수행
 		}, db_errorCB);
 	});
 };
-
-
 
 
 // 결과를 HTML에 출력
