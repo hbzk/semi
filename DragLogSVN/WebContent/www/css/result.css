@@ -31,11 +31,11 @@ text-decoration: none; color: #fff; font-size: 100%;}
 #date span.left { left: 20px; }
 #date span.right { right: 20px; }
 
-.listNavi{ width: 100%;  padding: 0px; line-height: 30px; text-align: center; }
-.listNavi div{height: 30px; border: 1px solid #F5A503; }
+.listNavi{ width: 100%;  padding: 0px; line-height: 30px; text-align: center; margin-bottom: 10px; }
+.listNavi div{font-family: 'orbitron';height: 30px; border: 1px solid #F5A503; }
 .listNavi .weekNavi{ width:32%; margin:0px auto; display: inline-block;}
-.listNavi .dateNavi{ width:33%;float:left;}
-.listNavi .monthNavi{ width:33%;float:right;}
+.listNavi .dateNavi{ width:32%;float:left;}
+.listNavi .monthNavi{ width:32%;float:right;}
  
 .rtTable{	width : auto; float: left; clear: both;}
 .rtIcon{width: 40px;height: 40px;margin-left: 20px;text-align: center;}

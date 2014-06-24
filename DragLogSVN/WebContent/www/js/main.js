@@ -9,7 +9,7 @@ $(document).ready(function(){
 	console.log(5678);
 	startIcon = $('#start').html();
 	
-	db_init(); // DB 없으면 생성
+	//db_init();  DB 없으면 생성
 	loadMainIcon();
 	
 	dragdrop_doing();
@@ -119,13 +119,13 @@ function loadMainIcon(){
 }
 
 //DB 초기화
-function db_init() {
+/*function db_init() {
 	console.log(1234);
 	db.transaction(function(tx) {
 		//tx.executeSql('drop table if exists ACTION'); 
 		tx.executeSql('CREATE TABLE IF NOT EXISTS ACTION (ID integer primary key, TITLE text, CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
 	}, db_errorCB);
-}
+}*/
 
 // ACTION 시작시 쿼리
 function db_startQuery() {

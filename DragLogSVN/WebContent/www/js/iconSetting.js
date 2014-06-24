@@ -9,7 +9,7 @@ $(window).load(function() {
 	setting_drag();
 	setting_drop();
 	
-	db_init();
+	//db_init();
 	
 	loadSelectedIcon();
 
@@ -121,7 +121,7 @@ function db_selectIconUpdate(){
 }
 
 //DB 초기화
-function db_init() {
+/*function db_init() {
 	db.transaction(function(tx) {
 		//tx.executeSql('DROP TABLE IF EXISTS ICONLIST');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS ICONLIST (POSITION TEXT, ICON_NAME TEXT PRIMARY KEY, CLASS_NAME TEXT, TIMER_VAL INTEGER)');
@@ -163,7 +163,7 @@ function db_init() {
 			+ ' UNION SELECT 0,"code", "fa fa-code", 22'
 			+ ' UNION SELECT 0,"keyboard", "fa fa-keyboard-o", 60');
 	}, db_errorCB);
-}
+}*/
 
 
 
