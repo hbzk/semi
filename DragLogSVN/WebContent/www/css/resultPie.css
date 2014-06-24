@@ -26,7 +26,7 @@ text-decoration: none; color: #fff; font-size: 100%;}
 
 #layout { 
 margin: 0px auto 0px; width: 320px; height: 518px; position: relative;}
-#date { height: auto; text-align: center; line-height: 80px; position: relative; vertical-align: middle; }
+#date { height: auto; text-align: center; line-height: 60px; position: relative; vertical-align: middle; }
 #date p { font-family: 'orbitron', sans-serif; font-size: 250%; width: 320px; 
 	color: #2E3233; font-weight: bold; margin: 0px auto 0px; text-align: center; }
 	
