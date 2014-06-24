@@ -74,15 +74,9 @@ app.post('/login', function(req,res){
 				res.cookie('email', req.body.email);
 				var user = rows[0];
 				console.log(user);
+				user.PASSWORD = '';
 				
-				var userData = new Object();
-				userData['email'] = user.EMAIL;
-				userData['gen'] = user.GENDER;
-				userData['age'] = user.AGE;
-				userData['job'] = user.JOB;
-				
-				console.log(userData);
-				res.jsonp(userData);
+				res.send(user);
 				//dbconn.query('UPDATE USER SET  WHERE ID = ?', , function(err, rows, fields){
 				
 				// 서버에서 유저 정보 받아서 장비 유저 테이블에 넣기
