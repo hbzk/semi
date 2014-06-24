@@ -88,7 +88,7 @@ footer a{ text-decoration: none;}
 	  <option value="21">Early 20's</option>
 	  <option value="25">Middle 20's</option>
 	  <option value="29">Late 20's</option>
-	  <option value="30"> 30's</option>
+	  <option value="30">30's</option>
 	  <option value="40">40's</option>
 	  <option value="50">50's</option>
 	  <option value="60">60's</option>
@@ -102,12 +102,13 @@ footer a{ text-decoration: none;}
 		</select>
 	
 <div class="bottomEle">    
-    <input id="email" name="email" type="email" placeholder="EMAIL" autofocus required oninput="oninputEmail(event)">
-    <p id="emailValidate"></p>
-    <p id="emailCheck"></p>
-    <input id="password" name="password" type="password" placeholder="PASSWORD" required oninput="oninputPwd (event)">
-    <button id="btnStart" disabled="disabled">START</button>
-    <button id="signUpSubmit" type="submit" hidden="hidden"></button>
+	<input id="user_no" name="user_no"> <!-- hidden="hidden" -->
+	<input id="email" name="email" type="email" placeholder="EMAIL" autofocus required oninput="oninputEmail(event)">
+	<p id="emailValidate"></p>
+	<p id="emailCheck"></p>
+	<input id="password" name="password" type="password" placeholder="PASSWORD" required oninput="oninputPwd (event)">
+	<button id="btnStart" disabled="disabled">START</button>
+	<button id="signUpSubmit" type="submit" hidden="hidden"></button>
 <footer>
 	<a id="terms" href="termOfUse.html">Terms of Use</a>
 	<a href="privacyPolicy.html">Privacy Policy</a>
@@ -117,6 +118,7 @@ footer a{ text-decoration: none;}
 
 <script type="text/javascript" src="js/jquery.toastmessage.js"></script>
 <script type="text/javascript">
+var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 var emailVal;
 
 $('#form input:radio').addClass('input_hidden');
@@ -253,11 +255,31 @@ $('#btnStart').click(function(e){
 	e.preventDefault();
 	if(genderSelect() && ageSelect() && jobSelect()){
 		console.log("signUp");
-		$("#signUpSubmit").click();
+		
+		
+		db_getId();
+		//$("#signUpSubmit").click();
 	}else{
 		console.log("something unchecked!!!!!!!!");
 	}
 });
+
+
+function db_getId(){
+	db.transaction(function(tx){
+		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
+			console.log(res.rows.item(0).USER_NO);
+			
+			$('#user_no').val(res.rows.item(0).USER_NO);
+			$("#signUpSubmit").click();
+		});
+	}, db_errorCB);
+}
+
+function db_errorCB(e) { // query 에러시 호출 함수
+	console.log(e);
+	console.log("e.message :" + e.message);
+}
 
 </script>
 </body>
