@@ -44,9 +44,9 @@ app.post('/signup',function(req,res){
         if (err) {
             console.log(err);
             throw err;
+        } else {
+        	res.send('ok');
         }
-        res.send('ok');
-        //res.redirect(''+req.headers.origin+'/www/main.html');
     });
 });
 
