@@ -89,12 +89,12 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 		});
 	
 		$(window).load(function(){
-		db_init();
+			db_init();
 		});
 		
 		function db_init() {
 			db.transaction(function(tx) {
-				//tx.executeSql('DROP TABLE IF EXISTS ICONLIST');
+				tx.executeSql('DROP TABLE IF EXISTS USER');
 				tx.executeSql('CREATE TABLE IF NOT EXISTS USER (NO INTEGER PRIMARY KEY, ID UNIQUE, EMAIL, GEN, AGE, JOB)');
 				// 내부 DB ID 있는지 확인, 
 				tx.executeSql('SELECT * FROM USER', [], function(tx, res){
@@ -113,8 +113,8 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 			}, db_errorCB);
 		}
 		
-		function db_errorCB(tx, e) { // query 에러시 호출 함수
-			console.log(tx);
+		function db_errorCB(e) { // query 에러시 호출 함수
+			console.log(e);
 			console.log("e.message :" + e.message);
 			
 		}
@@ -129,9 +129,8 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 		
 		function db_insertId(userId){
 			db.transaction(function(tx){
-				tx.executeSql('INSERT INTO USER SET NO, ID, EMAIL, GEN, AGE, JOB VALUES(?,?,?,?,?)', [1,userId , null,null,null],
-						function(){}, db_errorCB);
-			});
+				tx.executeSql('INSERT INTO USER (ID) VALUES (?)', [userId]);
+			}, db_errorCB);
 		}
 		
 </script>
