@@ -20,7 +20,7 @@ var dbconn = mysql.createConnection({
 // 장비에서 최초 실행시 USER ID 생성 후 전달
 app.get('/createUser',function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
-	//res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	dbconn.query('INSERT INTO USER SET PASSWORD=""', function(err, rows){
 		if (err) {
 			console.log(err);
@@ -40,9 +40,7 @@ app.post('/signup',function(req,res){
 	user.password = sha1.SHA1(user.password); // 암호화 
 	
 	console.log(req.headers);
-
-	reqPath = req.headers.origin;
-	console.log(reqPath);
+	console.log(req.headers.origin);
 	
 	
 	console.log(user);
@@ -52,13 +50,16 @@ app.post('/signup',function(req,res){
             next(err);
             throw err;
         }
-        res.redirect(''+reqPath+'/www/main_sql.html');
+        res.redirect(''+req.headers.origin+'/www/main.html');
     });
 
 });
 
 // 로그인
 app.post('/login', function(req,res){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	
 	console.log('login post');
 	
 	var email = req.body.email;
@@ -71,7 +72,21 @@ app.post('/login', function(req,res){
 				res.send('암호가 다르다');
 			} else {
 				res.cookie('email', req.body.email);
-				res.send('로그인 되었다 \n' + req.body.email);
+				var user = rows[0];
+				console.log(user);
+				
+				var userData = new Object();
+				userData['email'] = user.EMAIL;
+				userData['gen'] = user.GENDER;
+				userData['age'] = user.AGE;
+				userData['job'] = user.JOB;
+				
+				console.log(userData);
+				res.jsonp(userData);
+				//dbconn.query('UPDATE USER SET  WHERE ID = ?', , function(err, rows, fields){
+				
+				// 서버에서 유저 정보 받아서 장비 유저 테이블에 넣기
+				//res.redirect(''+req.headers.origin+'/www/main.html');
 			}
 		}
 	});
