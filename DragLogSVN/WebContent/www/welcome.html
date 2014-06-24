@@ -78,13 +78,62 @@ font-size: 200%; font-weight: bolder; color: #fff; text-align: center; }
 </section>
 <script src="js/typed.js"></script>
 <script>
-	
+var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+		
+	//logo 
 		$(".logoText").typed({
 			 strings: ["Make your TIME valuable.","semi-LOG"],
 		        typeSpeed: 30, // typing speed
 		        backDelay: 1500, // pause before backspacing
 		        callback: function(){ } // call function after typing is done
 		});
+	
+		$(window).load(function(){
+		db_init();
+		});
+		
+		function db_init() {
+			db.transaction(function(tx) {
+				//tx.executeSql('DROP TABLE IF EXISTS ICONLIST');
+				tx.executeSql('CREATE TABLE IF NOT EXISTS USER (NO INTEGER PRIMARY KEY, ID UNIQUE, EMAIL, GEN, AGE, JOB)');
+				// 내부 DB ID 있는지 확인, 
+				tx.executeSql('SELECT * FROM USER', [], function(tx, res){
+					if(res.rows.length == 0){
+						// >> 없을 경우만 서버(mysql)에서 ID 번호 발급 받기 + 내부 DB에 ID 삽입
+						createUser();
+					}
+				// 끝나면 공통으로 location.href = main.html
+					
+				});
+				
+				// 있으면 초기 실행 아니니 끝
+			
+				
+				
+			}, db_errorCB);
+		}
+		
+		function db_errorCB(tx, e) { // query 에러시 호출 함수
+			console.log(tx);
+			console.log("e.message :" + e.message);
+			
+		}
+		
+		//사용자ID 서버에 확인
+		function createUser() {
+			$.get("http://14.32.7.49:1111/createUser").done(function(userId){
+				console.log(userId);
+				db_insertId(userId);
+			});
+		}
+		
+		function db_insertId(userId){
+			db.transaction(function(tx){
+				tx.executeSql('INSERT INTO USER SET NO, ID, EMAIL, GEN, AGE, JOB VALUES(?,?,?,?,?)', [1,userId , null,null,null],
+						function(){}, db_errorCB);
+			});
+		}
+		
 </script>
 </body>
 </html>
