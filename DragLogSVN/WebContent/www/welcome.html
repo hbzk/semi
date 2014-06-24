@@ -102,14 +102,7 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 						// >> 없을 경우만 서버(mysql)에서 ID 번호 발급 받기 + 내부 DB에 ID 삽입
 						createUser();
 					}
-				// 끝나면 공통으로 location.href = main.html
-					
 				});
-				
-				// 있으면 초기 실행 아니니 끝
-			
-				
-				
 			}, db_errorCB);
 		}
 		

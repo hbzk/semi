@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<title>semiLOG</title>
+</head>
+<body>
+<script>
+var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+
+$(window).load(function(){
+	db_init();
+});
+
+//db USER table에 EMAIL이 비어있으면 welcome page  있으면 main.html로 redirect
+function db_init() {
+	db.transaction(function(tx) {
+		tx.executeSql('DROP TABLE IF EXISTS USER');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS USER (ID INTEGER PRIMARY KEY, USER_NO UNIQUE, EMAIL, GEN, AGE, JOB)');
+		tx.executeSql('SELECT USER_NO FROM USER WHERE ID = 1', [], function(tx, res){
+			console.log(res.rows);
+			if(res.rows.length == 0 ){
+				//local DB USER_NO field null이면 한번도 실행하지 않았으므로 welcome페이지
+				window.location.href = "welcome.html";
+			}else{
+				//local DB USER_NO field null아니면 실행했었으므로 바로 main페이지
+				window.location.href = "main.html";
+			}
+			}
+			
+		);
+	}, db_errorCB);
+}
+
+function db_errorCB(e) { // query 에러시 호출 함수
+	console.log(e);
+	console.log("e.message :" + e.message);
+}
+</script>
+
+</body>
+</html>
