@@ -61,6 +61,7 @@ text-decoration: none; color: #fff; font-size: 100%;}
 }
 
 .rtIcon,.rtTime,.rtDuration,.rtDelete{
+		letter-spacing: -0.05em;
 	float: left;
 	/* border: 1px solid #999; */
 	margin-bottom: 15px;

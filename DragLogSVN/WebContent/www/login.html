@@ -58,7 +58,7 @@ footer a{font-family: 'nanumGothic'; text-decoration: none;}
 
 <script type="text/javascript">
 var emailVal;
-
+var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024); 
 function oninputEmail() {
 	emailVal = $('#email').val();
 	
@@ -90,6 +90,8 @@ $("#btnStart").click(function(){
 																					password: $('#password').val()})
 		.done(function(data){
 			console.log(data);
+			db_updateUser(data);
+			
 		});
 });
 
@@ -115,7 +117,18 @@ function validateForm() {
 	});
 }
 
-
+ function db_updateUser(user){
+	db.transaction(function(tx){
+		tx.executeSql('UPDATE USER SET EMAIL =?, GEN=?, AGE=?, JOB=? VALUES WHERE USER_NO = ? ',
+				[user.EMAIL, user.GENDER, user.AGE, user.JOB, user.USER_NO]);
+	},db_errorCB);
+ }
+		
+	function db_errorCB(e) { // query 에러시 호출 함수
+		console.log(e);
+		console.log("e.message :" + e.message);
+	}	
+		
 </script>
 </body>
 </html>

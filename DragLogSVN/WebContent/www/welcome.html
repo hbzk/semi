@@ -94,8 +94,8 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 		
 		function db_init() {
 			db.transaction(function(tx) {
-				tx.executeSql('DROP TABLE IF EXISTS USER');
-				tx.executeSql('CREATE TABLE IF NOT EXISTS USER (NO INTEGER PRIMARY KEY, ID UNIQUE, EMAIL, GEN, AGE, JOB)');
+				//tx.executeSql('DROP TABLE IF EXISTS USER');
+				tx.executeSql('CREATE TABLE IF NOT EXISTS USER (ID INTEGER PRIMARY KEY, USER_NO UNIQUE, EMAIL, GEN, AGE, JOB)');
 				// 내부 DB ID 있는지 확인, 
 				tx.executeSql('SELECT * FROM USER', [], function(tx, res){
 					if(res.rows.length == 0){
@@ -128,7 +128,7 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 		
 		function db_insertId(userId){
 			db.transaction(function(tx){
-				tx.executeSql('INSERT INTO USER (ID) VALUES (?)', [userId]);
+				tx.executeSql('INSERT INTO USER (USER_NO) VALUES (?)', [userId]);
 			}, db_errorCB);
 		}
 		
