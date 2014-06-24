@@ -43,13 +43,13 @@ footer a{font-family: 'nanumGothic'; text-decoration: none;}
 <body>
 
 <header><a href="welcome.html">&lt;</a>LOG IN</header>
-
-<form id="form" method="post" action="http://192.168.200.6:1111/login">
+<!--  method="post" action="http://14.32.7.49:1111/login" -->
+<form id="form">
     <input id="email" name="email" type="email" placeholder="Email" autofocus required oninput="oninputEmail(event)">
     <p id="emailValidate"></p>
     <p id="emailCheck"></p>
     <input id="password" name="password" type="password" placeholder="Password" required oninput="oninputPwd (event)">
-    <button id="btnStart" type="submit" disabled="disabled">START</button>
+    <button id="btnStart" type="button" disabled="disabled">START</button>
 </form>
 
 <footer>
@@ -85,6 +85,14 @@ function validateEmail() {
 		return false;
 	}
 }
+$("#btnStart").click(function(){
+	$.post('http://14.32.7.49:1111/login',{ email : $('#email').val() ,
+																					password: $('#password').val()})
+		.done(function(data){
+			console.log(data);
+		});
+});
+
 
 
 //이메일 가입 여부 확인
