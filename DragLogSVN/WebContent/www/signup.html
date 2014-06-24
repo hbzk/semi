@@ -74,7 +74,8 @@ footer a{ text-decoration: none;}
 
 <header><a href="welcome.html">&lt;</a>SIGN UP</header>
 
-<form id="form" method="post" action="http://192.168.200.6:1111/signup">
+<!-- method="post" action="http://192.168.200.6:1111/signup" -->
+<form id="form">
 		 <input type="radio" name="gender" value='2' id="female"/>
         <label class="genderSelect" for="female"><img src="./css/img/female.png" alt="I'm a woman" /></label>
 
@@ -82,7 +83,7 @@ footer a{ text-decoration: none;}
         <label class="genderSelect" for="male"><img src="./css/img/male.png" alt="I'm a man" /></label>
     
     
-    <select name="age" class="ageSelect">
+    <select id="age" name="age" class="ageSelect">
 	  <option value="">AGE</option>
 	  <option value="1">Teenagers</option>
 	  <option value="21">Early 20's</option>
@@ -93,7 +94,7 @@ footer a{ text-decoration: none;}
 	  <option value="50">50's</option>
 	  <option value="60">60's</option>
 		</select>
-	   <select name="job" class="jobSelect">
+	  <select id="job" name="job" class="jobSelect">
 	  <option value="">JOB</option>
 	  <option value="student">STUDENT</option>
 	  <option value="office_worker">OFFICE WORKER</option>
@@ -102,13 +103,12 @@ footer a{ text-decoration: none;}
 		</select>
 	
 <div class="bottomEle">    
-	<input id="user_no" name="user_no"> <!-- hidden="hidden" -->
+	<input id="user_no" name="user_no" type="hidden">
 	<input id="email" name="email" type="email" placeholder="EMAIL" autofocus required oninput="oninputEmail(event)">
 	<p id="emailValidate"></p>
 	<p id="emailCheck"></p>
 	<input id="password" name="password" type="password" placeholder="PASSWORD" required oninput="oninputPwd (event)">
 	<button id="btnStart" disabled="disabled">START</button>
-	<button id="signUpSubmit" type="submit" hidden="hidden"></button>
 <footer>
 	<a id="terms" href="termOfUse.html">Terms of Use</a>
 	<a href="privacyPolicy.html">Privacy Policy</a>
@@ -256,24 +256,33 @@ $('#btnStart').click(function(e){
 	if(genderSelect() && ageSelect() && jobSelect()){
 		console.log("signUp");
 		
-		
-		db_getId();
-		//$("#signUpSubmit").click();
+		signupSubmit();
 	}else{
 		console.log("something unchecked!!!!!!!!");
 	}
 });
 
-
-function db_getId(){
+function signupSubmit(){
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
-			console.log(res.rows.item(0).USER_NO);
+			var userNo = res.rows.item(0).USER_NO
 			
-			$('#user_no').val(res.rows.item(0).USER_NO);
-			$("#signUpSubmit").click();
+			user = {email: $('#email').val(), password: $('#password').val()
+					,gender: $(':radio[name="gender"]:checked').val(), age: $('#age').val(), job: $('#job').val()
+					,user_no: userNo}
+			signupPost(user);
 		});
 	}, db_errorCB);
+}
+
+function signupPost(user) {
+ 	$.post("http://14.32.7.49:1111/signup", user)
+		.done(function(data) {
+			console.log(data);
+			// 'ok' 받으면 signup 성공
+			// --> Login.html 에서 진행하는 Web SQL에 값 넣기 동작 필요함
+			
+	});
 }
 
 function db_errorCB(e) { // query 에러시 호출 함수

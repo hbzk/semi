@@ -33,10 +33,11 @@ app.get('/createUser',function(req,res){
 
 // /signup으로 post 요청 오면 update 수행
 app.post('/signup',function(req,res){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	var user = req.body;
 	user.password = sha1.SHA1(user.password); // 암호화 
 	
-	console.log(req.headers);
 	console.log(user);
     dbconn.query('UPDATE USER SET EMAIL=?, PASSWORD=?, GENDER=?, AGE=?, JOB=? WHERE USER_NO=?', 
     		[user.email, user.password, user.gender, user.age, user.job, user.user_no], function(err,result){
@@ -44,7 +45,8 @@ app.post('/signup',function(req,res){
             console.log(err);
             throw err;
         }
-        res.redirect(''+req.headers.origin+'/www/main.html');
+        res.send('ok');
+        //res.redirect(''+req.headers.origin+'/www/main.html');
     });
 });
 
