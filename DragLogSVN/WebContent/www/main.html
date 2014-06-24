@@ -12,10 +12,10 @@
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript" src="js/jquery.ui.touch.js"></script>
-
-<script type="text/javascript" src="js/stopwatch.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/iconSetting.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/stopwatch.js"></script>
+
 <title>Main</title>
 </head>
 <body>
@@ -24,7 +24,7 @@
 	<section id="iconMainDiv">
 		<div id="start"><i class="fa fa-play"></i></div>
 		
-		<div id="middle"><!-- <i class="li li_tv"></i> 아이콘이 여기로 --></div>
+		<div id="middle"></div>
 		
 		<div id="one" class="drag iconMain left top"></div>
 		<div id="two" class="drag iconMain center top"></div>
@@ -45,9 +45,14 @@
 <script type="text/javascript">
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
-db.transaction(function(tx) {
-	tx.executeSql('drop table if exists TEST'); // DB 삭제 - 테스트 용
-});
+/*  db.transaction(function(tx) {
+	tx.executeSql('drop table if exists ACTION'); // DB 삭제 - 테스트 용
+	tx.executeSql('drop table if exists ICONlIST');
+	tx.executeSql('drop table if exists ICONSELECT');
+	tx.executeSql('drop table if exists ICONSTIME');
+	tx.executeSql('drop table if exists USER');
+});  */
 </script>
+
 </body>
 </html>

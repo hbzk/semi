@@ -89,7 +89,7 @@ function selectCount(){
 	}
 }
 
-function db_errorCB(tx, e) { // query 에러시 호출 함수
+function db_errorCB(e) { // query 에러시 호출 함수
 	console.log(e);
 	console.log("e.message :" + e.message);
 }
@@ -109,15 +109,15 @@ function db_selectIconUpdate(){
 			var selectedPosition = $.inArray(activityList[i],selectedNames) + 1;
 			if ($.inArray(activityList[i],selectedNames) >= 0){
 				tx.executeSql('UPDATE ICONLIST SET POSITION=? WHERE ICON_NAME=? ', [selectedPosition.toString(), activityList[i]], function(tx, res) {
-				}, db_errorCB);
+				});
 			} else {
 				tx.executeSql('UPDATE ICONLIST SET POSITION=? WHERE ICON_NAME=? ', ['-', activityList[i]], function(tx, res) {
-				}, db_errorCB);
+				});
 			}
 			
 		}
 		
-	});
+	}, db_errorCB);
 }
 
 //DB 초기화
