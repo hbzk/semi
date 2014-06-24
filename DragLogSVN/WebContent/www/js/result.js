@@ -7,9 +7,9 @@ var monthList = new Array();
 
 $(document).ready(function(){
 	db_dayList();			// 페이징을 위한 전체 목록
-	//db_selectLastDay();	// 마지막 날 출력
-	scope = 'LASTDAY';
-	db_selectSearch(scope);
+	
+	scope = 'LASTDAY';	
+	db_selectSearch(scope); 	// 마지막 날 출력
 	
 	$('#deleteAll').click(function(){
 		if (confirm('정말 다 지움?')) {
