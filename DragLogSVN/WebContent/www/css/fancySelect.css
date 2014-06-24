@@ -1,6 +1,6 @@
 @font-face{
 		font-family: 'orbitron';
-		src: url('./font/orbitron-black-webfont.woff') format('woff');
+		src: url('../font/orbitron-black-webfont.woff') format('woff');
 }
 
 div.fancy-select {
