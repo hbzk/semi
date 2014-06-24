@@ -154,8 +154,8 @@ function db_selectSearch(scope, date) { // 날짜, 범위 받고 쿼리 수행
 			tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
 				+" WHERE START_TIME BETWEEN date("+lastActionSql+") AND date("+lastActionSql+", ?) ORDER BY START_TIME", ['+1 day'], function(tx, res) {
 					db_listing(res, scope);
-			}, db_errorCB);
-		});
+			});
+		}, db_errorCB);
 		
 	} else { 	// 범위에 따른 WHERE 문 선택
 		if (scope == 'DAY') {
@@ -172,8 +172,8 @@ function db_selectSearch(scope, date) { // 날짜, 범위 받고 쿼리 수행
 		db.transaction(function(tx) {
 			tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION " + whereSql, [date, date], function(tx, res) {
 				db_listing(res, scope);
-			}, db_errorCB);
-		});
+			});
+		}, db_errorCB);
 	}
 };
 
@@ -201,8 +201,8 @@ function db_dayList() {
 					}
 				}
 			}
-		}, db_errorCB);
-	});
+		});
+	}, db_errorCB);
 };
 
 // 결과 하나 지우기
@@ -213,7 +213,7 @@ function db_delete(no){
 }
 
 //query 에러시 호출 함수
-function db_errorCB(tx, e) {
+function db_errorCB(e) {
 	console.log(e);
 	console.log("e.message :" + e.message);
 }

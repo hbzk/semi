@@ -130,10 +130,9 @@ function db_startQuery() {
 	db.transaction(function(tx) {
 		tx.executeSql('INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) VALUES (?,?,?,?)', 
 				[actionName, className, localISOString(startTime), startTime], function(tx, res) {
-			tx.executeSql('SELECT * FROM ACTION;', [], function(tx, res) {
-			});
-		}, db_errorCB);
-	});
+			tx.executeSql('SELECT * FROM ACTION');
+		});
+	}, db_errorCB);
 }
 
 // 마지막 INSERT row 얻기
@@ -142,23 +141,20 @@ function db_selectLastRow() {
 		tx.executeSql('SELECT * FROM ACTION ORDER BY ID DESC', [], function(tx, res){
 			lastRow = res.rows.item(0);
 			console.log(lastRow);
-		}, db_errorCB);
-	});
+		});
+	}, db_errorCB);
 }
 
 // ACTION 종료 쿼리
 function db_endQuery() {
 	db_selectLastRow(); 		// 마지막 행 얻기
 	
-	
-	
 	db.transaction(function(tx) {
 		startTime = new Date(lastRow.WHILE);
 		resultWhile = Math.floor((endTime - startTime) / 1000);
 		
-		tx.executeSql('UPDATE ACTION SET END_TIME=?, WHILE=? WHERE ID=?', [localISOString(endTime), resultWhile, lastRow.ID],
-				function() {}, db_errorCB);
-	});
+		tx.executeSql('UPDATE ACTION SET END_TIME=?, WHILE=? WHERE ID=?', [localISOString(endTime), resultWhile, lastRow.ID]);
+	}, db_errorCB);
 }
 
 
@@ -177,7 +173,7 @@ function dragdrop_flip() {
 	}, 1000);
 }
 
-function db_errorCB(tx, e) { // query 에러시 호출 함수
+function db_errorCB(e) { // query 에러시 호출 함수
 	console.log(e);
 	console.log("e.message :" + e.message);
 }
