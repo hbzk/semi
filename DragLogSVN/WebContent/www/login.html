@@ -119,8 +119,8 @@ function validateForm() {
 
  function db_updateUser(user){
 	db.transaction(function(tx){
-		tx.executeSql('UPDATE USER SET EMAIL =?, GEN=?, AGE=?, JOB=? VALUES WHERE USER_NO = ? ',
-				[user.EMAIL, user.GENDER, user.AGE, user.JOB, user.USER_NO]);
+		tx.executeSql('UPDATE USER SET EMAIL =?, GEN=?, AGE=?, JOB=? WHERE ID = 1 ',
+				[user.EMAIL, user.GENDER, user.AGE, user.JOB]);
 	},db_errorCB);
  }
 		
