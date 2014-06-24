@@ -120,6 +120,7 @@ footer a{ text-decoration: none;}
 <script type="text/javascript">
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 var emailVal;
+var user;
 
 $('#form input:radio').addClass('input_hidden');
 $('#form .genderSelect').click(function(){
@@ -245,10 +246,6 @@ function validateForm() {
 	});
 }
 
-//submit
-$("#signUpSubmit").on("click",function(e){
-	console.log("submit button is clicked");
-});
 
 //start btn 활성화 된 후에 gender와 age,job 체크여부확인 후 submit
 $('#btnStart').click(function(e){
@@ -280,11 +277,21 @@ function signupPost(user) {
 		.done(function(data) {
 			console.log(data);
 			// 'ok' 받으면 signup 성공
-			// --> Login.html 에서 진행하는 Web SQL에 값 넣기 동작 필요함
-			
+			if (data == 'ok') {
+				console.log(user);
+				db_updateUser(user);
+			}
 	});
 }
 
+function db_updateUser(user){
+	db.transaction(function(tx){
+		console.log(user);
+		console.log(user.email);
+		tx.executeSql('UPDATE USER SET EMAIL =?, GEN=?, AGE=?, JOB=? WHERE ID = 1 ',
+				[user.email, user.gender, user.age, user.job]);
+	},db_errorCB);
+}
 function db_errorCB(e) { // query 에러시 호출 함수
 	console.log(e);
 	console.log("e.message :" + e.message);

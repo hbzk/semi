@@ -39,8 +39,9 @@ app.post('/signup',function(req,res){
 	user.password = sha1.SHA1(user.password); // 암호화 
 	
 	console.log(user);
-    dbconn.query('UPDATE USER SET EMAIL=?, PASSWORD=?, GENDER=?, AGE=?, JOB=? WHERE USER_NO=?', 
-    		[user.email, user.password, user.gender, user.age, user.job, user.user_no], function(err,result){
+    dbconn.query('UPDATE USER SET EMAIL=?, PASSWORD=?, GENDER=?, AGE=?, JOB=? WHERE USER_NO=?',
+    		[user.email, user.password, user.gender, user.age, user.job, user.user_no], 
+    		function(err, rows, fields){
         if (err) {
             console.log(err);
             throw err;
@@ -96,13 +97,15 @@ app.post('/emailCheck',function(req,res){
 // (테스트용 / 삭제 예정) pathname 없으면 user list 출력
 app.get('/', function(req,res){
 	
-	dbconn.query('SELECT * FROM USER', function(err, rows){
+	dbconn.query('SELECT * FROM USER', function(err, rows, fields){
 		if (err) {
 			console.log('Query err');
 			console.log(err);
 		}
 		//console.log(rows);
+		//console.log(fields);
 		res.json(rows);
+		
 	});
 });
 
