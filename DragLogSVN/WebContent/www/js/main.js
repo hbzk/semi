@@ -119,6 +119,7 @@ function loadMainIcon(){
 
 //DB 초기화
 function db_init() {
+	console.log(1234);
 	db.transaction(function(tx) {
 		//tx.executeSql('drop table if exists ACTION'); 
 		tx.executeSql('CREATE TABLE IF NOT EXISTS ACTION (ID integer primary key, TITLE text, CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
