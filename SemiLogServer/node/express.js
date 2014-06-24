@@ -17,6 +17,22 @@ var dbconn = mysql.createConnection({
 	database:'semidb'
 });
 
+// 장비에서 최초 실행시 USER ID 생성 후 전달
+app.get('/createUser',function(req,res){
+	res.header("Access-Control-Allow-Origin", "*");
+	//res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	dbconn.query('INSERT INTO USER SET PASSWORD=""', function(err, rows){
+		if (err) {
+			console.log(err);
+            next(err);
+            throw err;
+		}
+		console.log(rows);
+		console.log(rows.insertId);
+		res.send(rows.insertId.toString());
+	});
+});
+
 
 // /signup으로 post 요청 오면 insert 수행
 app.post('/signup',function(req,res){
