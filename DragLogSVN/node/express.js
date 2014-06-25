@@ -64,7 +64,7 @@ app.post('/login', function(req,res){
 		if (!rows.length) { res.send('가입 안된 이메일'); } 
 		else {
 			if (rows[0].PASSWORD == password) {
-				res.cookie('email', req.body.email);
+				//res.cookie('email', req.body.email);
 				var user = rows[0];
 				console.log(user);
 				user.PASSWORD = '';
@@ -94,7 +94,7 @@ app.post('/emailCheck',function(req,res){
 });
 
 
-// (테스트용 / 삭제 예정) pathname 없으면 user list 출력
+// (테스트 용) pathname 없으면 user list 출력
 app.get('/', function(req,res){
 	
 	dbconn.query('SELECT * FROM USER', function(err, rows, fields){
@@ -105,7 +105,6 @@ app.get('/', function(req,res){
 		//console.log(rows);
 		//console.log(fields);
 		res.json(rows);
-		
 	});
 });
 

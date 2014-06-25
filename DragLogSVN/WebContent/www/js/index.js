@@ -2,11 +2,12 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 //db_allDrop();
 //db_init();
+
 function db_init() {
 	db.transaction(function(tx) {
 		console.log("init");
 		//tx.executeSql('DROP TABLE IF EXISTS USER');
-		tx.executeSql('CREATE TABLE IF NOT EXISTS USER (ID INTEGER PRIMARY KEY, USER_NO UNIQUE, EMAIL, GEN, AGE, JOB)');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS USER (ID INTEGER PRIMARY KEY, USER_NO UNIQUE, EMAIL, GENDER, AGE, JOB)');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS ACTION (ID integer primary key, TITLE text, CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS ICONLIST (POSITION TEXT, ICON_NAME TEXT PRIMARY KEY, CLASS_NAME TEXT, TIMER_VAL INTEGER)');
 		tx.executeSql('INSERT OR IGNORE INTO ICONLIST '  
@@ -52,7 +53,7 @@ function db_init() {
 function db_allDrop(){
 	console.log("alldrop");
 	db.transaction(function(tx) {
-		tx.executeSql('drop table if exists ACTION'); // DB 삭제 - 테스트 용
+		tx.executeSql('drop table if exists ACTION');
 		tx.executeSql('drop table if exists ICONLIST');
 		tx.executeSql('drop table if exists USER');
 		tx.executeSql('drop table if exists ICONSTIME');
@@ -72,7 +73,6 @@ function db_redirect(){
 				//local DB USER_NO field null아니면 실행했었으므로 바로 main페이지
 				window.location.href = "main.html";
 			}
-			
 		});
 	}, db_errorCB);
 }
