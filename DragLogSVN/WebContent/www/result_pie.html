@@ -14,20 +14,28 @@
 <script type="text/javascript" src="js/resultPie.js"></script>
 <title>LOG CHART</title>
 <style type="text/css">
+
 .pieChart_pie_chart { left: 20px;}
 </style>
 </head>
 <body>
 <div class="header" data-role="header"><a class="mainLink"onclick="location.href='main.html';">&lt; fsdfs</a><p>LOG CHART</p></div>
 <div id="date">
-	<span class="left" >&lt;</span><span class="right">&gt;</span>
-	<p onclick="location.href='result_text.html';" >05/12</p>
+	<!-- <span class="left" >&lt;</span><span class="right">&gt;</span> -->
+	<p onclick="location.href='result_text.html';" >06/25</p>
 </div>
+
+<div class="range listNavi">
+	<div id="day" class="dateNavi">1D</div>
+ 	<div id="week" class="weekNavi">1W</div>
+	<div id="month" class="monthNavi">1M</div>
+</div>
+
 <section id="layout">
 
- <div>
+<div id="rtScroll">
 	<div id="pieChart"></div>
- </div>
+</div>
 
 
 </section>

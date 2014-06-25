@@ -1,17 +1,12 @@
 @CHARSET "UTF-8";
 
 /* resultList.html 에 적용css */
+* { margin: 0px; padding: 0px;}
+html,body{ height: 100%; width:100%;}
 
-@font-face{
-		font-family: 'orbitron';
-		src: url('../font/orbitron-black-webfont.woff') format('woff');
-}
-@font-face{
-		font-family: 'orbitron-l';
-		src: url('../font/orbitron-light-webfont.woff') format('woff');		
-}
+@font-face { font-family: 'orbitron'; src: url('../font/orbitron-black-webfont.woff') format('woff');}
+@font-face { font-family: 'orbitron-l';	src: url('../font/orbitron-light-webfont.woff') format('woff'); }
 
-*{margin: 0px; padding: 0px;}
 .header{ 
 	font-family: 'orbitron', sans-serif;
 	font-size: 1.7em;
@@ -24,18 +19,23 @@
 .header .mainLink{ position: absolute; left: 0; width: 70px;
 text-decoration: none; color: #fff; font-size: 100%;}
 
-#layout { 
-margin: 0px auto 0px; width: 320px; height: 518px; position: relative;}
+#layout { margin: 0px auto 0px; width: 320px; height: 70%; position: relative;}
 #date { height: auto; text-align: center; line-height: 60px; position: relative; vertical-align: middle; }
 #date p { font-family: 'orbitron', sans-serif; font-size: 250%; width: 320px; 
 	color: #2E3233; font-weight: bold; margin: 0px auto 0px; text-align: center; }
 	
-#resultTextLink { height: 450px; width: 340px; overflow: auto;}    
-#rtScroll { overflow: hidden; position:absolute; height: 450px; width:320px;}
+#rtScroll { overflow: hidden; position:absolute; height: 100%; width:320px;}
+#pieChart { height: 100%; width: 340px; overflow-x: hidden;}
+#date span { position: absolute; width: 70px;}
+#date span.left { left: 0px; }
+#date span.right { right: 0px; }
 
-#date span { position: absolute; width: 40px;}
-#date span.left { left: 20px; }
-#date span.right { right: 20px; }
+.listNavi{ width: 100%;  padding: 0px; line-height: 30px; text-align: center; margin-bottom: 10px; }
+.listNavi div{font-family: 'orbitron';height: 30px; border: 1px solid #F5A503; }
+.listNavi .weekNavi{ width:32%; margin:0px auto; display: inline-block;}
+.listNavi .dateNavi{ width:32%;float:left;}
+.listNavi .monthNavi{ width:32%;float:right;}
+
 .rtTable{	width : auto; float: left; clear: both;}
 .rtIcon{width: 40px;height: 40px;margin-left: 20px;text-align: center;}
 .rtIcon i{/* margin-left: 10px; */}
