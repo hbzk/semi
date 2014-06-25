@@ -32,7 +32,7 @@ app.get('/createUser',function(req,res){
 });
 
 
-// /signup으로 post 요청 오면 update 수행
+// 회원가입
 app.post('/signup',function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
@@ -60,14 +60,17 @@ app.post('/login', function(req,res){
 	var email = req.body.email;
 	var password = sha1.SHA1(req.body.password);
 	dbconn.query('SELECT * FROM USER WHERE EMAIL = ?', email, function(err, rows, fields){
-		if (err) {console.log(err);}
-		if (!rows.length) { res.send('가입 안된 이메일'); } 
+		if (err) {
+			console.log(err);
+            throw err;
+		}
 		else {
 			if (rows[0].PASSWORD == password) {
 				//res.cookie('email', req.body.email);
 				var user = rows[0];
 				console.log(user);
 				user.PASSWORD = '';
+				
 				res.send(user);
 			} else {
 				res.send('no');

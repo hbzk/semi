@@ -279,6 +279,8 @@ function signupPost(user) {
 			// 'ok' 받으면 signup 성공
 			if (data == 'ok') {
 				db_updateUser(user);
+			} else {
+				alert('서버 점검중 입니다.');
 			}
 	});
 }
@@ -286,9 +288,9 @@ function signupPost(user) {
 function db_updateUser(user){
 	db.transaction(function(tx){
 		console.log(user.email);
-		tx.executeSql('UPDATE USER SET EMAIL =?, GEN=?, AGE=?, JOB=? WHERE ID = 1 ',
+		tx.executeSql('UPDATE USER SET EMAIL=?, GENDER=?, AGE=?, JOB=? WHERE ID=1 ',
 				[user.email, user.gender, user.age, user.job], function(tx, res){
-			console.log(res.rows);
+			window.location.href = "main.html";
 		});
 	},db_errorCB);
 }
