@@ -63,15 +63,14 @@ app.post('/login', function(req,res){
 		if (err) {console.log(err);}
 		if (!rows.length) { res.send('가입 안된 이메일'); } 
 		else {
-			if (rows[0].PASSWORD != password) {
-				res.send('암호가 다르다');
-			} else {
+			if (rows[0].PASSWORD == password) {
 				res.cookie('email', req.body.email);
 				var user = rows[0];
 				console.log(user);
 				user.PASSWORD = '';
-				
 				res.send(user);
+			} else {
+				res.send('no');
 			}
 		}
 	});
