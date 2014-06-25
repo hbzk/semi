@@ -19,8 +19,8 @@ height: 50px; line-height: 50px; text-align: center;}
 /* .aLinks{position: absolute; bottom: 1px; width: 200px;height:70px;}
 .aLinks a .li{width: 30px; height: 30px;} */
 .links .li {text-shadow: none;}
-.iconLink {  right: 53px;bottom: 1px; font-size: 150%; text-decoration: none;}
-.resultLink {position: absolute;  right: 100px; font-size: 150%; text-decoration: none;}
+.iconLink { position: absolute; right: 63px;bottom: 1px; font-size: 150%; text-decoration: none;}
+.resultLink {position: absolute; bottom: 1px;right: 120px; font-size: 150%; text-decoration: none;}
 .userLink{position: absolute; bottom: 1px; right: 10px; font-size: 150%; text-decoration: none;}
 
 .resultLink i { color:#de0052; font-size: 1.3em;}
