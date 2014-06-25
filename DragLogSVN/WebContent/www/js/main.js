@@ -65,7 +65,7 @@ function showAction(lastWhile) {
 	lastDragger.attr('style', '');
 	lastDraggerClass = lastDragger[0].className;
 	
-	$('#middle').html(lastIcon).draggable({zIndex: 9});		// 아이콘 중앙 배치
+	$('#middle').html(lastIcon).draggable({zIndex: 9}, {containment: "document"});		// 아이콘 중앙 배치
 	$('#start').children().remove();		// 시작 아이콘 관련
 	
 	stopwatch_doing(lastWhile); // 타이머 출력
@@ -188,7 +188,7 @@ function db_errorCB(e) { // query 에러시 호출 함수
 
 //드래그 대상 설정
 function dragdrop_doing() {
-	$('.drag').draggable({distance: 20}, {revert: true}, {revertDuration: 500}, {zIndex: 9});
+	$('.drag').draggable({distance: 20}, {revert: true}, {revertDuration: 500}, {zIndex: 9},{containment: "document"});
 }
 
 //날짜 형태 만들기 (2014-06-19T14:12:35.261)
