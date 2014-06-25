@@ -18,7 +18,10 @@ p { font-size: 1.0em; margin-bottom: 10px; }
 a { text-decoration: none; }
 img { border: 0; }
 
+
+
 /** Heading title bar **/
+
 header{ 
     font-family: 'orbitron', sans-serif;
     font-size: 1.7em;
@@ -34,10 +37,14 @@ header{
 
 i {margin-right: 15px; margin-left: 15px;}
 
+
+
 /* #layout { margin: 0px auto 0px; width: 320px; height: 518px; position: relative; } */
 
 section#content { margin-top: 0px; height: -50px; width: 100%; 
 overflow: hidden; position: absolute;} 
+
+
 
 /** Navigation list **/
 nav { height:450px; padding: 0px 0px; background: #fff; width: 108%; overflow: auto;}
@@ -108,6 +115,7 @@ nav ul li.head, ul#nlists li.head {
 }
 
 
+
 /** pop up menu **/
 
 .pop-layer {display:none; position: absolute; top: 0%; left: 0%; width: 100%; 
@@ -125,3 +133,40 @@ a.allCbtn {display:inline-block; height:50px; width:50px; padding-left: 23px;
            line-height:45px; float:left; position: absolute; } 
 
 a.allCbtn:hover {border: 0px solid #000000; background-color:#b4c699; color:#fff; }
+
+
+
+/** ex) button **/
+
+.jqx-switchbutton {
+    overflow: hidden;
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px; 
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.jqx-switchbutton-thumb {
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+.jqx-switchbutton-label {
+    font-size: 15px;
+    font-family: Sans-Serif;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+
+/*jqxButton, jqxToggleButton, jqxRepeatButton Style*/
+.jqx-button {
+	outline: none; border: 1px solid transparent; 
+	padding: 3px; text-align: center; vertical-align: central; 
+	margin: 0 0 0 0; cursor: default; 
+}
+
+button.jqx-button, input[type=button].jqx-button,  input[type=submit].jqx-button {
+    box-sizing: border-box !important; -moz-box-sizing: border-box !important; 
+}
