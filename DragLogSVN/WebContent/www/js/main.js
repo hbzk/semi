@@ -6,10 +6,8 @@ var actionName, className, startTime, endTime, resultWhile, lastRow;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 $(document).ready(function(){
-	console.log(5678);
 	startIcon = $('#start').html();
 	
-	//db_init();  DB 없으면 생성
 	loadMainIcon();
 	
 	dragdrop_doing();
@@ -95,37 +93,41 @@ function loadMainIcon(){
 	var iconDiv = $("#iconMainDiv .drag");
 	console.log("Load DB - data (selectedIcon)");
 	db.transaction(function(tx){
-		tx.executeSql('SELECT * FROM ICONLIST', [], function(tx, rs){
-			for( var i=0 ; i < rs.rows.length ; i++){
-				var row = rs.rows.item(i);
+		tx.executeSql('SELECT * FROM ICONLIST', [], function(tx, res){
+			for( var i=0 ; i < res.rows.length ; i++){
+				var row = res.rows.item(i);
 				if (row.POSITION > 0) {
 					$($(iconDiv)[row.POSITION - 1]).append("<i data-name = '"+ row.ICON_NAME +"' class = '"+ row.CLASS_NAME +"'></i>");
 				}
 			}
 			
 			// ACTION 실행중이면
-			if (lastRow.END_TIME == null) {
-				lastIcon = $('[data-name="'+lastRow.TITLE+'"]');
-				lastDragger = lastIcon.parent('div');
-				lastWhile = new Date() - new Date(lastRow.WHILE);
-				showAction(lastWhile);
-				
+			if (lastRow != 'none') {
+				if (lastRow.END_TIME == null) {
+					lastIcon = $('[data-name="'+lastRow.TITLE+'"]');
+					lastDragger = lastIcon.parent('div');
+					lastWhile = new Date() - new Date(lastRow.WHILE);
+					showAction(lastWhile);
+				}
 			}
+			
 		});
-		
-		
-		
 	});
 }
 
-//DB 초기화
-/*function db_init() {
-	console.log(1234);
+//마지막 INSERT row 얻기
+function db_selectLastRow() {
 	db.transaction(function(tx) {
-		//tx.executeSql('drop table if exists ACTION'); 
-		tx.executeSql('CREATE TABLE IF NOT EXISTS ACTION (ID integer primary key, TITLE text, CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
+		tx.executeSql('SELECT * FROM ACTION ORDER BY ID DESC', [], function(tx, res){
+			if (res.rows.length != 0) {
+				lastRow = res.rows.item(0);
+				console.log(lastRow);
+			} else {
+				lastRow = 'none';
+			}
+		});
 	}, db_errorCB);
-}*/
+}
 
 // ACTION 시작시 쿼리
 function db_startQuery() {
@@ -137,20 +139,11 @@ function db_startQuery() {
 	}, db_errorCB);
 }
 
-// 마지막 INSERT row 얻기
-function db_selectLastRow() {
-	db.transaction(function(tx) {
-		tx.executeSql('SELECT * FROM ACTION ORDER BY ID DESC', [], function(tx, res){
-			lastRow = res.rows.item(0);
-			console.log(lastRow);
-		});
-	}, db_errorCB);
-}
+
 
 // ACTION 종료 쿼리
 function db_endQuery() {
 	db_selectLastRow(); 		// 마지막 행 얻기
-	
 	db.transaction(function(tx) {
 		startTime = new Date(lastRow.WHILE);
 		resultWhile = Math.floor((endTime - startTime) / 1000);
