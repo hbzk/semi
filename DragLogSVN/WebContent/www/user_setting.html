@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="header" data-role="header">
-<a class="mainLink"onclick="location.href='main.html';">&lt; fsdfs</a>
+<a class="mainLink"onclick="location.href='main.html';">&lt;</a>
 <p>USER SETTING</p>
 </div>
 
@@ -20,6 +20,42 @@
 	<div class="userId"></div>
 	<div class="firstEnter"></div>
 </section>
+<script>
 
+var us_email, us_gender, us_job, us_age;
+var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
+//user_setting page load되었을때 
+$(window).load(function(){
+	 db_userCheck();
+});
+
+//#################기록한것 전체삭제 기능 추가할것
+
+
+function db_userCheck(){
+		db.transaction(function(tx){
+			tx.executeSql('SELECT * FROM USER WHERE ID = 1',[],function(tx,res){
+				us_email = res.rows.item(0).EMAIL;
+				if(us_email == null){
+				//#################local DB EMAIL field가 비어있으면 ->회원가입하지않았으므로 회원가입문구 and 회원가입링크버튼보여주기
+				}else{
+				us_gender = res.rows.item(0).GEN;
+				us_job = res.rows.item(0).JOB;
+				us_age = res.rows.item(0).AGE;
+				}
+			});
+		});
+	
+}
+
+function setInfo(){
+	
+	
+}
+
+function setGender(){}
+
+
+</script>
 </body>
 </html>

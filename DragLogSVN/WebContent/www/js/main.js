@@ -16,8 +16,21 @@ $(document).ready(function(){
 	$('#middle').mouseup(function(){ // 미들 클릭시 초기화
 		dragdrop_timerCheck();
 	});
+	
+	$("#resultLink").click(function(){
+		db.transaction(function(tx){
+			tx.executeSql('SELECT * FROM ACTION',[],function(tx,res){
+				console.log(res.rows);
+				if(res.rows.length == 0){
+					alert("log 한적 없잖아!");
+					//toast();
+				}else{
+					location.href="result_text.html";
+				}
+			});
+		});
+	});
 });
-
 
 //=====================================================================
 //드롭

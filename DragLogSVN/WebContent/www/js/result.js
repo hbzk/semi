@@ -139,7 +139,7 @@ function db_listing(res, scope) {
 		if (endTime == null) break;
 		
 		resultList.append($('<div class="rtTable">')
-				.append('<div data-id= "'+res.rows.item(i).id +'" class="rtIcon actionName">'+'<i class= "'+res.rows.item(i).CLASSNAME+'"></i></div>')
+				.append('<div data-id= "'+res.rows.item(i).ID +'" class="rtIcon actionName">'+'<i class= "'+res.rows.item(i).CLASSNAME+'"></i></div>')
 				.append('<div class="rtTime">' + startTime.substring(11, 16) + ' ~ ' + endTime.substring(11, 16))
 				.append('<div class="rtDuration">' + whileT +'</div>')
 				.append('<div class="rtDelete"><i class="fa fa-times"></i></div>')
@@ -208,9 +208,10 @@ function db_dayList() {
 // 결과 하나 지우기
 function db_delete(no){
 	db.transaction(function(tx){
-		tx.executeSql("DELETE FROM ACTION WHERE id = ?",	[no]);
+		tx.executeSql("DELETE FROM ACTION WHERE ID = ?",[no]);
 	});
 }
+
 
 //query 에러시 호출 함수
 function db_errorCB(e) {
