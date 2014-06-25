@@ -1,7 +1,7 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 $(document).ready(function(){
-	dummy();
+	//dummy();
 });
 
 function dummy() {
@@ -196,6 +196,9 @@ function dummy() {
 			+ " VALUES ('book', 'fa fa-book', '2014-06-11T19:55:21.310Z', datetime(), 386)");
 		tx.executeSql("INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, END_TIME, WHILE) "
 			+ " VALUES ('code', 'fa fa-code', '2014-06-11T21:07:31.310Z', datetime(), 22)");
-			
+		
+		tx.executeSql('SELECT * FROM ACTION', [] , function(tx, res){
+			console.log('ACTION TABLE ROW :' +res.rows.length);
+		});
 	});
 }

@@ -40,16 +40,16 @@ app.post('/signup',function(req,res){
 	user.password = sha1.SHA1(user.password); // 암호화 
 	
 	console.log(user);
-    dbconn.query('UPDATE USER SET EMAIL=?, PASSWORD=?, GENDER=?, AGE=?, JOB=? WHERE USER_NO=?',
+	dbconn.query('UPDATE USER SET EMAIL=?, PASSWORD=?, GENDER=?, AGE=?, JOB=? WHERE USER_NO=?',
     		[user.email, user.password, user.gender, user.age, user.job, user.user_no], 
     		function(err, rows, fields){
-        if (err) {
-            console.log(err);
+    		if (err) {
+        		console.log(err);
             throw err;
-        } else {
-        	res.send('ok');
-        }
-    });
+    		} else {
+        		res.send('ok');
+    		}
+	});
 });
 
 // 로그인

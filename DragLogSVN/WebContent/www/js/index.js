@@ -4,6 +4,7 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 //db_init();
 function db_init() {
 	db.transaction(function(tx) {
+		console.log("init");
 		//tx.executeSql('DROP TABLE IF EXISTS USER');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS USER (ID INTEGER PRIMARY KEY, USER_NO UNIQUE, EMAIL, GEN, AGE, JOB)');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS ACTION (ID integer primary key, TITLE text, CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
@@ -48,21 +49,16 @@ function db_init() {
 	}, db_errorCB);
 }
 
-function db_errorCB(e) { // query 에러시 호출 함수
-	console.log(e);
-	console.log("e.message :" + e.message);
-}
-
 function db_allDrop(){
 	console.log("alldrop");
 	db.transaction(function(tx) {
-	tx.executeSql('drop table if exists ACTION'); // DB 삭제 - 테스트 용
-	tx.executeSql('drop table if exists ICONLIST');
-	tx.executeSql('drop table if exists USER');
-	tx.executeSql('drop table if exists ICONSTIME');
-	tx.executeSql('drop table if exists ICONSELECT');
-	tx.executeSql('drop table if exists ICONTIME');
-}); 
+		tx.executeSql('drop table if exists ACTION'); // DB 삭제 - 테스트 용
+		tx.executeSql('drop table if exists ICONLIST');
+		tx.executeSql('drop table if exists USER');
+		tx.executeSql('drop table if exists ICONSTIME');
+		tx.executeSql('drop table if exists ICONSELECT');
+		tx.executeSql('drop table if exists ICONTIME');
+	}); 
 }
 
 function db_redirect(){
@@ -72,11 +68,16 @@ function db_redirect(){
 			if(res.rows.length == 0 ){
 				//local DB USER_NO field null이면 한번도 실행하지 않았으므로 welcome페이지
 				window.location.href = "welcome.html";
-			}else{
+			} else{
 				//local DB USER_NO field null아니면 실행했었으므로 바로 main페이지
 				window.location.href = "main.html";
 			}
-			}
-		);
+			
+		});
 	}, db_errorCB);
+}
+
+function db_errorCB(e) { // query 에러시 호출 함수
+	console.log(e);
+	console.log("e.message :" + e.message);
 }

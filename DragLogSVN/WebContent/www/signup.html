@@ -262,11 +262,11 @@ $('#btnStart').click(function(e){
 function signupSubmit(){
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
-			var userNo = res.rows.item(0).USER_NO
-			
+			var userNo = res.rows.item(0).USER_NO;
 			user = {email: $('#email').val(), password: $('#password').val()
 					,gender: $(':radio[name="gender"]:checked').val(), age: $('#age').val(), job: $('#job').val()
-					,user_no: userNo}
+					,user_no: userNo};
+			console.log(user);
 			signupPost(user);
 		});
 	}, db_errorCB);
@@ -278,7 +278,6 @@ function signupPost(user) {
 			console.log(data);
 			// 'ok' 받으면 signup 성공
 			if (data == 'ok') {
-				console.log(user);
 				db_updateUser(user);
 			}
 	});
@@ -286,12 +285,14 @@ function signupPost(user) {
 
 function db_updateUser(user){
 	db.transaction(function(tx){
-		console.log(user);
 		console.log(user.email);
 		tx.executeSql('UPDATE USER SET EMAIL =?, GEN=?, AGE=?, JOB=? WHERE ID = 1 ',
-				[user.email, user.gender, user.age, user.job]);
+				[user.email, user.gender, user.age, user.job], function(tx, res){
+			console.log(res.rows);
+		});
 	},db_errorCB);
 }
+
 function db_errorCB(e) { // query 에러시 호출 함수
 	console.log(e);
 	console.log("e.message :" + e.message);
