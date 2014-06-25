@@ -5,19 +5,19 @@
 <link rel="stylesheet" href="css/userSetting.css">
 
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-<title>USER SETTING</title>
+<title>USER INFO</title>
 </head>
+
 <body>
 <div class="header" data-role="header">
 <a class="mainLink"onclick="location.href='main.html';">&lt;</a>
-<p>USER SETTING</p>
+<p>USER INFO</p>
 </div>
-
 <section id="layout">
 	<div class="userGender"></div>
 	<div class="userAge"></div>
 	<div class="userJob"></div>
-	<div class="userId"></div>
+	<div class="userEmail"></div>
 	<div class="firstEnter"></div>
 </section>
 <script>
@@ -35,6 +35,7 @@ $(window).load(function(){
 function db_userCheck(){
 		db.transaction(function(tx){
 			tx.executeSql('SELECT * FROM USER WHERE ID = 1',[],function(tx,res){
+				console.log(res.rows.item(0));
 				us_email = res.rows.item(0).EMAIL;
 				if(us_email == null){
 				//#################local DB EMAIL field가 비어있으면 ->회원가입하지않았으므로 회원가입문구 and 회원가입링크버튼보여주기
@@ -42,18 +43,69 @@ function db_userCheck(){
 				us_gender = res.rows.item(0).GEN;
 				us_job = res.rows.item(0).JOB;
 				us_age = res.rows.item(0).AGE;
+				
+				setEmail(us_email);
+				setGender(us_gender);
+				setJob(us_job);
+				setAge(us_age);
+				setFirstEnter();
 				}
 			});
 		});
 	
 }
-
-function setInfo(){
-	
-	
+function setEmail(email){
+	$(".userEmail").text(email);
 }
 
-function setGender(){}
+function setGender(gen){
+	if(gen == 1){ //남자
+		$(".userGender").append("<img src='./css/img/male.png'/>");
+	}else{//여자
+		$(".userGender").append("<img src='./css/img/female.png'/>");
+	}
+}
+
+function setJob(job){
+	$(".userJob").text(job);
+}
+
+function setAge(age){
+	switch(age){
+	case 1:
+		printAge("Teenagers");
+		break;	
+	case 21:
+		printAge("Early 20's");
+	case 25:
+		printAge("Mid 20's");
+	case 29:
+		printAge("Late 20's");
+	case 30:
+		printAge("30's");
+	case 40:
+		printAge("40's");
+	case 50:
+		printAge("50's");
+	case 60:
+		printAge("60's");
+	}
+}
+
+
+function setFirstEnter(){
+	db.transaction(function(tx){
+		tx.executeSql('SELECT * FROM ACTION',[],function(tx,res){
+		 	first_log = res.rows.item(0).START_TIME;
+		 	first_log= first_log.substring(0,10);
+		 	$(".firstEnter").text(first_log);
+		});
+	});
+}
+
+function printAge(age){
+	$(".userAge").text(age);
+}
 
 
 </script>
