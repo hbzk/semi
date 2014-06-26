@@ -7,13 +7,13 @@ $(window).load(function(){
 	
 });
 
-
-
 //============================================================
 // 결과 가공 후 출력
 var db_listing = function(res, scope) {
-	var result = [];
 	
+	$('#doughnutChart').html('');	// 리스트 초기화
+	
+	var result = [];
 	var len = res.rows.length;
 	console.log("ACTION (page): " + len + " rows found.");
 	
@@ -32,8 +32,6 @@ var db_listing = function(res, scope) {
 		$('#date>p').text(targetDate.replace(/-/g, '/').substring(0, 7));
 	}
 	
-	console.log(iconList);
-	console.log(colorList);
 	var resultObj = new Object();
 	for (var i=0; i<len; i++) { 
 		if (res.rows.item(i).END_TIME == null) {
@@ -66,9 +64,7 @@ var db_listing = function(res, scope) {
 		
 		result.push(tempObj);
 	}
-	console.log(result);
-	
-	$('#doughnutChart').html('');	// 리스트 초기화
+	//console.log(result);
 	
 	// 실제 차트 그리기
 	$("#doughnutChart").drawDoughnutChart(result);
