@@ -1,32 +1,36 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
-var result = [];
-
-// 데이터 형식 샘플
 
 $(window).load(function(){
 	//if문으로 로그인or회원가입 안되어 있으면 알람창+가입유도(링크)
 	
 	//가입되어있으면 통계 제공
-	db_resultPie();
+	
 });
-
-// 임시 전체 출력
-function db_resultPie() {
-	db.transaction(function(tx) {
-		tx.executeSql("select * from ACTION ", [], resultProcess);
-	}, db_errorCB);
-}
-
-function db_errorCB(e) { // query 에러시 호출 함수
-	console.log(e);
-	console.log("e.message :" + e.message);
-}
 
 //============================================================
 // 결과 가공 후 출력
-var resultProcess = function(tx, res) {
+var db_listing = function(res, scope) {
+	var result = [];
+	
+	console.log('pie');
 	var len = res.rows.length;
-	console.log("ACTION: " + len + " rows found.");
+	console.log("ACTION (page): " + len + " rows found.");
+	
+	firstResultDate = res.rows.item(0).strtDay;
+	
+	if (scope == 'LASTDAY') {
+		$('#date>p').text(firstResultDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
+		($.inArray(firstResultDate, dayList) > 0) ? $('#date .left').css('display', 'block') : $('#date .left').css('display', 'none');
+		$('#date .right').css('display', 'none');
+		
+	} else if (scope == 'DAY') {
+		$('#date>p').text(targetDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
+	} else if (scope == 'WEEK') {
+		$('#date>p').text(targetDate.replace(/-/g, '/').substring(5) + ' ~일주일');
+	} else if (scope == 'MONTH')  {
+		$('#date>p').text(targetDate.replace(/-/g, '/').substring(0, 7));
+	}
+	
 	
 	var resultObj = new Object();
 	for (var i=0; i<len; i++) { 
@@ -69,6 +73,7 @@ var resultProcess = function(tx, res) {
 	}
 	console.log(result);
 	
+	$('#doughnutChart').html('');	// 리스트 초기화
 	
 	// 실제 차트 그리기
 	$("#doughnutChart").drawDoughnutChart(result);

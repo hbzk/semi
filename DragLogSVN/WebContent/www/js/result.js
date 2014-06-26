@@ -20,35 +20,29 @@ $(document).ready(function(){
 		}
 	});
 	
+	// 좌/우 화살표 클릭
 	$('#date .left').click(function(){
 		nav(-1);
 	});
-
 	$('#date .right').click(function(){
 		nav(+1);
 	});
 	
-	// 일, 주, 월 지정
+	// 일, 주, 월 클릭
 	$('#day').click(function(){
 		scope = 'DAY';
 		scopeClick(dayList);
-		
 	});
-	
 	$('#week').click(function(){
 		scope = 'WEEK';
 		scopeClick(weekList);
 	});
-	
 	$('#month').click(function(){
 		scope = 'MONTH';
 		scopeClick(monthList);
 	});
-	
-	
 });
 // <-- $(document).ready
-
 
 $(document).on("click",".rtDelete",function(e){
 	if (confirm('정말 지움?')) {
@@ -63,7 +57,10 @@ $(document).on("click",".rtTable",function(){
 });
 
 
-// ========================= 함수 정의
+
+
+
+// ================================================= 함수 정의
 
 // scope 클릭시 
 var scopeClick = function(list) {
