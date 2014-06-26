@@ -7,12 +7,13 @@ $(window).load(function(){
 	
 });
 
+
+
 //============================================================
 // 결과 가공 후 출력
 var db_listing = function(res, scope) {
 	var result = [];
 	
-	console.log('pie');
 	var len = res.rows.length;
 	console.log("ACTION (page): " + len + " rows found.");
 	
@@ -31,7 +32,8 @@ var db_listing = function(res, scope) {
 		$('#date>p').text(targetDate.replace(/-/g, '/').substring(0, 7));
 	}
 	
-	
+	console.log(iconList);
+	console.log(colorList);
 	var resultObj = new Object();
 	for (var i=0; i<len; i++) { 
 		if (res.rows.item(i).END_TIME == null) {
@@ -44,7 +46,7 @@ var db_listing = function(res, scope) {
 			resultObj[res.rows.item(i).TITLE] += res.rows.item(i).WHILE; // 같은 값 있으면 합산
 		}
 	}
-	console.log(resultObj);
+	//console.log(resultObj);
 	
 	// 결과를 값 큰 순서로 정렬
 	var sortResult =[];
@@ -52,23 +54,16 @@ var db_listing = function(res, scope) {
 		sortResult.push([title, resultObj[title]]);
 		};
 		sortResult.sort(function (a, b) {return b[1] - a[1];});
-	console.log(sortResult);
+	//console.log(sortResult);
 	
 	
 	// 결과를 출력 함수가 원하는 배열[obj, obj ... ] 형태로 생성 
-	var tempC = '';
 	for (var i=0; i<sortResult.length ; i++) {
 		var tempObj = new Object();
 		tempObj['title'] = sortResult[i][0];
 		tempObj['value'] = sortResult[i][1];
+		tempObj['color'] =  colorList[$.inArray(sortResult[i][0], iconList)]; 		// colorList에서 해당 아이콘 색 매칭
 		
-		if (i < 10 ) {
-			tempObj['color'] =  "#".concat(i,i,i);
-		} else {
-			tempC = i.toString().substring(1);
-			tempObj['color'] =  "#".concat(tempC,tempC,tempC);
-		}
-		//console.log(tempObj);
 		result.push(tempObj);
 	}
 	console.log(result);

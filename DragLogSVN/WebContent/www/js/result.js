@@ -1,12 +1,12 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 var firstResultDate, firstResultDate, targetDate, scope;
-var dbId, clickedTable; 
-var dayList = new Array();
-var weekList = new Array();
-var monthList = new Array();
+var dayList = []; var weekList = []; var monthList = []; 		// scope 출력을 위한 List
+var iconList = []; var colorList = [];									// chart 출력을 위한 List
+var clickedTable; 
 
 $(document).ready(function(){
 	db_dayList();			// 페이징을 위한 전체 목록
+	colorListing();
 	
 	scope = 'LASTDAY';	
 	db_selectSearch(scope); 	// 마지막 날 출력
@@ -46,7 +46,7 @@ $(document).ready(function(){
 
 $(document).on("click",".rtDelete",function(e){
 	if (confirm('정말 지움?')) {
-		dbId = $(e.target).parent(".rtDelete").siblings(".rtIcon")[0].attributes[0].value;
+		var dbId = $(e.target).parent(".rtDelete").siblings(".rtIcon")[0].attributes[0].value;
 		clickedTable = $(e.target).parent(".rtDelete").parent(".rtTable");
 		db_delete(dbId);
 	}
@@ -61,6 +61,20 @@ $(document).on("click",".rtTable",function(){
 
 
 // ================================================= 함수 정의
+
+// chart에서 사용할 colorList 만들기
+var colorListing = function() {
+	db.transaction(function(tx) {
+		tx.executeSql('SELECT ICON_NAME AS title, BACK_COL AS color FROM ICONLIST ', [], function(tx, res){
+			console.log(res.rows.length);
+			for (var i = 0; i < res.rows.length; i++) {
+				iconList.push(res.rows.item(i).title); 			// chart에서 사용할 iconList
+				colorList.push(res.rows.item(i).color); 		// colorList
+			}
+		});
+	}, db_errorCB);
+};
+
 
 // scope 클릭시 
 var scopeClick = function(list) {
@@ -209,7 +223,7 @@ var db_dayList = function () {
 var db_delete = function (no){
 	db.transaction(function(tx){
 		tx.executeSql("DELETE FROM ACTION WHERE ID = ?",[no]);
-	});
+	}, db_errorCB);
 };
 
 //query 에러시 호출 함수
