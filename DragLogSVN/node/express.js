@@ -10,12 +10,42 @@ app.use(morgan('short')); // Logging middleware
 app.use(bodyParser());	// body parsing middleware.
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
-var dbconn = mysql.createConnection({
+/*var dbconn = mysql.createConnection({
 	host : 'localhost',
 	user : 'semi',
 	password : 'semi',
 	database:'semidb'
-});
+});*/
+
+var db_config = {
+	host : 'localhost',
+	user : 'semi',
+	password : 'semi',
+	database:'semidb'
+};
+
+var dbconn;
+
+var handleDisconnect = function() {
+	dbconn = mysql.createConnection(db_config);
+	
+	dbconn.connect(function(err) {
+		if(err) {
+			console.log('error when connecting to db:', err);
+			setTimeout(handleDisconnect(), 2000);
+		}
+	});
+	
+	dbconn.on('error', function(err) {
+		console.log('db error', err);
+		if(err.code === 'PROTOCOL_CONNECTION_LOST') {
+			handleDisconnect();
+		} else {
+			throw err;
+		}
+	});
+};
+handleDisconnect();
 
 // 장비에서 최초 실행시 USER ID 생성 후 전달
 app.get('/createUser',function(req,res){
