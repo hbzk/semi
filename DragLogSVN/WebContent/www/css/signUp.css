@@ -1,0 +1,109 @@
+@CHARSET "UTF-8";
+
+@font-face{
+		font-family: 'orbitron';
+		src: url('../font/orbitron-black-webfont.woff') format('woff');
+}
+@font-face{
+		font-family: 'orbitron-l';
+		src: url('../font/orbitron-light-webfont.woff') format('woff');		
+}
+@font-face{
+		font-family: 'nanumGothic';
+		src: url('../font/nanumGothic.woff') format('woff');		
+}
+* { margin: 0; padding: 0;}
+:focus { outline: 0;}
+body { font-family: 'orbitron',' sans-serif; background: #3ba3d0; overflow: hidden;}
+
+header {font-family: 'orbitron'; height: 60px; line-height: 60px; background: #3ba3d0; 
+text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
+header>a { position: absolute; left: 0; width: 70px;
+text-decoration: none; color: #fff; font-size: 80%;}
+
+
+ol{list-style: none; margin: 0px; padding: 0px; display: block; z-index: 0; height: 0px;}
+	.simForm{background: #3798C2; display: block; position: relative; margin: 0 auto; width: 100%;text-align: left;}
+	.simform-inner{padding: 2em 2em; width: 100%; height: 90px; z-index: 0;}
+	.questions{ font-family:'orbitron' ;color:white;color: rgba(0,0,0,0.45);z-index: 0;}
+	li{display: list-item; text-align: -webkit-match-parent;}
+	.questions li{ height: 0;  visibility: hidden; height: 0px; z-index:0; position: relative;transition: visibility 0s 0.4s, height 0s 0.4s;}
+	.questions li.current{visibility: visible; height: 70px; transition: none; z-index: 0;}
+	
+	
+	
+	.questions li span{height: 30px; padding: 5px 0px;}
+	.questions input{ margin: 0em 2em 0em 2em; opacity:0; background:black;	font-family: 'nanumGothic';width: 80%; height: 30px; padding-top: 10px; line-height: 25px;
+											text-indent: 10px; font-size: 100%; margin-top: 10px; color: white; z-index: 0px;}
+	.questions .current input{opacity: 0.2; z-index: 10;}
+	.simform-inner .controls {/* display: none; */ padding: 0em 2em;
+		z-index:100;
+	}
+	.simform-inner .progress {
+	width: 0%;
+	height: 0.15em;
+	margin-top: 70px;
+	background: rgba(0,0,0,0.3);
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+}
+
+.simform-inner .progressBack {
+	width: 100%;
+	height: 0.15em;
+	margin-top: 0px;
+	background: rgba(0,0,0,0.15);
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+}
+	
+	.btnNext{color: white; float: right; margin-right: -20px;z-index: 3000;margin-top: -28px;}
+	.btnNext i {z-index: 200;}
+	/* Next question button */
+	.next {
+	position: absolute;
+	right: 2.15em;
+	bottom: 3.55em; /* padding-bottom of form plus progress bar height */
+	display: block;
+	padding: 0;
+	width: 2em;
+	height: 2em;
+	border: none;
+	background: none;
+	color: white;/* rgba(0,0,0,0.4); */
+	text-align: center;
+	opacity: 1;
+	z-index:100;
+	cursor: pointer;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+	-webkit-transform: translateX(-20%);
+	transform: translateX(-20%);
+	pointer-events: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}					
+
+
+
+
+
+input {opacity:0.2;background:black;	font-family: 'nanumGothic';width: 100%; height: 30px; padding-top: 20px; line-height: 25px;border: 0px;
+											text-indent: 10px; font-size: 100%;  color: white; /* font-family: 'nanumGothic'; border: 0px; display: block; width: 100%; height: 30px; padding-top: 20px;
+text-indent: 30px; font-size: 100%;  */}
+#email { /* border-top: 1px solid #999; */}
+#password { border-top: 1px solid #999;}
+#btnStart {font-family: 'orbitron'; width: 100%; height: 55px; background: #F05630; 
+-webkit-transition: background-color .4s ease-out;
+color: #fff; font-size: 200%; font-weight: bolder;}
+#btnStart:disabled { background: #999; }
+
+#emailValidate, #emailCheck {font-family: 'nanumGothic'; position: absolute; top: 6px; font-size: 0.8em;
+text-indent: 10px; color: white;}
+
+footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; font-size: 0.8em;}
+footer a{color:white; text-decoration: none;}
+button{ border: none;}
+
+#terms { margin-right: 50px;}
+
+.bottomEle{position: fixed; bottom: 0px;width: 100%;}

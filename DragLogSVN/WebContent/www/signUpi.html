@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script src="js/fancySelect.js"></script>
+ <link rel="stylesheet" media="screen, projection" href="css/fancySelect.css">
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/jquery.toastmessage.css">
+<link rel="stylesheet" href="css/signUp.css"> 
+<title>SIGN UP</title>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<header><a href="welcome.html">&lt;</a>SIGN UP</header>
+
+<!-- method="post" action="http://192.168.200.6:1111/signup" -->
+<section>
+<form id="form" class="simForm">
+<input id="user_no" name="user_no" type="hidden">
+	<input id="email" name="email" type="email" placeholder="EMAIL" autofocus required oninput="oninputEmail(event)">
+	<p id="emailValidate"></p>
+	<p id="emailCheck"></p>
+	<input id="password" name="password" type="password" placeholder="PASSWORD" required oninput="oninputPwd (event)">
+
+		<div class="simform-inner">
+						<ol class="questions">
+							<li class="current">
+								<span><label for="q1">How old are you?</label></span>
+								<input id="q1" name="q1" type="number"/>
+							</li>
+							<li>
+								<span><label for="q2">What is your GENDER?</label></span>
+								<input id="q2" name="q2" type="text"/>
+							</li>
+							<li>
+								<span><label for="q3">What do you do for a living?</label></span>
+								<input id="q3" name="q3" type="text"/>
+							</li>
+							<li>
+								<span><label for="q4">How much your annual SALARY is?</label></span>
+								<input id="q4" name="q4" type="text"/>
+							</li>
+							<li>
+								<span><label for="q5">How much money do you spend in a month?</label></span>
+								<input id="q5" name="q5" type="text"/>
+							</li>
+							<li>
+								<span><label for="q6">What's your highest level of education?</label></span>
+								<input id="q6" name="q6" type="text"/>
+							</li>
+							<li>
+								<span><label for="q6">Are you married?</label></span>
+								<input id="q6" name="q6" type="text"/>
+							</li>
+						</ol><!-- /questions -->
+						<div class="controls">
+							<div class="btnNext"><i class="fa fa-arrow-right"></i></div>
+							<div class="progress"></div>
+							<div class="progressBack"></div>
+						</div>
+						<!-- <div class="controls">
+							<button class="next"><i class="fa fa-arrow-right"></i></button>
+							<div class="progress"></div>
+							<span class="number">
+								<span class="number-current"></span>
+								<span class="number-total"></span>
+							</span>
+							<span class="error-message"></span>
+						</div>/ controls
+					
+					<span class="final-message"></span> -->
+		</div> <!-- simform-inner -->
+<div class="bottomEle">    
+	<!--  -->
+	<button id="btnStart" disabled="disabled">START</button>
+<footer>
+	<a id="terms" href="termOfUse.html">Terms of Use</a>
+	<a href="privacyPolicy.html">Privacy Policy</a>
+</footer>
+</div>
+</form>
+</section>
+ <script type="text/javascript" src="js/jquery.toastmessage.js"></script> 
+<!-- <script src="js/signUp.js"></script> -->
+<script>
+
+$(".questions li input").keydown(function(){
+	console.log("keydown in input tag");
+});
+
+
+$(".button").click(function(){
+	console.log("next button");
+});
+
+
+
+</script>
+</body>
+</html>
