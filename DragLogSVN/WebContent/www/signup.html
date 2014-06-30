@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-<script src="js/fancySelect.js"></script>
 <link rel="stylesheet" media="screen, projection" href="css/fancySelect.css">
 <link rel="stylesheet" href="css/jquery.toastmessage.css">
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script src="js/fancySelect.js"></script>
+<script src="js/sha1.js"></script>
 <title>SIGN UP</title>
 <style type="text/css">
 @font-face{
@@ -263,7 +264,7 @@ function signupSubmit(){
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
 			var userNo = res.rows.item(0).USER_NO;
-			user = {email: $('#email').val(), password: $('#password').val()
+			user = {email: $('#email').val(), password: SHA1($('#password').val())
 					,gender: $(':radio[name="gender"]:checked').val(), age: $('#age').val(), job: $('#job').val()
 					,user_no: userNo};
 			console.log(user);
