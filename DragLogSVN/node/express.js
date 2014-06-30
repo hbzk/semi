@@ -86,7 +86,7 @@ app.post('/login', function(req,res){
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
 	var email = req.body.email;
-	var password = req.body.email;
+	var password = req.body.password;
 	
 	dbconn.query('SELECT * FROM USER WHERE EMAIL = ?', email, function(err, rows, fields){
 		if (err) {
