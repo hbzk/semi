@@ -87,12 +87,15 @@ app.post('/login', function(req,res){
 	
 	var email = req.body.email;
 	var password = req.body.email;
+	
 	dbconn.query('SELECT * FROM USER WHERE EMAIL = ?', email, function(err, rows, fields){
 		if (err) {
 			console.log(err);
             throw err;
 		}
 		else {
+			console.log(password);
+			console.log(rows[0].PASSWORD);
 			if (rows[0].PASSWORD == password) {
 				//res.cookie('email', req.body.email);
 				var user = rows[0];
