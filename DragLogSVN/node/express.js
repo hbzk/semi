@@ -94,8 +94,6 @@ app.post('/login', function(req,res){
             throw err;
 		}
 		else {
-			console.log(password);
-			console.log(rows[0].PASSWORD);
 			if (rows[0].PASSWORD == password) {
 				//res.cookie('email', req.body.email);
 				var user = rows[0];
