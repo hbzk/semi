@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/SHA1.js"></script>
 <title>LOG IN</title>
 <style type="text/css">
 @font-face{
@@ -107,7 +108,7 @@ function validateForm() {
 }
 
 $("#btnStart").click(function(){
-	$.post('http://14.32.7.49:1111/login', { email : $('#email').val(), password: $('#password').val() })
+	$.post('http://14.32.7.49:1111/login', { email : $('#email').val(), password: SHA1($('#password').val()) })
 		.done(function(data){
 			console.log(data);
 			if (data == 'no') {

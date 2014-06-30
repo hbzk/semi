@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var morgan  = require('morgan');
 
 var mysql = require('mysql');
-var sha1 = require('./sha1.js'); // password sha1 암호화
 
 var app = express();
 app.use(morgan('short')); // Logging middleware
@@ -67,7 +66,6 @@ app.post('/signup',function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	var user = req.body;
-	//user.password = sha1.SHA1(user.password); // 암호화 
 	
 	console.log(user);
 	dbconn.query('UPDATE USER SET EMAIL=?, PASSWORD=?, GENDER=?, AGE=?, JOB=? WHERE USER_NO=?',
@@ -88,7 +86,7 @@ app.post('/login', function(req,res){
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
 	var email = req.body.email;
-	//var password = sha1.SHA1(req.body.password);
+	var password = req.body.email;
 	dbconn.query('SELECT * FROM USER WHERE EMAIL = ?', email, function(err, rows, fields){
 		if (err) {
 			console.log(err);
