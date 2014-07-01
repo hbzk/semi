@@ -200,6 +200,7 @@ $('.jobSelect').fancySelect();
 	function oninputEmail() {
 	emailVal = $('#email').val();
 	
+	console.log( );
 	if (validateEmail()) {
 		$('#emailValidate').text('');
 	} else {
@@ -215,7 +216,7 @@ function oninputPwd() {
 
 // 메일 형식 검증
 function validateEmail() {
-	if (emailVal.length > 4 && emailVal.match("@") &&
+	if (emailVal.length > 4 && emailVal.match("@") && emailVal.indexOf("@") > 0 &&
 		emailVal.indexOf("@") + 1 < emailVal.indexOf(".", emailVal.indexOf("@")) &&
 		emailVal.length - 1 > emailVal.indexOf(".", emailVal.indexOf("@"))) {
 			return true;
