@@ -73,8 +73,9 @@ app.post('/signup',function(req,res){
 	var user = req.body;
 	
 	console.log(user);
-	dbconn.query('UPDATE USER SET EMAIL=?, PASSWORD=?, GENDER=?, AGE=?, JOB=? WHERE USER_NO=?',
-    		[user.email, user.password, user.gender, user.age, user.job, user.user_no], 
+	dbconn.query('UPDATE USER SET EMAIL=?, PASSWORD=?, AGE=?, GENDER=?, JOB=?, '
+			+' SALARY=?, SPEND=?, SCHOLAR=?, MARRY=? WHERE USER_NO=?',
+    		[user.email, user.password, user.age, user.gender, user.job, user.salary, user.spend, user.scholar, user.marry, user.user_no], 
     		function(err, rows, fields){
     		if (err) {
         		console.log(err);
