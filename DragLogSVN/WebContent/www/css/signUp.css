@@ -14,66 +14,141 @@
 }
 * { margin: 0; padding: 0;}
 :focus { outline: 0;}
-body { font-family: 'orbitron',' sans-serif; background: #3ba3d0; overflow: hidden;}
+body { font-family: 'orbitron',' sans-serif; background: #fb887c; overflow: hidden;}
 
-header {font-family: 'orbitron'; height: 60px; line-height: 60px; background: #3ba3d0; 
+header {font-family: 'orbitron'; height: 60px; line-height: 60px; background: #fb887c; 
 text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
 header>a { position: absolute; left: 0; width: 70px;
 text-decoration: none; color: #fff; font-size: 80%;}
 
+.direction{font-family: 'nanumGothic';color: white; padding: 0.5em 1em 0em 1em;}
+.directionP{opacity:0.9;font-size:1.5em; font-weight: bold;}
+.expSurvey{color:black;opacity: 0.5;font-size:0.7em;}
+.survey{;width: 100%;}
 
-ol{list-style: none; margin: 0px; padding: 0px; display: block; z-index: 0; height: 0px;}
-	.simForm{background: #3798C2; display: block; position: relative; margin: 0 auto; width: 100%;text-align: left;}
-	.simform-inner{padding: 2em 2em; width: 100%; height: 90px; z-index: 0;}
-	.questions{ font-family:'orbitron' ;color:white;color: rgba(0,0,0,0.45);z-index: 0;}
-	li{display: list-item; text-align: -webkit-match-parent;}
-	.questions li{ height: 0;  visibility: hidden; height: 0px; z-index:0; position: relative;transition: visibility 0s 0.4s, height 0s 0.4s;}
-	.questions li.current{visibility: visible; height: 70px; transition: none; z-index: 0;}
-	
-	
-	
-	.questions li span{height: 30px; padding: 5px 0px;}
-	.questions input{ margin: 0em 2em 0em 2em; opacity:0; background:black;	font-family: 'nanumGothic';width: 80%; height: 30px; padding-top: 10px; line-height: 25px;
-											text-indent: 10px; font-size: 100%; margin-top: 10px; color: white; z-index: 0px;}
-	.questions .current input{opacity: 0.2; z-index: 10;}
-	.simform-inner .controls {/* display: none; */ padding: 0em 2em;
-		z-index:100;
-	}
-	.simform-inner .progress {
+
+.simForm{background: rgba(0,0,0,.05); display: block; position: relative; margin: 0 auto; width: 100%;text-align: left;}
+.simform-inner{ margin: 0 auto;position: relative; padding: 2em 1em; height: auto; z-index: 0;}
+
+
+.questions{ font-family:'orbitron' ;color:white;color: rgba(0,0,0,0.45);z-index: 0;}
+
+ol{	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: relative;
+	-webkit-transition: height 0.4s;
+	transition: height 0.4s; }
+	ul{	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: relative;
+	-webkit-transition: height 0.4s;
+	transition: height 0.4s; }
+ol:before{
+	background-color: rgba(0,0,0,0.1);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2.35em; }
+li{display: list-item; text-align: -webkit-match-parent;}
+.questions li{ width:100%; height: 0%; height: 0;  visibility: hidden;  z-index:0; position: relative;
+								transition: visibility 0s 0.4s, height 0s 0.4s;display: list-item; text-align: -webkit-match-parent;}
+.questions li.current{visibility: visible;	/* border: 1px solid black; */
+	height: auto;
+	-webkit-transition: none;
+	transition: none;}
+
+.questions li span{height: 50px; padding-left: 5px; vertical-align: middle; }
+
+.questions li > span {
+	display: block;
+	overflow: hidden;
+}
+.questions li > span label {
+	display: block;
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+
+.questions li.current > span label {
+	-webkit-transition: none;
+	transition: none;
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+}
+.questions input{ 
+		opacity:0; 
+		background:transparent;	
+		font-family:'nanumGothic'; 
+		height: 30px; 
+		line-height: 25px; 
+		text-indent: 10px; 
+		font-size: 100%; color: white; z-index: 0px;
+		margin: 0.3em 0 0 0;
+		padding: 0.5em 1em 0.5em 0.7em;
+		width: calc(100% - 4em);
+		}
+
+.questions .current input{background:black; opacity: 0.3; /* border: 1px solid black; */}
+
+.questions li > ul {
+	visibility: visible;
+	color: white;		
+}
+.questions li.current > ul li{visibility: visible; opacity:1;}
+.questions li > ul li{visibility: hidden; min-width: 150px ; height: 32px;  margin-bottom: 0.5em; opacity:0;}
+.questions li > ul li .check{margin: 10px 0px 0px 10px; width: 20px; height: 20px; float: left; margin: 0 1em 0 1em;}
+
+.checked{
+		width: 30px;
+		height: 30px;
+		background-image: url('img/check.png');
+		background-repeat: no-repeat;
+		background-size: 20px 20px;
+}
+.questions li > ul li label{ height: 30px; line-height: 30px; font-size: 1.0em;}
+
+.input_hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+.simform-inner .progress {
 	width: 0%;
 	height: 0.15em;
-	margin-top: 70px;
+	margin-top: 94px;
 	background: rgba(0,0,0,0.3);
 	-webkit-transition: width 0.4s ease-in-out;
 	transition: width 0.4s ease-in-out;
 }
 
-.simform-inner .progressBack {
-	width: 100%;
-	height: 0.15em;
-	margin-top: 0px;
-	background: rgba(0,0,0,0.15);
-	-webkit-transition: width 0.4s ease-in-out;
-	transition: width 0.4s ease-in-out;
-}
-	
-	.btnNext{color: white; float: right; margin-right: -20px;z-index: 3000;margin-top: -28px;}
-	.btnNext i {z-index: 200;}
-	/* Next question button */
-	.next {
+.simform-inner .progress::before {
+	width: calc(100% - 4.3em);
 	position: absolute;
-	right: 2.15em;
-	bottom: 3.55em; /* padding-bottom of form plus progress bar height */
+	top: auto;
+	height: inherit;
+	background: rgba(0,0,0,0.05);
+	content: '';
+}
+	/* Next question button */
+	.btnNext {
+	position: absolute;
+	right: 1em;
+	top: 6em; /* padding-bottom of form plus progress bar height */
 	display: block;
 	padding: 0;
 	width: 2em;
 	height: 2em;
 	border: none;
 	background: none;
-	color: white;/* rgba(0,0,0,0.4); */
+	color: rgba(0,0,0,0.4);
 	text-align: center;
-	opacity: 1;
-	z-index:100;
+	opacity: 0;
+	z-index: 100;
 	cursor: pointer;
 	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
 	transition: transform 0.3s, opacity 0.3s;
@@ -82,9 +157,24 @@ ol{list-style: none; margin: 0px; padding: 0px; display: block; z-index: 0; heig
 	pointer-events: none;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }					
-
-
-
+.btnNext::after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	line-height: 2;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.btnNext i {font-size: 1.5em;}
+.btnNext.show {
+	opacity: 1;
+	-webkit-transform: translateX(0);
+	transform: translateX(0);
+	pointer-events: auto;
+}
 
 
 input {opacity:0.2;background:black;	font-family: 'nanumGothic';width: 100%; height: 30px; padding-top: 20px; line-height: 25px;border: 0px;
