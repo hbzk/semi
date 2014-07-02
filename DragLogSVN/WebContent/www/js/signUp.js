@@ -15,6 +15,12 @@ $(function(){
 questionList = $(".questions").children();
 var indexList = 0;
 $(".btnNext").click(function(){
+	
+	
+	
+	
+	
+	console.log($(':radio[name="gender"].rChecked').val());
 	if(indexList<6){
 	$(questionList[indexList]).removeClass("current");
 	indexList++;
@@ -130,15 +136,28 @@ function validateForm() {
 	});
 }
 
+$('#btnStart').click(function(e){
+	e.preventDefault();
+		signupSubmit();
+});
+
+
+
 function signupSubmit(){
+
+	
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
 			var userNo = res.rows.item(0).USER_NO;
 			user = {email: $('#email').val(), 
 					password: $('#password').val(),
-					age: $('#age').val(), 
-					gender: $(':radio[name="gender"]:checked').val(), 
-					job: $('input[').val(),
+					age: $('input[name="age"]').val(), 
+					gender: $(':radio[name="gender"].rChecked').val(), 
+					job: $(':radio[name="job"].rChecked').val(),
+					salary: $(':radio[name="salary"].rChecked').val(),
+					spend: $('input[name="spend"]').val(),
+					scholar: $(':radio[name="scholar"].rChecked').val(),
+					marry: $(':radio[name="marry"]').val(),
 					user_no: userNo, };
 			console.log(user);
 			signupPost(user);
@@ -147,6 +166,14 @@ function signupSubmit(){
 }
 
 function signupPost(user) {
+	console.log($('input[name="age"]').val());
+	console.log($(':radio[name="gender"].rChecked').val());
+	console.log($(':radio[name="job"].rChecked').val());
+	console.log($(':radio[name="salary"].rChecked').val());
+	console.log($('input[name="spend"]').val());
+	console.log($(':radio[name="scholar"].rChecked').val());
+	console.log($(':radio[name="marry"]').val());
+	
  	$.post("http://14.32.7.49:1111/signup", user)
 		.done(function(data) {
 			console.log(data);
