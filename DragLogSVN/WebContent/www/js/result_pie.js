@@ -31,7 +31,7 @@ var db_listing = function(res, scope) {
 		$('#date>p').text(firstResultDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
 		($.inArray(firstResultDate, dayList) > 0) ? $('#date .left').css('display', 'block') : $('#date .left').css('display', 'none');
 		$('#date .right').css('display', 'none');
-		
+	
 	} else if (scope == 'DAY') {
 		$('#date>p').text(targetDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
 	} else if (scope == 'WEEK') {

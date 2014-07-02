@@ -101,7 +101,7 @@
                      "margin-top": -(summarySize / 2) + "px"
                    });
     var $summaryTitle = $('<p class="' + settings.summaryTitleClass + '">' + settings.summaryTitle + '</p>').appendTo($summary);
-    var $summaryNumber = $('<p class="' + settings.summaryNumberClass + '"></p>').appendTo($summary).css({opacity: 0});
+    var $summaryNumber = $('<pre class="' + settings.summaryNumberClass + '"></pre>').appendTo($summary).css({opacity: 0});
 
     for (var i = 0, len = data.length; i < len; i++) {
       segmentTotal += data[i].value;
@@ -201,9 +201,18 @@
       }
     }
     function drawDoughnutText(animationDecimal, segmentTotal) {
+    		var log_text = segmentTotal * animationDecimal;
+    		if (log_text < 60) {
+    			log_text = '';
+    		} else if (log_text < 3600) {
+    			log_text = Math.floor(log_text%3600/60) + '분';
+		} else {
+			log_text = Math.floor(log_text/3600) + '시간\n' + Math.floor(log_text%3600/60) + '분';
+		}
       $summaryNumber
         .css({opacity: animationDecimal})
-        .text((segmentTotal * animationDecimal).toFixed(1));
+        //.text((segmentTotal * animationDecimal).toFixed(1));
+        .text(log_text);
     }
     function animateFrame(cnt, drawData) {
       var easeAdjustedAnimationPercent =(settings.animation)? CapValue(easingFunction(cnt), null, 0) : 1;
