@@ -8,9 +8,9 @@ function db_init() {
 		console.log("init");
 		//tx.executeSql('DROP TABLE IF EXISTS USER');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS USER (ID INTEGER PRIMARY KEY, USER_NO UNIQUE, EMAIL, GENDER, AGE, JOB)');
-		tx.executeSql('CREATE TABLE IF NOT EXISTS ACTION (ID integer primary key, TITLE text, CLASSNAME text, START_TIME date, END_TIME date, WHILE integer)');
-		tx.executeSql('CREATE TABLE IF NOT EXISTS ICONLIST (POSITION TEXT, ICON_NAME TEXT PRIMARY KEY, CLASS_NAME TEXT, TIMER_VAL INTEGER, BACK_COL TEXT)');
-		tx.executeSql('INSERT OR IGNORE INTO ICONLIST '  
+		tx.executeSql('CREATE TABLE IF NOT EXISTS LOG (ID INTEGER PRIMARY KEY, TITLE, CLASSNAME, START_TIME, END_TIME, DURATION)');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS ACTION (POSITION TEXT, ICON_NAME TEXT PRIMARY KEY, CLASS_NAME TEXT, TIMER_VAL INTEGER, BACK_COL TEXT)');
+		tx.executeSql('INSERT OR IGNORE INTO ACTION '  
 			+ ' SELECT 0 AS POSITION, "headphones" AS ICON_NAME, "fa fa-headphones" AS CLASS_NAME, 80 AS TIMER_VAL, "#DB435C" AS BACK_COL'
 			+ ' UNION SELECT 1,"music", "fa fa-music", 60, "#74DBC5"'
 			+ ' UNION SELECT 2,"automobile", "fa fa-automobile", 60, "#61A74D"'
@@ -53,12 +53,9 @@ function db_init() {
 function db_allDrop(){
 	console.log("alldrop");
 	db.transaction(function(tx) {
-		tx.executeSql('drop table if exists ACTION');
-		tx.executeSql('drop table if exists ICONLIST');
 		tx.executeSql('drop table if exists USER');
-		tx.executeSql('drop table if exists ICONSTIME');
-		tx.executeSql('drop table if exists ICONSELECT');
-		tx.executeSql('drop table if exists ICONTIME');
+		tx.executeSql('drop table if exists LOG');
+		tx.executeSql('drop table if exists ACTION');
 	}); 
 }
 

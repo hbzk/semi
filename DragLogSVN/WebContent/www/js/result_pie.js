@@ -23,7 +23,7 @@ $(function(){
 // 결과 가공 후 차트 출력
 var db_listing = function(res, scope) {
 	var len = res.rows.length;
-	console.log("ACTION (page): " + len + " rows found.");
+	console.log("LOG (page): " + len + " rows found.");
 	
 	firstResultDate = res.rows.item(0).strtDay;
 	
@@ -50,9 +50,9 @@ var db_listing = function(res, scope) {
 			break;
 		}
 		if (resultObj[res.rows.item(i).TITLE] == undefined) {
-			resultObj[res.rows.item(i).TITLE] = res.rows.item(i).WHILE; // 같은 값 없으면 저장
+			resultObj[res.rows.item(i).TITLE] = res.rows.item(i).DURATION; // 같은 값 없으면 저장
 		} else {
-			resultObj[res.rows.item(i).TITLE] += res.rows.item(i).WHILE; // 같은 값 있으면 합산
+			resultObj[res.rows.item(i).TITLE] += res.rows.item(i).DURATION; // 같은 값 있으면 합산
 		}
 	}
 	//console.log(resultObj);

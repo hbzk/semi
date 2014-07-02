@@ -14,7 +14,7 @@ $(document).ready(function(){
 	$('#deleteAll').click(function(){
 		if (confirm('정말 다 지움?')) {
 			db.transaction(function(tx) { 
-				tx.executeSql("DELETE FROM ACTION");
+				tx.executeSql("DELETE FROM LOG");
 			}, db_errorCB);
 			location.reload(true);
 		}
@@ -65,7 +65,7 @@ $(document).on("click",".rtTable",function(){
 // chart에서 사용할 colorList 만들기
 var colorListing = function() {
 	db.transaction(function(tx) {
-		tx.executeSql('SELECT ICON_NAME AS title, BACK_COL AS color FROM ICONLIST ', [], function(tx, res){
+		tx.executeSql('SELECT ICON_NAME AS title, BACK_COL AS color FROM ACTION ', [], function(tx, res){
 			for (var i = 0; i < res.rows.length; i++) {
 				iconList.push(res.rows.item(i).title); 			// chart에서 사용할 iconList
 				colorList.push(res.rows.item(i).color); 		// colorList
@@ -116,9 +116,9 @@ var navDisplay = function (list) {
 // 날짜, 범위 받고 쿼리 수행
 var db_selectSearch = function (scope, target) { 
 	if (scope == 'LASTDAY') { 	// 마지막 날짜 출력
-		var lastActionSql = "(SELECT date(START_TIME) AS stDay FROM ACTION ORDER BY START_TIME DESC LIMIT 1)";
+		var lastActionSql = "(SELECT date(START_TIME) AS stDay FROM LOG ORDER BY START_TIME DESC LIMIT 1)";
 		db.transaction(function(tx) {
-			tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION "
+			tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM LOG "
 				+" WHERE START_TIME BETWEEN date("+lastActionSql+") AND date("+lastActionSql+", ?) ORDER BY START_TIME", ['+1 day'], function(tx, res) {
 					db_listing(res, scope);
 			});
@@ -138,7 +138,7 @@ var db_selectSearch = function (scope, target) {
 		}
 		
 		db.transaction(function(tx) {
-			tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM ACTION " + whereSql, [target, target], function(tx, res) {
+			tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM LOG " + whereSql, [target, target], function(tx, res) {
 				db_listing(res, scope);
 			});
 		}, db_errorCB);
@@ -148,9 +148,9 @@ var db_selectSearch = function (scope, target) {
 // nav가 사용할 날짜 목록 만들기
 var db_dayList = function () { 
 	db.transaction(function(tx) {
-		tx.executeSql("SELECT strftime('%Y-%m-%d', START_TIME) AS strtDay, strftime('%Y-%m', START_TIME) AS strtMonth FROM ACTION ORDER BY strtDay", [], function(tx, res) {
+		tx.executeSql("SELECT strftime('%Y-%m-%d', START_TIME) AS strtDay, strftime('%Y-%m', START_TIME) AS strtMonth FROM LOG ORDER BY strtDay", [], function(tx, res) {
 			var len = res.rows.length;
-			console.log("ACTION (All): " + len + " rows found.");
+			console.log("LOG (All): " + len + " rows found.");
 			
 			for (var i=0; i<len; i++){
 				// 일 목록(dayList) 만들기
@@ -175,7 +175,7 @@ var db_dayList = function () {
 // 결과 하나 지우기
 var db_delete = function (no){
 	db.transaction(function(tx){
-		tx.executeSql("DELETE FROM ACTION WHERE ID = ?",[no]);
+		tx.executeSql("DELETE FROM LOG WHERE ID = ?",[no]);
 	}, db_errorCB);
 };
 

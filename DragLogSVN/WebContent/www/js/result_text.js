@@ -10,7 +10,7 @@ $(function(){
 // 결과를 Text list로 출력
 var db_listing = function (res, scope) {
 	var len = res.rows.length;
-	console.log("ACTION (page): " + len + " rows found.");
+	console.log("LOG (page): " + len + " rows found.");
 	
 	firstResultDate = res.rows.item(0).strtDay;
 	
@@ -31,13 +31,13 @@ var db_listing = function (res, scope) {
 	resultList.html('');	// 리스트 초기화
 	
 	for (var i=0; i<len; i++){
-		whileT = res.rows.item(i).WHILE;
-		if (whileT < 60) {
-			whileT = whileT + '초';
-		} else if (whileT < 3600){
-			whileT = Math.floor(whileT%3600/60) + '분 ' + whileT%60 + '초';
+		var duration = res.rows.item(i).DURATION;
+		if (duration < 60) {
+			duration = duration + '초';
+		} else if (duration < 3600){
+			duration = Math.floor(duration%3600/60) + '분 ' + duration%60 + '초';
 		} else {
-			whileT = Math.floor(whileT/3600) + '시간 ' + Math.floor(whileT%3600/60) + '분 ' + whileT%60 + '초';
+			duration = Math.floor(duration/3600) + '시간 ' + Math.floor(duration%3600/60) + '분 ' + duration%60 + '초';
 		}
 		
 		var startTime = res.rows.item(i).START_TIME;
@@ -48,7 +48,7 @@ var db_listing = function (res, scope) {
 		resultList.append($('<div class="rtTable">')
 				.append('<div data-id= "'+res.rows.item(i).ID +'" class="rtIcon">'+'<i class= "'+res.rows.item(i).CLASSNAME+'"></i></div>')
 				.append('<div class="rtTime">' + startTime.substring(11, 16) + ' ~ ' + endTime.substring(11, 16))
-				.append('<div class="rtDuration">' + whileT +'</div>')
+				.append('<div class="rtDuration">' + duration +'</div>')
 				.append('<div class="rtDelete"><i class="fa fa-times"></i></div>')
 		);
 	}

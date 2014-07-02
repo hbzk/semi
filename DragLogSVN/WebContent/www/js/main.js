@@ -19,7 +19,7 @@ $(document).ready(function(){
 	
 	$("#resultLink").click(function(){
 		db.transaction(function(tx){
-			tx.executeSql('SELECT * FROM ACTION',[],function(tx,res){
+			tx.executeSql('SELECT * FROM LOG',[],function(tx,res){
 				console.log(res.rows);
 				if(res.rows.length == 0){
 					alert("log 한적 없잖아!");
@@ -106,7 +106,7 @@ function loadMainIcon(){
 	var iconDiv = $("#iconMainDiv .drag");
 	console.log("Load DB - data (selectedIcon)");
 	db.transaction(function(tx){
-		tx.executeSql('SELECT * FROM ICONLIST', [], function(tx, res){
+		tx.executeSql('SELECT * FROM ACTION', [], function(tx, res){
 			for( var i=0 ; i < res.rows.length ; i++){
 				var row = res.rows.item(i);
 				if (row.POSITION > 0) {
@@ -114,12 +114,12 @@ function loadMainIcon(){
 				}
 			}
 			
-			// ACTION 실행중이면
+			// LOG 실행중이면
 			if (lastRow != 'none') {
 				if (lastRow.END_TIME == null) {
 					lastIcon = $('[data-name="'+lastRow.TITLE+'"]');
 					lastDragger = lastIcon.parent('div');
-					lastWhile = new Date() - new Date(lastRow.WHILE);
+					lastWhile = new Date() - new Date(lastRow.DURATION);
 					showAction(lastWhile);
 				}
 			}
@@ -131,7 +131,7 @@ function loadMainIcon(){
 //마지막 INSERT row 얻기
 function db_selectLastRow() {
 	db.transaction(function(tx) {
-		tx.executeSql('SELECT * FROM ACTION ORDER BY ID DESC', [], function(tx, res){
+		tx.executeSql('SELECT * FROM LOG ORDER BY ID DESC', [], function(tx, res){
 			if (res.rows.length != 0) {
 				lastRow = res.rows.item(0);
 				console.log(lastRow);
@@ -142,26 +142,26 @@ function db_selectLastRow() {
 	}, db_errorCB);
 }
 
-// ACTION 시작시 쿼리
+// LOG 시작시 쿼리
 function db_startQuery() {
 	db.transaction(function(tx) {
-		tx.executeSql('INSERT INTO ACTION (TITLE, CLASSNAME, START_TIME, WHILE) VALUES (?,?,?,?)', 
+		tx.executeSql('INSERT INTO LOG (TITLE, CLASSNAME, START_TIME, DURATION) VALUES (?,?,?,?)', 
 				[actionName, className, localISOString(startTime), startTime], function(tx, res) {
-			tx.executeSql('SELECT * FROM ACTION');
+			tx.executeSql('SELECT * FROM LOG');
 		});
 	}, db_errorCB);
 }
 
 
 
-// ACTION 종료 쿼리
+// LOG 종료 쿼리
 function db_endQuery() {
 	db_selectLastRow(); 		// 마지막 행 얻기
 	db.transaction(function(tx) {
-		startTime = new Date(lastRow.WHILE);
+		startTime = new Date(lastRow.DURATION);
 		resultWhile = Math.floor((endTime - startTime) / 1000);
 		
-		tx.executeSql('UPDATE ACTION SET END_TIME=?, WHILE=? WHERE ID=?', [localISOString(endTime), resultWhile, lastRow.ID]);
+		tx.executeSql('UPDATE LOG SET END_TIME=?, DURATION=? WHERE ID=?', [localISOString(endTime), resultWhile, lastRow.ID]);
 	}, db_errorCB);
 }
 
