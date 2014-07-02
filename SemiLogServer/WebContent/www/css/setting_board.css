@@ -9,6 +9,7 @@
 
 
 * { margin: 0; padding: 0; }
+
 html { height: 100%; }
 
 body { margin:0px; }
@@ -16,6 +17,7 @@ body { margin:0px; }
 p { font-size: 1.0em; margin-bottom: 10px; }
 
 a { text-decoration: none; }
+
 img { border: 0; }
 
 
@@ -49,72 +51,69 @@ overflow: hidden; position: absolute;}
 /** Navigation list **/
 nav { height:450px; padding: 0px 0px; background: #fff; width: 108%; overflow: auto;}
 
+ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
 
-nav ul#nlists li { 
-	border-bottom: 1px solid #d9e2eb; 
-	background: #fff; 
-	display: block;
-	/* background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff) to(#ecf1f5));
-	background-image: -webkit-linear-gradient(top, #ffffff, #ecf1f5);
-	background-image:    -moz-linear-gradient(top, #ffffff, #ecf1f5);
-	background-image:      -o-linear-gradient(top, #ffffff, #ecf1f5);
-	background-image:         linear-gradient(top, #ffffff, #ecf1f5);  */
-}
+    #sticky-list  {
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
 
-nav ul#nlists li a { 
-	position: relative; 
-	display: block;
-	box-sizing: border-box;
-	width: 100%;
-	padding: 15px 0px;
-	padding-left: 10px;
-	text-decoration: none;
-	font-size: 1.0em;
-	color: black;
-	font-weight: bold;
-	overflow: hidden;
-}
-nav ul#nlists li a:hover { color:#FFFFFF; background-color: #dcdcdc;}
+    #sticky-list  ul {
+      height: 100%;
+      overflow: auto;
+    }
 
-nav ul#nlists li a::after {
-	/*  content: '';  */
-	display: block;
-	width: 9px;
-	height: 9px;
-	border-right: 3px solid #adb46b;
-	border-top: 3px solid #adb46b;
-	position: absolute;
-	right: 40px;
-	top: 50%;
-	margin-top: -5px;
-	-webkit-transform: rotate(45deg);
-	-moz-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	transform: rotate(45deg);
-}
+    #sticky-list  ul  li strong {
+    border-bottom: 1px solid #b4c699;
+    border-top: 1px solid #b4c699;
+    height: 26px; 
+    color: black; 
+    text-shadow: 0 1px 1px #fff; 
+    font-family: 'orbitron', sans-serif;
+    font-weight: bold; 
+    font-size: 1.3em; 
+    line-height: 25px; 
+    padding-left: 15px;
+    background-color: #b4c699;
+    /* opacity: 0.2; */
+    z-index: 1;
+    display: block;   
+    }
 
-nav ul#nlists li a:hover::after { border-color: #c3ca80; }
-
-nav ul li.head, ul#nlists li.head { 
-	border-bottom: 1px solid #b4c699;
-	border-top: 1px solid #b4c699;
-	height: 26px; 
-	color: black; 
-	text-shadow: 0 1px 1px #fff; 
-	font-family: 'orbitron', sans-serif;
-	font-weight: bold; 
-	font-size: 1.3em; 
-	line-height: 25px; 
-	padding-left: 15px;
-	background-color: #b4c699;
-	/* background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#cbddb1) to(#dfeacb));
-	background-image: -webkit-linear-gradient(top, #cbddb1, #dfeacb);
-	background-image:    -moz-linear-gradient(top, #cbddb1, #dfeacb);
-	background-image:      -o-linear-gradient(top, #cbddb1, #dfeacb);
-	background-image:         linear-gradient(top, #cbddb1, #dfeacb); */ 
-}
-
-
+    #sticky-list  ul  li.sticky strong {
+      position: absolute;
+      top: 0;
+    }
+    
+    #sticky-list li { 
+    border-bottom: 1px solid #d9e2eb; 
+    background: #fff; 
+    display: block;
+    }
+    
+    #sticky-list  ul ul li {
+    position: relative; 
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 0px;
+    padding-left: 10px;
+    text-decoration: none;
+    font-size: 1.0em;
+    color: black;
+    font-weight: bold;
+    overflow: hidden;
+    }
+    
+    #sticky-list  ul ul li:hover {
+    color:#FFFFFF; background-color: #dcdcdc;
+    }
+    
 
 /** pop up menu **/
 
@@ -162,9 +161,9 @@ a.allCbtn:hover {border: 0px solid #000000; background-color:#b4c699; color:#fff
 
 /*jqxButton, jqxToggleButton, jqxRepeatButton Style*/
 .jqx-button {
-	outline: none; border: 1px solid transparent; 
-	padding: 3px; text-align: center; vertical-align: central; 
-	margin: 0 0 0 0; cursor: default; 
+    outline: none; border: 1px solid transparent; 
+    padding: 3px; text-align: center; vertical-align: central; 
+    margin: 0 0 0 0; cursor: default; 
 }
 
 button.jqx-button, input[type=button].jqx-button,  input[type=submit].jqx-button {
