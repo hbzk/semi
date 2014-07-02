@@ -24,7 +24,7 @@ app.post('/test', function(req,res){
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
 	console.log(req.body);
-	res.json(req.body);
+	res.send(req.body);
 });
 
 
