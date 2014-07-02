@@ -9,13 +9,7 @@ app.use(morgan('short')); // Logging middleware
 app.use(bodyParser());	// body parsing middleware.
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
-/*var dbconn = mysql.createConnection({
-	host : 'localhost',
-	user : 'semi',
-	password : 'semi',
-	database:'semidb'
-});*/
-
+var dbconn;
 var db_config = {
 	host : 'localhost',
 	user : 'semi',
@@ -23,7 +17,15 @@ var db_config = {
 	database:'semidb'
 };
 
-var dbconn;
+
+// test
+app.post('/test', function(req,res){
+	console.log(req);
+	console.log(req.body);
+});
+
+
+
 
 var handleDisconnect = function() {
 	dbconn = mysql.createConnection(db_config);
@@ -79,6 +81,7 @@ app.post('/signup',function(req,res){
     		}
 	});
 });
+
 
 // 로그인
 app.post('/login', function(req,res){
