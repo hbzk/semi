@@ -20,8 +20,13 @@ var db_config = {
 
 // test
 app.post('/test', function(req,res){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	
 	console.log(req);
 	console.log(req.body);
+	res.send(req);
+	res.send(req.body);
 });
 
 

@@ -1,19 +1,27 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
-$(window).load(function(){
-	//if문으로 로그인or회원가입 안되어 있으면 알람창+가입유도(링크)
-	$('#doughnutChart').html('');
+$(function(){
+	// if 문으로 로그인or회원가입 안되어 있으면 알람창+가입유도(링크)
+	/*if ("가입" != '') {
+		alert('가입하면보인다');
+		
+		history.back();
+		
 	//가입되어있으면 통계 제공
+	} else {
+		
+	
+	}*/
+	
 	
 });
 
-//============================================================
-// 결과 가공 후 출력
+
+
+
+//=======================================================
+// 결과 가공 후 차트 출력
 var db_listing = function(res, scope) {
-	
-	$('#doughnutChart').html('');	// 리스트 초기화
-	
-	var result = [];
 	var len = res.rows.length;
 	console.log("ACTION (page): " + len + " rows found.");
 	
@@ -32,6 +40,9 @@ var db_listing = function(res, scope) {
 		$('#date>p').text(targetDate.replace(/-/g, '/').substring(0, 7));
 	}
 	
+	$('#doughnutChart').html('');	// 리스트 초기화
+	
+	// 결과 누적 합산
 	var resultObj = new Object();
 	for (var i=0; i<len; i++) { 
 		if (res.rows.item(i).END_TIME == null) {
@@ -50,12 +61,12 @@ var db_listing = function(res, scope) {
 	var sortResult =[];
 	for (var title in resultObj) {
 		sortResult.push([title, resultObj[title]]);
-		};
-		sortResult.sort(function (a, b) {return b[1] - a[1];});
+	};
+	sortResult.sort(function (a, b) {return b[1] - a[1];});
 	//console.log(sortResult);
 	
-	
 	// 결과를 출력 함수가 원하는 배열[obj, obj ... ] 형태로 생성 
+	var result = [];
 	for (var i=0; i<sortResult.length ; i++) {
 		var tempObj = new Object();
 		tempObj['title'] = sortResult[i][0];
@@ -68,4 +79,6 @@ var db_listing = function(res, scope) {
 	
 	// 실제 차트 그리기
 	$("#doughnutChart").drawDoughnutChart(result);
+	
+	$.post("http://14.32.7.49:1111/test", { "aaa" : resultObj, "bbb" : sortResult, "ccc" : result  });
 };
