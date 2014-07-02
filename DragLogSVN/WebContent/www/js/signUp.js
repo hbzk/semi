@@ -2,82 +2,85 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 var emailVal;
 var user;
 
+var questionList = [];
+var statusChecker = 1;
 
-$('#form input:radio').addClass('input_hidden');
-$('#form .genderSelect').click(function(){
-    $(this).removeClass('unselected').siblings().addClass('unselected');
-    $(this).addClass('genderSelected').siblings().removeClass('genderSelected');
+$(function(){
+	$(".lastQ").click(function(){
+		validateForm();
+	});
 });
 
-$('.jobSelect').fancySelect();
-	$('.ageSelect').fancySelect();
+//다음 질문과 input보여주기(next button control)
+questionList = $(".questions").children();
+var indexList = 0;
+$(".btnNext").click(function(){
+	if(indexList<6){
+	$(questionList[indexList]).removeClass("current");
+	indexList++;
+	statusChecker++;
+	$(questionList[indexList]).addClass("current");
+	$(".btnNext").removeClass("show");
+	}else if(indexList = 6){
+		statusChecker++;
+		$(".btnNext").removeClass("show");
+	}
+	//console.log(statusChecker);
+});
 
-	function genderSelect(){
-		if($("input[name='gender']:checked").length > 0){
-			console.log("User's gender is checked");
-			return true;
+//age input창에 값이 입력된 후에만 nextButton활성화하기
+$(".questions li input").keydown(function(){
+	console.log($.type($(".questions li input").val()));
+	if(indexList<6){
+		if($(".questions li input").val() != null ){
+			$(".btnNext").addClass("show");
 		}else{
-			errorGender();
-			return false;
+			$(".btnNext").removeClass("show");
 		}
+	}else{
+		$(".btnNext").removeClass("show");
 	}
-	
-	function ageSelect(){
-		if($(".ageSelect option:selected").val()!= ""){
-			console.log($(".ageSelect option:selected").val());
-			return true;
+});
+
+//radio버튼 숨기기
+$('.questions li > ul li input:radio').addClass('input_hidden');
+
+//선택된 상태 체크
+$('.questions li > ul li label').click(function(e){
+	if(indexList<6){
+		selectCheck(e.target);
+		if($(this).siblings("input").val())
+		if(radioCheck()){
+			$(".btnNext").addClass("show");
 		}else{
-			errorAge();
-			console.log("age is not selected");
-			return false;
+			$(".btnNext").removeClass("show");
 		}
+	}else{ //마지막 항목
+		selectCheck(e.target);
+		$(".btnNext").removeClass("show");
 	}
-	
-	function jobSelect(){
-		if($(".jobSelect option:selected").val()!=""){
-			console.log($(".jobSelect option:selected").val());
-			return true;
-		}else{
-			errorJob();
-			console.log("job is not selected");
-			return false;
-		}
+});
+
+function selectCheck(target){
+		$(target).siblings("input").addClass("rChecked");
+		$(target).siblings(".check").addClass("checked");
+		$(target).parent("li").siblings("li").children(".check").removeClass("checked");
+		$(target).parent("li").siblings("li").children("input").removeClass("rChecked");
+}
+
+if($("input[name='gender']:checked").length>0){
+	console.log("gender is checked");
+}
+
+function radioCheck(){
+	if($(".current ul li input.rChecked").length >0){
+		return true;
+	}else{
+		return false;
 	}
-	
-	function errorGender() {
-		$().toastmessage('showToast',{
-		    text     : 'Select your gender!',
-		    stayTime : 1000,
-		    sticky   : false,
-		    position : 'middle-center',
-		    type     : 'error',
-		    close    : function () {console.log("Gender alarm is closed ...");}
-		});
-	}
-	
-	function errorAge() {
-		$().toastmessage('showToast',{
-		    text     : 'Select your age!',
-		    stayTime : 1000,
-		    sticky   : false,
-		    position : 'middle-center',
-		    type     : 'error',
-		    close    : function () {console.log("Age alarm is closed ...");}
-		});
-	}
-	
-	function errorJob() {
-		$().toastmessage('showToast',{
-		    text     : 'Select your Job!',
-		    stayTime : 1000,
-		    sticky   : false,
-		    position : 'middle-center',
-		    type     : 'error',
-		    close    : function () {console.log("Job alarm is closed ...");}
-		});
-	}
-	
-	function oninputEmail() {
+}
+
+function oninputEmail() {
 	emailVal = $('#email').val();
 	
 	if (validateEmail()) {
@@ -104,9 +107,9 @@ function validateEmail() {
 	}
 }
 
-
 //이메일 가입 여부 확인
 function validateForm() {
+	
 	$.post("http://14.32.7.49:1111/emailCheck", { email: $('#email').val()})
 		.done(function(data) {
 			if (data == 'already') {
@@ -115,9 +118,9 @@ function validateForm() {
 				
 			} else { // 가입된 이메일이 아닐때
 				$('#emailCheck').text('');
-				
+				console.log(statusChecker);
 				// 추가 조건 확인 후 버튼 활성화
-				if (validateEmail() && $('#password').val().length > 0) {
+				if (validateEmail() && $('#password').val().length > 0 && statusChecker ==7 ) {
 					
 					$('#btnStart').removeAttr('disabled');
 				} else {
@@ -127,26 +130,16 @@ function validateForm() {
 	});
 }
 
-
-//start btn 활성화 된 후에 gender와 age,job 체크여부확인 후 submit
-$('#btnStart').click(function(e){
-	e.preventDefault();
-	if(genderSelect() && ageSelect() && jobSelect()){
-		console.log("signUp");
-		
-		signupSubmit();
-	}else{
-		console.log("something unchecked!!!!!!!!");
-	}
-});
-
 function signupSubmit(){
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
 			var userNo = res.rows.item(0).USER_NO;
-			user = {email: $('#email').val(), password: $('#password').val()
-					,gender: $(':radio[name="gender"]:checked').val(), age: $('#age').val(), job: $('#job').val()
-					,user_no: userNo};
+			user = {email: $('#email').val(), 
+					password: $('#password').val(),
+					age: $('#age').val(), 
+					gender: $(':radio[name="gender"]:checked').val(), 
+					job: $('input[').val(),
+					user_no: userNo, };
 			console.log(user);
 			signupPost(user);
 		});
