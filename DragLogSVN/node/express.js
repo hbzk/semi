@@ -97,7 +97,12 @@ app.post('/submitLog', function(req, res) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
-	console.log(req.body);
+	var logList = req.body.logList;
+	console.log(logList);
+	
+	for (var log in logList) {
+		console.log(log.ACTION);
+	}
 	
 	res.send('ok');
 });
