@@ -49,6 +49,28 @@ app.post('/test', function(req,res){
 	res.send(req.body);
 });
 
+//USER dummy 삽입
+app.get('/dummyu', function(req,res){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	
+	
+	dbconn.query('INSERT INTO USER (EMAIL, GENDER, AGE, JOB, SALARY, SPEND, SCHOLAR, MARRY) ' 
+			+ ' VALUES ("a", 2, 30, 5, 6, 30, 4, 1) '
+			+ ', ("b", 2, 30, 5, 6, 30, 4, 1) '
+			+ ', ("c", 2, 30, 5, 6, 30, 4, 1) '
+			+ ', ("d", 2, 30, 5, 6, 30, 4, 1) '
+			
+			
+			, function(err, rows){
+		if (err) {
+			console.log(err);
+            throw err;
+		}
+		res.send('들어감');
+	});
+});
+
 // LOG dummy 삽입
 app.get('/dummy', function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
@@ -71,18 +93,26 @@ app.get('/dummy', function(req,res){
 });
 
 
-// USER dummy 삽입
-app.get('/dummyu', function(req,res){
+app.post('/submitLog', function(req, res) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
+	var logList = req.body.logList;
 	
-	dbconn.query('INSERT INTO USER (EMAIL, GENDER, AGE, JOB, SALARY, SPEND, SCHOLAR, MARRY) ' 
-			+ ' VALUES ("a", 2, 30, 5, 6, 30, 4, 1) '
-			+ ', ("b", 2, 30, 5, 6, 30, 4, 1) '
-			+ ', ("c", 2, 30, 5, 6, 30, 4, 1) '
-			+ ', ("d", 2, 30, 5, 6, 30, 4, 1) '
-			
+	var logSQL = 'INSERT INTO LOG (USER_NO, ACTION, START_TIME, END_TIME, DURATION) ' 
+		+ ' VALUES ('+logList[0].USER_NO+','+logList[0].ACTION+','+logList[0].START_TIME+','+logList[0].END_TIME+','+logList[0].DURATION+')';
+	
+	console.log(logList.length);
+	for (var i = 1; i < logList.length; i++) {
+		logSQL += ',\n ('+logList[i].USER_NO+','+logList[i].ACTION+','+logList[i].START_TIME+','+logList[i].END_TIME+','+logList[i].DURATION+')';
+	}
+	console.log(logSQL);
+	
+	
+	/*dbconn.query('INSERT INTO LOG (USER_NO, ACTION, START_TIME, END_TIME, DURATION) ' 
+			+ ' VALUES (1, "beer", "2014-03-19T07:00:00.332Z", NOW(), 23456) '
+			+ ', (1, "child", "2014-03-30T07:00:00.332Z", NOW(), 2211)'
+			+ ', (1, "child", "2014-03-30T07:00:00.332Z", NOW(), 432)'
 			
 			, function(err, rows){
 		if (err) {
@@ -90,21 +120,8 @@ app.get('/dummyu', function(req,res){
             throw err;
 		}
 		res.send('들어감');
-	});
-});
-
-app.post('/submitLog', function(req, res) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	});*/
 	
-	var logList = req.body.logList;
-	console.log(logList);
-	
-	for (var log in logList) {
-		console.log(log.ACTION);
-	}
-	
-	res.send('ok');
 });
 
 
