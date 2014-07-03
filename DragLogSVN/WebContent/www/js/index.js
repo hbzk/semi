@@ -3,12 +3,42 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 //db_allDrop();
 //db_init();
 
+$(function(){
+	db_submitLog();
+});
+
+var db_submitLog = function(){
+	db.transaction(function(tx){
+		tx.executeSql('SELECT USER_NO FROM USER', [], function(tx, res){
+			var user_no = res.rows.item(0).USER_NO;
+			
+			tx.executeSql('SELECT * FROM LOG', [], function(tx, res){
+			console.log('res.rows.length=' + res.rows.length);
+			var logList = [];
+			
+			for (var i = 0; i < res.rows.length; i ++) {
+				var item = res.rows.item(i);
+				var logObj = {USER_NO : user_no, ACTION : item.TITLE, START_TIME : item.START_TIME
+						, END_TIME : item.END_TIME, DURATION : item.DURATION};
+				logList.push(logObj);
+			}
+			console.log(logList);
+			
+			$.post('http://14.32.7.49:1111/submitLog', logList).done(function(data){
+				console.log(data);
+			});
+			
+		});
+			
+		});
+	}, db_errorCB);
+};
 
 function db_init() {
 	db.transaction(function(tx) {
 		console.log("init");
 		//tx.executeSql('DROP TABLE IF EXISTS USER');
-		tx.executeSql('CREATE TABLE IF NOT EXISTS USER (ID INTEGER PRIMARY KEY, USER_NO UNIQUE, EMAIL, AGE, GENDER, JOB, SALARY, SPEND, SCHOLAR, MARRY )');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS USER (ID INTEGER PRIMARY KEY, USER_NO UNIQUE, EMAIL, GENDER, AGE, JOB, SALARY, SPEND, SCHOLAR, MARRY)');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS LOG (ID INTEGER PRIMARY KEY, TITLE, CLASSNAME, START_TIME, END_TIME, DURATION)');
 		tx.executeSql('CREATE TABLE IF NOT EXISTS ACTION (POSITION TEXT, ICON_NAME TEXT PRIMARY KEY, CLASS_NAME TEXT, TIMER_VAL INTEGER, BACK_COL TEXT)');
 		tx.executeSql('INSERT OR IGNORE INTO ACTION '  
@@ -59,7 +89,7 @@ function db_allDrop(){
 		tx.executeSql('drop table if exists ACTION');
 		
 		tx.executeSql('drop table if exists ICONLIST');
-	}); 
+	}, db_errorCB);
 }
 
 function db_redirect(){
@@ -77,7 +107,7 @@ function db_redirect(){
 	}, db_errorCB);
 }
 
-function db_errorCB(e) { // query 에러시 호출 함수
+var db_errorCB = function(e) { // query 에러시 호출 함수
 	console.log(e);
 	console.log("e.message :" + e.message);
-}
+};
