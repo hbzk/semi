@@ -17,19 +17,7 @@ var db_config = {
 	database:'semidb'
 };
 
-
-// test
-app.post('/test', function(req,res){
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	
-	console.log(req.body);
-	res.send(req.body);
-});
-
-
-
-
+// connection 에러로 서버 다운 방지
 var handleDisconnect = function() {
 	dbconn = mysql.createConnection(db_config);
 	
@@ -51,11 +39,42 @@ var handleDisconnect = function() {
 };
 handleDisconnect();
 
+
+//test
+app.post('/test', function(req,res){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	
+	console.log(req.body);
+	res.send(req.body);
+});
+
+// Log dummy 삽입
+app.get('/dummy', function(req,res){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	
+	dbconn.query('INSERT INTO LOG (USER_NO, ACTION, START_TIME, END_TIME, DURATION) ' 
+			+ ' VALUES (10, "beer", "2014-03-19T07:00:00.332Z", NOW(), 3000) ', function(err, rows){
+		if (err) {
+			console.log(err);
+            throw err;
+		}
+		console.log(rows);
+		res.send(rows.insertId.toString());
+	});
+});
+
+
+
+
+
+
 // 장비에서 최초 실행시 USER ID 생성 후 전달
 app.get('/createUser',function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	dbconn.query('INSERT INTO USER SET PASSWORD=""', function(err, rows){
+	dbconn.query('INSERT INTO USER SET PASSWORD="" ', function(err, rows){
 		if (err) {
 			console.log(err);
             throw err;
