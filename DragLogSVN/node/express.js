@@ -66,7 +66,7 @@ app.get('/dummy', function(req,res){
 			console.log(err);
             throw err;
 		}
-		console.log('LOG last insert ID :' + rows.insertId);
+		console.log('--- LOG last insert ID :' + rows.insertId);
 		res.send(rows.insertId.toString());
 	});
 });
@@ -78,11 +78,12 @@ app.get('/dummyu', function(req,res){
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
 	
-	dbconn.query('INSERT INTO USER (EMAIL, PASSWORD, GENDER, AGE, JOB, SALARY, SPEND, SCHOLAR, MARRY) ' 
-			+ ' VALUES ("a", 1234, 2, 30, 5, 6, 30, 4, 1) '
-			+ ', ("b", 1234, 2, 30, 5, 6, 30, 4, 1) '
-			+ ', ("c", 1234, 2, 30, 5, 6, 30, 4, 1) '
-			+ ', ("d", 1234, 2, 30, 5, 6, 30, 4, 1) '
+	dbconn.query('DROP TABLE USER');
+	dbconn.query('INSERT INTO USER (EMAIL, GENDER, AGE, JOB, SALARY, SPEND, SCHOLAR, MARRY) ' 
+			+ ' VALUES ("a", 2, 30, 5, 6, 30, 4, 1) '
+			+ ', ("b", 2, 30, 5, 6, 30, 4, 1) '
+			+ ', ("c", 2, 30, 5, 6, 30, 4, 1) '
+			+ ', ("d", 2, 30, 5, 6, 30, 4, 1) '
 			
 			
 			, function(err, rows){
@@ -90,7 +91,7 @@ app.get('/dummyu', function(req,res){
 			console.log(err);
             throw err;
 		}
-		console.log('USER last insert ID :' + rows.insertId);
+		console.log('--- USER last insert ID :' + rows.insertId);
 		res.send(rows.insertId.toString());
 	});
 });
