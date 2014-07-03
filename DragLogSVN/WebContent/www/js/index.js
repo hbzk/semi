@@ -4,7 +4,7 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 //db_init();
 
 $(function(){
-
+	
 });
 
 
@@ -24,25 +24,6 @@ var db_submitLog = function(){
 							, END_TIME : item.END_TIME, DURATION : item.DURATION};
 					logList.push(logObj);
 				}
-				//console.log(logList);
-				
-				
-				/*var logSQL = 'INSERT INTO LOG (USER_NO, ACTION, START_TIME, END_TIME, DURATION) ' 
-					+ ' VALUES ('+logList[0].USER_NO+','+logList[0].ACTION+','+logList[0].START_TIME+','+logList[0].END_TIME+','+logList[0].DURATION+')';
-				
-				console.log(logList.length);
-				for (var i = 1; i < logList.length; i++) {
-					logSQL += ',\n ('+logList[i].USER_NO+','+logList[i].ACTION+','+logList[i].START_TIME+','+logList[i].END_TIME+','+logList[i].DURATION+')';
-				}
-				console.log(logSQL);*/
-				
-				
-				
-				
-				
-				
-				
-				
 				
 				$.post('http://14.32.7.49:1111/submitLog', {'logList' : logList}).done(function(data){
 					console.log(data);
