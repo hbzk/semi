@@ -65,11 +65,10 @@ ALTER TABLE `ACTION`
 
 -- 기록
 CREATE TABLE `LOG` (
-	`LOG_ID`     INTEGER      NOT NULL COMMENT '아이디', -- 아이디
-	`USER_NO`    INTEGER      NULL     COMMENT '사용자번호', -- 사용자번호
-	`ACTION`     VARCHAR(255) NULL     COMMENT '행동', -- 행동
-	`START_TIME` DATETIME     NULL     COMMENT '시작시간', -- 시작시간
+	`USER_NO`    INTEGER      NOT NULL COMMENT '사용자번호', -- 사용자번호
+	`START_TIME` DATETIME     NOT NULL COMMENT '시작시간', -- 시작시간
 	`END_TIME`   DATETIME     NULL     COMMENT '종료시간', -- 종료시간
+	`ACTION`     VARCHAR(255) NOT NULL COMMENT '행동', -- 행동
 	`DURATION`   INTEGER      NULL     COMMENT '사용시간' -- 사용시간
 )
 COMMENT '기록';
@@ -78,11 +77,9 @@ COMMENT '기록';
 ALTER TABLE `LOG`
 	ADD CONSTRAINT `PK_LOG` -- 기록 기본키
 		PRIMARY KEY (
-			`LOG_ID` -- 아이디
+			`USER_NO`,    -- 사용자번호
+			`START_TIME`  -- 시작시간
 		);
-
-ALTER TABLE `LOG`
-	MODIFY COLUMN `LOG_ID` INTEGER NOT NULL AUTO_INCREMENT COMMENT '아이디';
 
 -- 기록
 ALTER TABLE `LOG`
