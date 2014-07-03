@@ -8,76 +8,17 @@
 <link rel="stylesheet" href="css/lineconStyle.css">
 <link rel="stylesheet" href="css/common_font.css">
 <link rel="stylesheet" href="css/resultPie.css">
-
+<script>
+var naviColor = "#F895A5";
+var unSelectedColor = "#FBC0CA";
+</script>
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.drawDoughnutChart.js"></script>
 <script type="text/javascript" src="js/result.js"></script>
 <script type="text/javascript" src="js/result_pie.js"></script>
 <title>LOG CHART</title>
 <style type="text/css">
-#rtScroll { }
-.chart {
-  width: 320px;
-  height: 320px;
-  margin: 30px auto 0;
-}
-.doughnutTip {
-  position: absolute;
-  min-width: 30px;
-  max-width: 300px;
-  padding: 5px 15px;
-  border-radius: 1px;
-  background: rgba(0,0,0,.8);
-  color: #ddd;
-  font-size: 17px;
-  text-shadow: 0 1px 0 #000;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 1.3;
-  letter-spacing: .06em;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  pointer-events: none;
-}
-.doughnutTip:after {
-      position: absolute;
-      left: 50%;
-      bottom: -6px;
-      content: "";
-      height: 0;
-      margin: 0 0 0 -6px;
-      border-right: 5px solid transparent;
-      border-left: 5px solid transparent;
-      border-top: 6px solid rgba(0,0,0,.7);
-      line-height: 0;
-}
-.doughnutSummary {
-  position: absolute;
-  /* top: 50%; */
-  top: 190px;
-  left: 50%;
-  color: #d5d5d5;
-  text-align: center;
-  text-shadow: 1px 1px 1px #111;
-  cursor: default;
-}
-.doughnutSummaryTitle {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  margin-top: -27%;
-  font-size: 22px;
-  letter-spacing: .06em;
-}
-.doughnutSummaryNumber {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  margin-top: 0%;
-  font-size: 35px;
-}
-.chart path:hover { opacity: .65; }
 
-pre { font-family: sans-serif;}
 </style>
 </head>
 <body>
