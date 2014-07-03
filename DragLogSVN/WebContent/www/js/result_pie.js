@@ -1,18 +1,6 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 $(function(){
-	// if 문으로 로그인or회원가입 안되어 있으면 알람창+가입유도(링크)
-	/*if ("가입" != '') {
-		alert('가입하면보인다');
-		
-		history.back();
-		
-	//가입되어있으면 통계 제공
-	} else {
-		
-	
-	}*/
-	
 	
 });
 

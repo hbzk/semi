@@ -54,7 +54,7 @@ VALUES ("a", 2, 30, 5, 6, 30, 4, 1)
 
 
 -- LOG DUMMY ============================================================
-INSERT INTO LOG (USER_NO, ACTION, START_TIME, END_TIME, DURATION)
+INSERT IGNORE INTO LOG (USER_NO, ACTION, START_TIME, END_TIME, DURATION)
 VALUES (1, "beer", "2014-03-19T07:00:00.332Z", NOW(), 23456)
 
 , (1, "book", "2014-03-19T08:08:18.011Z", NOW(), 776)
