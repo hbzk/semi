@@ -2,9 +2,6 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 var firstResultDate, targetDate;
 var dayList = []; 
 
-$(function(){
-	
-});
 
 //=======================================================
 // 결과를 Text list로 출력
@@ -22,7 +19,7 @@ var db_listing = function (res, scope) {
 	} else if (scope == 'DAY') {
 		$('#date>p').text(targetDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
 	} else if (scope == 'WEEK') {
-		$('#date>p').text(targetDate.replace(/-/g, '/').substring(5) + ' ~일주일');
+		$('#date>p').text(targetDate.replace(/-/g, '/').substring(5) + '~' +(targetDate.replace(/-/g, '').substring(6,10)));
 	} else if (scope == 'MONTH')  {
 		$('#date>p').text(targetDate.replace(/-/g, '/').substring(0, 7));
 	}
@@ -33,11 +30,11 @@ var db_listing = function (res, scope) {
 	for (var i=0; i<len; i++){
 		var duration = res.rows.item(i).DURATION;
 		if (duration < 60) {
-			duration = duration + '초';
+			duration = duration + 's';
 		} else if (duration < 3600){
-			duration = Math.floor(duration%3600/60) + '분 ' + duration%60 + '초';
+			duration = Math.floor(duration%3600/60) + 'm ' + duration%60 + 's';
 		} else {
-			duration = Math.floor(duration/3600) + '시간 ' + Math.floor(duration%3600/60) + '분 ' + duration%60 + '초';
+			duration = Math.floor(duration/3600) + 'h ' + Math.floor(duration%3600/60) + 'm ' + duration%60 + 's';
 		}
 		
 		var startTime = res.rows.item(i).START_TIME;

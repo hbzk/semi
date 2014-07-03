@@ -149,7 +149,16 @@
     };
     function pathMouseEnter(e) {
       var order = $(this).data().order;
-      $tip.text(data[order].title + ": " + data[order].value)
+      var originData = data[order].value;
+      var produceData ;
+		if(originData < 60){
+			produceData = 	originData + 'sec';
+		}else if (originData < 3600) {
+			produceData = Math.floor(originData%3600/60) + 'min';
+		} else {
+			produceData = Math.floor(originData/3600) + 'hr\n' + Math.floor(originData%3600/60) + 'min';
+		}
+      $tip.text(data[order].title + ": " + produceData)
           .fadeIn(200);
       settings.onPathEnter.apply($(this),[e,data]);
     }
@@ -201,17 +210,17 @@
       }
     }
     function drawDoughnutText(animationDecimal, segmentTotal) {
-    		var log_text = segmentTotal * animationDecimal;
-    		if (log_text < 60) {
-    			log_text = '';
-    		} else if (log_text < 3600) {
-    			log_text = Math.floor(log_text%3600/60) + '분';
+    		var log_text = (segmentTotal * animationDecimal).toFixed(0);
+    		if(log_text < 60){
+    			log_text = 	log_text + 'sec';
+    		}else if (log_text < 3600) {
+    			log_text = Math.floor(log_text%3600/60) + 'min';
 		} else {
-			log_text = Math.floor(log_text/3600) + '시간\n' + Math.floor(log_text%3600/60) + '분';
+			log_text = Math.floor(log_text/3600) + 'hr\n' + Math.floor(log_text%3600/60) + 'min';
 		}
       $summaryNumber
         .css({opacity: animationDecimal})
-        //.text((segmentTotal * animationDecimal).toFixed(1));
+        //.text((segmentTotal * animationDecimal).toFixed(0));
         .text(log_text);
     }
     function animateFrame(cnt, drawData) {

@@ -20,6 +20,13 @@ $(document).ready(function(){
 		}
 	});
 	
+	 $('.hover').bind('touchstart touchend', function(e) {
+	        e.preventDefault();
+	        $(this).toggleClass('hover_effect');
+	    });
+	
+	
+	
 	// 좌/우 화살표 클릭
 	$('#date .left').click(function(){
 		nav(-1);
@@ -28,18 +35,28 @@ $(document).ready(function(){
 		nav(+1);
 	});
 	
+	
 	// 일, 주, 월 클릭
 	$('#day').click(function(){
 		scope = 'DAY';
 		scopeClick(dayList);
+		$(this).css("background",naviColor); //현재보고있는 페이지 
+		$('#month').css("background",unSelectedColor);  //나머지
+		$('#week').css("background",unSelectedColor);
 	});
 	$('#week').click(function(){
 		scope = 'WEEK';
 		scopeClick(weekList);
+		$(this).css("background",naviColor);
+		$('#month').css("background",unSelectedColor);
+		$('#day').css("background",unSelectedColor);
 	});
 	$('#month').click(function(){
 		scope = 'MONTH';
 		scopeClick(monthList);
+		$(this).css("background",naviColor);
+		$('#day').css("background",unSelectedColor);
+		$('#week').css("background",unSelectedColor);
 	});
 });
 // <-- $(document).ready
