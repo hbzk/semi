@@ -54,23 +54,24 @@ app.post('/other', function(req,res){
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	console.log(req.body.USER_NO);
 	
-	dbconn.query('SELECT USER_ID FROM LOG WHERE (USER_NO != ?)'
-			+ 'AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', function(err, rows) {
-				if (err) { console.log(err); throw err; }
-				
-				console.log(rows);
-				
-				for (var i=0; i<rows.length; i++) {
-					if (users.indexOf(rows[i]) === -1) users.push(rows[i]);
-				}
-				console.log(users);
-
-				var ran = Math.floor(Math.random() * users.length);
-				console.log(ran);
-				console.log(users[ran]);
-				
-				res.send(users[ran]);
-			});
+	dbconn.query('SELECT USER_NO FROM LOG WHERE (USER_NO != ?)'
+			+ 'AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', [req.body.USER_NO],
+		function(err, rows) {
+			
+			if (err) { console.log(err); throw err; }
+			
+			var users = [];
+			for (var i=0; i<rows.length; i++) {
+				if (users.indexOf(rows[i].USER_NO) === -1) users.push(rows[i].USER_NO);
+			}
+			console.log(users);
+	
+			var ran = Math.floor(Math.random() * users.length);
+			console.log(ran);
+			console.log(users[ran]);
+			
+			res.send(users[ran].toString());
+		});
 });
 
 // 장비에서 서버로 기록 보내기
