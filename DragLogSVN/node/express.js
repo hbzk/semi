@@ -93,7 +93,14 @@ app.get('/dummyu', function(req,res){
 	});
 });
 
-
+app.post('/submitLog', function(req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	
+	console.log(req.body);
+	
+	res.send('ok');
+});
 
 
 // 장비에서 최초 실행시 USER ID 생성 후 전달
