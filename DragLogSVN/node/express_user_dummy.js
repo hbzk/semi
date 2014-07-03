@@ -66,7 +66,7 @@ dbconn.query('INSERT INTO USER (EMAIL, GENDER, AGE, JOB, SALARY, SPEND, SCHOLAR,
 		+ ', ("aNeko.nyanko.jp", 2, 15, 2, 1, 68, 1, 2) '
 		+ ', ("kuksamussang@hero.cn", 1, 31, 4, 6, 99, 4, 1) '
 		+ ', ("usodaRena@oyashiro.jp", 2, 16, 2, 1, 42, 2, 2) '
-		+ ', ("strikeGundam@gat-x105.com", 1, 15, 2, 5, 15, 3, 2) '
+		+ ', ("strikeGundam@gatx105.com", 1, 15, 2, 5, 15, 3, 2) '
 		+ ', ("otsukare@finish.net", 2, 76, 1, 6, 18, 4, 1) '
 		
 		
