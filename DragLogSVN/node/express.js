@@ -49,16 +49,16 @@ app.post('/test', function(req,res){
 	res.send(req.body);
 });
 
-// Log dummy 삽입
+// LOG dummy 삽입
 app.get('/dummy', function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
 	dbconn.query('INSERT INTO LOG (USER_NO, ACTION, START_TIME, END_TIME, DURATION) ' 
-			+ ' VALUES (1, "beer", "2014-03-19T07:00:00.332Z", NOW(), 23456) ' 
-			+ ', (2, "child", "2014-03-30T07:00:00.332Z", NOW(), 5432)' 
-			+ ', (1, "child", "2014-03-30T07:00:00.332Z", NOW(), 2211)' 
-			+ ', (1, "child", "2014-03-30T07:00:00.332Z", NOW(), 432)' 
+			+ ' VALUES (1, "beer", "2014-03-19T07:00:00.332Z", NOW(), 23456) '
+			+ ', (2, "child", "2014-03-30T07:00:00.332Z", NOW(), 5432)'
+			+ ', (1, "child", "2014-03-30T07:00:00.332Z", NOW(), 2211)'
+			+ ', (1, "child", "2014-03-30T07:00:00.332Z", NOW(), 432)'
 			
 			
 			, function(err, rows){
@@ -66,12 +66,34 @@ app.get('/dummy', function(req,res){
 			console.log(err);
             throw err;
 		}
-		console.log(rows.insertId);
+		console.log('LOG last insert ID :' + rows.insertId);
 		res.send(rows.insertId.toString());
 	});
 });
 
 
+// USER dummy 삽입
+app.get('/dummyu', function(req,res){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	
+	
+	dbconn.query('INSERT INTO USER (EMAIL, PASSWORD, GENDER, AGE, JOB, SALARY, SPEND, SCHOLAR, MARRY) ' 
+			+ ' VALUES ("a", 1234, 2, 30, 5, 6, 30, 4, 1) '
+			+ ', ("b", 1234, 2, 30, 5, 6, 30, 4, 1) '
+			+ ', ("c", 1234, 2, 30, 5, 6, 30, 4, 1) '
+			+ ', ("d", 1234, 2, 30, 5, 6, 30, 4, 1) '
+			
+			
+			, function(err, rows){
+		if (err) {
+			console.log(err);
+            throw err;
+		}
+		console.log('USER last insert ID :' + rows.insertId);
+		res.send(rows.insertId.toString());
+	});
+});
 
 
 
