@@ -68,8 +68,8 @@ CREATE TABLE `LOG` (
 	`LOG_ID`     INTEGER      NOT NULL COMMENT '아이디', -- 아이디
 	`USER_NO`    INTEGER      NULL     COMMENT '사용자번호', -- 사용자번호
 	`ACTION`     VARCHAR(255) NULL     COMMENT '행동', -- 행동
-	`START_TIME` DATE         NULL     COMMENT '시작시간', -- 시작시간
-	`END_TIME`   DATE         NULL     COMMENT '종료시간', -- 종료시간
+	`START_TIME` DATETIME     NULL     COMMENT '시작시간', -- 시작시간
+	`END_TIME`   DATETIME     NULL     COMMENT '종료시간', -- 종료시간
 	`DURATION`   INTEGER      NULL     COMMENT '사용시간' -- 사용시간
 )
 COMMENT '기록';
