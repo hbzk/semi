@@ -66,8 +66,7 @@ app.get('/dummy', function(req,res){
 			console.log(err);
             throw err;
 		}
-		console.log('--- LOG last insert ID :' + rows.insertId);
-		res.send(rows.insertId.toString());
+		res.send('들어감');
 	});
 });
 
@@ -78,7 +77,6 @@ app.get('/dummyu', function(req,res){
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
 	
-	dbconn.query('DROP TABLE USER');
 	dbconn.query('INSERT INTO USER (EMAIL, GENDER, AGE, JOB, SALARY, SPEND, SCHOLAR, MARRY) ' 
 			+ ' VALUES ("a", 2, 30, 5, 6, 30, 4, 1) '
 			+ ', ("b", 2, 30, 5, 6, 30, 4, 1) '
@@ -91,8 +89,7 @@ app.get('/dummyu', function(req,res){
 			console.log(err);
             throw err;
 		}
-		console.log('--- USER last insert ID :' + rows.insertId);
-		res.send(rows.insertId.toString());
+		res.send('들어감');
 	});
 });
 
