@@ -93,3 +93,5 @@ ALTER TABLE `LOG`
 	ADD INDEX `FK_USER_TO_LOG` (
 		`USER_NO` ASC -- 사용자번호
 	);
+
+
