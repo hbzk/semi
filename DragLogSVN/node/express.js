@@ -70,7 +70,16 @@ app.post('/other', function(req,res){
 			console.log(ran);
 			console.log(users[ran]);
 			
-			res.send(users[ran].toString());
+			
+			dbconn.query('SELECT * FROM LOG WHERE (USER_NO = ?) '
+					+ ' AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', [users[ran]], 
+				function(err, rows) {
+					if (err) { console.log(err); throw err; }
+					
+					console.log(rows);
+					res.send(rows);
+				});
+			
 		});
 });
 
