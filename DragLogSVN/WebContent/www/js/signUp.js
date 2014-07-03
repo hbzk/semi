@@ -16,11 +16,6 @@ questionList = $(".questions").children();
 var indexList = 0;
 $(".btnNext").click(function(){
 	
-	
-	
-	
-	
-	console.log($(':radio[name="gender"].rChecked').val());
 	if(indexList<6){
 	$(questionList[indexList]).removeClass("current");
 	indexList++;
@@ -31,14 +26,21 @@ $(".btnNext").click(function(){
 		statusChecker++;
 		$(".btnNext").removeClass("show");
 	}
-	//console.log(statusChecker);
 });
 
 //age input창에 값이 입력된 후에만 nextButton활성화하기
-$(".questions li input").keydown(function(){
-	console.log($.type($(".questions li input").val()));
-	if(indexList<6){
-		if($(".questions li input").val() != null ){
+$(".questions li input").keyup(function(e){
+	var inputValue = $(".questions li input").val();
+	
+	console.log(inputValue);
+	if($(".questions li input").val().length>3){
+		e.preventDefault();
+		e.stopPropagation();
+	}
+	var num_check=/^[0-9]*$/;
+	if(inputValue == 0){console.log("0은입력할수없습니다.");}
+	if(indexList<6 && num_check.test(inputValue) && inputValue != 0 ){
+		if($(".questions li input").val() != null){
 			$(".btnNext").addClass("show");
 		}else{
 			$(".btnNext").removeClass("show");
@@ -74,9 +76,6 @@ function selectCheck(target){
 		$(target).parent("li").siblings("li").children("input").removeClass("rChecked");
 }
 
-if($("input[name='gender']:checked").length>0){
-	console.log("gender is checked");
-}
 
 function radioCheck(){
 	if($(".current ul li input.rChecked").length >0){
@@ -88,7 +87,6 @@ function radioCheck(){
 
 function oninputEmail() {
 	emailVal = $('#email').val();
-	
 	if (validateEmail()) {
 		$('#emailValidate').text('');
 	} else {
@@ -144,13 +142,11 @@ $('#btnStart').click(function(e){
 
 
 function signupSubmit(){
-
-	
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
 			var userNo = res.rows.item(0).USER_NO;
 			user = {email: $('#email').val(), 
-					password: $('#password').val(),
+					password: SHA1($('#password').val()),
 					age: $('input[name="age"]').val(), 
 					gender: $(':radio[name="gender"].rChecked').val(), 
 					job: $(':radio[name="job"].rChecked').val(),
@@ -158,7 +154,7 @@ function signupSubmit(){
 					spend: $('input[name="spend"]').val(),
 					scholar: $(':radio[name="scholar"].rChecked').val(),
 					marry: $(':radio[name="marry"]').val(),
-					user_no: userNo, };
+					user_no: userNo };
 			console.log(user);
 			signupPost(user);
 		});
@@ -166,14 +162,6 @@ function signupSubmit(){
 }
 
 function signupPost(user) {
-	console.log($('input[name="age"]').val());
-	console.log($(':radio[name="gender"].rChecked').val());
-	console.log($(':radio[name="job"].rChecked').val());
-	console.log($(':radio[name="salary"].rChecked').val());
-	console.log($('input[name="spend"]').val());
-	console.log($(':radio[name="scholar"].rChecked').val());
-	console.log($(':radio[name="marry"]').val());
-	
  	$.post("http://14.32.7.49:1111/signup", user)
 		.done(function(data) {
 			console.log(data);
@@ -185,12 +173,11 @@ function signupPost(user) {
 			}
 	});
 }
-
 function db_updateUser(user){
 	db.transaction(function(tx){
 		console.log(user.email);
-		tx.executeSql('UPDATE USER SET EMAIL=?, GENDER=?, AGE=?, JOB=? WHERE ID=1 ',
-				[user.email, user.gender, user.age, user.job], function(tx, res){
+		tx.executeSql('UPDATE USER SET EMAIL=?, AGE=?, GENDER=?, JOB=?,SALARY=?, SPEND=?, SCHOLAR=?, MARRY=? WHERE ID=1 ',
+				[user.email, user.age, user.gender, user.job, user.salary, user.spend, user.scholar, user.marry], function(tx, res){
 			window.location.href = "main.html";
 		});
 	},db_errorCB);

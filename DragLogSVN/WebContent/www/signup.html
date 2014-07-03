@@ -3,72 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
-<link rel="stylesheet" media="screen, projection" href="css/fancySelect.css">
-<link rel="stylesheet" href="css/jquery.toastmessage.css">
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-<script src="js/fancySelect.js"></script>
 <script src="js/sha1.js"></script>
+
+<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/jquery.toastmessage.css">
+<link rel="stylesheet" href="css/signUp.css"> 
 <title>SIGN UP</title>
 <style type="text/css">
-@font-face{
-		font-family: 'orbitron';
-		src: url('font/orbitron-black-webfont.woff') format('woff');
-}
-@font-face{
-		font-family: 'orbitron-l';
-		src: url('font/orbitron-light-webfont.woff') format('woff');		
-}
-@font-face{
-		font-family: 'nanumGothic;
-		src: url('font/NanumGothic.woff') format('woff');		
-}
-* { margin: 0; padding: 0;}
-:focus { outline: 0;}
-body { font-family: 'orbitron',' sans-serif;}
 
-header {font-family: 'orbitron'; height: 100px; line-height: 100px; background: #3ba3d0; 
-text-align: center; color: #fff; font-size: 200%; font-weight: bold;}
-header>a { position: absolute; left: 0; width: 70px;
-text-decoration: none; color: #fff; font-size: 80%;}
-
-input {font-family: 'nanumGothic'; border: 0px; display: block; width: 100%; height: 30px; padding-top: 20px;
-text-indent: 30px; font-size: 100%; }
-#email { /* border-top: 1px solid #999; */}
-#password { border-top: 1px solid #999;}
-#btnStart {font-family: 'orbitron'; width: 100%; height: 55px; background: #F05630; 
--webkit-transition: background-color .4s ease-out;
-color: #fff; font-size: 200%; font-weight: bolder;}
-#btnStart:disabled { background: #999; }
-
-#emailValidate, #emailCheck {font-family: 'nanumGothic'; position: absolute; top: 6px; font-size: 0.8em;
-text-indent: 10px; color: #df4949;}
-
-footer { text-align: center; margin-top: 5px; margin-bottom:5px; bottom: 0px; font-size: 0.8em;}
-footer a{ text-decoration: none;}
-#terms { margin-right: 50px;}
-
-/* 성별선택관련 */
-#form img{max-width: 80%; width:auto; height: auto; padding: 10px 10% 10px 10%;}
-.input_hidden {
-    position: absolute;
-    left: -9999px;
-}
-.genderSelect.unselected {
-   opacity: 0.4;
-}
-
-.genderSelect, .job, .age{
-	float: left; z-index: 99999;
-}
-
-#form .genderSelect {
-    display: inline-block;
-    width: 49.9999%;
-}
-.fancy-select{float: left; width: 48%;margin: 10px 3px 10px 2px; padding: 0px;text-indent: 10px;}
-.trigger{width:100%; }
-.options{ width: 100%;}
-.bottomEle{position: fixed; bottom: 0px;width: 100%;}
 </style>
 </head>
 <body>
@@ -76,39 +19,89 @@ footer a{ text-decoration: none;}
 <header><a href="welcome.html">&lt;</a>SIGN UP</header>
 
 <!-- method="post" action="http://192.168.200.6:1111/signup" -->
-<form id="form">
-		 <input type="radio" name="gender" value='2' id="female"/>
-        <label class="genderSelect" for="female"><img src="./css/img/female.png" alt="I'm a woman" /></label>
-
-    <input type="radio" name="gender" value='1' id="male" />
-        <label class="genderSelect" for="male"><img src="./css/img/male.png" alt="I'm a man" /></label>
-    
-    
-    <select id="age" name="age" class="ageSelect">
-	  <option value="">AGE</option>
-	  <option value="1">Teenagers</option>
-	  <option value="21">Early 20's</option>
-	  <option value="25">Middle 20's</option>
-	  <option value="29">Late 20's</option>
-	  <option value="30">30's</option>
-	  <option value="40">40's</option>
-	  <option value="50">50's</option>
-	  <option value="60">60's</option>
-		</select>
-	  <select id="job" name="job" class="jobSelect">
-	  <option value="">JOB</option>
-	  <option value="student">STUDENT</option>
-	  <option value="office_worker">OFFICE WORKER</option>
-	  <option value="free-lance">FREE-LANCE</option>
-	  <option value="business_man">BUSINESS MAN</option>
-		</select>
-	
-<div class="bottomEle">    
-	<input id="user_no" name="user_no" type="hidden">
+<section>
+<form id="form" class="simForm">
+<input id="user_no" name="user_no" type="hidden">
 	<input id="email" name="email" type="email" placeholder="EMAIL" autofocus required oninput="oninputEmail(event)">
 	<p id="emailValidate"></p>
 	<p id="emailCheck"></p>
 	<input id="password" name="password" type="password" placeholder="PASSWORD" required oninput="oninputPwd (event)">
+	<div class="direction">
+	<p class="directionP"> & Answer about you.</p>
+	<p class="expSurvey">Information that you answered will be used just by static data.</p>
+	<p class="expSurvey">We will never use your personal data for other purpose.</p>
+	<p class="expSurvey">And every single your information will be protected.</p>
+	<p class="expSurvey" style="color: white; opacity:0.7;font-weight:bold;">It is not OPTIONAL</p>
+	</div>
+		<div class="simform-inner">
+				<div class="survey">
+					 	<ol class="questions">
+							<li class="current">
+								<span><label for="age">1. How old are you?</label></span>
+								<input id="q1" name="age"/>
+							</li>
+							<li>
+								<span><label for="gender">2. What is your GENDER?</label></span>
+								<ul>
+									<li><div class="check"></div><input type="radio" name="gender" value="1"><label>men</label></li>
+									<li><div class="check"></div><input type="radio" name="gender" value="2"><label>women</label></li>
+								</ul>
+							</li>
+							<li>
+								<span><label for="job">3. What do you do for a Living?</label></span>
+								<ul>
+									<li><div class="check"></div><input type="radio" name="job" value="1"><label>Business Man</label></li>
+									<li><div class="check"></div><input type="radio" name="job" value="2"><label>Student</label></li>
+									<li><div class="check"></div><input type="radio" name="job" value="3"><label>Between the jobs</label></li>
+									<li><div class="check"></div><input type="radio" name="job" value="4"><label>Office Worker</label></li>
+									<li><div class="check"></div><input type="radio" name="job" value="5"><label>Free-lance</label></li>
+								</ul>
+							</li>
+							<li>
+								<span><label for="salary">4. Your annual INCOME is?<br>(a unit=만원)</label></span>
+								<ul>
+									<li><div class="check"></div><input type="radio" name="salary" value="1"><label>under 1000 </label></li>
+									<li><div class="check"></div><input type="radio" name="salary" value="2"><label>1001-2000</label></li>
+									<li><div class="check"></div><input type="radio" name="salary" value="3"><label>2001-3000</label></li>
+									<li><div class="check"></div><input type="radio" name="salary" value="4"><label>3001-4000</label></li>
+									<li><div class="check"></div><input type="radio" name="salary" value="5"><label>4001-5000</label></li>
+									<li><div class="check"></div><input type="radio" name="salary" value="6"><label>over 5001</label></li>
+								</ul>
+								<!-- <input id="q4" name="q4"/> 바로 입력하게? or radio check-->
+							</li>
+							<li>
+								<span><label for="spend">5. How much do you spend in a month?(a unit=만원)</label></span>
+								<input id="q5" name="spend" type="text"/>
+							</li>
+							<li>
+								<span><label for="scholar">6. Your highest level of education?</label></span>
+								<ul>
+									<li><div class="check"></div><input type="radio" name="scholar" value="1"><label style="font-size:0.9em;">Still attending high school </label></li>
+									<li><div class="check"></div><input type="radio" name="scholar" value="2"><label style="font-size:0.9em;">High School</label></li>
+									<li><div class="check"></div><input type="radio" name="scholar" value="3"><label style="font-size:0.9em;">College Degree</label></li>
+									<li><div class="check"></div><input type="radio" name="scholar" value="4"><label style="font-size:0.9em;">Masters or Doctorate Degree</label></li>
+								</ul>
+							</li>
+							<li>
+								<span><label for="marry">7. Are you married?</label></span>
+								<ul>
+									<li><div class="check"></div><input type="radio" name="marry" value="1"><label class="lastQ">yes</label></li>
+									<li><div class="check"></div><input type="radio" name="marry" value="2"><label class="lastQ">no</label></li>
+								</ul>
+							</li>
+						</ol><!-- </questions> -->
+						<div class="controls">
+							<div class="btnNext"><i class="fa fa-arrow-right"></i></div>
+							<div class="progress"></div>
+							<div class="progressBack"></div>
+							<span class="number">
+								<span class="number-current"></span>
+								<span class="number-total"></span>
+							</span>
+						</div> 
+						</div>
+				</div>
+<div class="bottomEle">    
 	<button id="btnStart" disabled="disabled">START</button>
 <footer>
 	<a id="terms" href="termOfUse.html">Terms of Use</a>
@@ -116,192 +109,8 @@ footer a{ text-decoration: none;}
 </footer>
 </div>
 </form>
-
-<script type="text/javascript" src="js/jquery.toastmessage.js"></script>
-<script type="text/javascript">
-var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
-var emailVal;
-var user;
-
-$('#form input:radio').addClass('input_hidden');
-$('#form .genderSelect').click(function(){
-    $(this).removeClass('unselected').siblings().addClass('unselected');
-    $(this).addClass('genderSelected').siblings().removeClass('genderSelected');
-});
-
-$('.jobSelect').fancySelect();
-	$('.ageSelect').fancySelect();
-
-	function genderSelect(){
-		if($("input[name='gender']:checked").length > 0){
-			console.log("User's gender is checked");
-			return true;
-		}else{
-			errorGender();
-			return false;
-		}
-	}
-	
-	function ageSelect(){
-		if($(".ageSelect option:selected").val()!= ""){
-			console.log($(".ageSelect option:selected").val());
-			return true;
-		}else{
-			errorAge();
-			console.log("age is not selected");
-			return false;
-		}
-	}
-	
-	function jobSelect(){
-		if($(".jobSelect option:selected").val()!=""){
-			console.log($(".jobSelect option:selected").val());
-			return true;
-		}else{
-			errorJob();
-			console.log("job is not selected");
-			return false;
-		}
-	}
-	
-	function errorGender() {
-		$().toastmessage('showToast',{
-		    text     : 'Select your gender!',
-		    stayTime : 1000,
-		    sticky   : false,
-		    position : 'middle-center',
-		    type     : 'error',
-		    close    : function () {console.log("Gender alarm is closed ...");}
-		});
-	}
-	
-	function errorAge() {
-		$().toastmessage('showToast',{
-		    text     : 'Select your age!',
-		    stayTime : 1000,
-		    sticky   : false,
-		    position : 'middle-center',
-		    type     : 'error',
-		    close    : function () {console.log("Age alarm is closed ...");}
-		});
-	}
-	
-	function errorJob() {
-		$().toastmessage('showToast',{
-		    text     : 'Select your Job!',
-		    stayTime : 1000,
-		    sticky   : false,
-		    position : 'middle-center',
-		    type     : 'error',
-		    close    : function () {console.log("Job alarm is closed ...");}
-		});
-	}
-	
-	function oninputEmail() {
-	emailVal = $('#email').val();
-	
-	console.log( );
-	if (validateEmail()) {
-		$('#emailValidate').text('');
-	} else {
-		$('#emailValidate').text('이메일 형식으로 입력해주세요');
-	}
-	
-	validateForm();
-}
-
-function oninputPwd() {
-	validateForm();
-}
-
-// 메일 형식 검증
-function validateEmail() {
-	if (emailVal.length > 4 && emailVal.match("@") && emailVal.indexOf("@") > 0 &&
-		emailVal.indexOf("@") + 1 < emailVal.indexOf(".", emailVal.indexOf("@")) &&
-		emailVal.length - 1 > emailVal.indexOf(".", emailVal.indexOf("@"))) {
-			return true;
-	} else {
-		return false;
-	}
-}
-
-
-//이메일 가입 여부 확인
-function validateForm() {
-	$.post("http://14.32.7.49:1111/emailCheck", { email: $('#email').val()})
-		.done(function(data) {
-			if (data == 'already') {
-				$('#emailCheck').text('이미 가입된 이메일입니다.');
-				$('#btnStart').attr('disabled', 'disabled');
-				
-			} else { // 가입된 이메일이 아닐때
-				$('#emailCheck').text('');
-				
-				// 추가 조건 확인 후 버튼 활성화
-				if (validateEmail() && $('#password').val().length > 0) {
-					
-					$('#btnStart').removeAttr('disabled');
-				} else {
-					$('#btnStart').attr('disabled', 'disabled');
-				}
-			}
-	});
-}
-
-
-//start btn 활성화 된 후에 gender와 age,job 체크여부확인 후 submit
-$('#btnStart').click(function(e){
-	e.preventDefault();
-	if(genderSelect() && ageSelect() && jobSelect()){
-		console.log("signUp");
-		
-		signupSubmit();
-	}else{
-		console.log("something unchecked!!!!!!!!");
-	}
-});
-
-function signupSubmit(){
-	db.transaction(function(tx){
-		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
-			var userNo = res.rows.item(0).USER_NO;
-			user = {email: $('#email').val(), password: SHA1($('#password').val())
-					,gender: $(':radio[name="gender"]:checked').val(), age: $('#age').val(), job: $('#job').val()
-					,user_no: userNo};
-			console.log(user);
-			signupPost(user);
-		});
-	}, db_errorCB);
-}
-
-function signupPost(user) {
- 	$.post("http://14.32.7.49:1111/signup", user)
-		.done(function(data) {
-			console.log(data);
-			// 'ok' 받으면 signup 성공
-			if (data == 'ok') {
-				db_updateUser(user);
-			} else {
-				alert('서버 점검중 입니다.');
-			}
-	});
-}
-
-function db_updateUser(user){
-	db.transaction(function(tx){
-		console.log(user.email);
-		tx.executeSql('UPDATE USER SET EMAIL=?, GENDER=?, AGE=?, JOB=? WHERE ID=1 ',
-				[user.email, user.gender, user.age, user.job], function(tx, res){
-			window.location.href = "main.html";
-		});
-	},db_errorCB);
-}
-
-function db_errorCB(e) { // query 에러시 호출 함수
-	console.log(e);
-	console.log("e.message :" + e.message);
-}
-
-</script>
+</section>
+ <script type="text/javascript" src="js/jquery.toastmessage.js"></script> 
+<script src="js/signUp.js"></script>
 </body>
 </html>
