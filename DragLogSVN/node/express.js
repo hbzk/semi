@@ -55,7 +55,11 @@ app.get('/dummy', function(req,res){
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
 	dbconn.query('INSERT INTO LOG (USER_NO, ACTION, START_TIME, END_TIME, DURATION) ' 
-			+ ' VALUES (10, "beer", "2014-03-19T07:00:00.332Z", NOW(), 3000) ', function(err, rows){
+			+ ' VALUES (1, "beer", "2014-03-19T07:00:00.332Z", NOW(), 23456) ' 
+			+ ' (2, "child", "2014-03-30T07:00:00.332Z", NOW(), 5432)' 
+			
+			
+			, function(err, rows){
 		if (err) {
 			console.log(err);
             throw err;
