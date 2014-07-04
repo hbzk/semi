@@ -72,7 +72,7 @@ function db_init() {
 			+ ' UNION SELECT 0,"pen", "li li_pen", 60, "#911146"'
 			+ ' UNION SELECT 0,"bulb", "li li_bulb", 60, "#CF4A30"'
 			+ ' UNION SELECT 0,"book", "fa fa-book", 60, "#218D80"'
-			+ ' UNION SELECT 0,"bookmark", "fa fa-bookmark", 60, "ED8C2B"'
+			+ ' UNION SELECT 0,"bookmark", "fa fa-bookmark", 60, "#ED8C2B"'
 			+ ' UNION SELECT 0,"child", "fa fa-child", 60, "#813DAC"'
 			+ ' UNION SELECT 0,"stethoscope", "fa fa-stethoscope", 60, "#FF5760"'
 			+ ' UNION SELECT 0,"spoon", "fa fa-spoon", 60, "#F0947C"'
