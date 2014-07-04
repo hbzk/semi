@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 <link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/lineconStyle.css">
 <link rel="stylesheet" href="css/common_font.css">
@@ -42,5 +43,11 @@
 <a class="links resultLink" onclick="location.href='result_text.html'; "><i  class="li li_search"></i></a>
 <a class="links userLink" onclick="location.href='user_setting.html'; "><i  class="li li_user"></i></a>
 <!-- </div> -->
+
+<form id="form" name="clock" style="display:none">
+<input class="timerCount Min" name="txtMins" size="1" readonly>
+<input class="timerCount Sec" name="txtSecs" size="1" readonly>
+</form>
+
 </body>
 </html>

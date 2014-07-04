@@ -1,3 +1,19 @@
+/* timer */
+var now = new Date();
+var minute = now.getMinutes().toString();
+var second = now.getSeconds().toString();
+minute = 00;
+second = 00;
+end=0;
+
+var icons;
+var defaultValue;
+var iconsName;
+var clickIcon;
+
+var dbLoad, iconName, defaultTime;
+/* ------- */
+
 // 드래그 관련 변수
 var startIcon, lastIcon, lastDragger, lastDraggerClass; 
 
@@ -6,8 +22,11 @@ var actionName, className, startTime, endTime, resultWhile, lastRow;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 $(document).ready(function(){
-	startIcon = $('#start').html();
 	
+	//$("#form").css("display", "none");
+	
+	startIcon = $('#start').html();
+		
 	loadMainIcon();
 	
 	dragdrop_doing();
@@ -15,6 +34,12 @@ $(document).ready(function(){
 	
 	$('#middle').mouseup(function(){ // 미들 클릭시 초기화
 		dragdrop_timerCheck();
+		
+		/* 타이머 초기화 */
+		
+		clearTimeout(timeClock);
+		
+		/* ---- */
 	});
 	
 	$("#resultLink").click(function(){
@@ -30,7 +55,42 @@ $(document).ready(function(){
 			});
 		});
 	});
+	
+	$(".drag").click(function(){
+		console.log(this);
+		
+		
+		clickIcon = $(this).find('i')[0].className;
+		//console.log(clickIcon);
+		db.transaction(function(tx) {
+			// tx.executeSql('drop table if exists ACTION'); // DB 초기화
+			tx.executeSql('INSERT or REPLACE into ACTION (ICON_NAME, CLASS_NAME) VALUES ("lastclick", ?)', [clickIcon]);
+		});
+		
+		
+	
+		setInterval(function(){
+			location.href = "functionEdit_sql.html";
+		}, 2);
+		
+	});
+	
 });
+function callJS(arg) {
+	document.getElementById("replaceme").innerHTML = arg;
+}
+
+function clear() {
+	document.getElementById("replaceme").innerHTML = "";
+}
+
+function show() {
+	setTimeout(function(){		
+		window.alert();
+		AppInterface2.toast();
+		document.getElementById("aaa").innerHTML = "dd";
+	}, 3000);
+}
 
 //=====================================================================
 //드롭
@@ -48,6 +108,28 @@ function dragdrop_drop() {
 			lastDragger = $(event.toElement);
 			lastIcon = lastDragger.children('i');
 		}
+		
+		/* 타이머 */
+	      db.transaction(function(tx){
+	        tx.executeSql('SELECT * FROM ACTION', [], function(tx, rs){
+	        	
+	        	var dragIcon = lastIcon.context.className;
+	        	for(var i=0;i<35;i++) {
+	        		iconsName = rs.rows.item(i).CLASS_NAME;
+	        		//console.log(iconsName);
+	        		
+	        		if(dragIcon == iconsName) {
+	        			minute = rs.rows.item(i).TIMER_VAL;
+	        			console.log(minute);
+	        			
+	        			end = 0;
+	        			timeclock();	
+	        		}
+	        	}
+	        });
+	    });
+	
+	    /* ------ */
 		
 		showAction(0);		// 아이콘 배치, 타이머 출력
 		
@@ -94,6 +176,14 @@ function dragdrop_timerCheck() {
 		lastDragger.attr('style','');
 
 		dragdrop_flip(); // 빙글빙글
+		
+		/* 타이머 초기화 */
+		
+		clearTimeout(timeClock);
+		
+		second = 0;
+	
+		/* ---- */
 		
 	}
 }
@@ -202,3 +292,109 @@ return d.getFullYear()+'-'
   + pad(d.getSeconds())+'.'
   + pad(d.getMilliseconds());
 };
+
+/* --------------------------timer------------------------------ */
+
+
+function timeclock(){
+  if(second == 00) {
+    minute -= 1 ;
+    second = 2 ;
+  } else{
+    second = second-1;
+  }
+  
+  
+  if ((minute < 0) && (end==0)) {
+	 window.alert();
+	 //showConfirm();
+	 end = 1;
+  }
+  
+  
+  if (second < 10) {
+    document.clock.txtSecs.value = 0 + second.toString();
+  } else {
+    document.clock.txtSecs.value = second;
+  }
+  if (minute < 10) {
+      document.clock.txtMins.value = 0 + minute.toString();
+    } else {
+      document.clock.txtMins.value = minute;
+    }
+  
+  
+  timeClock = setTimeout("timeclock()", 1000);
+  
+  
+}
+
+
+
+
+
+
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+
+function onDeviceReady() {
+	
+}
+
+
+
+// Beep three times
+//
+function playBeep() {
+    navigator.notification.beep(3);
+}
+
+// Vibrate for 2 seconds
+//
+function vibrate() {
+    navigator.notification.vibrate(2000);
+}
+
+function BnV() {
+	 navigator.notification.beep(3);
+    navigator.notification.vibrate(2000);
+}
+
+//process the confirmation dialog result
+function onConfirm(buttonIndex) {
+    if(buttonIndex == 1) {
+    	second = 0;
+    	minute = defaultValue;
+    	end = 0;    	
+    	clearTimeout(timeClock);
+      timeclock();
+    } else {
+    	window.location.reload();
+    }
+}
+
+function yes() {
+	window.location.reload();
+}
+
+function no() {
+	second = 0;
+	minute = defaultValue;
+	end = 0;    	
+	clearTimeout(timeClock);
+  timeclock();
+}
+
+
+// Show a custom confirmation dialog
+//
+function showConfirm() {
+	 //navigator.notification.vibrate(1000);
+    navigator.notification.confirm(
+        '알림을 종료할까요?', // message
+         onConfirm,            // callback to invoke with index of button pressed
+          '알림',           // title
+        ['계속','중지']         // buttonLabels
+    );
+}
