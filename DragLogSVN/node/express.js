@@ -74,12 +74,12 @@ app.post('/other', function(req,res){
 				function(err, rows) {
 					if (err) { console.log(err); throw err; }
 					
-					rows.EMAIL = '';
-					rows.PASSWORD = '';
-					console.log(rows);
+					rows[0].EMAIL = '';
+					rows[0].PASSWORD = '';
+					console.log(rows[0]);
 					
 					var data = [];
-					data.push(rows);
+					data.push(rows[0]);
 					
 					dbconn.query('SELECT * FROM LOG WHERE (USER_NO = ?) '
 							+ ' AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', [users[ran]], 
