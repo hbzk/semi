@@ -46,7 +46,7 @@ var db_listing = function (res, scope) {
 				.append('<div data-id= "'+res.rows.item(i).ID +'" class="rtIcon">'+'<i class= "'+res.rows.item(i).CLASSNAME+'"></i></div>')
 				.append('<div class="rtTime">' + startTime.substring(11, 16) + ' ~ ' + endTime.substring(11, 16))
 				.append('<div class="rtDuration">' + duration +'</div>')
-				.append('<div class="rtDelete"><i class="fa fa-times"></i></div>')
+				//.append('<div class="rtDelete"><i class="fa fa-times"></i></div>')
 		);
 	}
 };
