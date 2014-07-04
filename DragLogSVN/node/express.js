@@ -77,7 +77,6 @@ app.post('/other', function(req,res){
 					delete rows[0].EMAIL;
 					delete rows[0].PASSWORD;
 					console.log(rows[0]);
-					var obj = new Object();
 					
 					var data = [];
 					data.push(rows[0]);
@@ -87,9 +86,8 @@ app.post('/other', function(req,res){
 							function(err, rows) {
 								if (err) { console.log(err); throw err; }
 								
-								console.log(rows);
+								//console.log(rows);
 								data.push(rows);
-								
 								res.send(data);
 							});
 			});
