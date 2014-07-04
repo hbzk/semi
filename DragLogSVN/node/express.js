@@ -70,17 +70,33 @@ app.post('/other', function(req,res){
 			console.log(ran);
 			console.log(users[ran]);
 			
-			
-			dbconn.query('SELECT * FROM LOG WHERE (USER_NO = ?) '
-					+ ' AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', [users[ran]], 
+			dbconn.query('SELECT * FROM USER WHERE (USER_NO = ?)', [users[ran]], 
 				function(err, rows) {
 					if (err) { console.log(err); throw err; }
 					
+					rows.EMAIL = '';
+					rows.PASSWORD = '';
 					console.log(rows);
-					res.send(rows);
-				});
+					
+					var data = [];
+					data.push(rows);
+					
+					dbconn.query('SELECT * FROM LOG WHERE (USER_NO = ?) '
+							+ ' AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', [users[ran]], 
+							function(err, rows) {
+								if (err) { console.log(err); throw err; }
+								
+								console.log(rows);
+								data.push(rows);
+								
+								res.send(data);
+							});
+			});
 			
-		});
+			
+			
+		}
+	);
 });
 
 // 장비에서 서버로 기록 보내기
