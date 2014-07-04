@@ -2,7 +2,7 @@
 
 /* resultList.html 에 적용css */
 * { margin: 0px; padding: 0px;}
-html,body{ height: 100%; width:100%;}
+html,body{ height: 100%; width:100%; overflow-x:hidden;}
 
 @font-face { font-family: 'orbitron'; src: url('../font/orbitron-black-webfont.woff') format('woff');}
 @font-face { font-family: 'orbitron-l';	src: url('../font/orbitron-light-webfont.woff') format('woff'); }
@@ -21,7 +21,7 @@ html,body{ height: 100%; width:100%;}
 .header .mainLink{ position: absolute; left: 0; width: 70px;
 text-decoration: none; color: #fff; font-size: 100%;}
 
-#layout { margin: 0px auto 0px; width: 320px; height: 70%; position: relative;}
+#layout { margin: 0px auto 0px; width: 320px; height: 69%; position: relative;}
 #date { height: 60px; text-align: center; line-height: 60px; position: relative; vertical-align: middle; }
 #date p { font-family: 'orbitron', sans-serif; font-size: 200%; width: 320px; 
 	color: #2E3233; font-weight: bold; margin: 0px auto 0px; text-align: center; }
@@ -32,8 +32,8 @@ text-decoration: none; color: #fff; font-size: 100%;}
 #date span.right { right: 0px; }
 
 
-.listNavi{ width: 40%;  padding: 0px; line-height: 30px; text-align: center; margin-bottom: 10px; 
-					position: absolute;bottom: 0px; right: 1px; }
+.listNavi{ width: 40%;  padding: 0px; line-height: 30px; text-align: center; margin-bottom: 5px; 
+					position: absolute;bottom: 0px; right: 5px; }
 .listNavi div{font-family: 'orbitron';height: 30px; background: #FFE0A1; color: white;}
 .listNavi .weekNavi{ width:32%; margin:0px auto; display: inline-block;}
 .listNavi .dateNavi{ width:32%;float:left;  background: #F2B843;}
@@ -41,11 +41,10 @@ text-decoration: none; color: #fff; font-size: 100%;}
  
  .naviColor{background:#F2B843;}
  
-.rtTable{	width : auto; float: left; clear: both;}
+.rtTable{	width : auto; float: left; clear: both; margin-bottom: 5px; border-bottom: 1px solid #CCCCCC;}
 .rtIcon{width: 40px;height: 40px;margin-left: 20px;text-align: center;}
-.rtIcon i{/* margin-left: 10px; */}
 
-.rtTime{width: 110px;height: 30px;padding-top: 10px;margin-left: 15px;text-indent: 10px; }
+.rtTime{width: 110px;height: 30px;padding-top: 10px;margin-left: 25px;text-indent: 10px; }
 .rtDuration{width: 90px;	height: 30px;	padding-top: 10px;margin-left: 10px;text-align: center;}
 
 .rtDelete{margin-top: 10px;margin-left: 20px;}
@@ -68,7 +67,7 @@ text-decoration: none; color: #fff; font-size: 100%;}
 	letter-spacing: -0.05em;
 	float: left;
 	/* border: 1px solid #999; */
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 .fa, .li{  
 	display: block; width: 40px; height: 40px; line-height: 40px; font-size: 1.5em;

@@ -16,15 +16,17 @@ margin: 30px auto 0px; width: 320px; height: 85%; position: relative;}
 font-family: 'orbitron', san1s-serif; font-size: 1.7em; font-weight: bold; 
 height: 50px; line-height: 50px; text-align: center;}
 
-/* .aLinks{position: absolute; bottom: 1px; width: 200px;height:70px;}
-.aLinks a .li{width: 30px; height: 30px;} */
-.links .li {text-shadow: none;}
-.iconLink { position: absolute; right: 63px;bottom: 1px; font-size: 150%; text-decoration: none;}
-.resultLink {position: absolute; bottom: 1px;right: 120px; font-size: 150%; text-decoration: none;}
-.userLink{position: absolute; bottom: 1px; right: 10px; font-size: 150%; text-decoration: none;}
+.aLinks{position: absolute; width: 180px; height:34px; 
+				right: 0px; bottom: 10px; margin-right: 5px; }
+.aLinks a{width: 55px; margin-right: 5px;float: left; background: #85CDE1;
+					color: white;font-size: 0.8em;  height: 34px;line-height: 34px; text-align: center; font-family: 'orbitron';}
+					
+/* .links .li {text-shadow: none; margin: 0 auto 0;} */
+.iconLink { width: 70px; bottom: 1px; font-size: 150%; text-decoration: none; }
+.resultLink { width: 70px; bottom: 1px; font-size: 150%; text-decoration: none;}
+.userLink{width: 70px; bottom: 1px;  font-size: 150%; text-decoration: none;}
 
-.resultLink i { color:#de0052; font-size: 1.3em;}
-.iconLink i { color:#de0052; font-size: 1.3em;}
+.resultLink i { color:#de0052; font-size: 1.3em;}000000000000000000
 .userLink i { color:#de0052; font-size: 1.3em;}
 /* 폰트 아이콘 */
 .fa, .li {  
@@ -33,6 +35,13 @@ height: 50px; line-height: 50px; text-align: center;}
 	text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15); border: 0px; 
 	color: white; text-align: center;	
 }
+
+/* .li_settings, .li_user, .li_search{
+		width: 32px; height: 32px; line-height: 32px;
+		border: 1px solid black;
+}
+
+ */
 #middle { position: absolute; left: 115px; top: 139px; }
 #start { position: absolute; top: 110px; left: 106px; width: 88px; height: 128px; opacity: 1; }
 .iconMain { position: absolute; }

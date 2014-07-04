@@ -22,50 +22,22 @@ text-decoration: none; color: #fff; font-size: 100%;}
 #layout { margin: 0px auto 0px; width: 320px; height: 70%; position: relative;}
 #date { height: auto; text-align: center; line-height: 60px; position: relative; vertical-align: middle; }
 #date p { font-family: 'orbitron', sans-serif; font-size: 200%; width: 320px; 
-	color: #2E3233; font-weight: bold; margin: 0px auto 0px; text-align: center; }
+	color: #2E3233; font-weight: bold; margin: 0px auto ; text-align: center; }
 	
-#rtScroll { overflow: hidden; position:absolute; height: 100%; width:320px;}
+#rtScroll { overflow: hidden; position:absolute; height: 100%; width:300px;}
 #pieChart { height: 100%; width: 340px; overflow-x: hidden;}
 #date span { position: absolute; width: 70px;}
 #date span.left { left: 0px; }
 #date span.right { right: 0px; }
 
 .listNavi{ width: 40%;  padding: 0px; line-height: 30px; text-align: center; 
-						margin-bottom: 10px;position: absolute;bottom: 0px; right: 1px; }
+						margin-bottom: 5px;position: absolute;bottom: 0px; right: 5px; }
 .listNavi div{font-family: 'orbitron';height: 30px;  color: white;background: #FBC0CA; }
 .listNavi .weekNavi{ width:32%; margin:0px auto; display: inline-block;}
 .listNavi .dateNavi{ width:32%;float:left; background: #F895A5; }
 .listNavi .monthNavi{ width:32%;float:right;}
 
 
-.rtTable{	width : auto; float: left; clear: both;}
-.rtIcon{width: 40px;height: 40px;margin-left: 20px;text-align: center;}
-.rtIcon i{/* margin-left: 10px; */}
-
-.rtTime{width: 130px;height: 30px;padding-top: 10px;margin-left: 15px;text-indent: 10px; }
-.rtDuration{width: 50px;	height: 30px;	padding-top: 10px;margin-left: 10px;text-align: center;}
-
-.rtDelete{margin-top: 10px;margin-left: 20px;}
-
-.rtDelete i{
-	background: #999;
-	opacity: 0.5;
-	display: block; width: 20px; height: 20px; line-height: 20px; font-size: 1.0em;
-	border-radius: 10px; -webkit-border-radius: 10px;	-moz-border-radius: 10px;
-	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.15); border: 0px; 
-	color: white; text-align: center;	
-	
-}
-.rtDuration,.rtTime{
-		/* font-family: 'orbitron-i', sans-serif; */
-		font-size: 0.9em;
-}
-
-.rtIcon,.rtTime,.rtDuration,.rtDelete{
-	float: left;
-	/* border: 1px solid #999; */
-	margin-bottom: 15px;
-}
 .fa, .li{  
 	display: block; width: 40px; height: 40px; line-height: 40px; font-size: 1.5em;
 	border-radius: 20px; -webkit-border-radius: 20px;	-moz-border-radius: 20px;

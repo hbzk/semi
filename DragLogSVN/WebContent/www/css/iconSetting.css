@@ -11,7 +11,7 @@
 		src: url('../font/orbitron-light-webfont.woff') format('woff');		
 }
 
-body {font-family: 'orbitron', sans-serif; }
+body {font-family: 'orbitron', sans-serif; overflow-x: hidden;}
 
 hr {
   width: 62px;
@@ -25,7 +25,6 @@ hr {
 	text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15); border: 0px; 
 	color: white; text-align: center;	
 }
-
 .activityIcon .fa, .activityIcon .li, .checkBack{
 	display: block; width: 50px; height: 50px; line-height: 50px; font-size: 2.1em;
 	border-radius: 25px; -webkit-border-radius: 25px;	-moz-border-radius: 25px;
@@ -34,17 +33,10 @@ hr {
 		
 }
 .header { 
-	position: fixed;
-	margin: 0px;
-	width: 100%;
-	height: 50px; line-height: 50px; background: #7ABF49; 
-	text-align: center; color: #fff;  font-weight: bold;
-	font-size: 1.7em;
-	background: #7ABF49;
-	border: none;
-	text-shadow: none;
-	color: white;
-	z-index: 99;
+	position: fixed;margin: 0px;width: 100%;height: 50px; line-height: 50px; 
+	background: #7ABF49; text-align: center; color: #fff;  font-weight: bold;
+	font-size: 1.7em;	background: #7ABF49; border: none;	text-shadow: none;
+	color: white;	z-index: 99;
 }
 .header a{ position: absolute; left: 0; width: 70px;
 text-decoration: none; color: #fff; font-size: 100%;}
@@ -64,8 +56,6 @@ text-decoration: none; color: #fff; font-size: 100%;}
 /* 분류별 아이콘 div */
 .icon_theme{min-width: 300px;	min-height: 140px;/* border: 1px solid white */;	clear: both;}
 
-
-
 /* 선택된 아이콘 div */
 #selected_icon {	z-index: 999;height: 180px; width: 100%; background: white;  position: fixed; margin-top: 50px; }
 
@@ -75,10 +65,10 @@ text-decoration: none; color: #fff; font-size: 100%;}
 .icon_row{min-width: 300px; overflow: auto;margin: 0 auto;}
 
 /* icon 하나 박싱 */
-.icon{width: 100px;	height: 70px; float: left;}
+.icon{width: 60px;	height: 70px; float: left; padding: 0px 10px 0px 10px;  }
 
 /* 아이콘들 */
-i{float: left;	margin: 5px;}
+i{float: left;	margin: 0px;}
 
 
 /*   두번째페이지 (setting)f---- */
@@ -88,7 +78,7 @@ i{float: left;	margin: 5px;}
 }
 
 #selected_icon_row {
-	width: 320px;
+	width: 280px;
 	padding: 10px 10px 10px 40px;
 	margin: 0px auto;
 }
