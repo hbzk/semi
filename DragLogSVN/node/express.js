@@ -82,24 +82,14 @@ app.post('/other', function(req,res){
 			data.push(rows[0]);
 			
 			
-			dbconn.query('SELECT * FROM LOG WHERE (USER_NO = 64) ', [users[ran]]
-			,function(err, rows) {
-				if (err) { console.log(err); throw err; }
-				
-				//console.log(rows);
-				data.push(rows);
-				res.send(data);
-			});
-			
-			/*dbconn.query('SELECT * FROM LOG WHERE (USER_NO = ?) '
+			dbconn.query('SELECT * FROM LOG WHERE (USER_NO = ?) '
 					+ ' AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', [users[ran]]
 			,function(err, rows) {
 				if (err) { console.log(err); throw err; }
 				
-				//console.log(rows);
 				data.push(rows);
 				res.send(data);
-			});*/
+			});
 		});
 		
 		
