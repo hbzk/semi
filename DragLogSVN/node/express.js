@@ -74,9 +74,10 @@ app.post('/other', function(req,res){
 				function(err, rows) {
 					if (err) { console.log(err); throw err; }
 					
-					rows[0].EMAIL = '';
-					rows[0].PASSWORD = '';
+					delete rows[0].EMAIL;
+					delete rows[0].PASSWORD;
 					console.log(rows[0]);
+					var obj = new Object();
 					
 					var data = [];
 					data.push(rows[0]);
