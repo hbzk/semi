@@ -55,47 +55,56 @@ app.post('/other', function(req,res){
 	console.log(req.body.USER_NO);
 	
 	dbconn.query('SELECT USER_NO FROM LOG WHERE (USER_NO != ?)'
-			+ 'AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', [req.body.USER_NO],
-		function(err, rows) {
-			
+		+ 'AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', [req.body.USER_NO]
+	,function(err, rows) {
+		
+		if (err) { console.log(err); throw err; }
+		
+		var users = [];
+		for (var i=0; i<rows.length; i++) {
+			if (users.indexOf(rows[i].USER_NO) === -1) users.push(rows[i].USER_NO);
+		}
+		console.log(users);
+
+		var ran = Math.floor(Math.random() * users.length);
+		console.log(ran);
+		console.log(users[ran]);
+		
+		dbconn.query('SELECT * FROM USER WHERE (USER_NO = ?)', [users[ran]]
+		,function(err, rows) {
 			if (err) { console.log(err); throw err; }
 			
-			var users = [];
-			for (var i=0; i<rows.length; i++) {
-				if (users.indexOf(rows[i].USER_NO) === -1) users.push(rows[i].USER_NO);
-			}
-			console.log(users);
-	
-			var ran = Math.floor(Math.random() * users.length);
-			console.log(ran);
-			console.log(users[ran]);
+			delete rows[0].EMAIL;
+			delete rows[0].PASSWORD;
+			console.log(rows[0]);
 			
-			dbconn.query('SELECT * FROM USER WHERE (USER_NO = ?)', [users[ran]], 
-				function(err, rows) {
-					if (err) { console.log(err); throw err; }
-					
-					delete rows[0].EMAIL;
-					delete rows[0].PASSWORD;
-					console.log(rows[0]);
-					
-					var data = [];
-					data.push(rows[0]);
-					
-					dbconn.query('SELECT * FROM LOG WHERE (USER_NO = ?) '
-							+ ' AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', [users[ran]], 
-							function(err, rows) {
-								if (err) { console.log(err); throw err; }
-								
-								//console.log(rows);
-								data.push(rows);
-								res.send(data);
-							});
+			var data = [];
+			data.push(rows[0]);
+			
+			
+			dbconn.query('SELECT * FROM LOG WHERE (USER_NO = 64) ', [users[ran]]
+			,function(err, rows) {
+				if (err) { console.log(err); throw err; }
+				
+				//console.log(rows);
+				data.push(rows);
+				res.send(data);
 			});
 			
-			
-			
-		}
-	);
+			/*dbconn.query('SELECT * FROM LOG WHERE (USER_NO = ?) '
+					+ ' AND START_TIME >= CURDATE() - INTERVAL 1 DAY AND START_TIME < CURDATE()', [users[ran]]
+			,function(err, rows) {
+				if (err) { console.log(err); throw err; }
+				
+				//console.log(rows);
+				data.push(rows);
+				res.send(data);
+			});*/
+		});
+		
+		
+		
+	});
 });
 
 // 장비에서 서버로 기록 보내기
