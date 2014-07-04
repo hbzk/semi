@@ -25,7 +25,7 @@ var db_submitLog = function(){
 					logList.push(logObj);
 				}
 				
-				$.post('http://14.32.7.49:1111/submitLog', {'logList' : logList}).done(function(data){
+				$.post('http://14.32.66.98:1111/submitLog', {'logList' : logList}).done(function(data){
 					console.log(data);
 				});
 				

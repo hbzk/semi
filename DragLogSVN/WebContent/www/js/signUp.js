@@ -114,7 +114,7 @@ function validateEmail() {
 //이메일 가입 여부 확인
 function validateForm() {
 	
-	$.post("http://14.32.7.49:1111/emailCheck", { email: $('#email').val()})
+	$.post("http://14.32.66.98:1111/emailCheck", { email: $('#email').val()})
 		.done(function(data) {
 			if (data == 'already') {
 				$('#emailCheck').text('이미 가입된 이메일입니다.');
@@ -162,7 +162,7 @@ function signupSubmit(){
 }
 
 function signupPost(user) {
- 	$.post("http://14.32.7.49:1111/signup", user)
+ 	$.post("http://14.32.66.98:1111/signup", user)
 		.done(function(data) {
 			console.log(data);
 			// 'ok' 받으면 signup 성공

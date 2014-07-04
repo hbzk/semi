@@ -111,7 +111,7 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 		
 		//사용자ID 서버에 확인
 		function createUser() {
-			$.get("http://14.32.7.49:1111/createUser").done(function(userId){
+			$.get("http://14.32.66.98:1111/createUser").done(function(userId){
 				console.log(userId);
 				db_insertId(userId);
 			});

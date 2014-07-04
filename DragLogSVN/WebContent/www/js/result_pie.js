@@ -67,8 +67,4 @@ var db_listing = function(res, scope) {
 	// 실제 차트 그리기
 	$("#doughnutChart").drawDoughnutChart(result);
 	
-	/*$.post("http://14.32.7.49:1111/test", { "aaa" : resultObj, "bbb" : sortResult, "ccc" : result  }).done(function(res){
-		console.log(res);
-	});*/
-		
 };
