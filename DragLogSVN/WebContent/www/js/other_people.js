@@ -17,12 +17,28 @@ var db_submitLog = function(){
 				alert('가입하면 다른 사람의 일상을 볼 수 있다');
 				history.back();
 			}
-			console.log(me);
+			//console.log(me);
 			$.post('http://14.32.66.98:1111/other', me).done(function(data){
 				// 유저 정보 가공 후 출력
 				var otherUser = data[0];
 				//console.log(objToString);
-				$('#info').text(objToString(otherUser));
+			
+				var gender = otherUser.GENDER;
+				setGender(gender);
+				var age = otherUser.AGE;
+				setAge(age);
+				var job = otherUser.JOB;
+				setJob(job);
+				var scholar = otherUser.SCHOLAR;
+				setScholar(scholar);
+				var salary = otherUser.SALARY;
+				setSalary(salary);
+				console.log(otherUser.SCHOLAR);
+				var spend = otherUser.SPEND;
+				setSpend(spend);
+				var marry = otherUser.MARRY;
+				setMarry(marry);
+				
 				
 				// 결과 가공 
 				var resultList = data[1];
@@ -67,6 +83,89 @@ var db_submitLog = function(){
 	}, db_errorCB);
 };
 
+
+function setGender(gender) {
+	if(gender == 1) {
+		//$(".userGender").text("male");	
+		$(".userGender").append("<img src='./css/img/male.png'/>");
+	} else {
+		//$(".userGender").text("female");
+		$(".userGender").append("<img src='./css/img/female.png'/>");
+	}
+}
+function setAge(age) {
+	if(age < 20) {
+		printAge("Teenagers");
+	} else if(age < 25) {
+		printAge("Early 20's");
+	} else if(age == 25) {
+		printAge("Mid 20's");
+	} else if(age < 30) {
+		printAge("Late 20's");
+	} else if(age < 40) {
+		printAge("30's");
+	} else if(age < 50) {
+		printAge("40's");
+	} else if(age < 60) {
+		printAge("50's");
+	} else if(age < 70) {
+		printAge("60's");
+	} else {
+		printAge("70's~");
+	}
+}
+function printAge(age){
+	$(".userAge").text(age);
+}
+function setJob(job) {
+	if(job == 1) {
+		$(".userJob").text("Business Man");
+	} else if(job == 2) {
+		$(".userJob").text("Student");
+	} else if(job == 3) {
+		$(".userJob").text("Between the jobs");
+	} else if(job == 4){
+		$(".userJob").text("Office Worker");
+	} else {
+		$(".userJob").text("Free-lance");
+	}
+}
+function setScholar(scholar) {
+	if(scholar == 1) {
+		  $(".userScholar").text("Still attending");
+	  } else if(scholar == 2) {
+		  $(".userScholar").text("High School");
+	  } else if(scholar == 3) {
+		  $(".userScholar").text("College Degree");
+	  } else {
+		  $(".userScholar").text("Masters or Do");
+	  }
+}
+function setSalary(salary) {
+	if(salary == 1) {
+		$(".userSalary").text("under 1000");
+	} else if(salary == 2) {
+		$(".userSalary").text("1001-2000");
+	} else if(salary == 3) {
+		$(".userSalary").text("2001-3000");
+	} else if(salary == 4) {
+		$(".userSalary").text("3001-4000");
+	} else if(salary == 5) {
+		$(".userSalary").text("4001-5000");
+	} else if(salary == 6) {
+		$(".userSalary").text("over 5001");
+	}
+}
+function setSpend(spend) {
+	$(".userSpend").text(spend + "만원");
+}
+function setMarry(marry) {
+	if(marry == 1) {
+		$(".userMarry").text("Married");
+	} else {
+		$(".userMarry").text("Single");
+	}
+}
 
 
 //query 에러시 호출 함수
