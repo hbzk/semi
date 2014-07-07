@@ -18,11 +18,14 @@
 	<div class="userAge"></div>
 	<div class="userJob"></div>
 	<div class="userEmail"></div>
-	<div class="firstEnter"></div>
+	<div class="userScholar"></div>
+	<div class="userSalary"></div>
+	<div class="userSpend"></div>
+	<div class="userMarry"></div>
 </section>
 <script>
 
-var us_email, us_gender, us_job, us_age;
+var us_gender, us_email, us_job, us_age, us_enter, us_salary, us_spend, us_marry;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 //user_setting page load되었을때 
 $(window).load(function(){
@@ -30,7 +33,6 @@ $(window).load(function(){
 });
 
 //#################기록한것 전체삭제 기능 추가할것
-
 
 function db_userCheck(){
 		db.transaction(function(tx){
@@ -40,10 +42,17 @@ function db_userCheck(){
 				if(us_email == null){
 				//#################local DB EMAIL field가 비어있으면 ->회원가입하지않았으므로 회원가입문구 and 회원가입링크버튼보여주기
 				}else{
-				us_gender = res.rows.item(0).GEN;
-				us_job = res.rows.item(0).JOB;
+				us_gender = res.rows.item(0).GENDER;
 				us_age = res.rows.item(0).AGE;
-				
+				us_job = res.rows.item(0).JOB;
+				us_salary = res.rows.item(0).SALARY;
+				us_spend = res.rows.item(0).SPEND;  
+				us_scholar = res.rows.item(0).SCHOLAR;
+				us_marry = res.rows.item(0).MARRY;
+				setMarry(us_marry);
+				setScholar(us_scholar);
+				setSpend(us_spend);
+				setSalary(us_salary);
 				setEmail(us_email);
 				setGender(us_gender);
 				setJob(us_job);
@@ -54,42 +63,108 @@ function db_userCheck(){
 		});
 	
 }
+function setMarry(marry) {
+	if(marry == 1) {
+		$(".userMarry").text("Married");
+	} else {
+		$(".userMarry").text("Single");
+	}
+}
+function setScholar(scholar) {
+		if(scholar == 1) {
+		  $(".userScholar").text("Still attending high school");
+	  } else if(scholar == 2) {
+		  $(".userScholar").text("High School");
+	  } else if(scholar == 3) {
+		  $(".userScholar").text("College Degree");
+	  } else {
+		  $(".userScholar").text("Masters or Doctorate Degree");
+	  }
+}
+function setSpend(Spend) {
+	$(".userSpend").text(Spend + "만원");
+}
+function setSalary(salary) {
+	if(salary == 1) {
+		$(".userSalary").text("under 1000");
+	} else if(salary == 2) {
+		$(".userSalary").text("1001-2000");
+	} else if(salary == 3) {
+		$(".userSalary").text("2001-3000");
+	} else if(salary == 4) {
+		$(".userSalary").text("3001-4000");
+	} else if(salary == 5) {
+		$(".userSalary").text("4001-5000");
+	} else if(salary == 6) {
+		$(".userSalary").text("over 5001");
+	}
+}
+function setGender(gen){
+	  if(gen == 1){ //남자
+	    $(".userGender").append("<img src='./css/img/male.png'/>");
+	  }else{//여자
+	    $(".userGender").append("<img src='./css/img/female.png'/>");
+	  }
+}
 function setEmail(email){
 	$(".userEmail").text(email);
 }
 
-function setGender(gen){
-	if(gen == 1){ //남자
-		$(".userGender").append("<img src='./css/img/male.png'/>");
-	}else{//여자
-		$(".userGender").append("<img src='./css/img/female.png'/>");
-	}
-}
 
 function setJob(job){
-	$(".userJob").text(job);
+	if(job == 1) {
+		$(".userJob").text("Business Man");
+	} else if(job == 2) {
+		$(".userJob").text("Student");
+	} else if(job == 3) {
+		$(".userJob").text("Between the jobs");
+	} else if(job == 4){
+		$(".userJob").text("Office Worker");
+	} else {
+		$(".userJob").text("Free-lance");
+	}
 }
 
 function setAge(age){
-	switch(age){
+	/* switch(age){
 	case 1:
-		printAge("Teenagers");
-		break;	
+		printAge("Teenagers"); break;	
 	case 21:
-		printAge("Early 20's");
+		printAge("Early 20's"); break; 
 	case 25:
-		printAge("Mid 20's");
+		printAge("Mid 20's"); break; 
 	case 29:
-		printAge("Late 20's");
+		printAge("Late 20's"); break; 
 	case 30:
-		printAge("30's");
+		printAge("30's"); break;  
 	case 40:
-		printAge("40's");
+		printAge("40's"); break;  
 	case 50:
-		printAge("50's");
+		printAge("50's"); break;  
 	case 60:
+		printAge("60's"); break;  
+	} */
+	if(age < 20) {
+		printAge("Teenagers");
+	} else if(age < 25) {
+		printAge("Early 20's");
+	} else if(age == 25) {
+		printAge("Mid 20's");
+	} else if(age < 30) {
+		printAge("Late 20's");
+	} else if(age < 40) {
+		printAge("30's");
+	} else if(age < 50) {
+		printAge("40's");
+	} else if(age < 60) {
+		printAge("50's");
+	} else if(age < 70) {
 		printAge("60's");
+	} else {
+		//printAge("");
 	}
+	
+	
 }
 
 
