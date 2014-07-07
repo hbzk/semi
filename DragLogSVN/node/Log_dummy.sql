@@ -1,7 +1,6 @@
 -- USER DUMMY ============================================================
 INSERT IGNORE INTO USER (EMAIL, GENDER, AGE, JOB, SALARY, SPEND, SCHOLAR, MARRY)
-VALUES ("a", 2, 30, 5, 6, 30, 4, 1)
-,("kokore@gd.com", 2, 45, 1, 6, 250, 3, 2)
+VALUES ("kokore@gd.com", 2, 45, 1, 6, 250, 3, 2)
 ,("uverworld@yahoo.com", 1, 23, 2, 6, 400, 2, 2)
 ,("SuranIbrahim@cb.com", 1, 85, 5, 6, 500, 2, 2)
 ,("option@naver.com", 1, 30, 5, 2, 30, 4, 1)
