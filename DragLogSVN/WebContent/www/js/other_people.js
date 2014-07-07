@@ -10,11 +10,16 @@ var obj = new Object();
 
 var db_submitLog = function(){
 	db.transaction(function(tx){
-		tx.executeSql('SELECT USER_NO FROM USER', [], function(tx, res){
-			var user_no = res.rows.item(0).USER_NO;
-			
-			$.post('http://14.32.66.98:1111/other', {USER_NO : user_no}).done(function(data){
-				// 유저 정보 가공 후 출력 
+		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
+			var me = res.rows.item(0);
+			// 가입 안했다면
+			if (me.EMAIL == null) {
+				alert('가입하면 다른 사람의 일상을 볼 수 있다');
+				history.back();
+			}
+			console.log(me);
+			$.post('http://14.32.66.98:1111/other', me).done(function(data){
+				// 유저 정보 가공 후 출력
 				var otherUser = data[0];
 				//console.log(objToString);
 				$('#info').text(objToString(otherUser));
