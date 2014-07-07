@@ -10,6 +10,7 @@ var icons;
 var defaultValue;
 var iconsName;
 var clickIcon;
+var iconClick = 0;
 
 var dbLoad, iconName, defaultTime;
 /* ------- */
@@ -34,6 +35,8 @@ $(document).ready(function(){
 	
 	$('#middle').mouseup(function(){ // 미들 클릭시 초기화
 		dragdrop_timerCheck();
+		iconClick = 0;
+		console.log(iconClick);
 		
 		/* 타이머 초기화 */
 		
@@ -56,23 +59,23 @@ $(document).ready(function(){
 		});
 	});
 	
-	$(".drag").click(function(){
-		console.log(this);
-		
-		
+	$(".sub").click(function(){
+		//console.log(this);
+		if(iconClick == 0) {
+			
+			
 		clickIcon = $(this).find('i')[0].className;
 		//console.log(clickIcon);
 		db.transaction(function(tx) {
 			// tx.executeSql('drop table if exists ACTION'); // DB 초기화
 			tx.executeSql('INSERT or REPLACE into ACTION (ICON_NAME, CLASS_NAME) VALUES ("lastclick", ?)', [clickIcon]);
 		});
-		
-		
-	
+			
 		setInterval(function(){
 			location.href = "functionEdit_sql.html";
 		}, 2);
 		
+		}
 	});
 	
 });
@@ -97,14 +100,14 @@ function show() {
 function dragdrop_drop() {
 	$('#start').droppable({tolerance: 'touch'}, {accept: '.drag'}, {drop: function(event, ui){
 		dragdrop_timerCheck(); // 이미 실행중인지 확인 후 초기화
-		
+		iconClick = 1;
 		// 드래그 대상 관련
 		// 가끔 드래그 대상이 div로 인식되는 버그 대응 
 		if (event.toElement.tagName == "I") {
 			lastIcon = $(event.toElement);
 			lastDragger = lastIcon.parent('div');
 		} else {
-			console.log('event.toElement == div');
+			//console.log('event.toElement == div');
 			lastDragger = $(event.toElement);
 			lastIcon = lastDragger.children('i');
 		}
@@ -120,7 +123,7 @@ function dragdrop_drop() {
 	        		
 	        		if(dragIcon == iconsName) {
 	        			minute = rs.rows.item(i).TIMER_VAL;
-	        			console.log(minute);
+	        			//console.log(minute);
 	        			
 	        			end = 0;
 	        			timeclock();	
@@ -194,7 +197,7 @@ function loadMainIcon(){
 	db_selectLastRow();
 	
 	var iconDiv = $("#iconMainDiv .drag");
-	console.log("Load DB - data (selectedIcon)");
+	//console.log("Load DB - data (selectedIcon)");
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM ACTION', [], function(tx, res){
 			for( var i=0 ; i < res.rows.length ; i++){
@@ -224,7 +227,7 @@ function db_selectLastRow() {
 		tx.executeSql('SELECT * FROM LOG ORDER BY ID DESC', [], function(tx, res){
 			if (res.rows.length != 0) {
 				lastRow = res.rows.item(0);
-				console.log(lastRow);
+				//console.log(lastRow);
 			} else {
 				lastRow = 'none';
 			}
