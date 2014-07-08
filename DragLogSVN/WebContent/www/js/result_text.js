@@ -4,7 +4,6 @@ var dayList = [];
 
 $(function(){
 	$('#resultList').on('swipeleft', '.rtTable', function(e) {
-		console.log(e);
 		
 		if (confirm('정말 지움?')) {
 			var rtTable = e.currentTarget;
