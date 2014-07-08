@@ -6,6 +6,13 @@ $(function(){
 	db_submitLog();
 });
 
+function login() {
+	location.href = "login.html";
+}
+function signup() {
+	location.href = "signup.html";
+}
+
 var obj = new Object();
 
 var db_submitLog = function(){
@@ -14,9 +21,17 @@ var db_submitLog = function(){
 			var me = res.rows.item(0);
 			// 가입 안했다면
 			if (me.EMAIL == null) {
-				alert('가입하면 다른 사람의 일상을 볼 수 있다');
-				history.back();
+				//alert('가입하면 다른 사람의 일상을 볼 수 있다');
+				//history.back();
+				$("#layout1").css("display", "none");
+				$("#layout2").css("display", "");
+			} else {
+				$("#layout1").css("display", "");
+				$("#layout2").css("display", "none");
 			}
+			
+			
+			
 			//console.log(me);
 			$.post('http://14.32.66.98:1111/other', me).done(function(data){
 				// 유저 정보 가공 후 출력
