@@ -13,7 +13,33 @@ function signup() {
 	location.href = "signup.html";
 }
 
-var obj = new Object();
+
+var db_submitLog = function(){
+	db.transaction(function(tx){
+		tx.executeSql('SELECT USER_NO FROM USER', [], function(tx, res){
+			var user_no = res.rows.item(0).USER_NO;
+			
+			tx.executeSql('SELECT * FROM LOG', [], function(tx, res){
+				console.log('res.rows.length=' + res.rows.length);
+				var logList = [];
+				
+				for (var i = 0; i < res.rows.length; i++) {
+					var item = res.rows.item(i);
+					var logObj = {USER_NO : user_no, ACTION : item.TITLE, START_TIME : item.START_TIME
+							, END_TIME : item.END_TIME, DURATION : item.DURATION};
+					logList.push(logObj);
+				}
+				
+				$.post('http://14.32.66.98:1111/submitLog', {'logList' : logList}).done(function(data){
+					console.log(data);
+				});
+				
+			});
+			
+		});
+	}, db_errorCB);
+};
+
 
 var db_submitLog = function(){
 	db.transaction(function(tx){
@@ -30,7 +56,6 @@ var db_submitLog = function(){
 				$.post('http://14.32.66.98:1111/other', me).done(function(data){
 					// 유저 정보 가공 후 출력
 					var otherUser = data[0];
-					//console.log(objToString);
 				
 					var gender = otherUser.GENDER;
 					setGender(gender);
