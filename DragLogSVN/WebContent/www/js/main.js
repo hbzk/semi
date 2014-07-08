@@ -22,7 +22,7 @@ var actionName, className, startTime, endTime, resultWhile, lastRow;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 $(document).ready(function(){
-	
+
 	//$("#form").css("display", "none");
 	
 	startIcon = $('#start').html();
