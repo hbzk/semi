@@ -9,7 +9,6 @@ end=0;
 var icons;
 var defaultValue;
 var iconsName;
-var clickIcon;
 var iconClick = 0;
 
 var dbLoad, iconName, defaultTime;
@@ -33,68 +32,77 @@ $(document).ready(function(){
 	dragdrop_doing();
 	dragdrop_drop();
 	
+	
+	
+	
+	$("#resultLink").click(function(){
+		db.transaction(function(tx){
+			tx.executeSql('SELECT * FROM LOG',[],function(tx,res){
+				console.log(res.rows);
+				if(res.rows.length == 0){
+					alert("log 한적 없잖아!");
+					//toast();
+				}else{
+					location.href="result_text.html";
+				}
+			});
+		});
+	});
+
+	
 	$('#middle').mouseup(function(){ // 미들 클릭시 초기화
 		dragdrop_timerCheck();
 		iconClick = 0;
-		console.log(iconClick);
+		
 		
 		/* 타이머 초기화 */
 		
 		clearTimeout(timeClock);
 		
 		/* ---- */
+		
 	});
 	
-	$(".resultLink").click(function(){
-		db.transaction(function(tx){
-			tx.executeSql('SELECT * FROM LOG',[],function(tx,res){
-				if (res.rows.length == 0 || 
-						(res.rows.length == 1 && (res.rows.item(0).ENDTIME == undefined))) {
-					alert("log 한적 없잖아!");
-					//toast();
-				}else{
-					console.log('else');
-					//location.href="result_text.html";
-				}
-			});
-		});
-	});
 	
-	$(".sub").click(function(){
-		//console.log(this);
+		$(".drag").click(function(){
+		
 		if(iconClick == 0) {
 			
-			
+		console.log(this);
+		
 		clickIcon = $(this).find('i')[0].className;
 		//console.log(clickIcon);
 		db.transaction(function(tx) {
 			// tx.executeSql('drop table if exists ACTION'); // DB 초기화
 			tx.executeSql('INSERT or REPLACE into ACTION (ICON_NAME, CLASS_NAME) VALUES ("lastclick", ?)', [clickIcon]);
 		});
-			
+		
 		setInterval(function(){
 			location.href = "functionEdit_sql.html";
 		}, 2);
 		
+		} else {
+			location.href="#";	
+			iconClick(0);
 		}
+		
+		iconClick = 1;
+		
 	});
+
+	
+	
+	
+
+	
+	
+	
+	
+	
 	
 });
-function callJS(arg) {
-	document.getElementById("replaceme").innerHTML = arg;
-}
 
-function clear() {
-	document.getElementById("replaceme").innerHTML = "";
-}
 
-function show() {
-	setTimeout(function(){		
-		window.alert();
-		AppInterface2.toast();
-		document.getElementById("aaa").innerHTML = "dd";
-	}, 3000);
-}
 
 //=====================================================================
 //드롭
@@ -108,7 +116,7 @@ function dragdrop_drop() {
 			lastIcon = $(event.toElement);
 			lastDragger = lastIcon.parent('div');
 		} else {
-			//console.log('event.toElement == div');
+			console.log('event.toElement == div');
 			lastDragger = $(event.toElement);
 			lastIcon = lastDragger.children('i');
 		}
@@ -124,7 +132,8 @@ function dragdrop_drop() {
 	        		
 	        		if(dragIcon == iconsName) {
 	        			minute = rs.rows.item(i).TIMER_VAL;
-	        			//console.log(minute);
+	        			defaultValue = rs.rows.item(i).TIMER_VAL;
+	        			console.log(defaultValue);
 	        			
 	        			end = 0;
 	        			timeclock();	
@@ -198,7 +207,7 @@ function loadMainIcon(){
 	db_selectLastRow();
 	
 	var iconDiv = $("#iconMainDiv .drag");
-	//console.log("Load DB - data (selectedIcon)");
+	console.log("Load DB - data (selectedIcon)");
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM ACTION', [], function(tx, res){
 			for( var i=0 ; i < res.rows.length ; i++){
@@ -228,7 +237,7 @@ function db_selectLastRow() {
 		tx.executeSql('SELECT * FROM LOG ORDER BY ID DESC', [], function(tx, res){
 			if (res.rows.length != 0) {
 				lastRow = res.rows.item(0);
-				//console.log(lastRow);
+				console.log(lastRow);
 			} else {
 				lastRow = 'none';
 			}
@@ -334,6 +343,19 @@ function timeclock(){
 }
 
 
+function yes() {
+	//window.location.reload();
+}
+
+function no() {
+	second = 0;
+	minute = defaultValue;
+	end = 0;    	
+	clearTimeout(timeClock);
+   timeclock();
+}
+
+
 
 
 
@@ -378,17 +400,7 @@ function onConfirm(buttonIndex) {
     }
 }
 
-function yes() {
-	window.location.reload();
-}
 
-function no() {
-	second = 0;
-	minute = defaultValue;
-	end = 0;    	
-	clearTimeout(timeClock);
-  timeclock();
-}
 
 
 // Show a custom confirmation dialog
