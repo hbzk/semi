@@ -10,38 +10,35 @@
 }
 html,body{width:100%; height: 100%;}
 *{margin: 0px; padding: 0px;}
-.header{ 
-	font-family: 'orbitron', sans-serif;
-	font-size: 1.7em;
+.header{ font-family: 'orbitron', sans-serif; font-size: 1.7em;
 	height: 50px; line-height: 50px; background: #4192D9; 
 	text-align: center; color: #fff;  font-weight: bold;
-	border: none;
-	text-shadow: none;
-	color: white;
+	border: none; text-shadow: none;	color: white;
 }
-div {line-height: 33px;}
+
 .header .mainLink{ position: absolute; left: 0; width: 70px;
 text-decoration: none; color: #fff; font-size: 100%;}
-#layout { /*  border: 1px solid #999;  */margin: 60px auto 0px; width: 320px; height: 80%; position: relative;}
+#member { /*  border: 1px solid #999;  */margin: 60px auto 0px; width: 320px; height: 80%; position: relative;}
 
-#layout div{position:relative; float: left; font-family: 'orbitron';background:#7ABAF2; /* border: 1px solid black; */}
+#member div{ position:relative; float: left; font-family: 'orbitron';background:#7ABAF2; line-height: 33px;}
 
-.userGender{width: 110px; height: 110px;  margin: 40px 10px 10px 10px;}
-
+.userGender {width: 110px; height: 110px;  margin: 40px 10px 10px 10px;}
 .userGender img{width: 110px; height: 110px;}
-
 .userAge{width: 150px; height: 30px;  margin: 80px 0px 10px 5px; text-indent: 5px}
-
 .userJob{width: 150px; height: 30px; margin: 0px 0px 10px 5px;text-indent: 5px}
-
 .userEmail{width: 275px; height: 30px;  margin: 10px 20px 10px 10px;text-indent: 5px}
-
 .userSalary{width: 275px; height: 30px; margin: 10px 20px 10px 10px;text-indent: 5px}
-
 .userSpend{width: 275px; height: 30px; margin: 10px 20px 10px 10px;text-indent: 5px; font-weight: bold;}
-
 .userScholar{width: 275px; height: 30px; margin: 10px 20px 10px 10px;text-indent: 5px;}
-
 .userMarry{width: 275px; height: 30px; margin: 10px 20px 10px 10px;text-indent: 5px;}
-
 .firstLog {width: 275px; height: 30px; margin: 10px 20px 10px 10px;text-indent: 5px;}
+
+#notMember { margin: 60px auto 0px; width: 320px; height: 80%; position: relative; }
+
+#notMember>div { margin-top: 50px; }
+.description { font-family: 'orbitron';}
+.link { height: 60px; line-height: 60px; 
+color: #fff; text-align: center; font-size: 200%; font-family: 'orbitron';}
+
+.login { background: #de0052;}
+.signup { background: #3ba3d0;}

@@ -7,16 +7,12 @@
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <title>USER INFO</title>
 </head>
-<style>
-.login {border: 1px solid red; height: 80px; background-color: green;}
-.signup {border: 1px solid red; height: 80px; background-color: yellow;}
-</style>
 <body>
 <div class="header" data-role="header">
 <a class="mainLink"onclick="location.href='main.html';">&lt;</a>
 <p>USER INFO</p>
 </div>
-<section id="layout" style="display:none;">
+<section id="member" style="display:none;">
 	<div class="userGender"></div>
 	<div class="userAge"></div>
 	<div class="userJob"></div>
@@ -25,9 +21,16 @@
 	<div class="userSpend"></div>
 	<div class="userMarry"></div>
 </section>
-<section id="layout2" style="display:none;">
-  <div class="login" onclick="login()">login</div>
-  <div class="signup" onclick="signup()">signup</div>
+<section id="notMember" style="display:none;">
+	<div>
+		<p class="description">아직 가입하지 않으셨다면</p>
+		<p class="login link" onclick="login()">LOG IN</p>
+	</div>
+
+	<div>
+		<p class="description">이미 계정이 있으시다면</p>
+		<p class="signup link" onclick="signup()">SIGN UP</p>
+	</div>
 </section>
 <script>
 
@@ -54,20 +57,20 @@ function db_userCheck(){
 				
 				us_email = res.rows.item(0).EMAIL;
 				
-				if(us_email == null) {					
-					   $("#layout2").css("display", "");
-					  $("#layout").css("display", "none");
+				if (us_email == null) {					
+					$("#member").css("display", "none");
+					$("#notMember").css("display", "");
 				} else {
-					$("#layout").css("display", "");
-					$("#layout2").css("display", "none");
+					$("#member").css("display", "");
+					$("#notMember").css("display", "none");
 				}
 				
 				
 				
 				
 				if(us_email == null){
-				//#################local DB EMAIL field가 비어있으면 ->회원가입하지않았으므로 회원가입문구 and 회원가입링크버튼보여주기
-				}else{
+				//################# local DB EMAIL field가 비어있으면 ->회원가입하지않았으므로 회원가입문구 and 회원가입링크버튼보여주기
+				} else {
 				us_gender = res.rows.item(0).GENDER;
 				us_age = res.rows.item(0).AGE;
 				us_job = res.rows.item(0).JOB;
@@ -189,8 +192,6 @@ function setAge(age){
 	} else {
 		printAge("70's~");
 	}
-	
-	
 }
 
 
