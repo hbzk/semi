@@ -35,19 +35,20 @@ $(document).ready(function(){
 	
 	
 	
-	$("#resultLink").click(function(){
+	/*$(".resultLink").click(function(){
 		db.transaction(function(tx){
 			tx.executeSql('SELECT * FROM LOG',[],function(tx,res){
-				console.log(res.rows);
+				console.log(res.rows.item(0).END_TIME == null);
 				if(res.rows.length == 0){
+					alert("Please record first");
+				} else if (res.rows.item(0).END_TIME == null) {
 					alert("log 한적 없잖아!");
-					//toast();
-				}else{
+				} else {
 					location.href="result_text.html";
 				}
 			});
 		});
-	});
+	});*/
 
 	
 	$('#middle').mouseup(function(){ // 미들 클릭시 초기화

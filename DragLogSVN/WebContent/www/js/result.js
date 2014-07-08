@@ -50,20 +50,6 @@ $(document).ready(function(){
 		$('#week').css("background",unSelectedColor);
 	});
 });
-// <-- $(document).ready
-
-/*$(document).on("click",".rtDelete",function(e){
-	if (confirm('정말 지움?')) {
-		var dbId = $(e.target).parent(".rtDelete").siblings(".rtIcon")[0].attributes[0].value;
-		clickedTable = $(e.target).parent(".rtDelete").parent(".rtTable");
-		db_delete(dbId);
-	}
-});
-
-$(document).on("click",".rtTable",function(){
-	$(clickedTable).fadeOut(700);
-});
-*/
 
 
 
@@ -177,13 +163,6 @@ var db_dayList = function () {
 				}
 			}
 		});
-	}, db_errorCB);
-};
-
-// 결과 하나 지우기
-var db_delete = function (no){
-	db.transaction(function(tx){
-		tx.executeSql("DELETE FROM LOG WHERE ID = ?",[no]);
 	}, db_errorCB);
 };
 
