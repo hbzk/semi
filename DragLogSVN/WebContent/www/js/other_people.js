@@ -19,81 +19,80 @@ var db_submitLog = function(){
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
 			var me = res.rows.item(0);
-			// 가입 안했다면
 			if (me.EMAIL == null) {
-				//alert('가입하면 다른 사람의 일상을 볼 수 있다');
 				//history.back();
-				$("#layout1").css("display", "none");
-				$("#layout2").css("display", "");
+				$("#member").css("display", "none");
+				$("#notMember").css("display", "");
 			} else {
-				$("#layout1").css("display", "");
-				$("#layout2").css("display", "none");
+				$("#member").css("display", "");
+				$("#notMember").css("display", "none");
+				
+				$.post('http://14.32.66.98:1111/other', me).done(function(data){
+					// 유저 정보 가공 후 출력
+					var otherUser = data[0];
+					//console.log(objToString);
+				
+					var gender = otherUser.GENDER;
+					setGender(gender);
+					var age = otherUser.AGE;
+					setAge(age);
+					var job = otherUser.JOB;
+					setJob(job);
+					var scholar = otherUser.SCHOLAR;
+					setScholar(scholar);
+					var salary = otherUser.SALARY;
+					setSalary(salary);
+					console.log(otherUser.SCHOLAR);
+					var spend = otherUser.SPEND;
+					setSpend(spend);
+					var marry = otherUser.MARRY;
+					setMarry(marry);
+					
+					
+					// 결과 가공 
+					var resultList = data[1];
+					var resultObj = new Object();
+					for (var i=0; i<resultList.length; i++) { 
+						if (resultList[i].END_TIME == null) {
+							console.log(resultList[i].END_TIME);
+							break;
+						}
+						if (resultObj[resultList[i].ACTION] == undefined) {
+							resultObj[resultList[i].ACTION] = resultList[i].DURATION; // 같은 값 없으면 저장
+						} else {
+							resultObj[resultList[i].ACTION] += resultList[i].DURATION; // 같은 값 있으면 합산
+						}
+					}
+					//console.log(resultObj);
+					
+					// 결과를 값 큰 순서로 정렬
+					var sortResult =[];
+					for (var title in resultObj) {
+						sortResult.push([title, resultObj[title]]);
+					};
+					sortResult.sort(function (a, b) {return b[1] - a[1];});
+					//console.log(sortResult);
+					
+					// 결과를 출력 함수가 원하는 배열[obj, obj ... ] 형태로 생성 
+					var result = [];
+					for (var i=0; i<sortResult.length ; i++) {
+						var tempObj = new Object();
+						tempObj['title'] = sortResult[i][0];
+						tempObj['value'] = sortResult[i][1];
+						tempObj['color'] =  colorList[$.inArray(sortResult[i][0], iconList)]; 		// colorList에서 해당 아이콘 색 매칭
+						
+						result.push(tempObj);
+					}
+					//console.log(result);
+					
+					// 실제 차트 그리기
+					$("#doughnutChart").drawDoughnutChart(result);
+				});
 			}
 			
 			
 			
-			//console.log(me);
-			$.post('http://14.32.66.98:1111/other', me).done(function(data){
-				// 유저 정보 가공 후 출력
-				var otherUser = data[0];
-				//console.log(objToString);
 			
-				var gender = otherUser.GENDER;
-				setGender(gender);
-				var age = otherUser.AGE;
-				setAge(age);
-				var job = otherUser.JOB;
-				setJob(job);
-				var scholar = otherUser.SCHOLAR;
-				setScholar(scholar);
-				var salary = otherUser.SALARY;
-				setSalary(salary);
-				console.log(otherUser.SCHOLAR);
-				var spend = otherUser.SPEND;
-				setSpend(spend);
-				var marry = otherUser.MARRY;
-				setMarry(marry);
-				
-				
-				// 결과 가공 
-				var resultList = data[1];
-				var resultObj = new Object();
-				for (var i=0; i<resultList.length; i++) { 
-					if (resultList[i].END_TIME == null) {
-						console.log(resultList[i].END_TIME);
-						break;
-					}
-					if (resultObj[resultList[i].ACTION] == undefined) {
-						resultObj[resultList[i].ACTION] = resultList[i].DURATION; // 같은 값 없으면 저장
-					} else {
-						resultObj[resultList[i].ACTION] += resultList[i].DURATION; // 같은 값 있으면 합산
-					}
-				}
-				//console.log(resultObj);
-				
-				// 결과를 값 큰 순서로 정렬
-				var sortResult =[];
-				for (var title in resultObj) {
-					sortResult.push([title, resultObj[title]]);
-				};
-				sortResult.sort(function (a, b) {return b[1] - a[1];});
-				//console.log(sortResult);
-				
-				// 결과를 출력 함수가 원하는 배열[obj, obj ... ] 형태로 생성 
-				var result = [];
-				for (var i=0; i<sortResult.length ; i++) {
-					var tempObj = new Object();
-					tempObj['title'] = sortResult[i][0];
-					tempObj['value'] = sortResult[i][1];
-					tempObj['color'] =  colorList[$.inArray(sortResult[i][0], iconList)]; 		// colorList에서 해당 아이콘 색 매칭
-					
-					result.push(tempObj);
-				}
-				//console.log(result);
-				
-				// 실제 차트 그리기
-				$("#doughnutChart").drawDoughnutChart(result);
-			});
 		});
 	}, db_errorCB);
 };

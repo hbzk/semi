@@ -7,29 +7,37 @@
 <link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/lineconStyle.css">
 <link rel="stylesheet" href="css/common_font.css">
-<link rel="stylesheet" href="css/resultPie.css">
+<link rel="stylesheet" href="css/result.css">
 <script>
-var naviColor = "#F895A5";
-var unSelectedColor = "#FBC0CA";
+var naviColor = "#F2B843";
+var unSelectedColor = "#FFE0A1";
 </script>
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.drawDoughnutChart.js"></script>
 <script type="text/javascript" src="js/result.js"></script>
-<script type="text/javascript" src="js/result_pie.js"></script>
-<title>LOG CHART</title>
+<!-- 더미 데이터 삽입 -->
 <style type="text/css">
-
+#type { width: 100px; height: 50px; position: absolute; bottom: 50px; right: 20px; }
 </style>
+<title>Result_text</title>
 </head>
-<body>
-<div class="header" data-role="header"><a class="mainLink"onclick="location.href='main.html';">&lt; fsdfs</a><p>LOG CHART</p></div>
-<div id="date">
-	<span class="left" >&lt;</span><span class="right">&gt;</span>
-	<p onclick="location.href='result_text.html';" >06/25</p>
-</div>
-<div class="random" onclick="location.href='other_people.html';">?
 
+<body>
+<div class="header" data-role="header"><a class="mainLink"onclick="location.href='main.html';">&lt;</a><p>LOG LIST</p></div>
+<div id="date">
+	<span class="left">&lt;</span><span class="right">&gt;</span>
+	<p id="stDt"></p>
 </div>
+
+<section id="layout">
+<div id="rtScroll">
+	<div id="resultList"></div>
+	<div id="chart"></div>
+</div>
+</section>
+
+<div class="random" onclick="location.href='other_people.html';">?</div>
+<button id="type">TYPE</button>
 
 <div class="range listNavi">
 	<div id="day" class="dateNavi">1D</div>
@@ -37,19 +45,5 @@ var unSelectedColor = "#FBC0CA";
 	<div id="month" class="monthNavi">1M</div>
 </div>
 
-<section id="layout">
-
-<div id="rtScroll">
-	<div id="doughnutChart" class="chart"></div>
-</div>
-
-
-</section>
-<!-- <a class="deleteAll" href="#"><i class="fa fa-trash-o fa-1"></i></a> -->
-
-<script>
-
-
-</script>
 </body>
 </html>

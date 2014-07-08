@@ -31,17 +31,16 @@ html,body{ height: 100%; width:100%; overflow: hidden;}
 .header .mainLink{ position: absolute; left: 0; width: 70px;
 text-decoration: none; color: #fff; font-size: 100%;}
 
-#layout { margin: 0px auto 0px; width: 320px; height: 100%; position: relative;}
+#layout { margin: 0px auto 0px; width: 320px; height: 100%; position: relative; }
 
 
 .userGender img {width: 110px; height:110px; float: left; margin-right: 23px;}
 #profile {font-family: 'orbitron'; background:#7ABAF2; height: 105px; padding-top: 5px; line-height: 17px;}
-.login {border: 1px solid red; height: 80px; margin-top: -60px; background-color: green;}
-.signup {border: 1px solid red; height: 80px; background-color: yellow;}
+.login { border: 1px solid red; height: 80px; margin-top: -60px; background-color: green;}
+.signup { border: 1px solid red; height: 80px; background-color: yellow;}
 
 
 /*--pie chart 관련 -->   */
-#rtScroll { }
 .chart {
   width: 260px;
   height: 260px;
@@ -115,12 +114,6 @@ pre { font-family: sans-serif;}
 /*<--pie chart 관련 --   */
 
 
-.deleteAll{font-size: 150%; position: absolute; bottom: 10px; left: 1px;  text-decoration: none;}
-.deleteAll i{font-size: 1.4em;color: #F0788C;}
-
-
-
-
 </style>
 </head>
 <body>
@@ -128,27 +121,28 @@ pre { font-family: sans-serif;}
 
 <section id="layout">
 
-<div id="rtScroll">
-	<div id="doughnutChart" class="chart"></div>
-	<section id="layout1" style="display:none;">
-	<div class="userGender"></div>
-	<div id="profile">
-	<div class="userAge"></div>
-	<div class="userJob"></div>
-	<div class="userEmail"></div>
-	<div class="userScholar"></div>
-	<div class="userSalary"></div>
-	<div class="userSpend"></div>
-	<div class="userMarry"></div>
+	<div id="rtScroll">
+		<section id="member" style="display:none;">
+			<div id="doughnutChart" class="chart"></div>
+			<div class="userGender"></div>
+				<div id="profile">
+				<div class="userAge"></div>
+				<div class="userJob"></div>
+				<div class="userEmail"></div>
+				<div class="userScholar"></div>
+				<div class="userSalary"></div>
+				<div class="userSpend"></div>
+				<div class="userMarry"></div>
+			</div>
+		</section>
+		
+		<section id="notMember" style="display:none;">
+		
+		  <div class="login" onclick="login()">login</div>
+		  <div class="signup" onclick="signup()">signup</div>
+		</section>
 	</div>
-	</section>
-</div>
-
-</section>
-
-<section id="layout2" style="display:none;">
-  <div class="login" onclick="login()">login</div>
-  <div class="signup" onclick="signup()">signup</div>
+	
 </section>
 
 <script>

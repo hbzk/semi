@@ -1,22 +1,28 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
-var firstResultDate, firstResultDate, targetDate, scope;
+var firstResultDate, firstResultDate, targetDate, resRows, scope;
 var dayList = []; var weekList = []; var monthList = []; 		// scope 출력을 위한 List
 var iconList = []; var colorList = [];									// chart 출력을 위한 List
+var textType = true;
 var clickedTable; 
 
 $(document).ready(function(){
 	db_dayList();			// 페이징을 위한 전체 목록
 	colorListing();
-	
+
 	scope = 'LASTDAY';	
 	db_selectSearch(scope); 	// 마지막 날 출력
 	
-	 $('.hover').bind('touchstart touchend', function(e) {
-	        e.preventDefault();
-	        $(this).toggleClass('hover_effect');
-	    });
+	$('.hover').bind('touchstart touchend', function(e) {
+		e.preventDefault();
+		$(this).toggleClass('hover_effect');
+	});
 	
-	
+	$('#type').click(function(){
+		if (textType) textType = false;
+		else textType = true;
+		
+		db_listing(textType, resRows, scope);
+	});
 	
 	// 좌/우 화살표 클릭
 	$('#date .left').click(function(){
@@ -51,6 +57,132 @@ $(document).ready(function(){
 	});
 });
 
+$('#resultList').on('swipeleft', '.rtTable', function(e) {
+	
+	if (confirm('정말 지움?')) {
+		var rtTable = e.currentTarget;
+		var dbId = $(e.currentTarget).children('.rtIcon').attr('data-id');
+		db_delete(rtTable, dbId);
+		
+	}
+});
+
+//결과 하나 지우기
+var db_delete = function (rtTable, no){
+	db.transaction(function(tx){
+		tx.executeSql("DELETE FROM LOG WHERE ID = ?",[no], function(tx, res){
+			$(rtTable).fadeOut(700);
+		});
+	}, db_errorCB);
+};
+
+
+// 결과를 Text list로 출력
+var db_listing = function (textType, resRows, scope) {
+	$('#resultList').html('').css('display', 'none');	// 리스트 초기화
+	$('#chart').html('').css('display', 'none');
+	
+	var len = resRows.length;
+	
+	if (len == 0) {
+		$('#resultList').html('기록이 없습니다');
+		$('#date .left').css('display', 'none');
+		$('#date .right').css('display', 'none');
+	} else {
+		console.log("LOG (page): " + len + " rows found.");
+		firstResultDate = resRows.item(0).strtDay;
+		
+		if (scope == 'LASTDAY') {
+			$('#date>p').text(firstResultDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
+			($.inArray(firstResultDate, dayList) > 0) ? $('#date .left').css('display', 'block') : $('#date .left').css('display', 'none');
+			$('#date .right').css('display', 'none');
+			
+		} else if (scope == 'DAY') {
+			$('#date>p').text(targetDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
+		} else if (scope == 'WEEK') {
+			$('#date>p').text(targetDate.replace(/-/g, '/').substring(5) + ' ~ 08/08');
+		} else if (scope == 'MONTH')  {
+			$('#date>p').text(targetDate.replace(/-/g, '/').substring(0, 7));
+		}
+		
+		if (resRows.item(0).END_TIME == null){
+			$('#resultList').html('오늘은 아직 기록이 없습니다');
+		} else {
+			
+			
+			// ================= TEXT 출력 =================  
+			if (textType) {
+				for (var i=0; i<len; i++){
+					var duration = resRows.item(i).DURATION;
+					if (duration < 60) {
+						duration = duration + 's';
+					} else if (duration < 3600){
+						duration = Math.floor(duration%3600/60) + 'm ' + duration%60 + 's';
+					} else {
+						duration = Math.floor(duration/3600) + 'h ' + Math.floor(duration%3600/60) + 'm ' + duration%60 + 's';
+					}
+					
+					var startTime = resRows.item(i).START_TIME;
+					var endTime = resRows.item(i).END_TIME;
+					
+					if (endTime == null) break; 			// 진행중인것 출력 방지
+					
+					$('#resultList').css('display', '')
+						.append($('<div class="rtTable">')
+							.append('<div data-id= "'+resRows.item(i).ID +'" class="rtIcon">'+'<i class= "'+resRows.item(i).CLASSNAME+'"></i></div>')
+							.append('<div class="rtTime">' + startTime.substring(11, 16) + ' ~ ' + endTime.substring(11, 16))
+							.append('<div class="rtDuration">' + duration +'</div>')
+					);
+					
+				}
+
+			// ================= CHART 출력 =================				
+			} else {
+				// 결과 누적 합산
+				var resultObj = new Object();
+				for (var i=0; i<len; i++) { 
+					if (resRows.item(i).END_TIME == null) {
+						console.log(resRows.item(i).END_TIME);
+						break;
+					}
+					if (resultObj[resRows.item(i).TITLE] == undefined) {
+						resultObj[resRows.item(i).TITLE] = resRows.item(i).DURATION; // 같은 값 없으면 저장
+					} else {
+						resultObj[resRows.item(i).TITLE] += resRows.item(i).DURATION; // 같은 값 있으면 합산
+					}
+				}
+				//console.log(resultObj);
+				
+				// 결과를 값 큰 순서로 정렬
+				var sortResult =[];
+				for (var title in resultObj) {
+					sortResult.push([title, resultObj[title]]);
+				};
+				sortResult.sort(function (a, b) {return b[1] - a[1];});
+				//console.log(sortResult);
+				
+				// 결과를 출력 함수가 원하는 배열[obj, obj ... ] 형태로 생성 
+				var result = [];
+				for (var i=0; i<sortResult.length ; i++) {
+					var tempObj = new Object();
+					tempObj['title'] = sortResult[i][0];
+					tempObj['value'] = sortResult[i][1];
+					tempObj['color'] =  colorList[$.inArray(sortResult[i][0], iconList)]; 		// colorList에서 해당 아이콘 색 매칭
+					
+					result.push(tempObj);
+				}
+				//console.log(result);
+				
+				// 실제 차트 그리기
+				$('#chart').css('display', '').drawDoughnutChart(result);
+			} 
+			
+			
+		}
+	}
+	
+};
+
 
 
 
@@ -69,7 +201,7 @@ var colorListing = function() {
 };
 
 
-// scope 클릭시 
+// scope 클릭시
 var scopeClick = function(list) {
 	targetDate = list[list.length-1]; 			// 해당 scope 마지막 기록을 타겟으로 설정
 	navDisplay(list); 								// 좌우 화살표 출력 판단
@@ -114,7 +246,8 @@ var db_selectSearch = function (scope, target) {
 		db.transaction(function(tx) {
 			tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM LOG "
 				+" WHERE START_TIME BETWEEN date("+lastActionSql+") AND date("+lastActionSql+", ?) ORDER BY START_TIME", ['+1 day'], function(tx, res) {
-					db_listing(res, scope);
+					resRows = res.rows;
+					db_listing(textType, resRows, scope);
 			});
 		}, db_errorCB);
 		
@@ -133,7 +266,8 @@ var db_selectSearch = function (scope, target) {
 		
 		db.transaction(function(tx) {
 			tx.executeSql("SELECT *, strftime('%Y-%m-%d', START_TIME) AS strtDay FROM LOG " + whereSql, [target, target], function(tx, res) {
-				db_listing(res, scope);
+				resRows = res.rows;
+				db_listing(textType, resRows, scope);
 			});
 		}, db_errorCB);
 	}
