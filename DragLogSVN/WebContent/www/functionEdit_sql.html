@@ -64,16 +64,9 @@ font-size: 180%;
 ::-webkit-input-placeholder {
    color: black;
 }
-.btn{
- width:130px;
- height:50px;
- margin-top: 50px;
- margin-left: 20px;
- float: left;
-
-}
 .button1 {
- width:125px;
+ margin-top: 80px;
+ width:205px;
  height:45px;
  border: none;
  outline:none;
@@ -89,7 +82,8 @@ font-size: 180%;
  box-shadow:none;
 }
 .button2 {
- width:125px;
+ margin-top: 40px;
+ width:205px;
  height:45px;
  border: none;
  outline:none;
@@ -111,7 +105,13 @@ font-size: 180%;
   color: white; text-align: center; 
 }
 .icons { display: none; }
-#iconSet { margin-left: 125px; }
+#align { width:100%; text-align:center; }   
+#iconSet { margin: 0 auto; width: 65px; text-align:left; }
+
+
+
+
+
 </style>
 <script type="text/javascript">
         $(function () {    
@@ -142,7 +142,7 @@ font-size: 180%;
                 $('.demo-' + demo).show();
             });
             $('#demo').trigger('change');
-               
+                         
         });
         
         
@@ -290,12 +290,12 @@ font-size: 180%;
 
 
 
-<section id="layout">
+
 
 
 <section id="functionEdit">
-<div id="iconSet">
-  
+<div class="align">
+<div id="iconSet"></div>
 </div>
   <p id="timer">Default Timer</p>
   
@@ -347,14 +347,13 @@ font-size: 180%;
 </div>
   
   
-  
+  <div class="align">
   <div id="confirm" class="btn"><input type="button" class="button1" value="CONFIRM"/></div>
   <div id="cancel" class="btn"><input type="button" class="button2" value="CANCEL"/></div>
+  </div>
   
 </section>
 
-
-</section>  
 
 
 
