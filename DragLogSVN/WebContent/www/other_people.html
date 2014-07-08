@@ -16,6 +16,9 @@
 <style type="text/css">
 .userGender img {width: 110px; height:110px; float: left; margin-right: 23px;}
 #profile {font-family: 'orbitron'; background:#7ABAF2; height: 105px; padding-top: 5px; line-height: 17px;}
+.login {border: 1px solid red; height: 80px; margin-top: -200px; background-color: green;}
+.signup {border: 1px solid red; height: 80px; background-color: yellow;}
+
 </style>
 </head>
 <body>
@@ -25,7 +28,7 @@
 
 <div id="rtScroll">
 	<div id="doughnutChart" class="chart"></div>
-	<section id="layout">
+	<section id="layout1" style="display:none;">
 	<div class="userGender"></div>
 	<div id="profile">
 	<div class="userAge"></div>
@@ -40,6 +43,12 @@
 </div>
 
 </section>
+
+<section id="layout2" style="display:none;">
+  <div class="login" onclick="login()">login</div>
+  <div class="signup" onclick="signup()">signup</div>
+</section>
+
 <script>
 
 
