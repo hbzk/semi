@@ -30,6 +30,12 @@ text-decoration: none; color: #fff; font-size: 100%;}
 #date span.left { left: 0px; }
 #date span.right { right: 0px; }
 
+.random{font-family: 'orbitron'; color: white; width: 12.8%; height: 30px;
+				padding: 0px; line-height: 30px; text-align: center;
+				margin-bottom: 5px;  position: absolute; bottom: 0px; left: 5px;
+				background: #F895A5; 
+}
+
 .listNavi{ width: 40%;  padding: 0px; line-height: 30px; text-align: center; 
 						margin-bottom: 5px;position: absolute;bottom: 0px; right: 5px; }
 .listNavi div{font-family: 'orbitron';height: 30px;  color: white;background: #FBC0CA; }
