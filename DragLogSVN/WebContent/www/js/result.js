@@ -11,15 +11,6 @@ $(document).ready(function(){
 	scope = 'LASTDAY';	
 	db_selectSearch(scope); 	// 마지막 날 출력
 	
-	$('#deleteAll').click(function(){
-		if (confirm('정말 다 지움?')) {
-			db.transaction(function(tx) { 
-				tx.executeSql("DELETE FROM LOG");
-			}, db_errorCB);
-			location.reload(true);
-		}
-	});
-	
 	 $('.hover').bind('touchstart touchend', function(e) {
 	        e.preventDefault();
 	        $(this).toggleClass('hover_effect');
@@ -61,7 +52,7 @@ $(document).ready(function(){
 });
 // <-- $(document).ready
 
-$(document).on("click",".rtDelete",function(e){
+/*$(document).on("click",".rtDelete",function(e){
 	if (confirm('정말 지움?')) {
 		var dbId = $(e.target).parent(".rtDelete").siblings(".rtIcon")[0].attributes[0].value;
 		clickedTable = $(e.target).parent(".rtDelete").parent(".rtTable");
@@ -72,7 +63,7 @@ $(document).on("click",".rtDelete",function(e){
 $(document).on("click",".rtTable",function(){
 	$(clickedTable).fadeOut(700);
 });
-
+*/
 
 
 

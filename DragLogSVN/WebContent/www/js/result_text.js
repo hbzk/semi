@@ -2,6 +2,18 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 var firstResultDate, targetDate;
 var dayList = []; 
 
+$(function(){
+	$('#resultList').on('swipeleft', '.rtTable', function(e) {
+		console.log(e);
+		
+		if (confirm('정말 지움?')) {
+			var rtTable = e.currentTarget;
+			var dbId = $(e.currentTarget).children('.rtIcon').attr('data-id');
+			db_delete(rtTable, dbId);
+			
+		}
+	});
+});
 
 //=======================================================
 // 결과를 Text list로 출력
@@ -46,7 +58,23 @@ var db_listing = function (res, scope) {
 				.append('<div data-id= "'+res.rows.item(i).ID +'" class="rtIcon">'+'<i class= "'+res.rows.item(i).CLASSNAME+'"></i></div>')
 				.append('<div class="rtTime">' + startTime.substring(11, 16) + ' ~ ' + endTime.substring(11, 16))
 				.append('<div class="rtDuration">' + duration +'</div>')
-				.append('<div class="rtDelete"><i class="fa fa-times"></i></div>')
+				/*.append('<div class="rtDelete"><i class="fa fa-times"></i></div>')*/
 		);
 	}
+};
+
+
+//결과 하나 지우기
+var db_delete = function (rtTable, no){
+	db.transaction(function(tx){
+		tx.executeSql("DELETE FROM LOG WHERE ID = ?",[no], function(tx, res){
+			$(rtTable).fadeOut(700);
+		});
+	}, db_errorCB);
+};
+
+//query 에러시 호출 함수
+var db_errorCB = function (e) {
+	console.log(e);
+	console.log("e.message :" + e.message);
 };
