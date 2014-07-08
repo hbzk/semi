@@ -4,10 +4,6 @@
 <meta charset="UTF-8">
 <meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
-<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/lineconStyle.css">
-<!-- <link rel="stylesheet" href="css/common_font.css">
-<link rel="stylesheet" href="css/resultPie.css"> -->
 
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.drawDoughnutChart.js"></script>
@@ -36,9 +32,6 @@ text-decoration: none; color: #fff; font-size: 100%;}
 
 .userGender img {width: 110px; height:110px; float: left; margin-right: 23px;}
 #profile {font-family: 'orbitron'; background:#7ABAF2; height: 105px; padding-top: 5px; line-height: 17px;}
-.login { border: 1px solid red; height: 80px; margin-top: -60px; background-color: green;}
-.signup { border: 1px solid red; height: 80px; background-color: yellow;}
-
 
 /*--pie chart 관련 -->   */
 .chart {
@@ -111,8 +104,17 @@ text-decoration: none; color: #fff; font-size: 100%;}
 }
 pre { font-family: sans-serif;}
 
-/*<--pie chart 관련 --   */
 
+/*<--pie chart 관련 --   */
+#notMember { margin: 60px auto 0px; width: 320px; height: 80%; position: relative; }
+
+#notMember>div { margin-top: 50px; }
+.description { font-family: 'orbitron';}
+.link { height: 60px; line-height: 60px; 
+color: #fff; text-align: center; font-size: 200%; font-family: 'orbitron';}
+
+.login { background: #de0052;}
+.signup { background: #3ba3d0;}
 
 </style>
 </head>
@@ -136,13 +138,19 @@ pre { font-family: sans-serif;}
 			</div>
 		</section>
 		
-		<section id="notMember" style="display:none;">
-		
-		  <div class="login" onclick="login()">login</div>
-		  <div class="signup" onclick="signup()">signup</div>
-		</section>
 	</div>
 	
+	<section id="notMember" style="display:none;">
+		<div>
+			<p class="description">아직 가입하지 않으셨다면</p>
+			<p class="login link" onclick="login()">LOG IN</p>
+		</div>
+	
+		<div>
+			<p class="description">이미 계정이 있으시다면</p>
+			<p class="signup link" onclick="signup()">SIGN UP</p>
+		</div>
+	</section>
 </section>
 
 <script>
