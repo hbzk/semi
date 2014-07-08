@@ -8,7 +8,8 @@
 <title>USER INFO</title>
 </head>
 <style>
-.link {border: 1px solid red; margin-top: 50px;}
+.login {border: 1px solid red; height: 80px; background-color: green;}
+.signup {border: 1px solid red; height: 80px; background-color: yellow;}
 </style>
 <body>
 <div class="header" data-role="header">
@@ -25,8 +26,8 @@
 	<div class="userMarry"></div>
 </section>
 <section id="layout2" style="display:none;">
-  <div class="link" onclick="login()">login</div>
-  <div class="link" onclick="signup()">signup</div>
+  <div class="login" onclick="login()">login</div>
+  <div class="signup" onclick="signup()">signup</div>
 </section>
 <script>
 
@@ -42,7 +43,7 @@ function login() {
 }
 function signup() {
 	  location.href = "signup.html";
-	}
+}
 
 
 //#################기록한것 전체삭제 기능 추가할것
