@@ -169,8 +169,9 @@ function setAge(age){
 
 function setFirstEnter(){
 	db.transaction(function(tx){
-		tx.executeSql('SELECT * FROM ACTION',[],function(tx,res){
+		tx.executeSql('SELECT * FROM LOG',[],function(tx,res){
 		 	first_log = res.rows.item(0).START_TIME;
+		 	console.log(res.rows.item(0));
 		 	first_log= first_log.substring(0,10);
 		 	$(".firstEnter").text(first_log);
 		});

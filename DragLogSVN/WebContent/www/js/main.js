@@ -45,15 +45,16 @@ $(document).ready(function(){
 		/* ---- */
 	});
 	
-	$("#resultLink").click(function(){
+	$(".resultLink").click(function(){
 		db.transaction(function(tx){
 			tx.executeSql('SELECT * FROM LOG',[],function(tx,res){
-				console.log(res.rows);
-				if(res.rows.length == 0){
+				if (res.rows.length == 0 || 
+						(res.rows.length == 1 && (res.rows.item(0).ENDTIME == undefined))) {
 					alert("log 한적 없잖아!");
 					//toast();
 				}else{
-					location.href="result_text.html";
+					console.log('else');
+					//location.href="result_text.html";
 				}
 			});
 		});
