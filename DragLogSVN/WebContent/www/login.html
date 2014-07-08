@@ -92,17 +92,19 @@ function validateForm() {
 	$.post("http://14.32.66.98:1111/emailCheck", { email: $('#email').val()})
 		.done(function(data) {
 			if (data == 'already') {
-				$('#emailCheck').text('이미 가입된 이메일입니다.');
-				$('#btnStart').removeAttr('disabled');
+				$('#emailCheck').text('가입되어 있는 이메일입니다.');
+				
+				// 암호 한글자 이상 입력시 START 버튼 활성화 
+				if ($('#password').val().length > 0) {
+					$('#btnStart').removeAttr('disabled');
+				} else {
+					$('#btnStart').attr('disabled', 'disabled');
+				}
 				
 			} else { // 가입된 이메일이 아닐때
 				$('#emailCheck').text('');
 				// 추가 조건 확인 후 버튼 활성화
-				if (validateEmail() && $('#password').val().length > 0) {
-					$('#btnStart').attr('disabled', 'disabled');
-				} else {
-					$('#btnStart').attr('disabled', 'disabled');
-				}
+				$('#btnStart').attr('disabled', 'disabled');
 			}
 	});
 }
@@ -122,8 +124,10 @@ $("#btnStart").click(function(){
 
 function db_updateUser(user){
 	db.transaction(function(tx){
-		tx.executeSql('UPDATE USER SET USER_NO=?, EMAIL =?, GENDER=?, AGE=?, JOB=? WHERE ID = 1 ',
-				[user.USER_NO, user.EMAIL, user.GENDER, user.AGE, user.JOB], function(tx, res) {
+		tx.executeSql('UPDATE USER SET USER_NO=?, EMAIL =?, GENDER=?, AGE=?, JOB=?, SALARY=?,'
+				+ ' SPEND=?, SCHOLAR=?, MARRY=? WHERE ID = 1 ',
+				[user.USER_NO, user.EMAIL, user.GENDER, user.AGE, user.JOB, user.SALARY
+				 , user.SPEND, user.SCHOLAR, user.MARRY], function(tx, res) {
 			window.location.href = "main.html";
 		});
 	}, db_errorCB);
