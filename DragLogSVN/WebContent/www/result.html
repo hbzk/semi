@@ -8,22 +8,15 @@
 <link rel="stylesheet" href="css/lineconStyle.css">
 <link rel="stylesheet" href="css/common_font.css">
 <link rel="stylesheet" href="css/result.css">
-<script>
-var naviColor = "#F2B843";
-var unSelectedColor = "#FFE0A1";
-</script>
+
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/jquery.drawDoughnutChart.js"></script>
 <script type="text/javascript" src="js/result.js"></script>
-<!-- 더미 데이터 삽입 -->
-<style type="text/css">
-#type { width: 100px; height: 50px; position: absolute; bottom: 50px; right: 20px; }
-</style>
-<title>Result_text</title>
+<title>Result</title>
 </head>
 
 <body>
-<div class="header" data-role="header"><a class="mainLink"onclick="location.href='main.html';">&lt;</a><p>LOG LIST</p></div>
+<div class="header" data-role="header"><a class="mainLink"onclick="location.href='main.html';">&lt;</a><p>LOG Result</p></div>
 <div id="date">
 	<span class="left">&lt;</span><span class="right">&gt;</span>
 	<p id="stDt"></p>
@@ -31,13 +24,14 @@ var unSelectedColor = "#FFE0A1";
 
 <section id="layout">
 <div id="rtScroll">
+	<p id="description"></p>
 	<div id="resultList"></div>
 	<div id="chart"></div>
 </div>
 </section>
 
 <div class="random" onclick="location.href='other_people.html';">?</div>
-<button id="type">TYPE</button>
+<div id="type">CHART</div>
 
 <div class="range listNavi">
 	<div id="day" class="dateNavi">1D</div>

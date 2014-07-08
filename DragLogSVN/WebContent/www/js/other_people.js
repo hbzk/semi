@@ -4,6 +4,7 @@ var iconList = ["beer", "book", "bookmark", "bulb", "child", "code", "coffee", "
 
 $(function(){
 	db_submitLog();
+	db_getOtherLog();
 });
 
 function login() {
@@ -14,7 +15,9 @@ function signup() {
 }
 
 
+// 사용자의 전체 LOG 서버로 업데이트
 var db_submitLog = function(){
+	console.log(123);
 	db.transaction(function(tx){
 		tx.executeSql('SELECT USER_NO FROM USER', [], function(tx, res){
 			var user_no = res.rows.item(0).USER_NO;
@@ -41,7 +44,8 @@ var db_submitLog = function(){
 };
 
 
-var db_submitLog = function(){
+// 랜덤 조건의 다른 사용자 LOG 얻기
+var db_getOtherLog = function(){
 	db.transaction(function(tx){
 		tx.executeSql('SELECT * FROM USER', [], function(tx, res){
 			var me = res.rows.item(0);
@@ -114,10 +118,6 @@ var db_submitLog = function(){
 					$("#doughnutChart").drawDoughnutChart(result);
 				});
 			}
-			
-			
-			
-			
 		});
 	}, db_errorCB);
 };

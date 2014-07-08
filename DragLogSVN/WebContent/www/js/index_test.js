@@ -89,7 +89,7 @@ function db_allDrop(){
 		tx.executeSql('drop table if exists LOG');
 		tx.executeSql('drop table if exists ACTION');
 		
-		tx.executeSql('drop table if exists ICONLIST');
+		db_init();
 	}, db_errorCB);
 }
 

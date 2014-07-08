@@ -154,7 +154,7 @@
 		if(originData < 60){
 			produceData = 	originData + 'sec';
 		}else if (originData < 3600) {
-			produceData = Math.floor(originData%3600/60) + 'min';
+			produceData = Math.floor(originData%3600/60) + 'min\n' +  Math.floor(originData%3600%60) + 'sec';
 		} else {
 			produceData = Math.floor(originData/3600) + 'hr\n' + Math.floor(originData%3600/60) + 'min';
 		}
@@ -214,7 +214,7 @@
     		if(log_text < 60){
     			log_text = 	log_text + 'sec';
     		}else if (log_text < 3600) {
-    			log_text = Math.floor(log_text%3600/60) + 'min';
+    			log_text = Math.floor(log_text%3600/60) + 'min\n' + Math.floor(log_text%3600%60) + 'sec';
 		} else {
 			log_text = Math.floor(log_text/3600) + 'hr\n' + Math.floor(log_text%3600/60) + 'min';
 		}

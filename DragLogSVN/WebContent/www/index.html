@@ -14,7 +14,6 @@ var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 
 $(function(){
 	db_init();
-	db_redirect()
 });
 
 function db_allDrop(){
@@ -70,7 +69,10 @@ function db_init() {
 			+ ' UNION SELECT 0,"spoon", "fa fa-spoon", 60, "#F0947C"'
 			+ ' UNION SELECT 0,"code", "fa fa-code", 22, "#064B75"'
 			+ ' UNION SELECT 0,"keyboard", "fa fa-keyboard-o", 60, "#008899"');
-			//db_redirect();
+		
+		// 초기화 완료 후 페이지 이동
+		db_redirect();
+		
 	}, db_errorCB);
 }
 

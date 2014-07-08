@@ -4,6 +4,8 @@ var dayList = []; var weekList = []; var monthList = []; 		// scope 출력을 �
 var iconList = []; var colorList = [];									// chart 출력을 위한 List
 var textType = true;
 var clickedTable; 
+var naviColor = "#F2B843";
+var unSelectedColor = "#FFE0A1";
 
 $(document).ready(function(){
 	db_dayList();			// 페이징을 위한 전체 목록
@@ -18,8 +20,8 @@ $(document).ready(function(){
 	});
 	
 	$('#type').click(function(){
-		if (textType) textType = false;
-		else textType = true;
+		if (textType) { textType = false; $('#type').html('TEXT'); }
+		else { textType = true; $('#type').text('CHART'); }
 		
 		db_listing(textType, resRows, scope);
 	});
@@ -85,7 +87,7 @@ var db_listing = function (textType, resRows, scope) {
 	var len = resRows.length;
 	
 	if (len == 0) {
-		$('#resultList').html('기록이 없습니다');
+		$('#description').html('아직 기록이 없습니다');
 		$('#date .left').css('display', 'none');
 		$('#date .right').css('display', 'none');
 	} else {
@@ -106,7 +108,7 @@ var db_listing = function (textType, resRows, scope) {
 		}
 		
 		if (resRows.item(0).END_TIME == null){
-			$('#resultList').html('오늘은 아직 기록이 없습니다');
+			$('#description').html('선택된 기간에 기록이 없습니다');
 		} else {
 			
 			
