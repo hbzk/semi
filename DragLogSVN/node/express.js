@@ -53,62 +53,70 @@ app.post('/other', function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	var me = req.body;
-	console.log('---- me.USER_NO :' + me.USER_NO);
-	var usersSql = 'SELECT l.USER_NO FROM LOG AS l'
-		+ ' INNER JOIN USER AS u ON l.USER_NO = u.USER_NO'
-		+ ' WHERE (l.USER_NO != '+me.USER_NO+')' 
-		+ ' AND ('
-		+ ' (GENDER != '+me.GENDER+' AND AGE>='+me.AGE+'-3 AND AGE<='+me.AGE+'+3 AND JOB='+me.JOB+')'
-		+ ' OR (GENDER != '+me.GENDER+' AND AGE>='+me.AGE+'-3 AND AGE<='+me.AGE+'+3 AND SALARY='+me.SALARY+')'
-		+ ' OR (GENDER != '+me.GENDER+' AND AGE>='+me.AGE+'-3 AND AGE<='+me.AGE+'+3 AND SCHOLAR='+me.SCHOLAR+')'
-		+ ' OR (GENDER != '+me.GENDER+' AND JOB='+me.JOB+' AND SALARY='+me.SALARY+')'
-		+ ' OR (GENDER != '+me.GENDER+' AND JOB='+me.JOB+' AND SCHOLAR='+me.SCHOLAR+')'
-		+ ' OR (GENDER != '+me.GENDER+' AND SALARY='+me.SALARY+' AND SCHOLAR='+me.SCHOLAR+')'
-
-		+ ' OR (GENDER = '+me.GENDER+' AND AGE>='+me.AGE+'-3 AND AGE<='+me.AGE+'+3)'
-		+ ' OR (GENDER = '+me.GENDER+' AND JOB='+me.JOB+')'
-		+ ' OR (GENDER = '+me.GENDER+' AND SALARY='+me.SALARY+')'
-		+ ' OR (GENDER = '+me.GENDER+' AND SCHOLAR='+me.SCHOLAR+')'
-		+ ' )'
-		+ ' AND (START_TIME < CURDATE()) ';
-	dbconn.query(usersSql ,function(err, rows) {
-		if (err) { console.log(err); throw err; }
-		if (rows.length == 0) { res.send('0users'); } 
-		else {
-			var users = [];
-			for (var i=0; i<rows.length; i++) {
-				if (users.indexOf(rows[i].USER_NO) === -1) users.push(rows[i].USER_NO);
-			}
-			var ran = Math.floor(Math.random() * users.length);
-			var randomNo = users[ran];
-			console.log('---- Random user :' + randomNo);
+	console.log(me);
+	
+	if (me.EMAIL == '' || me.GENDER == '' || me.AGE == '' || me.JOB == '' 
+		|| me.SALARY == '' || me.SPEND == '' || me.SCHOLAR == '' || me.MARRY == '') {
+		res.send('0signup');
+	} else {
+		var usersSql = 'SELECT l.USER_NO FROM LOG AS l'
+			+ ' INNER JOIN USER AS u ON l.USER_NO = u.USER_NO'
+			+ ' WHERE (l.USER_NO != '+me.USER_NO+')' 
+			+ ' AND ('
+			+ ' (GENDER != '+me.GENDER+' AND AGE>='+me.AGE+'-3 AND AGE<='+me.AGE+'+3 AND JOB='+me.JOB+')'
+			+ ' OR (GENDER != '+me.GENDER+' AND AGE>='+me.AGE+'-3 AND AGE<='+me.AGE+'+3 AND SALARY='+me.SALARY+')'
+			+ ' OR (GENDER != '+me.GENDER+' AND AGE>='+me.AGE+'-3 AND AGE<='+me.AGE+'+3 AND SCHOLAR='+me.SCHOLAR+')'
+			+ ' OR (GENDER != '+me.GENDER+' AND JOB='+me.JOB+' AND SALARY='+me.SALARY+')'
+			+ ' OR (GENDER != '+me.GENDER+' AND JOB='+me.JOB+' AND SCHOLAR='+me.SCHOLAR+')'
+			+ ' OR (GENDER != '+me.GENDER+' AND SALARY='+me.SALARY+' AND SCHOLAR='+me.SCHOLAR+')'
 			
-			dbconn.query('SELECT * FROM USER WHERE (USER_NO = ?)', randomNo
-			,function(err, rows) {
-				if (err) { console.log(err); throw err; }
-				delete rows[0].EMAIL;
-				delete rows[0].PASSWORD;
+			+ ' OR (GENDER = '+me.GENDER+' AND AGE>='+me.AGE+'-3 AND AGE<='+me.AGE+'+3)'
+			+ ' OR (GENDER = '+me.GENDER+' AND JOB='+me.JOB+')'
+			+ ' OR (GENDER = '+me.GENDER+' AND SALARY='+me.SALARY+')'
+			+ ' OR (GENDER = '+me.GENDER+' AND SCHOLAR='+me.SCHOLAR+')'
+			+ ' )'
+			+ ' AND (START_TIME < CURDATE()) ';
+		dbconn.query(usersSql ,function(err, rows) {
+			if (err) { console.log(err); throw err; }
+			if (rows.length == 0) { res.send('0users'); } 
+			else {
+				var users = [];
+				for (var i=0; i<rows.length; i++) {
+					if (users.indexOf(rows[i].USER_NO) === -1) users.push(rows[i].USER_NO);
+				}
+				var ran = Math.floor(Math.random() * users.length);
+				var randomNo = users[ran];
+				console.log('---- Random user :' + randomNo);
 				
-				var data = [];
-				data.push(rows[0]);
-				dbconn.query('SELECT * FROM LOG WHERE (USER_NO = ?) AND START_TIME>= '
-						+ ' (SELECT DATE(START_TIME) AS lastSt FROM LOG WHERE (USER_NO = ?) '
-						+ ' ORDER BY lastSt DESC LIMIT 1)', [randomNo, randomNo]
-				,function(err, rows) {
+				dbconn.query('SELECT * FROM USER WHERE (USER_NO = ?)', randomNo
+						,function(err, rows) {
 					if (err) { console.log(err); throw err; }
-					if (rows.length == 0) { res.send('0log'); }
-					else {
-						data.push(rows);
-						res.send(data);
-					}
+					delete rows[0].EMAIL;
+					delete rows[0].PASSWORD;
 					
+					var data = [];
+					data.push(rows[0]);
+					dbconn.query('SELECT * FROM LOG WHERE (USER_NO = ?) AND START_TIME>= '
+							+ ' (SELECT DATE(START_TIME) AS lastSt FROM LOG WHERE (USER_NO = ?) '
+							+ ' ORDER BY lastSt DESC LIMIT 1)', [randomNo, randomNo]
+							,function(err, rows) {
+								if (err) { console.log(err); throw err; }
+								if (rows.length == 0) { res.send('0log'); }
+								else {
+									data.push(rows);
+									res.send(data);
+								}
+								
+							});
 				});
-			});
-		}
+			}
+			
+			
+			
+		});
 		
-		
-		
-	});
+	}
+	
 });
 
 // 장비에서 서버로 기록 보내기
