@@ -16,7 +16,6 @@ var db_config = {
 	password : 'semi',
 	database:'semidb'
 };
-
 // connection 에러로 서버 다운 방지
 var handleDisconnect = function() {
 	dbconn = mysql.createConnection(db_config);
@@ -39,6 +38,8 @@ var handleDisconnect = function() {
 };
 handleDisconnect();
 
+
+
 //test
 app.post('/test', function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
@@ -59,12 +60,22 @@ app.post('/sns', function(req,res){
 	var logNo = req.body.no;
 	var result = req.body.result;
 	
-	var snsSql = 'INSERT IGNORE INTO LOG (NO, TITLE, COLOR, VALUE) VALUE ('
+	var snsSql = 'INSERT IGNORE INTO SNS_LOG (NO, TITLE, COLOR, VALUE) VALUE ('
 		+logNo+', '+result[0].title+', '+result[0].color+', '+result[0].value+')';
 	for (var i=1; i<result.length; i++) {
 		snsSql += ', ('+logNo+', '+result[i].title+', '+result[i].color+', '+result[i].value+')';
 	}
 	console.log(snsSql);
+	
+	dbconn.query(snsSql, function(err, rows){
+		if (err) {
+			console.log(err);
+            throw err;
+		}
+		console.log(rows);
+		res.send(rows.insertId.toString());
+	});
+	
 	
 });
 
