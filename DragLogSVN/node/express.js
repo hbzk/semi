@@ -50,7 +50,7 @@ app.post('/test', function(req,res){
 });
 
 // SNS 공유
-app.post('/sns', function(req,res){
+app.post('/snsShare', function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
@@ -73,8 +73,6 @@ app.post('/sns', function(req,res){
 		console.log(rows);
 		res.send(rows.insertId.toString());
 	});
-	
-	
 });
 
 

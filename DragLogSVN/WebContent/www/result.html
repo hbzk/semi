@@ -49,12 +49,11 @@
 </body>
 
 <script type="text/javascript">
-
-
+var url = 'http://14.32.66.98:1110/sns/snsResult.html?p=';
+var txt = '내 Log를 보도록';
 $(function(){
 	$('#submit').on('click', function(){
 		var sns = $('#select option:selected').val();
-		var url = 'http://14.32.66.98:1110/sns/snsResult.html';
 		var txt = 'My Log';
 		sendSns(sns, url, txt);
 	});
@@ -69,11 +68,11 @@ $(function(){
 function facebook() {
 	if (result.length != 0) {
 		// 유니크 URL 만들기
-		url = SHA1(userNo + new Date());
+		url += SHA1(userNo + new Date());
 		console.log(url);
 		
 		// URL과 result[] 전송
-		$.post('http://14.32.66.98:1111/sns', {no: url, result: result})
+		$.post('http://14.32.66.98:1111/snsShare', {no: url, result: result})
 		.done(function(data) {
 			console.log(data);
 			
