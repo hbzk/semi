@@ -180,7 +180,7 @@ var db_listing = function (textType, resRows, scope) {
 				//console.log(sortResult);
 				
 				// 결과를 출력 함수가 원하는 배열[obj, obj ... ] 형태로 생성 
-				
+				result = [];
 				for (var i=0; i<sortResult.length ; i++) {
 					var tempObj = new Object();
 					tempObj['title'] = sortResult[i][0];

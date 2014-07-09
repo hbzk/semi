@@ -49,7 +49,7 @@
 </body>
 
 <script type="text/javascript">
-var url = 'http://14.32.66.98:1110/sns/snsResult.html?p=';
+var url = 'http://14.32.66.98:1110/sns/snsResult.jsp?p=';
 var txt = '내 Log를 보도록';
 $(function(){
 	$('#submit').on('click', function(){
@@ -68,14 +68,14 @@ $(function(){
 function facebook() {
 	if (result.length != 0) {
 		// 유니크 URL 만들기
-		url += SHA1(userNo + new Date());
-		console.log(url);
+		var snsUrl = SHA1(userNo + new Date());
 		
 		// URL과 result[] 전송
-		$.post('http://14.32.66.98:1111/snsShare', {no: url, result: result})
+		$.post('http://14.32.66.98:1111/snsShare', {no: snsUrl, result: result})
 		.done(function(data) {
 			console.log(data);
-			
+			url += snsUrl;
+			console.log(url);
 			sendSns('facebook', url, '내 Log를 보도록');
 		});
 		
