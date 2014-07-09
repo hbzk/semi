@@ -5,15 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/sha1.js"></script>
+<script type="text/javascript" src="js/jquery.toastmessage.js"></script>
+<link rel="stylesheet" href="css/jquery.toastmessage.css">
 <title>LOG IN</title>
 <style type="text/css">
 @font-face{
-		font-family: 'orbitron';
-		src: url('./font/orbitron-black-webfont.woff') format('woff');
+    font-family: 'orbitron';
+    src: url('./font/orbitron-black-webfont.woff') format('woff');
 }
 @font-face{
-		font-family: 'nanumGothic;
-		src: url('./font/NanumGothic.woff') format('woff');		
+    font-family: 'nanumGothic;
+    src: url('./font/NanumGothic.woff') format('woff');   
 }
 * { margin: 0; padding: 0;}
 :focus { outline: 0;}
@@ -54,90 +56,98 @@ footer a{font-family: 'nanumGothic'; text-decoration: none;}
 </form>
 
 <footer>
-	<a href="#">Forgot your password?</a>
+  <a href="#">Forgot your password?</a>
 </footer>
 
 <script type="text/javascript">
 var emailVal;
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024); 
 function oninputEmail() {
-	emailVal = $('#email').val();
-	
-	if (validateEmail()) {
-		$('#emailValidate').text('');
-	} else {
-		$('#emailValidate').text('이메일 형식으로 입력해주세요');
-	}
-	
-	validateForm();
+  emailVal = $('#email').val();
+  
+  if (validateEmail()) {
+    $('#emailValidate').text('');
+  } else {
+    $('#emailValidate').text('이메일 형식으로 입력해주세요');
+  }
+  
+  validateForm();
 }
 
 function oninputPwd() {
-	validateForm();
+  validateForm();
 }
 
 function validateEmail() {
-	if (emailVal.length > 4 && emailVal.match("@") &&
-			emailVal.indexOf("@") + 1 < emailVal.indexOf(".", emailVal.indexOf("@")) &&
-			emailVal.length - 1 > emailVal.indexOf(".", emailVal.indexOf("@"))) {
-		$('#emailValidate').text('가입되지 않은 이메일 입니다.');
-			return true;
-	} else {
-		return false;
-	}
+  if (emailVal.length > 4 && emailVal.match("@") &&
+      emailVal.indexOf("@") + 1 < emailVal.indexOf(".", emailVal.indexOf("@")) &&
+      emailVal.length - 1 > emailVal.indexOf(".", emailVal.indexOf("@"))) {
+    $('#emailValidate').text('가입되지 않은 이메일 입니다.');
+      return true;
+  } else {
+    return false;
+  }
 }
 
 //이메일 가입 여부 확인
 function validateForm() {
-	$.post("http://14.32.66.98:1111/emailCheck", { email: $('#email').val()})
-		.done(function(data) {
-			if (data == 'already') {
-				$('#emailCheck').text('가입되어 있는 이메일입니다.');
-				
-				// 암호 한글자 이상 입력시 START 버튼 활성화 
-				if ($('#password').val().length > 0) {
-					$('#btnStart').removeAttr('disabled');
-				} else {
-					$('#btnStart').attr('disabled', 'disabled');
-				}
-				
-			} else { // 가입된 이메일이 아닐때
-				$('#emailCheck').text('');
-				// 추가 조건 확인 후 버튼 활성화
-				$('#btnStart').attr('disabled', 'disabled');
-			}
-	});
+  $.post("http://14.32.66.98:1111/emailCheck", { email: $('#email').val()})
+    .done(function(data) {
+      if (data == 'already') {
+        $('#emailCheck').text('가입되어 있는 이메일입니다.');
+        
+        // 암호 한글자 이상 입력시 START 버튼 활성화 
+        if ($('#password').val().length > 0) {
+          $('#btnStart').removeAttr('disabled');
+        } else {
+          $('#btnStart').attr('disabled', 'disabled');
+        }
+        
+      } else { // 가입된 이메일이 아닐때
+        $('#emailCheck').text('');
+        // 추가 조건 확인 후 버튼 활성화
+        $('#btnStart').attr('disabled', 'disabled');
+      }
+  });
 }
 
 $("#btnStart").click(function(){
-	console.log(SHA1($('#password').val()));
-	$.post('http://14.32.66.98:1111/login', { email : $('#email').val(), password: SHA1($('#password').val()) })
-		.done(function(data){
-			console.log(data);
-			if (data == 'no') {
-				alert('암호가 다르다');
-			} else {
-				db_updateUser(data);
-			}
-		});
+  console.log(SHA1($('#password').val()));
+  $.post('http://14.32.66.98:1111/login', { email : $('#email').val(), password: SHA1($('#password').val()) })
+    .done(function(data){
+      console.log(data);
+      if (data == 'no') {
+        //alert('암호가 다르다');
+        $().toastmessage('showToast',{
+              text     : '비밀번호 틀렸거등요',
+              stayTime : 1500,
+              sticky   : false,
+              position : 'middle-center',
+              type     : 'error',
+              close    : function () {console.log("toast is closed ...");}
+          });
+      } else {
+        db_updateUser(data);
+      }
+    });
 });
 
 function db_updateUser(user){
-	db.transaction(function(tx){
-		tx.executeSql('UPDATE USER SET USER_NO=?, EMAIL =?, GENDER=?, AGE=?, JOB=?, SALARY=?,'
-				+ ' SPEND=?, SCHOLAR=?, MARRY=? WHERE ID = 1 ',
-				[user.USER_NO, user.EMAIL, user.GENDER, user.AGE, user.JOB, user.SALARY
-				 , user.SPEND, user.SCHOLAR, user.MARRY], function(tx, res) {
-			window.location.href = "main.html";
-		});
-	}, db_errorCB);
+  db.transaction(function(tx){
+    tx.executeSql('UPDATE USER SET USER_NO=?, EMAIL =?, GENDER=?, AGE=?, JOB=?, SALARY=?,'
+        + ' SPEND=?, SCHOLAR=?, MARRY=? WHERE ID = 1 ',
+        [user.USER_NO, user.EMAIL, user.GENDER, user.AGE, user.JOB, user.SALARY
+         , user.SPEND, user.SCHOLAR, user.MARRY], function(tx, res) {
+      window.location.href = "main.html";
+    });
+  }, db_errorCB);
 }
-		
+    
 function db_errorCB(e) { // query 에러시 호출 함수
-	console.log(e);
-	console.log("e.message :" + e.message);
+  console.log(e);
+  console.log("e.message :" + e.message);
 }
-		
+    
 </script>
 </body>
 </html>
