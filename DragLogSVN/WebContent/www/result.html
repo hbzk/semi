@@ -82,19 +82,21 @@ function facebook() {
 		// DB에 보낼 데이터 가공
 		console.log(result);
 		
-/* 		var snsSql = 'INSERT IGNORE INTO LOG (NO, TITLE, COLOR, VALUE) VALUE ('
-				+userNo+', '+result[0].title+', '+result[0].color+', '+result[0].value+')';
+ 		var snsSql = 'INSERT IGNORE INTO LOG (NO, TITLE, COLOR, VALUE) VALUE ('
+				+userNo+', '+result[0].title+', '+result[0].color.substring(1)+', '+result[0].value+')';
 		for (i=1; i<result.length; i++) {
 			console.log(result[i]);
 			console.log(result[i].title);
-			snsSql += ' ,('+result[i].title+', '+result[i].color+', '+result[i].value+')';
+			snsSql += ' ,('+result[i].title+', '+result[i].color.substring(1)+', '+result[i].value+')';
 		}
-		console.log(snsSql); */
+		console.log(snsSql); 
 		
-		$.post('http://14.32.66.98:1111/sns', user)
+		$.post('http://14.32.66.98:1111/sns', {no: url, result: result})
 		.done(function(data) {
-			
+			console.log(data.result);
 		});
+		
+		
 		
 		// DB에 데이터 INSERT
 		
@@ -105,7 +107,7 @@ function facebook() {
 	}
 }
 
-
+console.log('#2182jd'.substring(1));
 
 function sendSns(sns, url, txt)
 {
