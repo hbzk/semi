@@ -57,26 +57,16 @@ $(document).ready(function(){
 		$('#day').css("background",unSelectedColor);
 		$('#week').css("background",unSelectedColor);
 	});
-});
-
-$('#resultList').on('swipeleft', '.rtTable', function(e) {
 	
-	if (confirm('정말 지움?')) {
-		var rtTable = e.currentTarget;
-		var dbId = $(e.currentTarget).children('.rtIcon').attr('data-id');
-		db_delete(rtTable, dbId);
-		
-	}
-});
 
-//결과 하나 지우기
-var db_delete = function (rtTable, no){
-	db.transaction(function(tx){
-		tx.executeSql("DELETE FROM LOG WHERE ID = ?",[no], function(tx, res){
-			$(rtTable).fadeOut(700);
-		});
-	}, db_errorCB);
-};
+	
+
+
+});
+/*------> $(function(){ });*/
+
+
+
 
 
 // 결과를 Text list로 출력
@@ -137,7 +127,20 @@ var db_listing = function (textType, resRows, scope) {
 					);
 					
 				}
-
+				
+				// 결과 한 줄 지우기
+				$('.rtTable').swipe({
+					swipeLeft:function(event, direction, distance, duration, fingerCount) {
+						var eventRow = ($(event.target).parents('.rtTable').length == 1) ? $(event.target).parents('.rtTable') : $(event.target);
+						var eventNo = eventRow.find('.rtIcon').attr('data-id');
+						
+						if (confirm('정말 삭제하시겠습니까?')) {
+							db_delete(eventRow, eventNo);
+						}
+					},
+					threshold:50
+				});
+				
 			// ================= CHART 출력 =================				
 			} else {
 				// 결과 누적 합산
@@ -189,6 +192,14 @@ var db_listing = function (textType, resRows, scope) {
 
 
 // ================================================= 함수 정의
+//결과 하나 지우기
+var db_delete = function(rtTable, no) {
+	db.transaction(function(tx){
+		tx.executeSql("DELETE FROM LOG WHERE ID = ?",[no], function(tx, res){
+			$(rtTable).fadeOut(700);
+		});
+	}, db_errorCB);
+};
 
 // chart에서 사용할 colorList 만들기
 var colorListing = function() {
