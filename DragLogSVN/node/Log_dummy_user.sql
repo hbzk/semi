@@ -24,4 +24,8 @@ VALUES ("kokore@gd.com", 2, 31, 2, 5, 250, 4, 1)
 
 ,("usoda@naver.com", 1, 31, 2, 5, 210, 4, 2)
 
+,("semil@semil.com", 1, 27, 3, 3, 180, 3, 2)
+
+,("java@java.com", 1. 24, 3, 5, 500, 3, 2)
+
  
