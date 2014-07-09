@@ -2,53 +2,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
-<link rel="stylesheet" href="font/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/lineconStyle.css">
-<link rel="stylesheet" href="css/common_font.css">
-<link rel="stylesheet" href="css/result.css">
-
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="js/jquery.touchSwipe.js"></script>
-<script type="text/javascript" src="js/jquery.drawDoughnutChart.js"></script>
-<script type="text/javascript" src="js/sha1.js"></script>
-<script type="text/javascript" src="js/result.js"></script>
-<title>Result</title>
+<title>SNS TEST</title>
 <style type="text/css">
-#facebook { width: 100px; height: 50px; margin-left: 50px; font-size: 130%;}
+body, body * { margin: 0; padding: 0; font-size: 15pt;}
+select { width: 100px; height: 50px; margin: 50px 0 0 50px; }
+#submit { width: 100px; height: 30px; margin: 0px;}
 </style>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 </head>
-
 <body>
-<div class="header" data-role="header"><a class="mainLink"onclick="location.href='main.html';">&lt;</a><p>LOG Result</p></div>
-<div id="date">
-	<span class="left">&lt;</span><span class="right">&gt;</span>
-	<p id="stDt"></p>
-</div>
 
-<section id="layout">
-<div id="rtScroll">
-	<p id="description"></p>
-	<div id="resultList"></div>
-	<div id="chart"></div>
-</div>
-</section>
-
-<div class="random" onclick="location.href='other_people.html';">?</div>
-<div id="type">CHART</div>
-
-<button id="facebook">Facebook</button>
-
-<div class="range listNavi">
-	<div id="day" class="dateNavi">1D</div>
- 	<div id="week" class="weekNavi">1W</div>
-	<div id="month" class="monthNavi">1M</div>
-</div>
+<select id="select">
+	<option value="facebook">facebook</option>
+	<option value="twitter">twitter</option>
+	<option value="kakaotalk">kakaotalk</option>
+	<option value="band">band</option>
+</select>
+<button id="submit">submit</button>
 
 </body>
-
 <script type="text/javascript">
+
 
 
 $(function(){
@@ -61,52 +36,10 @@ $(function(){
 	
 	
 	$('#facebook').on('click', function(){
-		facebook();
+		console.log(result);
 	});
 
 });
-
-function facebook() {
-	if (result.length != 0) {
-		// 유니크 URL 만들기
-		console.log(userNo);
-		console.log(new Date());
-		url = SHA1(userNo + new Date());
-		console.log(url);
-		
-		
-		
-		
-		
-		
-		// DB에 보낼 데이터 가공
-		console.log(result);
-		
-/* 		var snsSql = 'INSERT IGNORE INTO LOG (NO, TITLE, COLOR, VALUE) VALUE ('
-				+userNo+', '+result[0].title+', '+result[0].color+', '+result[0].value+')';
-		for (i=1; i<result.length; i++) {
-			console.log(result[i]);
-			console.log(result[i].title);
-			snsSql += ' ,('+result[i].title+', '+result[i].color+', '+result[i].value+')';
-		}
-		console.log(snsSql); */
-		
-		$.post('http://14.32.66.98:1111/sns', user)
-		.done(function(data) {
-			
-		});
-		
-		// DB에 데이터 INSERT
-		
-		
-		
-		
-		
-	}
-}
-
-
-
 function sendSns(sns, url, txt)
 {
     var o;

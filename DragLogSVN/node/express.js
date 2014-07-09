@@ -46,7 +46,27 @@ app.post('/test', function(req,res){
 	
 	console.log(req.body);
 	res.send(req.body);
+	
+	var snsSql = 'INSERT IGNORE INTO LOG (NO, TITLE, COLOR, VALUE) VALUE ('
+		+userNo+', '+result[0].title+', '+result[0].color+', '+result[0].value+')';
+	for (var i=1; i<result.length; i++) {
+		console.log(result[i]);
+		console.log(result[i].title);
+		snsSql += ' ,('+result[i].title+', '+result[i].color+', '+result[i].value+')';
+	}
+	console.log(snsSql);
+	
 });
+
+// SNS 공유
+app.post('/sns', function(req,res){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	
+	console.log(req.body);
+	res.send(req.body);
+});
+
 
 // 다른 사람의 어제 기록 보기
 app.post('/other', function(req,res){

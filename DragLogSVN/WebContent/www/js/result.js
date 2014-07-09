@@ -1,7 +1,8 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
-var firstResultDate, firstResultDate, targetDate, resRows, scope;
+var firstResultDate, firstResultDate, targetDate, resRows, scope, userNo;
 var dayList = []; var weekList = []; var weekEndList = []; var monthList = []; 		// scope 출력을 위한 List
 var iconList = []; var colorList = [];									// chart 출력을 위한 List
+var result = [];
 var textType = true;
 var clickedTable; 
 var naviColor = "#F2B843";
@@ -10,7 +11,9 @@ var unSelectedColor = "#FFE0A1";
 $(document).ready(function(){
 	db_dayList();			// 페이징을 위한 전체 목록
 	colorListing();
-
+	
+	getUserNo();
+	
 	scope = 'LASTDAY';	
 	db_selectSearch(scope); 	// 마지막 날 출력
 	
@@ -57,7 +60,6 @@ $(document).ready(function(){
 		$('#day').css("background",unSelectedColor);
 		$('#week').css("background",unSelectedColor);
 	});
-	
 
 });
 /*------> $(function(){ });*/
@@ -178,7 +180,7 @@ var db_listing = function (textType, resRows, scope) {
 				//console.log(sortResult);
 				
 				// 결과를 출력 함수가 원하는 배열[obj, obj ... ] 형태로 생성 
-				var result = [];
+				
 				for (var i=0; i<sortResult.length ; i++) {
 					var tempObj = new Object();
 					tempObj['title'] = sortResult[i][0];
@@ -209,6 +211,17 @@ var db_delete = function(rtTable, no) {
 		});
 	}, db_errorCB);
 };
+
+// 로컬 DB에서 USER_NO 얻기
+var getUserNo = function() {
+	db.transaction(function(tx){
+		tx.executeSql("SELECT USER_NO FROM USER WHERE ID = 1", [], function(tx, res){
+			userNo = res.rows.item(0).USER_NO;
+			console.log('--- USER_NO : ' + userNo);
+		});
+	}, db_errorCB);
+};
+
 
 // chart에서 사용할 colorList 만들기
 var colorListing = function() {
