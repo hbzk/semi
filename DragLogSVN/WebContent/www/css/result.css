@@ -32,7 +32,7 @@ width: 30%; height: 30px; line-height: 30px;}
 	color: #2E3233; font-weight: bold; margin: 0px auto 0px; text-align: center; }
 #rtScroll { overflow: hidden; position:absolute; height: 100%; width:320px;}
 #resultList { height: 100%; width: 340px; overflow: auto;}
-#date span { position: absolute; width: 70px;}
+#date span { position: absolute; width: 70px; font-family: 'orbitron', sans-serif;}
 #date span.left { left: 0px; }
 #date span.right { right: 0px; }
 

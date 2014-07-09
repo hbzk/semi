@@ -1,6 +1,6 @@
 var db = window.openDatabase("Database", "1.0", "LogDB", 2 * 1024 * 1024);
 var firstResultDate, firstResultDate, targetDate, resRows, scope;
-var dayList = []; var weekList = []; var monthList = []; 		// scope 출력을 위한 List
+var dayList = []; var weekList = []; var weekEndList = []; var monthList = []; 		// scope 출력을 위한 List
 var iconList = []; var colorList = [];									// chart 출력을 위한 List
 var textType = true;
 var clickedTable; 
@@ -58,7 +58,6 @@ $(document).ready(function(){
 		$('#week').css("background",unSelectedColor);
 	});
 	
-	
 
 });
 /*------> $(function(){ });*/
@@ -84,15 +83,18 @@ var db_listing = function (textType, resRows, scope) {
 		
 		if (scope == 'LASTDAY') {
 			$('#date>p').text(firstResultDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
-			($.inArray(firstResultDate, dayList) > 0) ? $('#date .left').css('display', 'block') : $('#date .left').css('display', 'none');
+			($.inArray(firstResultDate, dayList) > 0) ? $('#date .left').css('display', '') : $('#date .left').css('display', 'none');
 			$('#date .right').css('display', 'none');
 			
 		} else if (scope == 'DAY') {
-			$('#date>p').text(targetDate.replace(/-/g, '/').substring(5)); 	// 날짜 출력
+			$('#date>p').text(targetDate.replace(/-/g, '/').substring(5))
+				.css('font-size', '200%'); 	// 날짜 출력
 		} else if (scope == 'WEEK') {
-			$('#date>p').text(targetDate.replace(/-/g, '/').substring(5) + ' ~ 08/08');
+			$('#date>p').text(targetDate.replace(/-/g, '/').substring(5) + ' ~ ' + weekEndList[weekList.indexOf(targetDate)])
+				.css('font-size', '150%');
 		} else if (scope == 'MONTH')  {
-			$('#date>p').text(targetDate.replace(/-/g, '/').substring(0, 7));
+			$('#date>p').text(targetDate.replace(/-/g, '/').substring(0, 7))
+				.css('font-size', '200%');
 		}
 		
 		if (resRows.item(0).END_TIME == null){
@@ -190,11 +192,8 @@ var db_listing = function (textType, resRows, scope) {
 				// 실제 차트 그리기
 				$('#chart').css('display', '').drawDoughnutChart(result);
 			} 
-			
-			
 		}
 	}
-	
 };
 
 
@@ -256,8 +255,8 @@ var taggetting = function (list, direction) {
 
 // 좌우 화살표 출력 판단
 var navDisplay = function (list) {
-	(targetDate == list[0]) ? $('#date .left').css('display', 'none') : $('#date .left').css('display', 'block');
-	(targetDate == list[list.length-1]) ? $('#date .right').css('display', 'none') : $('#date .right').css('display', 'block');
+	(targetDate == list[0]) ? $('#date .left').css('display', 'none') : $('#date .left').css('display', '');
+	(targetDate == list[list.length-1]) ? $('#date .right').css('display', 'none') : $('#date .right').css('display', '');
 };
 
 
@@ -310,8 +309,10 @@ var db_dayList = function () {
 					
 					// 주 목록(weekList) 만들기
 					var mondayTemp = localISOString(getLastMonday(res.rows.item(i).strtDay)).substring(0, 10);
+					var sundayTemp = localISOString(getNextSunday(res.rows.item(i).strtDay)).substring(5, 10);
 					if ($.inArray(mondayTemp, weekList) == -1) { 		
 						weekList.push(mondayTemp);
+						weekEndList.push(sundayTemp);
 					}
 					// 월 목록(monthList) 만들기
 					if ($.inArray(res.rows.item(i).strtMonth.concat('-01'), monthList) == -1) { 		
