@@ -56,13 +56,13 @@ app.post('/sns', function(req,res){
 	console.log(req.body);
 	res.send(req.body);
 	
+	var logNo = req.body.no;
+	var result = req.body.result;
 	
 	var snsSql = 'INSERT IGNORE INTO LOG (NO, TITLE, COLOR, VALUE) VALUE ('
-		+userNo+', '+result[0].title+', '+result[0].color+', '+result[0].value+')';
+		+logNo+', '+result[0].title+', '+result[0].color+', '+result[0].value+')';
 	for (var i=1; i<result.length; i++) {
-		console.log(result[i]);
-		console.log(result[i].title);
-		snsSql += ' ,('+result[i].title+', '+result[i].color+', '+result[i].value+')';
+		snsSql += ', ('+logNo+', '+result[i].title+', '+result[i].color+', '+result[i].value+')';
 	}
 	console.log(snsSql);
 	
@@ -146,19 +146,22 @@ app.post('/submitLog', function(req, res) {
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
 	var logList = req.body.logList;
-	var logSQL = 'INSERT IGNORE INTO LOG (USER_NO, ACTION, START_TIME, END_TIME, DURATION) ' 
-		+ ' VALUES ('+logList[0].USER_NO+',"'+logList[0].ACTION+'","'+logList[0].START_TIME+'","'+logList[0].END_TIME+'",'+logList[0].DURATION+')';
-	
-	for (var i = 1; i < logList.length; i++) {
-		logSQL += ',\n ('+logList[i].USER_NO+',"'+logList[i].ACTION+'","'+logList[i].START_TIME+'","'+logList[i].END_TIME+'",'+logList[i].DURATION+')';
-	}
-	
-	dbconn.query(logSQL, function(err, rows){
-		if (err) { console.log(err); throw err; }
+	if (logList != undefined) {
+		var logSQL = 'INSERT IGNORE INTO LOG (USER_NO, ACTION, START_TIME, END_TIME, DURATION) ' 
+			+ ' VALUES ('+logList[0].USER_NO+',"'+logList[0].ACTION+'","'+logList[0].START_TIME+'","'+logList[0].END_TIME+'",'+logList[0].DURATION+')';
 		
-		console.log(rows);
-		res.send(rows);
-	});
+		for (var i = 1; i < logList.length; i++) {
+			logSQL += ',\n ('+logList[i].USER_NO+',"'+logList[i].ACTION+'","'+logList[i].START_TIME+'","'+logList[i].END_TIME+'",'+logList[i].DURATION+')';
+		}
+		
+		dbconn.query(logSQL, function(err, rows){
+			if (err) { console.log(err); throw err; }
+			
+			console.log(rows);
+			res.send(rows);
+		});
+		
+	}
 	
 });
 

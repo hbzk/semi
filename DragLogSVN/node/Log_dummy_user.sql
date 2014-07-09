@@ -2,11 +2,7 @@
 
 INSERT IGNORE INTO USER (EMAIL, GENDER, AGE, JOB, SALARY, SPEND, SCHOLAR, MARRY)
 
-VALUES 
-
- 
-
-,("kokore@gd.com", 2, 31, 2, 5, 250, 4, 1)
+VALUES ("kokore@gd.com", 2, 31, 2, 5, 250, 4, 1)
 
 ,("uverworld@yahoo.com", 2, 32, 2, 5, 260, 4, 2)
 
