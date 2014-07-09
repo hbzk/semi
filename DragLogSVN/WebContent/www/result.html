@@ -69,45 +69,19 @@ $(function(){
 function facebook() {
 	if (result.length != 0) {
 		// 유니크 URL 만들기
-		console.log(userNo);
-		console.log(new Date());
 		url = SHA1(userNo + new Date());
 		console.log(url);
 		
-		
-		
-		
-		
-		
-		// DB에 보낼 데이터 가공
-		console.log(result);
-		
- 		var snsSql = 'INSERT IGNORE INTO LOG (NO, TITLE, COLOR, VALUE) VALUE ('
-				+userNo+', '+result[0].title+', '+result[0].color.substring(1)+', '+result[0].value+')';
-		for (i=1; i<result.length; i++) {
-			console.log(result[i]);
-			console.log(result[i].title);
-			snsSql += ' ,('+result[i].title+', '+result[i].color.substring(1)+', '+result[i].value+')';
-		}
-		console.log(snsSql); 
-		
+		// URL과 result[] 전송
 		$.post('http://14.32.66.98:1111/sns', {no: url, result: result})
 		.done(function(data) {
-			console.log(data.result);
+			console.log(data);
+			
+			sendSns('facebook', url, '내 Log를 보도록');
 		});
-		
-		
-		
-		// DB에 데이터 INSERT
-		
-		
-		
-		
 		
 	}
 }
-
-console.log('#2182jd'.substring(1));
 
 function sendSns(sns, url, txt)
 {
