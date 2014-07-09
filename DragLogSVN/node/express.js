@@ -46,6 +46,16 @@ app.post('/test', function(req,res){
 	
 	console.log(req.body);
 	res.send(req.body);
+});
+
+// SNS 공유
+app.post('/sns', function(req,res){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	
+	console.log(req.body);
+	res.send(req.body);
+	
 	
 	var snsSql = 'INSERT IGNORE INTO LOG (NO, TITLE, COLOR, VALUE) VALUE ('
 		+userNo+', '+result[0].title+', '+result[0].color+', '+result[0].value+')';
@@ -56,15 +66,6 @@ app.post('/test', function(req,res){
 	}
 	console.log(snsSql);
 	
-});
-
-// SNS 공유
-app.post('/sns', function(req,res){
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	
-	console.log(req.body);
-	res.send(req.body);
 });
 
 
