@@ -58,9 +58,7 @@ $(document).ready(function(){
 		$('#week').css("background",unSelectedColor);
 	});
 	
-
 	
-
 
 });
 /*------> $(function(){ });*/
@@ -124,6 +122,7 @@ var db_listing = function (textType, resRows, scope) {
 							.append('<div data-id= "'+resRows.item(i).ID +'" class="rtIcon">'+'<i class= "'+resRows.item(i).CLASSNAME+'"></i></div>')
 							.append('<div class="rtTime">' + startTime.substring(11, 16) + ' ~ ' + endTime.substring(11, 16))
 							.append('<div class="rtDuration">' + duration +'</div>')
+							.append('<div class="rtDelete" style="display:none;"><i class="fa fa-times"></i></div>')
 					);
 					
 				}
@@ -131,14 +130,24 @@ var db_listing = function (textType, resRows, scope) {
 				// 결과 한 줄 지우기
 				$('.rtTable').swipe({
 					swipeLeft:function(event, direction, distance, duration, fingerCount) {
-						var eventRow = ($(event.target).parents('.rtTable').length == 1) ? $(event.target).parents('.rtTable') : $(event.target);
-						var eventNo = eventRow.find('.rtIcon').attr('data-id');
+						eventRow = ($(event.target).parents('.rtTable').length == 1) ? $(event.target).parents('.rtTable') : $(event.target);
+						eventNo = eventRow.find('.rtIcon').attr('data-id');
+						eventDelete = eventRow.find('.rtDelete');
+						eventDuration = eventRow.find('.rtDuration');
 						
-						if (confirm('정말 삭제하시겠습니까?')) {
-							db_delete(eventRow, eventNo);
-						}
-					},
-					threshold:50
+						eventDuration.fadeOut(700);
+						eventDelete.fadeIn(700);
+						
+					}, threshold:50,
+					
+					swipeRight:function(event, distance, duration, fingerCount, fingerData) {
+						eventDuration.fadeIn(500);
+						eventDelete.fadeOut(500);
+					}, threshold:50,
+				});
+				
+				$('.rtDelete').click(function(){
+					db_delete(eventRow, eventNo);
 				});
 				
 			// ================= CHART 출력 =================				
@@ -192,6 +201,7 @@ var db_listing = function (textType, resRows, scope) {
 
 
 // ================================================= 함수 정의
+
 //결과 하나 지우기
 var db_delete = function(rtTable, no) {
 	db.transaction(function(tx){

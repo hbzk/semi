@@ -45,22 +45,23 @@ width: 30%; height: 30px; line-height: 30px;}
  
  .naviColor{background:#F2B843;}
  
-.rtTable{	width : auto; float: left; clear: both; margin-bottom: 5px; border-bottom: 1px solid #CCCCCC;}
+.rtTable{	width : 295px; float: left; clear: both; margin-bottom: 5px; border-bottom: 1px solid #CCCCCC; position: relative;}
 .rtIcon{width: 40px;height: 40px;margin-left: 20px;text-align: center;}
 
 .rtTime{width: 110px;height: 30px;padding-top: 10px;margin-left: 25px;text-indent: 10px; }
-.rtDuration{width: 90px;	height: 30px;	padding-top: 10px;margin-left: 10px;text-align: center;}
+.rtDuration{ width: 90px; height: 30px; padding-top: 10px; margin-left: 10px; text-align: center;}
 
-.rtDelete{margin-top: 10px;margin-left: 20px;}
+.rtDelete{ position: absolute; right: 0px;
+width: 90px; height: 30px; padding-top: 10px; margin-left: 10px; }
 
 .rtDelete i{
-	background: #999;
-	opacity: 0.5;
+	background: red;
+	opacity: 0.9;
 	display: block; width: 20px; height: 20px; line-height: 20px; font-size: 1.0em;
 	border-radius: 10px; -webkit-border-radius: 10px;	-moz-border-radius: 10px;
 	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.15); border: 0px; 
 	color: white; text-align: center;	
-	
+	margin-left: 35px;
 }
 .rtDuration,.rtTime{
 		/* font-family: 'orbitron-i', sans-serif; */
