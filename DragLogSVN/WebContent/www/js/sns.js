@@ -64,8 +64,14 @@ function sendSns(sns, url, txt)
     switch(o.method)
     {
         case 'popup':
-        		window.semi.newBrower(o.url);
-            //window.open(o.url, '_blank');
+        	
+        		var isMobile = (navigator.userAgent.match(/(android)|(iphone)|(ipod)|(ipad)/i));
+        		if(isMobile) {
+        			Android.showToast(o.url);
+        		} else {
+        			window.open(o.url);
+        		}
+        		
             break;
  
         case 'web2app':

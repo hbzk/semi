@@ -90,6 +90,7 @@ $(function(){
 		
 		// 모바일이거나, 페북이거나, 트윗이면
 		if(isMobile || sns=='facebook' || sns=='twitter') {
+			
 			$.post('http://14.32.66.98:1111/snsShare', {urlParam: urlParam, scope: scope, period: period, result: result})
 			.done(function(data) {
 				console.log(data);
