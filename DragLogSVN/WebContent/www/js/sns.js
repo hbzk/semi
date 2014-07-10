@@ -24,8 +24,7 @@ function sendSns(sns, url, txt)
         case 'kakaotalk':
             o = {
                 method:'web2app',
-                /* param:'sendurl?msg=' + _txt + '&url=' + _url + '&type=link&apiver=2.0.1&appver=2.0&appid=dev.epiloum.net&appname=' + encodeURIComponent('semiLog'), */
-                param:'sendurl?msg=' + _txt + '&url=' + _url + '&type=link&apiver=2.0.1&appver=2.0&appid=dev.epiloum.net&appname=' + encodeURIComponent('semiLog'), 
+                param:'sendurl?msg=' + _txt + '&url=' + _url + '&type=link&apiver=2.0.1&appname=' + encodeURIComponent('semiLog'), 
                 a_store:'itms-apps://itunes.apple.com/app/id362057947?mt=8',
                 g_store:'market://details?id=com.kakao.talk',
                 a_proto:'kakaolink://',
@@ -36,7 +35,6 @@ function sendSns(sns, url, txt)
         case 'kakaostory':
             o = {
                 method:'web2app',
-                /* param:'posting?post=' + _txt + _br + _url + '&apiver=1.0&appver=2.0&appid=dev.epiloum.net&appname=' + encodeURIComponent('semiLog'), */
                 param:'posting?post=' + _txt + _br + _url + '&apiver=1.0&appname=' + encodeURIComponent('semiLog'),
                 a_store:'itms-apps://itunes.apple.com/app/id486244601?mt=8',
                 g_store:'market://details?id=com.kakao.story',
