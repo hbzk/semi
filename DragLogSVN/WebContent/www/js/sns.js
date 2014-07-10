@@ -64,7 +64,7 @@ function sendSns(sns, url, txt)
     switch(o.method)
     {
         case 'popup':
-            window.open(o.url);
+            window.open(o.url, '_blank');
             break;
  
         case 'web2app':
