@@ -28,6 +28,7 @@ $(document).ready(function(){
 			$('#type').text('TEXT'); 
 			$('#share').css('display', '');
 			$('#shareDiv').css('display', 'none');
+			
 		} else { 
 			textType = true;
 			$('#type').text('CHART');
@@ -88,6 +89,8 @@ var db_listing = function (textType, resRows, scope) {
 		$('#description').html('아직 기록이 없습니다');
 		$('#date .left').css('display', 'none');
 		$('#date .right').css('display', 'none');
+		
+		$('#share').css('display', 'none');
 	} else {
 		//console.log("LOG (page): " + len + " rows found.");
 		firstResultDate = resRows.item(0).strtDay;
@@ -161,6 +164,8 @@ var db_listing = function (textType, resRows, scope) {
 				
 				$('.rtDelete').click(function(){
 					db_delete(eventRow, eventNo);
+					
+					db_selectSearch(scope, targetDate); // 리스트 갱신
 				});
 				
 			// ================= CHART 출력 =================				
@@ -202,7 +207,8 @@ var db_listing = function (textType, resRows, scope) {
 				
 				// 실제 차트 그리기
 				$('#chart').css('display', '').drawDoughnutChart(result);
-			} 
+				
+			}
 		}
 	}
 };
@@ -225,8 +231,10 @@ var db_delete = function(rtTable, no) {
 var getUserNo = function() {
 	db.transaction(function(tx){
 		tx.executeSql("SELECT USER_NO FROM USER WHERE ID = 1", [], function(tx, res){
-			userNo = res.rows.item(0).USER_NO;
-			console.log('--- USER_NO : ' + userNo);
+			if (res.rows.length != 0) {
+				userNo = res.rows.item(0).USER_NO;
+				console.log('--- USER_NO : ' + userNo);
+			}
 		});
 	}, db_errorCB);
 };

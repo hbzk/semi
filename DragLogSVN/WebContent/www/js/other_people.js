@@ -17,13 +17,12 @@ function signup() {
 
 // 사용자의 전체 LOG 서버로 업데이트
 var db_submitLog = function(){
-	console.log(123);
 	db.transaction(function(tx){
 		tx.executeSql('SELECT USER_NO FROM USER', [], function(tx, res){
 			var user_no = res.rows.item(0).USER_NO;
 			
 			tx.executeSql('SELECT * FROM LOG', [], function(tx, res){
-				console.log('res.rows.length=' + res.rows.length);
+				console.log('res.rows.length : ' + res.rows.length);
 				var logList = [];
 				
 				for (var i = 0; i < res.rows.length; i++) {

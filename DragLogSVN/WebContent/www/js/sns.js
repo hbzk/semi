@@ -76,7 +76,7 @@ function sendSns(sns, url, txt)
             if(navigator.userAgent.match(/android/i))
             {
                 // Android
-                setTimeout(function(){ location.href = 'intent://' + o.param + '#Intent;' + o.g_proto + ';end';}, 100);
+                setTimeout(function(){ location.href = 'intent://' + decodeURIComponent(o.param) + '#Intent;' + o.g_proto + ';end';}, 100);
             }
             else if(navigator.userAgent.match(/(iphone)|(ipod)|(ipad)/i))
             {
