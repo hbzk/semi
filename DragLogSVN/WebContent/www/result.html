@@ -14,16 +14,16 @@
 <script type="text/javascript" src="js/jquery.drawDoughnutChart.js"></script>
 <script type="text/javascript" src="js/sha1.js"></script>
 <script type="text/javascript" src="js/result.js"></script>
+<script type="text/javascript" src="js/sns.js"></script>
 <title>Result</title>
 <style type="text/css">
 #facebook { width: 100px; height: 50px; margin-left: 50px; font-size: 130%;}
 
-#share { position: absolute; bottom: 50px; right: 10px; width: 50px; height: 50px; z-index: 9; }
-#shareDiv { background: #ccc; 
-position: absolute; bottom: 50px; width: 100%; 
+#share { position: absolute; top: 355px; right: 10px; width: 40px; height: 45px; z-index: 9; 
+opacity: 0.35;}
+#shareDiv {  position: absolute; bottom: 10%; width: 100%; 
 text-align: center; }
-#shareDiv img { width: 50px; height: 50px; margin: 0 10px; }
-
+#shareDiv img { width: 40px; height: 40px; margin: 0 1.5%; box-shadow: 2px 2px 7px #bbb; border-radius: 5px;}
 </style>
 </head>
 
@@ -45,15 +45,15 @@ text-align: center; }
 <div class="random" onclick="location.href='other_people.html';">?</div>
 <div id="type">CHART</div>
 
-<button id="facebook">Facebook</button>
-<img id="share" src="icon/share.png">
+<!-- <button id="facebook">Facebook</button> -->
+<img id="share" src="icon/sh-transparent.png">
 
-<div id="shareDiv">
-	<img id="facebookIcon" src="icon/katalk.png">
-	<img id="facebookIcon" src="icon/katalk.png">
-	<img id="facebookIcon" src="icon/katalk.png">
-	<img id="facebookIcon" src="icon/katalk.png">
-	<img id="facebookIcon" src="icon/katalk.png">
+<div id="shareDiv"><!-- style="display: none;"-->
+	<img id="facebook" src="icon/f-Facebook.png">
+	<img id="twitter" src="icon/t-twitter.png">
+	<img id="kakaotalk" src="icon/k-kakao.png">
+	<img id="kakaostory" src="icon/ks-kakaoStory.png">
+	<img id="band" src="icon/b-BAND.png">
 	
 </div>
 
@@ -66,137 +66,47 @@ text-align: center; }
 </body>
 
 <script type="text/javascript">
+var shareHide = true;
 
 $(function(){
-	$('#submit').on('click', function(){
-		var sns = $('#select option:selected').val();
-		var txt = 'My Log';
-		sendSns(sns, url, txt);
-	});
 	
+	$('#share').on('click', function(){
+		if (shareHide) { $('#shareDiv').fadeToggle(700); shareHide = false;}
+		else { $('#shareDiv').fadeToggle(400); shareHide = true;}
+	})
 	
-	$('#facebook').on('click', function(){
-		facebook();
-	});
-
-});
-
-function facebook() {
-	if (result.length != 0) {
-		// 유니크 Parameter 만들기
-		var sns = 'facebook';
+	$('#shareDiv>img').on('click', function(e) {
+		console.log(e.target.id);
+		
+		
+		var sns = e.target.id;
 		var url = 'http://14.32.66.98:1110/sns/snsResult.jsp?p=';
-		var txt = 'semiLog My Result';
+		var txt = 'semiLog ; My Result\n';
 		
 		var urlParam = SHA1(userNo + new Date());
 		var period = $('#stDt').text();
 		
 		// 결과용 데이터 node.js 로 전송
-		$.post('http://14.32.66.98:1111/snsShare', {urlParam: urlParam, scope: scope, period: period, result: result})
+		var isMobile = (navigator.userAgent.match(/(android)|(iphone)|(ipod)|(ipad)/i));
+		
+		// 모바일이거나, 페북이거나, 트윗이면
+		if(isMobile || sns=='facebook' || sns=='twitter') {
+			alert('ok');
+		} else {
+			alert('모바일 전용');
+		}
+			
+		/* $.post('http://14.32.66.98:1111/snsShare', {urlParam: urlParam, scope: scope, period: period, result: result})
 		.done(function(data) {
 			console.log(data);
 			url += urlParam;
 			console.log(url);
 			sendSns(sns, url, txt);
-		});
-		
-	}
-}
+		}); */
+	});
+	
+});
 
-function sendSns(sns, url, txt)
-{
-    var o;
-    var _url = encodeURIComponent(url);
-    var _txt = encodeURIComponent(txt);
-    var _br  = encodeURIComponent('\r\n');
- 
-    switch(sns)
-    {
-        case 'facebook':
-            o = {
-                method:'popup',
-                url:'http://www.facebook.com/sharer/sharer.php?u=' + _url
-            };
-            break;
- 
-        case 'twitter':
-            o = {
-                method:'popup',
-                url:'http://twitter.com/intent/tweet?text=' + _txt + '&url=' + _url
-            };
-            break;
- 
-        case 'me2day':
-            o = {
-                method:'popup',
-                url:'http://me2day.net/posts/new?new_post[body]=' + _txt + _br + _url + '&new_post[tags]=semiLog'
-            };
-            break;
- 
-        case 'kakaotalk':
-            o = {
-                method:'web2app',
-                /* param:'sendurl?msg=' + _txt + '&url=' + _url + '&type=link&apiver=2.0.1&appver=2.0&appid=dev.epiloum.net&appname=' + encodeURIComponent('semiLog'), */
-                param:'sendurl?msg=' + _txt + '&url=' + _url + '&type=link&apiver=2.0.1&appver=2.0&appid=dev.epiloum.net&appname=' + encodeURIComponent('semiLog'), 
-                a_store:'itms-apps://itunes.apple.com/app/id362057947?mt=8',
-                g_store:'market://details?id=com.kakao.talk',
-                a_proto:'kakaolink://',
-                g_proto:'scheme=kakaolink;package=com.kakao.talk'
-            };
-            break;
- 
-        case 'kakaostory':
-            o = {
-                method:'web2app',
-                /* param:'posting?post=' + _txt + _br + _url + '&apiver=1.0&appver=2.0&appid=dev.epiloum.net&appname=' + encodeURIComponent('semiLog'), */
-                param:'posting?post=' + _txt + _br + _url + '&apiver=1.0&appname=' + encodeURIComponent('semiLog'),
-                a_store:'itms-apps://itunes.apple.com/app/id486244601?mt=8',
-                g_store:'market://details?id=com.kakao.story',
-                a_proto:'storylink://',
-                g_proto:'scheme=kakaolink;package=com.kakao.story'
-            };
-            break;
- 
-        case 'band':
-            o = {
-                method:'web2app',
-                param:'create/post?text=' + _txt + _br + _url,
-                a_store:'itms-apps://itunes.apple.com/app/id542613198?mt=8',
-                g_store:'market://details?id=com.nhn.android.band',
-                a_proto:'bandapp://',
-                g_proto:'scheme=bandapp;package=com.nhn.android.band'
-            };
-            break;
- 
-        default:
-            alert('지원하지 않는 SNS입니다.');
-            return false;
-    }
- 
-    switch(o.method)
-    {
-        case 'popup':
-            window.open(o.url);
-            break;
- 
-        case 'web2app':
-            if(navigator.userAgent.match(/android/i))
-            {
-                // Android
-                setTimeout(function(){ location.href = 'intent://' + o.param + '#Intent;' + o.g_proto + ';end'}, 100);
-            }
-            else if(navigator.userAgent.match(/(iphone)|(ipod)|(ipad)/i))
-            {
-                // Apple
-                setTimeout(function(){ location.href = o.a_store; }, 200);          
-                setTimeout(function(){ location.href = o.a_proto + o.param }, 100);
-            }
-            else
-            {
-                alert('이 기능은 모바일에서만 사용할 수 있습니다.');
-            }
-            break;
-    }
-}
+console.log(!false);
 </script>
 </html>
