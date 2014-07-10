@@ -54,7 +54,7 @@ app.post('/snsShare', function(req,res){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
-	//console.log(req.body);
+	console.log(req.body);
 	var urlParam = req.body.urlParam;
 	var scope = req.body.scope;
 	var period = req.body.period;
@@ -62,8 +62,11 @@ app.post('/snsShare', function(req,res){
 	
 	var snsSql = 'INSERT IGNORE INTO SNS_LOGS (URL_PARAM, SCOPE, PERIOD, TITLE, COLOR, VAL) VALUES ("'
 		+urlParam+'", "'+scope+'", "'+period+'", "'+result[0].title+'", "'+result[0].color+'", '+result[0].value+')';
-	for (var i=1; i<result.length; i++) {
-		snsSql += ', ("'+urlParam+'", "'+scope+'", "'+period+'", "'+result[0].title+'", "'+result[0].color+'", '+result[0].value+')';
+	
+	if (result.length > 1) {
+		for (var i=1; i<result.length; i++) {
+			snsSql += ', ("'+urlParam+'", "'+scope+'", "'+period+'", "'+result[i].title+'", "'+result[i].color+'", '+result[i].value+')';
+		}
 	}
 	console.log(snsSql);
 	
