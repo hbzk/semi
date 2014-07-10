@@ -55,13 +55,15 @@ app.post('/snsShare', function(req,res){
 	res.header("Access-Control-Allow-Headers", "X-Requested-With");
 	
 	//console.log(req.body);
-	var logNo = req.body.no;
+	var urlParam = req.body.urlParam;
+	var scope = req.body.scope;
+	var period = req.body.period;
 	var result = req.body.result;
 	
-	var snsSql = 'INSERT IGNORE INTO SNS_LOGS (URL, TITLE, COLOR, VAL) VALUES ("'
-		+logNo+'", "'+result[0].title+'", "'+result[0].color+'", '+result[0].value+')';
+	var snsSql = 'INSERT IGNORE INTO SNS_LOGS (URL_PARAM, SCOPE, PERIOD, TITLE, COLOR, VAL) VALUES ("'
+		+urlParam+'", "'+scope+'", "'+period+'", "'+result[0].title+'", "'+result[0].color+'", '+result[0].value+')';
 	for (var i=1; i<result.length; i++) {
-		snsSql += ', ("'+logNo+'", "'+result[i].title+'", "'+result[i].color+'", '+result[i].value+')';
+		snsSql += ', ("'+urlParam+'", "'+scope+'", "'+period+'", "'+result[0].title+'", "'+result[0].color+'", '+result[0].value+')';
 	}
 	console.log(snsSql);
 	
