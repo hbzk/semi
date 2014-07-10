@@ -45,10 +45,9 @@ text-align: center; }
 <div class="random" onclick="location.href='other_people.html';">?</div>
 <div id="type">CHART</div>
 
-<!-- <button id="facebook">Facebook</button> -->
-<img id="share" src="icon/sh-transparent.png">
+<img id="share" src="icon/sh-transparent.png" style="display: none;">
 
-<div id="shareDiv"><!-- style="display: none;"-->
+<div id="shareDiv" style="display: none;"><!-- style="display: none;"-->
 	<img id="facebook" src="icon/f-Facebook.png">
 	<img id="twitter" src="icon/t-twitter.png">
 	<img id="kakaotalk" src="icon/k-kakao.png">
@@ -71,7 +70,7 @@ var shareHide = true;
 $(function(){
 	
 	$('#share').on('click', function(){
-		if (shareHide) { $('#shareDiv').fadeToggle(700); shareHide = false;}
+		if (shareHide) { $('#shareDiv').fadeToggle(1000); shareHide = false;}
 		else { $('#shareDiv').fadeToggle(400); shareHide = true;}
 	})
 	
@@ -107,6 +106,5 @@ $(function(){
 	
 });
 
-console.log(!false);
 </script>
 </html>
