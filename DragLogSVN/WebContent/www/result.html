@@ -28,7 +28,7 @@ text-align: center; }
 </head>
 
 <body>
-<div class="header" data-role="header"><a class="mainLink"onclick="location.href='main.html';">&lt;</a><p>LOG Result</p></div>
+<div class="header" data-role="header"><a class="mainLink" onclick="location.href='main.html';">&lt;</a><p>LOG Result</p></div>
 <div id="date">
 	<span class="left">&lt;</span><span class="right">&gt;</span>
 	<p id="stDt"></p>
@@ -90,6 +90,14 @@ $(function(){
 		// 모바일이거나, 페북이거나, 트윗이면
 		if(isMobile || sns=='facebook' || sns=='twitter') {
 			
+			
+			// 테스트 코드
+			/* url += urlParam;
+			console.log(url);
+			sendSns(sns, url, txt); */
+			
+			
+			// 실제 코드
 			$.post('http://14.32.66.98:1111/snsShare', {urlParam: urlParam, scope: scope, period: period, result: result})
 			.done(function(data) {
 				console.log(data);

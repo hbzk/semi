@@ -21,10 +21,17 @@ function sendSns(sns, url, txt)
             };
             break;
  
+        case 'me2day':
+            o = {
+                method:'popup',
+                url:'http://me2day.net/posts/new?new_post[body]=' + _txt + _br + _url + '&new_post[tags]=semiLog'
+            };
+            break;
+ 
         case 'kakaotalk':
             o = {
                 method:'web2app',
-                param:'sendurl?msg=' + _txt + '&url=' + _url + '&type=link&apiver=2.0.1&appname=' + encodeURIComponent('semiLog'), 
+                param:'sendurl?msg=' + _txt + '&url=' + _url + '&type=link&apiver=2.0.1&appver=2.0&appid=dev.semi.semiLog&appname=' + encodeURIComponent('semiLog'),
                 a_store:'itms-apps://itunes.apple.com/app/id362057947?mt=8',
                 g_store:'market://details?id=com.kakao.talk',
                 a_proto:'kakaolink://',
@@ -35,7 +42,7 @@ function sendSns(sns, url, txt)
         case 'kakaostory':
             o = {
                 method:'web2app',
-                param:'posting?post=' + _txt + _br + _url + '&apiver=1.0&appname=' + encodeURIComponent('semiLog'),
+                param:'posting?post=' + _txt + _br + _url + '&apiver=1.0&appver=2.0&appid=dev.semi.semiLog&appname=' + encodeURIComponent('semiLog'),
                 a_store:'itms-apps://itunes.apple.com/app/id486244601?mt=8',
                 g_store:'market://details?id=com.kakao.story',
                 a_proto:'storylink://',
@@ -66,6 +73,7 @@ function sendSns(sns, url, txt)
         		var isMobile = (navigator.userAgent.match(/(android)|(iphone)|(ipod)|(ipad)/i));
         		if(isMobile) {
         			Android.showToast(o.url);
+        			console.log(o.url);
         		} else {
         			window.open(o.url);
         		}
@@ -76,7 +84,10 @@ function sendSns(sns, url, txt)
             if(navigator.userAgent.match(/android/i))
             {
                 // Android
-                setTimeout(function(){ location.href = 'intent://' + decodeURIComponent(o.param) + '#Intent;' + o.g_proto + ';end';}, 100);
+            		//setTimeout(function(){ location.href = 'intent://' + o.param + '#Intent;' + o.g_proto + ';end';}, 100);
+                
+            		// 테스트
+            		setTimeout(function(){ Android.showToast('intent://' + o.param + '#Intent;' + o.g_proto + ';end'); }, 100);
             }
             else if(navigator.userAgent.match(/(iphone)|(ipod)|(ipad)/i))
             {
