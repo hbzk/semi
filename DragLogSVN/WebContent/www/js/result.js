@@ -189,7 +189,7 @@ var db_listing = function (textType, resRows, scope) {
 					
 					result.push(tempObj);
 				}
-				//console.log(result);
+				console.log(result);
 				
 				// 실제 차트 그리기
 				$('#chart').css('display', '').drawDoughnutChart(result);

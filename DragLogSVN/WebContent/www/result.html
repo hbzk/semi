@@ -17,6 +17,13 @@
 <title>Result</title>
 <style type="text/css">
 #facebook { width: 100px; height: 50px; margin-left: 50px; font-size: 130%;}
+
+#share { position: absolute; bottom: 50px; right: 10px; width: 50px; height: 50px; z-index: 9; }
+#shareDiv { background: #ccc; 
+position: absolute; bottom: 50px; width: 100%; 
+text-align: center; }
+#shareDiv img { width: 50px; height: 50px; margin: 0 10px; }
+
 </style>
 </head>
 
@@ -39,6 +46,16 @@
 <div id="type">CHART</div>
 
 <button id="facebook">Facebook</button>
+<img id="share" src="icon/share.png">
+
+<div id="shareDiv">
+	<img id="facebookIcon" src="icon/katalk.png">
+	<img id="facebookIcon" src="icon/katalk.png">
+	<img id="facebookIcon" src="icon/katalk.png">
+	<img id="facebookIcon" src="icon/katalk.png">
+	<img id="facebookIcon" src="icon/katalk.png">
+	
+</div>
 
 <div class="range listNavi">
 	<div id="day" class="dateNavi">1D</div>
@@ -49,8 +66,7 @@
 </body>
 
 <script type="text/javascript">
-var url = 'http://14.32.66.98:1110/sns/snsResult.jsp?p=';
-var txt = '내 Log를 보도록';
+
 $(function(){
 	$('#submit').on('click', function(){
 		var sns = $('#select option:selected').val();
@@ -67,16 +83,21 @@ $(function(){
 
 function facebook() {
 	if (result.length != 0) {
-		// 유니크 URL 만들기
-		var snsUrl = SHA1(userNo + new Date());
+		// 유니크 Parameter 만들기
+		var sns = 'facebook';
+		var url = 'http://14.32.66.98:1110/sns/snsResult.jsp?p=';
+		var txt = 'semiLog My Result';
 		
-		// URL과 result[] 전송
-		$.post('http://14.32.66.98:1111/snsShare', {no: snsUrl, result: result})
+		var urlParam = SHA1(userNo + new Date());
+		var period = $('#stDt').text();
+		
+		// 결과용 데이터 node.js 로 전송
+		$.post('http://14.32.66.98:1111/snsShare', {urlParam: urlParam, scope: scope, period: period, result: result})
 		.done(function(data) {
 			console.log(data);
-			url += snsUrl;
+			url += urlParam;
 			console.log(url);
-			sendSns('facebook', url, '내 Log를 보도록');
+			sendSns(sns, url, txt);
 		});
 		
 	}
